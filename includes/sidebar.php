@@ -115,5 +115,3 @@ session_start();
                 } 
             ?>
         </header>
-
-<?php include_once("footer.php")?>
