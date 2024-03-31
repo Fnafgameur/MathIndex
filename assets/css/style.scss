@@ -2,8 +2,7 @@
 
 
 :root{
-    --textBlue:##1B3168;
-    --textGrey:
+    --textBlue:#1B3168;
 }
 
 
@@ -51,7 +50,6 @@ body{
         & p{
             font-size: 18px;
             color: #5D7285;
-            margin: ;
 
             & span{
                 font-size: 24px;
@@ -188,15 +186,75 @@ body{
     
 }
 
+/* ----------------------------------------------------------------------------- Mes exercices -----------------------------------------------------------------------------*/
+.exercices
+{
+    margin: 2rem 2rem 0 2rem;
+    height: 80vh;
 
+    .exercices__title
+    {
+        color: var(--textBlue);
+    }
+    .exercices__content
+    {
+        background-color: #fff;
+        padding: 0.5rem 3rem;
+        height: 90%;
 
+        .exercices__description
+        {
+            font-size: 22px;
+        }
 
+        .exercices__table
+        {
+            width: 100%;
+            
+        }
+        .exercices__table, .exercices__table-head
+        {
+            border: 1px solid #DBDBDB;
+            border-collapse: collapse;
+        }
+        .exercices__table-head
+        {
+            background-color: #F0F0F0;
+        }
+        .exercices__table-row
+        {
+            border-radius: 8px;
+            
+            .exercices__table-heading
+            {
+                color: #464646; 
+                padding: 0.5rem;
+                width: 20%;
+                
+                &:first-child
+                {
+                    width: 25%;
+                }
 
-
-
-
-
-
+            }
+            .exercices__table-data
+            { 
+                color: #74828F;
+                padding: 1rem 0.5rem;   
+            }
+            .exercices__table-heading, .exercices__table-data
+            {
+               
+                text-align: left;
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+            
+        
+        
+    }
+}
 
 
 
