@@ -1,13 +1,16 @@
 <?php include_once("header.php");
 
+
 //a supprimer
 session_start();
 ?>
 
+
 <div class="main--flex">
     <div class="side-bar">
 
-        <div class="side-bar __flex-logo">
+
+        <div class="side-bar__flex-logo">
             <img src="./assets/icons/stvincentlogo.png">
             <p>
                 <span>
@@ -17,9 +20,11 @@ session_start();
             </p>
         </div>
 
-        <div class="side-bar __menu">
 
-            <div class="side-bar __menu __flex">
+        <div class="side-bar__menu">
+
+
+            <div class="side-bar__menu__flex">
                 <form action="#" method="GET">
                     <input type="hidden" id="page" name="page" value="Accueil">
                     <button type="submit">
@@ -27,6 +32,7 @@ session_start();
                         <p>Accueil</p>
                     </button>
                 </form>
+
 
                 <form action="#" method="GET">
                     <input type="hidden" id="page" name="page" value="Recherche">
@@ -36,6 +42,7 @@ session_start();
                     </button>
                 </form>
 
+
                 <form action="#" method="GET">
                     <input type="hidden" id="page" name="page" value="Mathématique">
                     <button type="submit">
@@ -44,18 +51,22 @@ session_start();
                     </button>
                 </form>
 
+
                 <?php
+
 
                     if(isset($_SESSION)){
                         ?>
 
-                        <form action="#" method="GET"> 
-                            <input type="hidden" id="page" name="page" value="Mes exercices">   
+
+                        <form action="#" method="GET">
+                            <input type="hidden" id="page" name="page" value="Mes exercices">  
                             <button type="submit">
                                 <img src="./assets/icons/menu.svg">
                                 <p>Mes exercices</p>
                             </button>
                         </form>
+
 
                         <form action="#" method="GET">  
                             <input type="hidden" id="page" name="page" value="Soumettre">
@@ -65,17 +76,21 @@ session_start();
                             </button>
                         </form>
 
+
                         <?php
                     }
                 ?>
             </div>
 
+
             <?php
+
+
 
 
                 if(isset($_SESSION)){
                     ?>
-                    <a class="side-bar __menu __logout">
+                    <a class="side-bar__menu__logout">
                         <button>
                             <img src="./assets/icons/disconnect.svg">
                             <p>Déconnexion</p>
@@ -86,11 +101,15 @@ session_start();
             ?>
 
 
+
+
         </div>
     </div>
 
+
     <div class="main-content">
         <header>
+
 
             <?php
                 if(isset($_SESSION)){
@@ -110,8 +129,8 @@ session_start();
                                 <p>Connexion</p>
                             </button>
                         </a>
-                    
-                    <?php 
-                } 
+                   
+                    <?php
+                }
             ?>
         </header>
