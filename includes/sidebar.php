@@ -1,0 +1,117 @@
+<?php include_once("header.php");
+
+//a supprimer
+session_start();
+?>
+
+<div class="main--flex">
+    <div class="side-bar">
+
+        <div class="side-bar __flex-logo">
+            <img src="./assets/icons/stvincentlogo.png">
+            <p>
+                <span>
+                    Math Index
+                </span><br>
+                Lycée Saint-Vincent - Senlis
+            </p>
+        </div>
+
+        <div class="side-bar __menu">
+
+            <div class="side-bar __menu __flex">
+                <form action="#" method="GET">
+                    <input type="hidden" id="page" name="page" value="Accueil">
+                    <button type="submit">
+                        <img src="./assets/icons/home.svg">
+                        <p>Accueil</p>
+                    </button>
+                </form>
+
+                <form action="#" method="GET">
+                    <input type="hidden" id="page" name="page" value="Recherche">
+                    <button type="submit">
+                        <img src="./assets/icons/research.svg">
+                        <p>Recherche</p>
+                    </button>
+                </form>
+
+                <form action="#" method="GET">
+                    <input type="hidden" id="page" name="page" value="Mathématique">
+                    <button type="submit">
+                        <img src="./assets/icons/maths.svg">
+                        <p>Mathématique</p>
+                    </button>
+                </form>
+
+                <?php
+
+                    if(isset($_SESSION)){
+                        ?>
+
+                        <form action="#" method="GET"> 
+                            <input type="hidden" id="page" name="page" value="Mes exercices">   
+                            <button type="submit">
+                                <img src="./assets/icons/menu.svg">
+                                <p>Mes exercices</p>
+                            </button>
+                        </form>
+
+                        <form action="#" method="GET">  
+                            <input type="hidden" id="page" name="page" value="Soumettre">
+                            <button type="submit">
+                                <img src="./assets/icons/upload_file.svg">
+                                <p>Soumettre</p>
+                            </button>
+                        </form>
+
+                        <?php
+                    }
+                ?>
+            </div>
+
+            <?php
+
+
+                if(isset($_SESSION)){
+                    ?>
+                    <a class="side-bar __menu __logout">
+                        <button>
+                            <img src="./assets/icons/disconnect.svg">
+                            <p>Déconnexion</p>
+                        </button>
+                    </a>
+                    <?php
+                }
+            ?>
+
+
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+
+            <?php
+                if(isset($_SESSION)){
+                    ?>
+                        <div class="header__container">
+                            <p>
+                                nom prénom
+                            </p>
+                            <img src="">
+                        </div>
+                    <?php
+                } else{
+                    ?>
+                        <a>
+                            <button>
+                                <img src="./assets/icons/connect.svg">
+                                <p>Connexion</p>
+                            </button>
+                        </a>
+                    
+                    <?php 
+                } 
+            ?>
+        </header>
