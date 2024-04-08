@@ -97,14 +97,6 @@
                             <img src="">
                         </div>
                     <?php } else { ?>
-                        <a>
-                            <button>
-                                <img src="./assets/icons/connect.svg">
-                                <p>Connexion</p>
-                            </button>
-                        </a>
-
-                    <?php } else { ?>
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Connexion">
                             <button type="submit">
