@@ -6,13 +6,9 @@
     --descSize: 16px;
 }
 
-
 body{
     margin: 0;
 }
-
-
-
 
 .main--flex{
     min-height: 100vh;
@@ -23,9 +19,6 @@ body{
     background-color: #eef2f4;
 }
 
-
-
-
 .side-bar{
     width: 300px;
     height: 100vh;
@@ -34,9 +27,6 @@ body{
     box-shadow:  -7px 5px 7px 7px  #797979;
     background-color: #fff;
     z-index: 2;
-
-
-
 
     img{
         height: 32px;
@@ -64,13 +54,8 @@ body{
                 font-weight: 600;
                 color: #1B3168;
             }
-
-
         }
-
-
     }
-
 
     .side-bar__menu{
         display: flex;
@@ -78,9 +63,7 @@ body{
         flex-direction: column;
         justify-content: space-between;
         margin-top: 1rem;
-       
         box-shadow:none;
-
 
         .side-bar__menu__flex{
             display: flex;
@@ -90,17 +73,12 @@ body{
             align-items: center;
         }
 
-
-       
-
-
         .side-bar__menu__logout{
             display: flex;
             height: fit-content;
             margin: 0;
             align-items: center;
         }
-
 
         button{
             width: 12rem;
@@ -118,17 +96,14 @@ body{
             border: none;
             border-radius: 5px;
 
-
             p{
                 font-size: 14px;
             }
-
 
             img{
                 height: 24px;
                 width: 24px;
             }
-
 
             &:hover{
                 background-color: #F6F6F6;
@@ -137,27 +112,18 @@ body{
                    fill:#1B3168;
                 }
 
-
                 p{
                     color: #1B3168;
                 }
             }
-
-
         }
     }
-
-
-
-
 }
-
 
 .main-content{
     width: 100%;
     min-height: 100vh;
     max-height: fit-content;
-
 
     header{
         height: 100px;
@@ -168,28 +134,21 @@ body{
         padding-right: 5%;
         align-items: center;
 
-
         button{
             width: 15rem;
             padding: 2% 5%;
-
-
             display: flex;
             flex-direction: row;
             gap: 2rem;
             align-items: center;
-
-
             cursor: pointer;
             background-color: #fff;
             border: none;
             border-radius: 5px;
 
-
             p{
                 font-size: 14px;
             }
-
 
             :hover{
                 background-color: #F6F6F6;
@@ -198,23 +157,20 @@ body{
                    fill:#1B3168;
                 }
 
-
                 p{
                     color: #1B3168;
                 }
             }
-
-
         }
     }
 }
+
 .header__container{
     display: flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
     font-size: 18px;
-
 
     img{
         height: 64px;
@@ -223,16 +179,16 @@ body{
     }
 }
 
-
 .footer__text{
     margin-left: 2rem;
    
 }
 
 
-/* -------------------------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------------------- Connexion ----------------------------------------------------*/
-/* -------------------------------------------------------------------------------------------------------------------*/
+
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------- Connexion ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------- */
 
 .connexion{
     display: flex;
@@ -263,6 +219,12 @@ body{
                 text-decoration: none;
                 color: var(--textBlue);
             }
+        }
+
+        .connexion__errormsg {
+            margin-top: 0;
+            color: red;
+            font-weight: 600;
         }
 
         & form{
@@ -340,15 +302,18 @@ body{
             width: 100%;
             
         }
+
         .exercices__table, .exercices__table-head
         {
             border: 1px solid #DBDBDB;
             border-collapse: collapse;
         }
+
         .exercices__table-head
         {
             background-color: #F0F0F0;
         }
+
         .exercices__table-row
         {
             border-radius: 8px;
@@ -363,23 +328,20 @@ body{
                 {
                     width: 25%;
                 }
-
             }
+
             .exercices__table-data
             { 
                 color: #74828F;
                 padding: 1rem 0.5rem;   
             }
+
             .exercices__table-heading, .exercices__table-data
             {
-               
                 text-align: left;
                 font-size: 14px;
                 font-weight: 400;
             }
         }
-            
-        
-        
     }
 }
