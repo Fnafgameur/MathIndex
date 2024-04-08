@@ -2,7 +2,7 @@
 
 
 //a supprimer
-session_start();
+//session_start();
 ?>
 
 
@@ -123,13 +123,13 @@ session_start();
                     <?php
                 } else{
                     ?>
-                        <a>
-                            <button>
+                        <form action="#" method="GET">
+                            <input type="hidden" id="page" name="page" value="Connexion">
+                            <button type="submit">
                                 <img src="./assets/icons/connect.svg">
                                 <p>Connexion</p>
                             </button>
-                        </a>
-                   
+                        </form>
                     <?php
                 }
             ?>
