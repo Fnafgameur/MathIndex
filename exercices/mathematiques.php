@@ -1,3 +1,7 @@
+<?php
+    $exercices = get_exercices();
+
+?>
 <div class="mathematics">
     <h1 class="mathematics__title">Exercices</h1>
     <div class="mathematics__content">
@@ -14,14 +18,17 @@
             </tr>
             </thead>
             <tbody class="mathematics__table-body">
-            <tr class="mathematics__table-row">
-                <td class="mathematics__table-data">test</td>
-                <td class="mathematics__table-data">test</td>
-                <td class="mathematics__table-data">test</td>
-                <td class="mathematics__table-data">test</td>
-                <td class="mathematics__table-data">test</td>
-                <td class="mathematics__table-data">test</td>
-            </tr>
+            <?php foreach ($exercices as $exercice) { ?>
+                <tr class="mathematics__table-row">
+                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
+                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
+                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
+                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
+                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
+                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
+                </tr>
+            <?php } ?>
+
             </tbody>
         </table>
     </div>

@@ -11,4 +11,12 @@ if (isset($db)) {
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 }
+if (isset($db)) {
+    function get_exercices() : mixed {
+        global $db;
+        $query = $db->prepare("SELECT * FROM exercise");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
 
