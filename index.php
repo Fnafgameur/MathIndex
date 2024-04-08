@@ -13,6 +13,12 @@ include_once("includes/sidebar.php");
 if (isset($_GET["page"])) {
     if (isset($_SESSION["user"]) && Role::isGranted($_SESSION["user"]["role"])) {
         switch ($_GET["page"]) {
+            case "Recherche":
+                include_once("exercices/recherche_ex.php");
+                break;
+            case "Mathématique":
+                include_once("exercices/mathematiques.php");
+                break;
             case "Mes exercices":
                 include_once("exercices/mes_ex.php");
                 break;
