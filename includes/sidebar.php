@@ -4,6 +4,7 @@
     if (isset($_SESSION["user"])) {
         $prenom = $_SESSION["user"]["last_name"];
         $nom = $_SESSION["user"]["first_name"];
+        $role = $_SESSION["user"]["role"];
     }
 ?>
 
@@ -53,7 +54,7 @@
 
 
                 <?php if(isset($_SESSION["user"])){
-                        if($_SESSION["user"]["role"]==="Administrateur") { ?>
+                        if($role === Role::ADMIN->value || $role === Role::CONTRIBUTOR->value) { ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Mes exercices">
