@@ -1,8 +1,10 @@
-<?php include_once("header.php");
+<?php
+    include_once("header.php");
 
-
-//a supprimer
-session_start();
+    if (isset($_SESSION["user"])) {
+        $prenom = $_SESSION["user"]["last_name"];
+        $nom = $_SESSION["user"]["first_name"];
+    }
 ?>
 
 
@@ -22,8 +24,6 @@ session_start();
 
 
         <div class="side-bar__menu">
-
-
             <div class="side-bar__menu__flex">
                 <form action="#" method="GET">
                     <input type="hidden" id="page" name="page" value="Accueil">
@@ -52,57 +52,35 @@ session_start();
                 </form>
 
 
-                <?php
-
-
-                    if(isset($_SESSION)){
-                        ?>
-
+                <?php if(isset($_SESSION)){ ?>
 
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value="Mes exercices">  
+                            <input type="hidden" id="page" name="page" value="Mes exercices">
                             <button type="submit">
                                 <img src="./assets/icons/menu.svg">
                                 <p>Mes exercices</p>
                             </button>
                         </form>
 
-
-                        <form action="#" method="GET">  
+                        <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Soumettre">
                             <button type="submit">
                                 <img src="./assets/icons/upload_file.svg">
                                 <p>Soumettre</p>
                             </button>
                         </form>
-
-
-                        <?php
-                    }
-                ?>
+                    <?php } ?>
             </div>
 
 
-            <?php
-
-
-
-
-                if(isset($_SESSION)){
-                    ?>
+            <?php if(isset($_SESSION)){ ?>
                     <a class="side-bar__menu__logout">
                         <button>
                             <img src="./assets/icons/disconnect.svg">
                             <p>Déconnexion</p>
                         </button>
                     </a>
-                    <?php
-                }
-            ?>
-
-
-
-
+                    <?php } ?>
         </div>
     </div>
 
@@ -111,26 +89,20 @@ session_start();
         <header>
 
 
-            <?php
-                if(isset($_SESSION)){
-                    ?>
+            <?php if (isset($_SESSION["user"])) { ?>
                         <div class="header__container">
                             <p>
-                                nom prénom
+                                <?= $nom . " " . $prenom ?>
                             </p>
                             <img src="">
                         </div>
-                    <?php
-                } else{
-                    ?>
-                        <a>
-                            <button>
+                    <?php } else { ?>
+                        <form action="#" method="GET">
+                            <input type="hidden" id="page" name="page" value="Connexion">
+                            <button type="submit">
                                 <img src="./assets/icons/connect.svg">
                                 <p>Connexion</p>
                             </button>
-                        </a>
-                   
-                    <?php
-                }
-            ?>
+                        </form>
+                    <?php } ?>
         </header>
