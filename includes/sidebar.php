@@ -1,12 +1,10 @@
 <?php
-
     include_once("header.php");
 
     if (isset($_SESSION["user"])) {
         $prenom = $_SESSION["user"]["last_name"];
         $nom = $_SESSION["user"]["first_name"];
     }
-
 ?>
 
 
@@ -26,8 +24,6 @@
 
 
         <div class="side-bar__menu">
-
-
             <div class="side-bar__menu__flex">
                 <form action="#" method="GET">
                     <input type="hidden" id="page" name="page" value="Accueil">
@@ -77,19 +73,14 @@
             </div>
 
 
-            <?php
-                if(isset($_SESSION)){
-                    ?>
+            <?php if(isset($_SESSION)){ ?>
                     <a class="side-bar__menu__logout">
                         <button>
                             <img src="./assets/icons/disconnect.svg">
                             <p>Déconnexion</p>
                         </button>
                     </a>
-                    <?php
-                }
-            ?>
-
+                    <?php } ?>
         </div>
     </div>
 
@@ -113,5 +104,13 @@
                             </button>
                         </a>
 
+                    <?php } else { ?>
+                        <form action="#" method="GET">
+                            <input type="hidden" id="page" name="page" value="Connexion">
+                            <button type="submit">
+                                <img src="./assets/icons/connect.svg">
+                                <p>Connexion</p>
+                            </button>
+                        </form>
                     <?php } ?>
         </header>

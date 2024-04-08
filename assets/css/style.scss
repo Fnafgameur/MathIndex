@@ -17,11 +17,12 @@ body{
     flex-direction: row;
     width: 100%;
     background-color: #eef2f4;
+    font-family: 'epilogue';
 }
 
 .side-bar{
     width: 300px;
-    height: 100vh;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     box-shadow:  -7px 5px 7px 7px  #797979;
@@ -39,18 +40,18 @@ body{
         flex-direction: row;
         align-items: center;
         gap: 1rem;
-        margin-left: 2rem;
+        margin-left: 1rem;
        
         background: none;
         box-shadow:none;
 
 
         & p{
-            font-size: 18px;
+            font-size: 14px;
             color: #5D7285;
 
             & span{
-                font-size: 24px;
+                font-size: 18px;
                 font-weight: 600;
                 color: #1B3168;
             }
@@ -59,7 +60,7 @@ body{
 
     .side-bar__menu{
         display: flex;
-        height: 90vh;
+        height: 100%;
         flex-direction: column;
         justify-content: space-between;
         margin-top: 1rem;
@@ -83,7 +84,8 @@ body{
         button{
             width: 12rem;
             padding: 2% 5%;
-
+            font-family: poppins;
+            font-weight: 700;
 
             display: flex;
             flex-direction: row;
@@ -122,7 +124,7 @@ body{
 
 .main-content{
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     max-height: fit-content;
 
     header{
@@ -135,8 +137,10 @@ body{
         align-items: center;
 
         button{
-            width: 15rem;
+            width: 10rem;
             padding: 2% 5%;
+            font-family: poppins;
+            font-weight: 700;
             display: flex;
             flex-direction: row;
             gap: 2rem;
@@ -150,7 +154,7 @@ body{
                 font-size: 14px;
             }
 
-            :hover{
+            &:hover{
                 background-color: #F6F6F6;
                
                 img{
@@ -277,13 +281,15 @@ body{
 
 .exercices
 {
-    margin: 2rem 2rem 0 2rem;
+    margin: 2rem;
     height: 81vh;
   
 
     .exercices__title
     {
+        font-size: var(--titleSize);
         color: var(--textBlue);
+        margin-left: 0.5rem;
     }
     .exercices__content
     {
@@ -343,5 +349,38 @@ body{
                 font-weight: 400;
             }
         }
+    }
+}
+
+
+
+
+/* ----------------------------------------------------------------------------- Acceuil -----------------------------------------------------------------------------*/
+
+.accueil
+{
+    margin: 2rem ;
+    height: 80vh;
+  
+
+    .accueil__title
+    {
+        font-size: var(--titleSize);
+        color: var(--textBlue);
+        margin-left: 0.5rem;
+    }
+    .accueil__content
+    {
+        background-color: #fff;
+        padding: 1.5rem 3rem;
+        height: 80%;
+        border-radius: 7px;
+        font-size: var(--descSize);
+        
+        h2{
+            font-size: 20px;
+            font-weight: 400;
+        }
+
     }
 }
