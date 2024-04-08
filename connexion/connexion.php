@@ -39,7 +39,7 @@
         if (!isset($user["email"]) || $email !== $user["email"]) {
             $informations["email"]["displayValue"] = "block";
         }
-        if (!isset($user["password"]) || $password !== $user["password"]) {
+        if (!isset($user["password"]) || !password_verify($password, $user["password"])) {
             $informations["password"]["displayValue"] = "block";
         }
         else {
