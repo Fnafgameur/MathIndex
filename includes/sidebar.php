@@ -52,7 +52,7 @@
                 </form>
 
 
-                <?php if(isset($_SESSION)){ ?>
+                <?php if($_SESSION["role"]==="adminrole"){ ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Mes exercices">
@@ -73,7 +73,7 @@
             </div>
 
 
-            <?php if(isset($_SESSION)){ ?>
+            <?php if(isset($_SESSION["user"])){ ?>
                     <a class="side-bar__menu__logout">
                         <button>
                             <img src="./assets/icons/disconnect.svg">
