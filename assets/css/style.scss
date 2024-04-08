@@ -76,6 +76,7 @@ body{
 
         .side-bar__menu__logout{
             display: flex;
+            flex-direction: column;
             height: fit-content;
             margin: 0;
             align-items: center;
@@ -360,7 +361,7 @@ body{
 .accueil
 {
     margin: 2rem ;
-    height: 80vh;
+    height: fit-content;
   
 
     .accueil__title
@@ -373,7 +374,7 @@ body{
     {
         background-color: #fff;
         padding: 1.5rem 3rem;
-        height: 80%;
+        height: fit-content;
         border-radius: 7px;
         font-size: var(--descSize);
         
