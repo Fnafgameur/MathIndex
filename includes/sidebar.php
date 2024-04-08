@@ -53,7 +53,7 @@
 
 
                 <?php if(isset($_SESSION["user"])){
-                        if($_SESSION["user"]["role"]==="adminrole") ?>
+                        if($_SESSION["user"]["role"]==="Administrateur") { ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Mes exercices">
@@ -70,6 +70,7 @@
                                 <p>Soumettre</p>
                             </button>
                         </form>
+                    <?php } ?>
                     <?php } ?>
             </div>
 
