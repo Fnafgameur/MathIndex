@@ -54,7 +54,7 @@
 
 
                 <?php if(isset($_SESSION["user"])){
-                        if($role === Role::ADMIN->value || $role === Role::CONTRIBUTOR->value) { ?>
+                        if(Role::isGranted($role)) { ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Mes exercices">
