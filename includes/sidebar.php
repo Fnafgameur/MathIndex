@@ -52,7 +52,8 @@
                 </form>
 
 
-                <?php if($_SESSION["role"]==="adminrole"){ ?>
+                <?php if(isset($_SESSION["user"])){
+                        if($_SESSION["role"]==="adminrole") ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="Mes exercices">
