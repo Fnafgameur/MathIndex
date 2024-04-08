@@ -1,4 +1,3 @@
-
 <div class="exercices">
     <h1 class="exercices__title">Mes exercices</h1>
     <div class="exercices__content">
