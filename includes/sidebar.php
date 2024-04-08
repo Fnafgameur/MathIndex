@@ -97,7 +97,7 @@
                             <p>
                                 <?= $nom . " " . $prenom ?>
                             </p>
-                            <img src="">
+                            <img src="https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif">
                         </div>
                     <?php } else { ?>
                         <form action="#" method="GET">
