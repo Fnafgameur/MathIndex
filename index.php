@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once("enums/Role.php");
+//include_once("enums/Role.php");
 
 include_once("includes/requetes/requetes.php");
 
