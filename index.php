@@ -2,6 +2,8 @@
 
 session_start();
 
+include_once("enums/role_enum.php");
+
 include_once("includes/requetes/requetes.php");
 
 include_once("includes/header.php");
