@@ -76,7 +76,7 @@
 
 
             <?php if(isset($_SESSION["user"])){ ?>
-                    <a class="side-bar__menu__logout">
+                    <a class="side-bar__menu__logout" href="connexion/deconnexion.php">
                         <button>
                             <img src="./assets/icons/disconnect.svg">
                             <p>Déconnexion</p>
