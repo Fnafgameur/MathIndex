@@ -328,7 +328,9 @@ body {
   font-weight: 400;
 }
 
-/* ----------------------------------------------------------------------------- Acceuil -----------------------------------------------------------------------------*/
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Accueil ----------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------- */
 .accueil {
   margin: 2rem;
   height: fit-content;
@@ -347,6 +349,113 @@ body {
 }
 .accueil .accueil__content h2 {
   font-size: 20px;
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Recherche ----------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------- */
+.recherche {
+  margin: 2rem;
+  height: fit-content;
+}
+.recherche .recherche__title {
+  font-size: var(--titleSize);
+  color: var(--textBlue);
+  margin-left: 0.5rem;
+}
+.recherche .recherche__content {
+  background-color: #fff;
+  padding: 1.5rem 3rem;
+  height: fit-content;
+  border-radius: 7px;
+  font-size: var(--descSize);
+}
+.recherche .recherche__content h2 {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "epilogue";
+  color: var(--textBlue);
+  margin-top: 2.5rem;
+}
+.recherche .recherche__content form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.recherche .recherche__content form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  width: 25%;
+}
+.recherche .recherche__content form div label {
+  color: var(--textGrey);
+  font-family: "Noto sans";
+  font-weight: 600;
+}
+.recherche .recherche__content form div select, .recherche .recherche__content form div input {
+  height: 56px;
+  width: 80%;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: solid 2px #DBDBDB;
+  color: var(--textGrey);
+  font-family: "Noto sans";
+  font-weight: 600;
+}
+.recherche .recherche__content form div button {
+  height: 56px;
+  width: 70%;
+  border-radius: 8px;
+  border: solid 2px #F6F6F6;
+  background-color: #F6F6F6;
+  color: var(--textGrey);
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-top: 18px;
+}
+.recherche .recherche__content .recherche__table {
+  width: 100%;
+}
+.recherche .recherche__content .recherche__table, .recherche .recherche__content .recherche__table-head {
+  border: 1px solid #DBDBDB;
+  border-collapse: collapse;
+}
+.recherche .recherche__content .recherche__table-head {
+  background-color: #F0F0F0;
+}
+.recherche .recherche__content .recherche__table-row {
+  border-radius: 8px;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading {
+  color: #464646;
+  padding: 0.5rem;
+  width: 20%;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading.nom {
+  width: 30%;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading.difficulte {
+  width: 10%;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading.mots-cles {
+  width: 30%;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading.duree {
+  width: 10%;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading.fichiers {
+  width: 20%;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-data {
+  color: #74828F;
+  padding: 1rem 0.5rem;
+}
+.recherche .recherche__content .recherche__table-row .recherche__table-heading, .recherche .recherche__content .recherche__table-row .recherche__table-data {
+  text-align: left;
+  font-size: 14px;
   font-weight: 400;
 }
 
