@@ -1,0 +1,357 @@
+body {
+  margin: 0;
+}
+
+.main--flex {
+  min-height: 100vh;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #eef2f4;
+  font-family: "Epilogue";
+}
+
+.side-bar {
+  width: 300px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -7px 5px 7px 7px #797979;
+  background-color: #fff;
+  z-index: 2;
+}
+.side-bar img {
+  height: 32px;
+  width: 32px;
+  box-shadow: none;
+}
+.side-bar .side-bar__flex-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  background: none;
+  box-shadow: none;
+}
+.side-bar .side-bar__flex-logo p {
+  font-size: 14px;
+  color: #5D7285;
+}
+.side-bar .side-bar__flex-logo p span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1B3168;
+}
+.side-bar .side-bar__menu {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  box-shadow: none;
+}
+.side-bar .side-bar__menu .side-bar__menu__flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+  align-items: center;
+}
+.side-bar .side-bar__menu .side-bar__menu__logout {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 0;
+  align-items: center;
+  text-decoration: none;
+}
+.side-bar .side-bar__menu button {
+  width: 12rem;
+  padding: 2% 5%;
+  font-family: "Poppins";
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+.side-bar .side-bar__menu button p {
+  font-size: 14px;
+}
+.side-bar .side-bar__menu button img {
+  height: 24px;
+  width: 24px;
+}
+.side-bar .side-bar__menu button:hover {
+  background-color: #F6F6F6;
+}
+.side-bar .side-bar__menu button:hover img {
+  fill: #1B3168;
+}
+.side-bar .side-bar__menu button:hover p {
+  color: #1B3168;
+}
+
+.main-content {
+  width: 100%;
+  min-height: 100%;
+  max-height: fit-content;
+}
+.main-content header {
+  height: 100px;
+  background-color: #fff;
+  width: 95%;
+  display: flex;
+  justify-content: end;
+  padding-right: 5%;
+  align-items: center;
+}
+.main-content header button {
+  width: 10rem;
+  padding: 2% 5%;
+  font-family: "Poppins";
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+.main-content header button p {
+  font-size: 14px;
+}
+.main-content header button:hover {
+  background-color: #F6F6F6;
+}
+.main-content header button:hover img {
+  fill: #1B3168;
+}
+.main-content header button:hover p {
+  color: #1B3168;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  font-size: 18px;
+}
+.header__container img {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+}
+
+.footer__text {
+  margin-left: 2rem;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------- Connexion ---------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------- */
+.connexion {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin-left: 2rem;
+  height: 84vh;
+}
+.connexion h1 {
+  font-size: var(29px);
+  color: var(#1B3168);
+  margin-left: 0.5rem;
+}
+.connexion .connexion__content {
+  background-color: #fff;
+  padding: 0.5rem 1.3rem;
+  border-radius: 7px;
+  height: 100%;
+}
+.connexion .connexion__content p {
+  font-size: var(16px);
+  font-weight: 600;
+  padding-bottom: 2rem;
+}
+.connexion .connexion__content p a {
+  text-decoration: none;
+  color: var(#1B3168);
+}
+.connexion .connexion__content .connexion__errormsg {
+  margin-top: 0;
+  color: red;
+  font-weight: 600;
+}
+.connexion .connexion__content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.connexion .connexion__content form label {
+  color: var(#666666);
+  font-weight: 600;
+}
+.connexion .connexion__content form input {
+  width: 20rem;
+  padding: 1rem;
+  border: 1px solid #F6F6F6;
+  border-radius: 5px;
+}
+.connexion .connexion__content form .connexion__buttons {
+  display: flex;
+  gap: 2rem;
+}
+.connexion .connexion__content form .connexion__buttons button {
+  padding: 1rem;
+  color: #666666;
+  cursor: pointer;
+  border: none;
+}
+.connexion .connexion__content form .connexion__buttons .connexion__button-connexion {
+  background-color: #F6F6F6;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 11rem;
+}
+.connexion .connexion__content form .connexion__buttons .connexion__button-pwforget {
+  background-color: #fff;
+  width: 15rem;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* ----------------------------------------------------------------------------- Exercices -----------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.mathematics {
+  margin: 2rem;
+}
+.mathematics .mathematics__title {
+  color: var(#1B3168);
+}
+.mathematics .mathematics__content {
+  background-color: #fff;
+  padding: 0.5rem 3rem 1.5rem;
+  height: 90%;
+  border-radius: 7px;
+}
+.mathematics .mathematics__content .mathematics__description {
+  font-size: 22px;
+}
+.mathematics .mathematics__content .mathematics__table {
+  width: 100%;
+}
+.mathematics .mathematics__content .mathematics__table, .mathematics .mathematics__content .mathematics__table-head {
+  border: 1px solid #DBDBDB;
+  border-collapse: collapse;
+}
+.mathematics .mathematics__content .mathematics__table-head {
+  background-color: #F0F0F0;
+}
+.mathematics .mathematics__content .mathematics__table-row {
+  border-radius: 8px;
+}
+.mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading {
+  color: #464646;
+  padding: 0.5rem;
+  width: 20%;
+}
+.mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading:first-child {
+  width: 25%;
+}
+.mathematics .mathematics__content .mathematics__table-row .mathematics__table-data {
+  color: #74828F;
+  padding: 1rem 0.5rem;
+}
+.mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading, .mathematics .mathematics__content .mathematics__table-row .mathematics__table-data {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* ----------------------------------------------------------------------------- Mes exercices -----------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.exercices {
+  margin: 2rem;
+  height: 81vh;
+}
+.exercices .exercices__title {
+  font-size: var(29px);
+  color: var(#1B3168);
+  margin-left: 0.5rem;
+}
+.exercices .exercices__content {
+  background-color: #fff;
+  padding: 0.5rem 3rem;
+  height: 90%;
+  border-radius: 7px;
+}
+.exercices .exercices__content .exercices__description {
+  font-size: 22px;
+}
+.exercices .exercices__content .exercices__table {
+  width: 100%;
+}
+.exercices .exercices__content .exercices__table, .exercices .exercices__content .exercices__table-head {
+  border: 1px solid #DBDBDB;
+  border-collapse: collapse;
+}
+.exercices .exercices__content .exercices__table-head {
+  background-color: #F0F0F0;
+}
+.exercices .exercices__content .exercices__table-row {
+  border-radius: 8px;
+}
+.exercices .exercices__content .exercices__table-row .exercices__table-heading {
+  color: #464646;
+  padding: 0.5rem;
+  width: 20%;
+}
+.exercices .exercices__content .exercices__table-row .exercices__table-heading:first-child {
+  width: 25%;
+}
+.exercices .exercices__content .exercices__table-row .exercices__table-data {
+  color: #74828F;
+  padding: 1rem 0.5rem;
+}
+.exercices .exercices__content .exercices__table-row .exercices__table-heading, .exercices .exercices__content .exercices__table-row .exercices__table-data {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ----------------------------------------------------------------------------- Acceuil -----------------------------------------------------------------------------*/
+.accueil {
+  margin: 2rem;
+  height: fit-content;
+}
+.accueil .accueil__title {
+  font-size: var(29px);
+  color: var(#1B3168);
+  margin-left: 0.5rem;
+}
+.accueil .accueil__content {
+  background-color: #fff;
+  padding: 1.5rem 3rem;
+  height: fit-content;
+  border-radius: 7px;
+  font-size: var(16px);
+}
+.accueil .accueil__content h2 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Erreurs ----------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------- */
+
+/*# sourceMappingURL=style.css.map */
