@@ -257,6 +257,7 @@ body {
 }
 .mathematics .mathematics__content .mathematics__table-row {
   border-radius: 8px;
+  border-bottom: 1px solid #DBDBDB;
 }
 .mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading {
   color: #464646;
@@ -274,6 +275,17 @@ body {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
+}
+
+.link {
+  text-decoration: none;
+  color: #74828F;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+.link--row {
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

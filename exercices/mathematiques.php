@@ -1,6 +1,6 @@
 <?php
     $exercices = get_exercices();
-$file = get_file_by_exercices($exercice['exercise_file_id']);
+    $exercices_sorted = get_exercices_sorted();
 ?>
 <div class="mathematics">
     <h1 class="mathematics__title">Exercices</h1>
@@ -19,17 +19,19 @@ $file = get_file_by_exercices($exercice['exercise_file_id']);
             </tr>
             </thead>
             <tbody class="mathematics__table-body">
-            <?php foreach ($exercices as $exercice) { ?>
+            <?php foreach ($exercices_sorted as $exercice_sorted) {
+                $file = get_file_by_exercices($exercice_sorted['exercise_file_id']);
+                ?>
                 <tr class="mathematics__table-row">
-                    <td class="mathematics__table-data"><?=$exercice['name']?></td>
-                    <td class="mathematics__table-data"><?=get_thematic_by_exercices($exercice["thematic_id"])['name'];?>
+                    <td class="mathematics__table-data"><?=$exercice_sorted['name']?></td>
+                    <td class="mathematics__table-data"><?=get_thematic_by_exercices($exercice_sorted["thematic_id"])['name'];?>
                     </td>
-                    <td class="mathematics__table-data"><?=$exercice['difficulty']?></td>
-                    <td class="mathematics__table-data"><?=$exercice['duration']??"NULL gros gay"?></td>
-                    <td class="mathematics__table-data"><?=$exercice['keywords']??"NULL gros gay"?></td>
+                    <td class="mathematics__table-data"><?=$exercice_sorted['difficulty']?></td>
+                    <td class="mathematics__table-data"><?=$exercice_sorted['duration']??"NULL gros gay"?></td>
+                    <td class="mathematics__table-data"><?=$exercice_sorted['keywords']??"NULL gros gay"?></td>
                     <td class="mathematics__table-data">
-                        <a class="link link--row" href=""><img src="./assets/icons/download_file.svg" alt="">Exercice</a>
-                        <a class="link link--row" href=""><img src="./assets/icons/download_file.svg" alt="">Corrigé</a>
+                        <a class="link link--row" href="" download="<?=$file['name'].'.'.$file['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                        <a class="link link--row" href="" download="<?=$file['name'].'_corrigé.'.$file['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                     </td>
                 </tr>
             <?php } ?>
@@ -50,7 +52,9 @@ $file = get_file_by_exercices($exercice['exercise_file_id']);
                 </tr>
                 </thead>
                 <tbody class="mathematics__table-body">
-                <?php foreach ($exercices as $exercice) { ?>
+                <?php foreach ($exercices as $exercice) {
+                    $file = get_file_by_exercices($exercice['exercise_file_id']);
+                    ?>
                     <tr class="mathematics__table-row">
                         <td class="mathematics__table-data"><?=$exercice['name']?></td>
                         <td class="mathematics__table-data"><?=get_thematic_by_exercices($exercice["thematic_id"])['name'];?>
@@ -58,8 +62,9 @@ $file = get_file_by_exercices($exercice['exercise_file_id']);
                         <td class="mathematics__table-data"><?=$exercice['difficulty']?></td>
                         <td class="mathematics__table-data"><?=$exercice['duration']??"NULL gros gay"?></td>
                         <td class="mathematics__table-data"><?=$exercice['keywords']??"NULL gros gay"?></td>
-                        <td class="mathematics__table-data"><?php $file = get_file_by_exercices($exercice['exercise_file_id']);
-                            echo $file['name'].'.'.$file['extension']?>
+                        <td class="mathematics__table-data">
+                            <a class="link link--row" href="" download="<?=$file['name'].'.'.$file['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="" download="<?=$file['name'].'_corrigé.'.$file['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                     </tr>
                 <?php } ?>
