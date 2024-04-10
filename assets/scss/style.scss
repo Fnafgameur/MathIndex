@@ -1,10 +1,4 @@
-
-:root{
-    --textBlue:#1B3168;
-    --textGrey:#666666;
-    --titleSize: 29px;
-    --descSize: 16px;
-}
+@import "variables";
 
 body{
     margin: 0;
@@ -204,8 +198,8 @@ body{
     height: 84vh;
 
     & h1{
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: var($titleSize);
+        color: var($textBlue);
         margin-left: 0.5rem;
     }
 
@@ -217,13 +211,13 @@ body{
         height: 100%;
 
         & p {
-            font-size: var(--descSize);
+            font-size: var($descSize);
             font-weight: 600;
             padding-bottom: 2rem;
 
             & a {
                 text-decoration: none;
-                color: var(--textBlue);
+                color: var($textBlue);
             }
         }
 
@@ -239,7 +233,7 @@ body{
             gap: 1rem;
 
             & label {
-                color: var(--textGrey);
+                color: var($textGrey);
                 font-weight: 600;
             }
 
@@ -287,7 +281,7 @@ body{
 
     .mathematics__title
     {
-        color: var(--textBlue);
+        color: var($textBlue);
     }
     .mathematics__content
     {
@@ -367,8 +361,8 @@ body{
 
     .exercices__title
     {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: var($titleSize);
+        color: var($textBlue);
         margin-left: 0.5rem;
     }
     .exercices__content
@@ -446,8 +440,8 @@ body{
 
     .accueil__title
     {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: var($titleSize);
+        color: var($textBlue);
         margin-left: 0.5rem;
     }
     .accueil__content
@@ -456,7 +450,7 @@ body{
         padding: 1.5rem 3rem;
         height: fit-content;
         border-radius: 7px;
-        font-size: var(--descSize);
+        font-size: var($descSize);
         
         h2{
             font-size: 20px;
