@@ -16,7 +16,8 @@
     $pageName = "";
     $displayPasswordLabel = null;
     $buttonName = "";
-    $email = $informations["email"]["value"];
+    $email = htmlspecialchars($informations['email']["value"]);
+    $password = htmlspecialchars($informations['password']["value"]);
     $displaySuccess = false;
 
     if (isset($_GET["mdpoublié"])) {
@@ -34,8 +35,6 @@
 
         if ($_POST["envoi"] === "Connexion") {
             if (isset($informations['email']["value"]) && isset($informations['password']["value"])) {
-                $email = htmlspecialchars($informations['email']["value"]);
-                $password = htmlspecialchars($informations['password']["value"]);
 
                 $user = get_user_with_email($email);
 
@@ -43,14 +42,14 @@
                     $informations["email"]["displayValue"] = "block";
                     $informations["email"]["errorMsg"] = "Cet email n'existe pas.";
                 }
-                if ($email === "") {
+
+                $result = is_mail_correct($email);
+
+                if (!$result["bool"]) {
                     $informations["email"]["displayValue"] = "block";
-                    $informations["email"]["errorMsg"] = "Veuillez saisir votre email.";
+                    $informations["email"]["errorMsg"] = $result["msg"];
                 }
-                else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $informations["email"]["displayValue"] = "block";
-                    $informations["email"]["errorMsg"] = "Email invalide.";
-                }
+
                 if ($password === "") {
                     $informations["password"]["displayValue"] = "block";
                     $informations["password"]["errorMsg"] = "Veuillez saisir votre mot de passe.";
@@ -70,7 +69,6 @@
         }
         else if ($_POST["envoi"] === "Mdp") {
             if (isset($informations['email']["value"])) {
-                $email = htmlspecialchars($informations['email']["value"]);
 
                 $user = get_user_with_email($email);
 
@@ -78,13 +76,12 @@
                     $informations["email"]["displayValue"] = "block";
                     $informations["email"]["errorMsg"] = "Cet email n'existe pas.";
                 }
-                if ($email === "") {
+
+                $result = is_mail_correct($email);
+
+                if (!$result["bool"]) {
                     $informations["email"]["displayValue"] = "block";
-                    $informations["email"]["errorMsg"] = "Veuillez saisir votre email.";
-                }
-                else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    $informations["email"]["displayValue"] = "block";
-                    $informations["email"]["errorMsg"] = "Email invalide.";
+                    $informations["email"]["errorMsg"] = $result["msg"];
                 }
 
                 if (isset($user["email"]) && $email === $user["email"]) {
