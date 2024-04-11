@@ -227,6 +227,13 @@ body{
             font-weight: 600;
         }
 
+        .connexion__description {
+
+            & a:hover {
+                color: #182f69;
+            }
+        }
+
         & form{
             display: flex;
             flex-direction: column;
@@ -237,7 +244,12 @@ body{
                 font-weight: 600;
             }
 
-            & input{
+            .connexion__password-success {
+                color: green;
+                font-weight: 600;
+            }
+
+            .connexion__input {
                 width: 20rem;
                 padding: 1rem;
                 border: 1px solid #F6F6F6;
@@ -249,11 +261,12 @@ body{
                 display: flex;
                 gap: 2rem;
 
-                & button{
+                & button  {
                     padding: 1rem;
                     color: #666666;
                     cursor: pointer;
                     border: none;
+                    text-decoration: none;
                 }
 
                 & .connexion__button-connexion {
