@@ -27,7 +27,7 @@
         <div class="side-bar__menu">
             <div class="side-bar__menu__flex">
                 <form action="#" method="GET">
-                    <input type="hidden" id="page" name="page" value=<?= Page::ACCUEIL->value ?>>
+                    <input type="hidden" id="page" name="page" value="<?= Page::ACCUEIL->value ?>">
                     <button type="submit">
                         <img src="./assets/icons/home.svg">
                         <p><?= Page::ACCUEIL->value ?></p>
@@ -36,7 +36,7 @@
 
 
                 <form action="#" method="GET">
-                    <input type="hidden" id="page" name="page" value=<?= Page::RECHERCHE->value ?>>
+                    <input type="hidden" id="page" name="page" value="<?= Page::RECHERCHE->value ?>">
                     <button type="submit">
                         <img src="./assets/icons/research.svg">
                         <p><?= Page::RECHERCHE->value ?></p>
@@ -45,7 +45,7 @@
 
 
                 <form action="#" method="GET">
-                    <input type="hidden" id="page" name="page" value=<?= Page::MATHEMATIQUE->value ?>>
+                    <input type="hidden" id="page" name="page" value="<?= Page::MATHEMATIQUE->value ?>">
                     <button type="submit">
                         <img src="./assets/icons/maths.svg">
                         <p><?= Page::MATHEMATIQUE->value ?></p>
@@ -57,7 +57,7 @@
                         if(Role::isGranted($role)) { ?>
 
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value=<?= Page::MES_EXERCICES->value ?>>
+                            <input type="hidden" id="page" name="page" value="<?= Page::MES_EXERCICES->value ?>">
                             <button type="submit">
                                 <img src="./assets/icons/menu.svg">
                                 <p><?= Page::MES_EXERCICES->value ?></p>
@@ -65,7 +65,7 @@
                         </form>
 
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value=<?= Page::SOUMETTRE->value ?>>
+                            <input type="hidden" id="page" name="page" value="<?= Page::SOUMETTRE->value ?>">
                             <button type="submit">
                                 <img src="./assets/icons/upload_file.svg">
                                 <p><?= Page::SOUMETTRE->value ?></p>
@@ -101,7 +101,7 @@
                         </div>
                     <?php } else { ?>
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value=<?= Page::CONNEXION->value ?>>
+                            <input type="hidden" id="page" name="page" value="<?= Page::CONNEXION->value ?>">
                             <button type="submit">
                                 <img src="./assets/icons/connect.svg">
                                 <p><?= Page::CONNEXION->value ?></p>
