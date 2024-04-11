@@ -191,6 +191,9 @@ body {
   color: red;
   font-weight: 600;
 }
+.connexion .connexion__content .connexion__description a:hover {
+  color: #182f69;
+}
 .connexion .connexion__content form {
   display: flex;
   flex-direction: column;
@@ -200,7 +203,11 @@ body {
   color: var(#666666);
   font-weight: 600;
 }
-.connexion .connexion__content form input {
+.connexion .connexion__content form .connexion__password-success {
+  color: green;
+  font-weight: 600;
+}
+.connexion .connexion__content form .connexion__input {
   width: 20rem;
   padding: 1rem;
   border: 1px solid #F6F6F6;
@@ -215,6 +222,7 @@ body {
   color: #666666;
   cursor: pointer;
   border: none;
+  text-decoration: none;
 }
 .connexion .connexion__content form .connexion__buttons .connexion__button-connexion {
   background-color: #F6F6F6;
