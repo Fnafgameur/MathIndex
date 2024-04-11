@@ -281,6 +281,7 @@ body {
   text-decoration: none;
   color: #74828F;
   margin-bottom: 0.5rem;
+  display: flex;
   align-items: center;
 }
 .link--row {
