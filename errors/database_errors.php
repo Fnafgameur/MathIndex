@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Affiche un message d'erreur si la base de données n'est pas trouvée
+ * @return void - Affiche un message d'erreur si la base de données n'est pas trouvée
+ */
 function database_not_found(): void { ?>
 
     <div class="error__container">

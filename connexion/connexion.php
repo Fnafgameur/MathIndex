@@ -45,7 +45,7 @@
 
                 $result = is_mail_correct($email);
 
-                if (!$result["bool"]) {
+                if (!$result["result"]) {
                     $informations["email"]["displayValue"] = "block";
                     $informations["email"]["errorMsg"] = $result["msg"];
                 }
@@ -79,7 +79,7 @@
 
                 $result = is_mail_correct($email);
 
-                if (!$result["bool"]) {
+                if (!$result["result"]) {
                     $informations["email"]["displayValue"] = "block";
                     $informations["email"]["errorMsg"] = $result["msg"];
                 }
