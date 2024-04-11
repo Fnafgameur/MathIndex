@@ -27,28 +27,28 @@
         <div class="side-bar__menu">
             <div class="side-bar__menu__flex">
                 <form action="#" method="GET">
-                    <input type="hidden" id="page" name="page" value="Accueil">
+                    <input type="hidden" id="page" name="page" value=<?= Page::ACCUEIL->value ?>>
                     <button type="submit">
                         <img src="./assets/icons/home.svg">
-                        <p>Accueil</p>
+                        <p><?= Page::ACCUEIL->value ?></p>
                     </button>
                 </form>
 
 
                 <form action="#" method="GET">
-                    <input type="hidden" id="page" name="page" value="Recherche">
+                    <input type="hidden" id="page" name="page" value=<?= Page::RECHERCHE->value ?>>
                     <button type="submit">
                         <img src="./assets/icons/research.svg">
-                        <p>Recherche</p>
+                        <p><?= Page::RECHERCHE->value ?></p>
                     </button>
                 </form>
 
 
                 <form action="#" method="GET">
-                    <input type="hidden" id="page" name="page" value="Mathématique">
+                    <input type="hidden" id="page" name="page" value=<?= Page::MATHEMATIQUE->value ?>>
                     <button type="submit">
                         <img src="./assets/icons/maths.svg">
-                        <p>Mathématique</p>
+                        <p><?= Page::MATHEMATIQUE->value ?></p>
                     </button>
                 </form>
 
@@ -57,18 +57,18 @@
                         if(Role::isGranted($role)) { ?>
 
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value="Mes exercices">
+                            <input type="hidden" id="page" name="page" value=<?= Page::MES_EXERCICES->value ?>>
                             <button type="submit">
                                 <img src="./assets/icons/menu.svg">
-                                <p>Mes exercices</p>
+                                <p><?= Page::MES_EXERCICES->value ?></p>
                             </button>
                         </form>
 
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value="Soumettre">
+                            <input type="hidden" id="page" name="page" value=<?= Page::SOUMETTRE->value ?>>
                             <button type="submit">
                                 <img src="./assets/icons/upload_file.svg">
-                                <p>Soumettre</p>
+                                <p><?= Page::SOUMETTRE->value ?></p>
                             </button>
                         </form>
                     <?php } ?>
@@ -101,10 +101,10 @@
                         </div>
                     <?php } else { ?>
                         <form action="#" method="GET">
-                            <input type="hidden" id="page" name="page" value="Connexion">
+                            <input type="hidden" id="page" name="page" value=<?= Page::CONNEXION->value ?>>
                             <button type="submit">
                                 <img src="./assets/icons/connect.svg">
-                                <p>Connexion</p>
+                                <p><?= Page::CONNEXION->value ?></p>
                             </button>
                         </form>
                     <?php } ?>
