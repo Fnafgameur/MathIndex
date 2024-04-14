@@ -1,6 +1,7 @@
 <?php
 
-enum Page: string {
+enum Page: string
+{
     case ACCUEIL = "Accueil";
     case RECHERCHE = "Recherche";
     case MATHEMATIQUE = "Mathématique";
