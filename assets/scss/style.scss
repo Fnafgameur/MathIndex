@@ -1,4 +1,10 @@
-@import "variables";
+
+:root{
+    --textBlue:#1B3168;
+    --textGrey:#666666;
+    --titleSize: 29px;
+    --descSize: 16px;
+}
 
 body{
     margin: 0;
@@ -198,8 +204,8 @@ body{
     height: 84vh;
 
     & h1{
-        font-size: var($titleSize);
-        color: var($textBlue);
+        font-size: var(--titleSize);
+        color: var(--textBlue);
         margin-left: 0.5rem;
     }
 
@@ -211,13 +217,13 @@ body{
         height: 100%;
 
         & p {
-            font-size: var($descSize);
+            font-size: var(--descSize);
             font-weight: 600;
             padding-bottom: 2rem;
 
             & a {
                 text-decoration: none;
-                color: var($textBlue);
+                color: var(--textBlue);
             }
         }
 
@@ -227,29 +233,17 @@ body{
             font-weight: 600;
         }
 
-        .connexion__description {
-
-            & a:hover {
-                color: #182f69;
-            }
-        }
-
         & form{
             display: flex;
             flex-direction: column;
             gap: 1rem;
 
             & label {
-                color: var($textGrey);
+                color: var(--textGrey);
                 font-weight: 600;
             }
 
-            .connexion__password-success {
-                color: green;
-                font-weight: 600;
-            }
-
-            .connexion__input {
+            & input{
                 width: 20rem;
                 padding: 1rem;
                 border: 1px solid #F6F6F6;
@@ -261,12 +255,11 @@ body{
                 display: flex;
                 gap: 2rem;
 
-                & button  {
+                & button{
                     padding: 1rem;
                     color: #666666;
                     cursor: pointer;
                     border: none;
-                    text-decoration: none;
                 }
 
                 & .connexion__button-connexion {
@@ -284,12 +277,9 @@ body{
         }
     }
 }
-
-
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* ----------------------------------------------------------------------------- Exercices -----------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
 
 .mathematics
 {
@@ -297,7 +287,7 @@ body{
 
     .mathematics__title
     {
-        color: var($textBlue);
+        color: var(--textBlue);
     }
     .mathematics__content
     {
@@ -363,11 +353,12 @@ body{
 }
 
 
+
+
+
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* ----------------------------------------------------------------------------- Mes exercices -----------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-
 .exercices
 {
     margin: 2rem;
@@ -376,8 +367,8 @@ body{
 
     .exercices__title
     {
-        font-size: var($titleSize);
-        color: var($textBlue);
+        font-size: var(--titleSize);
+        color: var(--textBlue);
         margin-left: 0.5rem;
     }
     .exercices__content
@@ -455,8 +446,8 @@ body{
 
     .accueil__title
     {
-        font-size: var($titleSize);
-        color: var($textBlue);
+        font-size: var(--titleSize);
+        color: var(--textBlue);
         margin-left: 0.5rem;
     }
     .accueil__content
@@ -465,7 +456,7 @@ body{
         padding: 1.5rem 3rem;
         height: fit-content;
         border-radius: 7px;
-        font-size: var($descSize);
+        font-size: var(--descSize);
         
         h2{
             font-size: 20px;
@@ -475,18 +466,11 @@ body{
     }
 }
 
-/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------- Admin ---------------------------------------------------------------------------------*/
-/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-<<<<<<< HEAD:assets/scss/style.scss
-<<<<<<< HEAD
 /* ------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------- Recherche ----------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------- */
 
-<<<<<<< HEAD:assets/scss/style.scss
-<<<<<<< HEAD
 .recherche
 {
     margin: 2rem ;
@@ -629,71 +613,7 @@ body{
 
 
 
-/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------- Admin ---------------------------------------------------------------------------------*/
-/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
-=======
->>>>>>> 5dcae12 (Added contributeurs admin page)
-=======
->>>>>>> 966be46 (fix erreurspage in scss)
-=======
->>>>>>> 5dcae12 (Added contributeurs admin page):assets/css/style.scss
-=======
->>>>>>> 966be46 (fix erreurspage in scss):assets/css/style.scss
-
-.administration {
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    margin-left: 2rem;
-
-    & h1 {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
-    }
-
-    .administration__content {
-        display: flex;
-        flex-direction: column;
-
-        & ul {
-            display: flex;
-            flex-direction: row;
-            gap: 1.25rem;
-            list-style-type: none;
-            padding-left: 0;
-            margin: 0;
-
-            & button {
-                border-radius: 7px 7px 0 0;
-                padding: 0.75rem 2.5rem;
-                cursor: pointer;
-                border: none;
-                background-color: #455884;
-                color: white;
-            }
-
-            & button:hover {
-                background-color: var(--textBlue);
-            }
-        }
-
-        .administration__gestion {
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            width: 100%;
-        }
-    }
-}
-
-.contributeurs {
-    display: flex;
-    flex-direction: column;
-
-    & th {
-        text-align: left;
-    }
-
-}
+/* ------------------------------------------------------------------------------------------------------------------- */
+/* ----------------------------------------------------- Erreurs ----------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------- */
