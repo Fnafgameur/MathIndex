@@ -11,12 +11,12 @@
         <table class="mathematics__table">
             <thead class="mathematics__table-head">
             <tr class="mathematics__table-row">
-                <th class="mathematics__table-heading">Nom</th>
-                <th class="mathematics__table-heading">Thématiques</th>
+                <th class="mathematics__table-heading name">Nom</th>
+                <th class="mathematics__table-heading thematic">Thématiques</th>
                 <th class="mathematics__table-heading difficulty">Difficulté</th>
                 <th class="mathematics__table-heading duration">Durée</th>
                 <th class="mathematics__table-heading keywords">Mots-clés</th>
-                <th class="mathematics__table-heading">Fichiers</th>
+                <th class="mathematics__table-heading files">Fichiers</th>
             </tr>
             </thead>
             <tbody class="mathematics__table-body">
@@ -53,7 +53,7 @@
                     <th class="mathematics__table-heading difficulty">Difficulté</th>
                     <th class="mathematics__table-heading duration">Durée</th>
                     <th class="mathematics__table-heading keywords">Mots-clés</th>
-                    <th class="mathematics__table-heading">Fichiers</th>
+                    <th class="mathematics__table-heading files">Fichiers</th>
                 </tr>
                 </thead>
                 <tbody class="mathematics__table-body">

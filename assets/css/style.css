@@ -1,10 +1,3 @@
-:root {
-  --textBlue:#1B3168;
-  --textGrey:#666666;
-  --titleSize: 29px;
-  --descSize: 16px;
-}
-
 body {
   margin: 0;
 }
@@ -241,7 +234,7 @@ body {
   margin: 2rem;
 }
 .mathematics .mathematics__title {
-  color: var(--textBlue);
+  color: #1B3168;
 }
 .mathematics .mathematics__content {
   background-color: #fff;
@@ -270,9 +263,6 @@ body {
   color: #464646;
   padding: 0.5rem;
 }
-.mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading:first-child {
-  width: 25%;
-}
 .mathematics .mathematics__content .mathematics__table-row .mathematics__table-data {
   color: #74828F;
   padding: 1rem 0.5rem;
@@ -295,12 +285,16 @@ body {
   gap: 0.5rem;
 }
 
-.difficulty, .duration {
+.name, thematic {
+  width: 20%;
+}
+
+.difficulty, .duration, .files {
   width: 10%;
 }
 
 .keywords {
-  width: 20%;
+  width: 30%;
 }
 
 .wordbreak {
@@ -657,4 +651,6 @@ body {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
