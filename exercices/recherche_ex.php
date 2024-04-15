@@ -37,6 +37,7 @@
             <div>
                 <label for="thematique">Thématique:</label>
                 <select name="thematique">
+                    <option id="thematique"  name="thematique" value="0" <?= $filtres["thematique"] === "1" ? "selected" : "" ?>>Voir tout</option>
                     <option id="thematique"  name="thematique" value="1" <?= $filtres["thematique"] === "1" ? "selected" : "" ?>>Suites</option>
                     <option id="thematique"  name="thematique" value="2" <?= $filtres["thematique"] === "2" ? "selected" : "" ?>>Primitives</option>
                     <option id="thematique"  name="thematique" value="3" <?= $filtres["thematique"] === "3" ? "selected" : "" ?>>Algèbres</option>
@@ -49,7 +50,7 @@
             </div>
             <div>
                 <label for="mots-cles">Mots clés:</label>
-                <input id="mots_cles" name="mots-cles" <?= $filtres["mots-cles"] === "" ? "" : "value=".$filtres["mots-cles"] ?>>
+                <input id="mots_cles" name="mots-cles" value="<?= $filtres["mots-cles"]??"" ?>" type="text">
             </div>
             <div>
                 <button type="submit">

@@ -35,6 +35,7 @@ if (isset($db)) {
             $niveau = $filtres["niveau"];
             $thematique = $filtres["thematique"];
             $mots_cles = explode(" ", $filtres["mots-cles"]);
+            $mots_cles = str_replace("'", "", $mots_cles);
 
             $keywordsReq = "";
 
@@ -46,16 +47,32 @@ if (isset($db)) {
             }
 
             if ($keywordsReq === "") {
-                $query = $db->prepare("SELECT * FROM exercise WHERE classroom_id = :niveau AND thematic_id = :thematique");
+                if ($thematique === "0") {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE classroom_id = :niveau");
+                }
+                else {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE classroom_id = :niveau AND thematic_id = :thematique");
+                }
             }
             else {
-                $query = $db->prepare("SELECT * FROM exercise
+                if ($thematique === "0") {
+                    $query = $db->prepare("SELECT * FROM exercise
+            WHERE classroom_id = :niveau
+            AND ($keywordsReq)");
+                }
+                else {
+                    $query = $db->prepare("SELECT * FROM exercise
             WHERE classroom_id = :niveau
             AND thematic_id = :thematique
-            AND $keywordsReq");
+            AND ($keywordsReq)");
+                }
+
             }
+
             $query->bindParam(':niveau', $niveau);
-            $query->bindParam(':thematique', $thematique);
+            if ($thematique !== "0") {
+                $query->bindParam(':thematique', $thematique);
+            }
         } else {
             $query = $db->prepare("SELECT * FROM exercise");
         }
