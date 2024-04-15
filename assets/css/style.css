@@ -269,7 +269,6 @@ body {
 .mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading {
   color: #464646;
   padding: 0.5rem;
-  width: 20%;
 }
 .mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading:first-child {
   width: 25%;
@@ -294,6 +293,28 @@ body {
 .link--row {
   display: flex;
   gap: 0.5rem;
+}
+
+.difficulty, .duration {
+  width: 10%;
+}
+
+.keywords {
+  width: 20%;
+}
+
+.wordbreak {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.keyword {
+  background-color: #DBDBDB;
+  padding: 0.5rem;
+  border-radius: 20px;
+  color: #222222;
+  margin: 0.25rem;
+  width: fit-content;
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
