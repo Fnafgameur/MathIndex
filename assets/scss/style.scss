@@ -502,8 +502,8 @@ body{
 
     .research__title
     {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: var($titleSize);
+        color: $textBlue;
         margin-left: 0.5rem;
     }
     .research__content
