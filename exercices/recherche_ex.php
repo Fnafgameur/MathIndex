@@ -36,11 +36,12 @@
     $number = $exercices["number"]??0;
     $exercices = $exercices["exercise"];
 ?>
+          
+<div class="research">
+    <h1 class="research__title">Rechercher un exercice</h1>
+    <div class="research__content">
+        <form class="research__form">
 
-<div class="recherche">
-    <h1 class="recherche__title">Rechercher un exercice</h1>
-    <div class="recherche__content">
-        <form class="recherche__form" action="#" method="post">
             <div>
                 <label for="niveau">Niveau:</label>
                 <select name="niveau">
@@ -78,14 +79,14 @@
         
         <h2><?= $number; ?> exercices trouvés</h2>
 
-        <table class="recherche__table">
-            <thead class="recherche__table-head">
-                <tr class="recherche__table-row">
-                    <th class="recherche__table-heading nom">Nom</th>
-                    <th class="recherche__table-heading difficulte">Difficulté</th>
-                    <th class="recherche__table-heading mots-cles">Mots clés</th>
-                    <th class="recherche__table-heading duree">Durée</th>
-                    <th class="recherche__table-heading fichiers">Fichiers</th>
+        <table class="research__table">
+            <thead class="research__table-head">
+                <tr class="research__table-row">
+                    <th class="research__table-heading nom">Nom</th>
+                    <th class="research__table-heading difficulte">Difficulté</th>
+                    <th class="research__table-heading mots-cles">Mots clés</th>
+                    <th class="research__table-heading duree">Durée</th>
+                    <th class="research__table-heading fichiers">Fichiers</th>
                 </tr>
             </thead>
             <tbody class="recherche__table-body">
@@ -93,11 +94,11 @@
                 foreach ($exercices as $exercice) { ?>
 
                 <tr class="recherche__table-row">
-                    <td class="recherche__table-data"><?= $exercice["name"] ?></td>
-                    <td class="recherche__table-data"><?= $exercice["difficulty"] ?></td>
-                    <td class="recherche__table-data"><?= $exercice["keywords"] ?></td>
-                    <td class="recherche__table-data"><?= $exercice["duration"] ?></td>
-                    <td class="recherche__table-data">
+                    <td class="research__table-data"><?= $exercice["name"] ?></td>
+                    <td class="research__table-data"><?= $exercice["difficulty"] ?></td>
+                    <td class="research__table-data"><?= $exercice["keywords"] ?></td>
+                    <td class="research__table-data"><?= $exercice["duration"] ?></td>
+                    <td class="research__table-data">
                         <a href="<?= $exercice["file"]??"" ?>" download="<?= $exercice["file"]??"" ?>">Télécharger</a>
                     </td>
                 </tr>

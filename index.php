@@ -26,6 +26,9 @@ if (isset($_GET["page"])) {
             case Page::SOUMETTRE->value:
                 include_once("exercices/soumettre_ex.php");
                 break;
+            case "Administration":
+                include_once("admin/admin.php");
+                break;
             default:
                 include_once("exercices/accueil.php");
             }
