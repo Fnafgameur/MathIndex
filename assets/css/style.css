@@ -1,3 +1,10 @@
+:root {
+  --textBlue:#1B3168;
+  --textGrey:#666666;
+  --titleSize: 29px;
+  --descSize: 16px;
+}
+
 body {
   margin: 0;
 }
@@ -167,8 +174,8 @@ body {
   height: 84vh;
 }
 .connexion h1 {
-  font-size: var(29px);
-  color: var(#1B3168);
+  font-size: var(--titleSize);
+  color: var(--textBlue);
   margin-left: 0.5rem;
 }
 .connexion .connexion__content {
@@ -178,21 +185,18 @@ body {
   height: 100%;
 }
 .connexion .connexion__content p {
-  font-size: var(16px);
+  font-size: var(--descSize);
   font-weight: 600;
   padding-bottom: 2rem;
 }
 .connexion .connexion__content p a {
   text-decoration: none;
-  color: var(#1B3168);
+  color: var(--textBlue);
 }
 .connexion .connexion__content .connexion__errormsg {
   margin-top: 0;
   color: red;
   font-weight: 600;
-}
-.connexion .connexion__content .connexion__description a:hover {
-  color: #182f69;
 }
 .connexion .connexion__content form {
   display: flex;
@@ -200,14 +204,10 @@ body {
   gap: 1rem;
 }
 .connexion .connexion__content form label {
-  color: var(#666666);
+  color: var(--textGrey);
   font-weight: 600;
 }
-.connexion .connexion__content form .connexion__password-success {
-  color: green;
-  font-weight: 600;
-}
-.connexion .connexion__content form .connexion__input {
+.connexion .connexion__content form input {
   width: 20rem;
   padding: 1rem;
   border: 1px solid #F6F6F6;
@@ -222,7 +222,6 @@ body {
   color: #666666;
   cursor: pointer;
   border: none;
-  text-decoration: none;
 }
 .connexion .connexion__content form .connexion__buttons .connexion__button-connexion {
   background-color: #F6F6F6;
@@ -242,7 +241,7 @@ body {
   margin: 2rem;
 }
 .mathematics .mathematics__title {
-  color: var(#1B3168);
+  color: var(--textBlue);
 }
 .mathematics .mathematics__content {
   background-color: #fff;
@@ -292,8 +291,8 @@ body {
   height: 81vh;
 }
 .exercices .exercices__title {
-  font-size: var(29px);
-  color: var(#1B3168);
+  font-size: var(--titleSize);
+  color: var(--textBlue);
   margin-left: 0.5rem;
 }
 .exercices .exercices__content {
@@ -344,8 +343,8 @@ body {
   height: fit-content;
 }
 .accueil .accueil__title {
-  font-size: var(29px);
-  color: var(#1B3168);
+  font-size: var(--titleSize);
+  color: var(--textBlue);
   margin-left: 0.5rem;
 }
 .accueil .accueil__content {
@@ -353,7 +352,7 @@ body {
   padding: 1.5rem 3rem;
   height: fit-content;
   border-radius: 7px;
-  font-size: var(16px);
+  font-size: var(--descSize);
 }
 .accueil .accueil__content h2 {
   font-size: 20px;
@@ -361,7 +360,7 @@ body {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------- Recherche ----------------------------------------------------- */
+/* ----------------------------------------------------- contributors ----------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------- */
 .recherche {
   margin: 2rem;
@@ -374,10 +373,9 @@ body {
 }
 .recherche .recherche__content {
   background-color: #fff;
-  padding: 1.5rem 3rem;
-  height: fit-content;
+  padding: 0.5rem 3rem;
+  height: 90%;
   border-radius: 7px;
-  font-size: var(--descSize);
 }
 .recherche .recherche__content h2 {
   font-size: 20px;
@@ -467,8 +465,162 @@ body {
   font-weight: 400;
 }
 
-/* ------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------- Erreurs ----------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* --------------------------------------------------------------------------------- Admin ---------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.administration {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin-left: 2.5%;
+}
+.administration h1 {
+  font-size: var(--titleSize);
+  color: var(--textBlue);
+}
+.administration .administration__content {
+  display: flex;
+  flex-direction: column;
+}
+.administration .administration__content .administration__head-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.administration .administration__content .administration__head-bar button {
+  border-radius: 7px 7px 0 0;
+  padding: 0.5rem 2%;
+  cursor: pointer;
+  border: none;
+  background-color: #455884;
+  color: white;
+  font-family: "Noto sans";
+}
+.administration .administration__content .administration__head-bar button:hover {
+  background-color: var(--textBlue);
+}
+.administration .administration__content .administration__gestion {
+  background-color: #fff;
+  padding: 0.5rem 3rem;
+  height: 90%;
+  border-radius: 0 7px 7px 7px;
+}
 
-/*# sourceMappingURL=style.css.map */
+.contributors {
+  display: flex;
+  flex-direction: column;
+}
+.contributors h2 {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Noto sans";
+  color: var(--textBlue);
+  margin-top: 2.5rem;
+}
+.contributors .contributors__description {
+  margin: 0;
+  font-family: "Noto sans";
+}
+.contributors .contributors__action-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  width: 100%;
+}
+.contributors .contributors__action-bar form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+}
+.contributors .contributors__action-bar form input {
+  height: 56px;
+  width: 50%;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: solid 2px #DBDBDB;
+  color: var(--textGrey);
+  font-family: "Noto sans";
+  font-weight: 600;
+}
+.contributors .contributors__action-bar form button {
+  height: 56px;
+  width: 30%;
+  border-radius: 8px;
+  border: solid 2px #F6F6F6;
+  background-color: #F6F6F6;
+  color: var(--textGrey);
+  font-family: "Noto sans";
+  font-weight: 700;
+}
+.contributors .contributors__action-bar a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+.contributors .contributors__action-bar a button {
+  height: 56px;
+  width: 70%;
+  border-radius: 8px;
+  border: solid 2px #52B788;
+  background-color: #52B788;
+  color: #FFFFFF;
+  font-family: "Noto sans";
+  font-weight: 700;
+}
+.contributors table {
+  margin-top: 1rem;
+  width: 100%;
+}
+.contributors table, .contributors thead {
+  border: 1px solid #DBDBDB;
+  border-collapse: collapse;
+}
+.contributors thead {
+  background-color: #F0F0F0;
+}
+.contributors tr {
+  border-radius: 8px;
+}
+.contributors tr th {
+  color: #464646;
+  padding: 0.5rem;
+  width: 20%;
+}
+.contributors tr td {
+  color: #74828F;
+  padding: 1rem 0.5rem;
+}
+.contributors tr td button {
+  width: 10rem;
+  padding: 2% 5%;
+  font-family: "Poppins";
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+.contributors tr td button:hover {
+  background-color: #F6F6F6;
+}
+.contributors tr td button:hover img {
+  fill: #1B3168;
+}
+.contributors tr td button:hover p {
+  color: #1B3168;
+}
+.contributors tr th, .contributors tr td {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+}/*# sourceMappingURL=style.css.map */
