@@ -8,11 +8,26 @@
             "mots-cles" => "",
     ];
 
+    $searchFilterResult = [
+            "result" => true,
+            "msg" => "",
+    ];
+
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
         $filtres["niveau"] = $_POST["niveau"];
         $filtres["thematique"] = $_POST["thematique"];
         $filtres["mots-cles"] = $_POST["mots-cles"];
-        $exercices = get_exercices($filtres);
+
+        $filtres["mots-cles"] = str_replace(["'", '"'], "", $filtres["mots-cles"]);
+
+        $searchFilterResult = is_searching_correct($filtres);
+
+        if ($searchFilterResult["result"]) {
+            $exercices = get_exercices($filtres);
+        }
+        else {
+            $exercices = get_exercices();
+        }
 
     } else {
         $exercices = get_exercices();
@@ -37,7 +52,7 @@
             <div>
                 <label for="thematique">Thématique:</label>
                 <select name="thematique">
-                    <option id="thematique"  name="thematique" value="0" <?= $filtres["thematique"] === "1" ? "selected" : "" ?>>Voir tout</option>
+                    <option id="thematique"  name="thematique" value="0" <?= $filtres["thematique"] === "0" ? "selected" : "" ?>>Voir tout</option>
                     <option id="thematique"  name="thematique" value="1" <?= $filtres["thematique"] === "1" ? "selected" : "" ?>>Suites</option>
                     <option id="thematique"  name="thematique" value="2" <?= $filtres["thematique"] === "2" ? "selected" : "" ?>>Primitives</option>
                     <option id="thematique"  name="thematique" value="3" <?= $filtres["thematique"] === "3" ? "selected" : "" ?>>Algèbres</option>
@@ -58,6 +73,8 @@
                 </button>
             </div>
         </form>
+
+        <p style="color: red; font-weight: 900; display: <?= $searchFilterResult["result"] ? "none" : "block" ?> "><?= $searchFilterResult["msg"]; ?></p>
         
         <h2><?= $number; ?> exercices trouvés</h2>
 

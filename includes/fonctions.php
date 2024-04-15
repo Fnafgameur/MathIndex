@@ -35,3 +35,29 @@
         }
         return $result;
     }
+
+    function is_searching_correct(array $searchFilter) : array {
+
+        $result = [
+            "result" => false,
+            "msg" => "",
+        ];
+
+        $niveau = $searchFilter["niveau"];
+        $thematique = $searchFilter["thematique"];
+
+        echo intval($niveau);
+        echo intval($thematique);
+
+        if (!ctype_digit($niveau) || intval($niveau) < 1 || intval($niveau) > 3) {
+            $result["msg"] = "Niveau invalide.";
+            return $result;
+        }
+        if (!ctype_digit($thematique) || intval($thematique) < 0 || intval($thematique) > 8) {
+            $result["msg"] = "Thématique invalide.";
+            return $result;
+        }
+
+        $result["result"] = true;
+        return $result;
+    }
