@@ -390,46 +390,46 @@ body {
 /* ------------------------------------------------------------------------------------------------------------------- */
 /* ----------------------------------------------------- contributors ----------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------- */
-.recherche {
+.research {
   margin: 2rem;
   height: fit-content;
 }
-.recherche .recherche__title {
+.research .research__title {
   font-size: var(--titleSize);
   color: var(--textBlue);
   margin-left: 0.5rem;
 }
-.recherche .recherche__content {
+.research .research__content {
   background-color: #fff;
   padding: 0.5rem 3rem;
   height: 90%;
   border-radius: 7px;
 }
-.recherche .recherche__content h2 {
+.research .research__content h2 {
   font-size: 20px;
   font-weight: 600;
   font-family: "epilogue";
   color: var(--textBlue);
   margin-top: 2.5rem;
 }
-.recherche .recherche__content form {
+.research .research__content form {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 }
-.recherche .recherche__content form div {
+.research .research__content form div {
   display: flex;
   flex-direction: column;
   justify-content: end;
   width: 25%;
 }
-.recherche .recherche__content form div label {
+.research .research__content form div label {
   color: var(--textGrey);
   font-family: "Noto sans";
   font-weight: 600;
 }
-.recherche .recherche__content form div select, .recherche .recherche__content form div input {
+.research .research__content form div select, .research .research__content form div input {
   height: 56px;
   width: 80%;
   padding: 0 16px;
@@ -439,7 +439,7 @@ body {
   font-family: "Noto sans";
   font-weight: 600;
 }
-.recherche .recherche__content form div button {
+.research .research__content form div button {
   height: 56px;
   width: 70%;
   border-radius: 8px;
@@ -450,44 +450,44 @@ body {
   font-weight: 600;
   margin-top: 18px;
 }
-.recherche .recherche__content .recherche__table {
+.research .research__content .research__table {
   width: 100%;
 }
-.recherche .recherche__content .recherche__table, .recherche .recherche__content .recherche__table-head {
+.research .research__content .research__table, .research .research__content .research__table-head {
   border: 1px solid #DBDBDB;
   border-collapse: collapse;
 }
-.recherche .recherche__content .recherche__table-head {
+.research .research__content .research__table-head {
   background-color: #F0F0F0;
 }
-.recherche .recherche__content .recherche__table-row {
+.research .research__content .research__table-row {
   border-radius: 8px;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading {
+.research .research__content .research__table-row .research__table-heading {
   color: #464646;
   padding: 0.5rem;
   width: 20%;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading.nom {
+.research .research__content .research__table-row .research__table-heading.nom {
   width: 30%;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading.difficulte {
+.research .research__content .research__table-row .research__table-heading.difficulte {
   width: 10%;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading.mots-cles {
+.research .research__content .research__table-row .research__table-heading.mots-cles {
   width: 30%;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading.duree {
+.research .research__content .research__table-row .research__table-heading.duree {
   width: 10%;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading.fichiers {
+.research .research__content .research__table-row .research__table-heading.fichiers {
   width: 20%;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-data {
+.research .research__content .research__table-row .research__table-data {
   color: #74828F;
   padding: 1rem 0.5rem;
 }
-.recherche .recherche__content .recherche__table-row .recherche__table-heading, .recherche .recherche__content .recherche__table-row .recherche__table-data {
+.research .research__content .research__table-row .research__table-heading, .research .research__content .research__table-row .research__table-data {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
@@ -651,6 +651,4 @@ body {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

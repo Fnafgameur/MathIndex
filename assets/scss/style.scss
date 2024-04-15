@@ -494,19 +494,19 @@ body{
 /* ----------------------------------------------------- contributors ----------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------- */
 
-.recherche
+.research
 {
     margin: 2rem ;
     height: fit-content;
   
 
-    .recherche__title
+    .research__title
     {
         font-size: var(--titleSize);
         color: var(--textBlue);
         margin-left: 0.5rem;
     }
-    .recherche__content
+    .research__content
     {
         background-color: #fff;
         padding: 0.5rem 3rem;
@@ -566,27 +566,27 @@ body{
 
 
 
-        .recherche__table
+        .research__table
         {
             width: 100%;
         }
 
-        .recherche__table, .recherche__table-head
+        .research__table, .research__table-head
         {
             border: 1px solid #DBDBDB;
             border-collapse: collapse;
         }
 
-        .recherche__table-head
+        .research__table-head
         {
             background-color: #F0F0F0;
         }
 
-        .recherche__table-row
+        .research__table-row
         {
             border-radius: 8px;
             
-            .recherche__table-heading
+            .research__table-heading
             {
                 color: #464646; 
                 padding: 0.5rem;
@@ -615,13 +615,13 @@ body{
                 }
             }
 
-            .recherche__table-data
+            .research__table-data
             { 
                 color: #74828F;
                 padding: 1rem 0.5rem;   
             }
 
-            .recherche__table-heading, .recherche__table-data
+            .research__table-heading, .research__table-data
             {
                 text-align: left;
                 font-size: 14px;
