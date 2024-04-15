@@ -1,10 +1,4 @@
-
-:root{
-    --textBlue:#1B3168;
-    --textGrey:#666666;
-    --titleSize: 29px;
-    --descSize: 16px;
-}
+@import "variables.scss";
 
 body{
     margin: 0;
@@ -287,7 +281,7 @@ body{
 
     .mathematics__title
     {
-        color: var(--textBlue);
+        color: $textBlue;
     }
     .mathematics__content
     {
@@ -318,18 +312,12 @@ body{
         .mathematics__table-row
         {
             border-radius: 8px;
+            border-bottom: 1px solid #DBDBDB;
 
             .mathematics__table-heading
             {
                 color: #464646;
                 padding: 0.5rem;
-                width: 20%;
-
-                &:first-child
-                {
-                    width: 25%;
-                }
-
             }
             .mathematics__table-data
             {
@@ -351,10 +339,45 @@ body{
 
 
 }
+.link{
+    text-decoration: none;
+    color: #74828F;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
 
-
-
-
+    &--row
+    {
+        display: flex;
+        gap: 0.5rem;
+    }
+}
+.name,thematic
+{
+    width: 20%;
+}
+.difficulty,.duration,.files
+{
+    width: 10%;
+}
+.keywords
+{
+    width: 30%;
+}
+.wordbreak
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+.keyword
+{
+    background-color: #DBDBDB;
+    padding: 0.5rem;
+    border-radius: 20px;
+    color: #222222;
+    margin: 0.25rem;
+    width: fit-content;
+}
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* ----------------------------------------------------------------------------- Mes exercices -----------------------------------------------------------------------------*/
