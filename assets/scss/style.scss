@@ -486,8 +486,8 @@ body{
 
     .recherche__title
     {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: var($titleSize);
+        color: $textBlue;
         margin-left: 0.5rem;
     }
     .recherche__content

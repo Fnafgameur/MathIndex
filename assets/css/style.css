@@ -368,8 +368,8 @@ body {
   height: fit-content;
 }
 .recherche .recherche__title {
-  font-size: var(--titleSize);
-  color: var(--textBlue);
+  font-size: var(29px);
+  color: #1B3168;
   margin-left: 0.5rem;
 }
 .recherche .recherche__content {
