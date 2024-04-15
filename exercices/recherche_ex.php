@@ -40,7 +40,7 @@
 <div class="research">
     <h1 class="research__title">Rechercher un exercice</h1>
     <div class="research__content">
-        <form class="research__form">
+        <form class="research__form" method="post" action="#">
 
             <div>
                 <label for="niveau">Niveau:</label>
@@ -89,11 +89,11 @@
                     <th class="research__table-heading fichiers">Fichiers</th>
                 </tr>
             </thead>
-            <tbody class="recherche__table-body">
+            <tbody>
             <?php
                 foreach ($exercices as $exercice) { ?>
 
-                <tr class="recherche__table-row">
+                <tr class="research__table-row">
                     <td class="research__table-data"><?= $exercice["name"] ?></td>
                     <td class="research__table-data"><?= $exercice["difficulty"] ?></td>
                     <td class="research__table-data"><?= $exercice["keywords"] ?></td>
