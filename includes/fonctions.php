@@ -36,7 +36,12 @@
         return $result;
     }
 
-    function is_searching_correct(array $searchFilter) : array {
+    /**
+     * Permet de checker si les filtres de recherche sont corrects et n'ont pas été modifiés côté client
+     * @param array $searchFilter Les filtres de recherche
+     * @return array - Un tableau avec comme clé "result", un booléen indiquant si les filtres sont corrects ou non, et comme clé "msg", le message d'erreur
+     */
+    function is_searching_filter_correct(array $searchFilter) : array {
 
         $result = [
             "result" => false,
@@ -45,9 +50,6 @@
 
         $niveau = $searchFilter["niveau"];
         $thematique = $searchFilter["thematique"];
-
-        echo intval($niveau);
-        echo intval($thematique);
 
         if (!ctype_digit($niveau) || intval($niveau) < 1 || intval($niveau) > 3) {
             $result["msg"] = "Niveau invalide.";

@@ -20,7 +20,7 @@
 
         $filtres["mots-cles"] = str_replace(["'", '"'], "", $filtres["mots-cles"]);
 
-        $searchFilterResult = is_searching_correct($filtres);
+        $searchFilterResult = is_searching_filter_correct($filtres);
 
         if ($searchFilterResult["result"]) {
             $exercices = get_exercices($filtres);

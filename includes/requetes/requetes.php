@@ -20,6 +20,7 @@ if (isset($db)) {
 
     /**
      * Permet d'obtenir tous les exercices stockés en DB
+     * @param array|null $filtres - Les filtres de recherche (non obligatoire)
      * @return array|false - Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
      */
     function get_exercices(array $filtres = null) : array|false
