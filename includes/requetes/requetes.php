@@ -10,7 +10,7 @@ if (isset($db)) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    function get_exercises() : mixed {
+    function get_exercises_with_limit() : mixed {
         global $db;
         $query = $db->prepare("SELECT * FROM exercise LIMIT 5");
         $query->execute();
@@ -76,6 +76,7 @@ if (isset($db)) {
         } else {
             $query = $db->prepare("SELECT * FROM exercise");
         }
+
         $query->execute();
 
         $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -88,11 +89,7 @@ if (isset($db)) {
         global $db;
         $query = $db->prepare("SELECT * FROM exercise ORDER BY date_uploaded ASC LIMIT 3");
         $query->execute();
-
-        $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
-        $result["number"] = $query->rowCount();
-
-        return $result;
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
     function get_thematic_by_exercises($exercise_thematic) : mixed {
         global $db;

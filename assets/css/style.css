@@ -394,10 +394,9 @@ body {
   margin: 2rem;
   height: fit-content;
 }
-
 .research .research__title {
-  font-size: var(--titleSize);
-  color: var(--textBlue);
+  font-size: var(29px);
+  color: #1B3168;
   margin-left: 0.5rem;
 }
 .research .research__content {
@@ -652,4 +651,6 @@ body {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
