@@ -1,7 +1,6 @@
 <?php
     $exercises = get_exercises_with_limit();
     $exercises_sorted = get_exercises_sorted();
-    //explode(',',$exercise_sorted['keywords'])
 ?>
 <div class="mathematics">
     <h1 class="mathematics__title">Exercices</h1>
