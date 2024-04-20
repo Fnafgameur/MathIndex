@@ -272,7 +272,7 @@ body {
 .mathematics .mathematics__content .mathematics__pagination {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-top: 3rem;
 }
 
@@ -285,6 +285,15 @@ body {
 .link--row {
   display: flex;
   gap: 0.5rem;
+}
+.link--pagination {
+  border: 1px solid #DFE3E8;
+  border-radius: 5px;
+  padding: 0.5rem 0.75rem;
+  color: #C4CDD5;
+}
+.link--pagination:hover {
+  background-color: #919EAB;
 }
 
 .name, thematic {
