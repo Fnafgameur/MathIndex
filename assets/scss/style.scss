@@ -290,38 +290,44 @@ body{
         height: 90%;
         border-radius: 7px;
 
-        .mathematics__table
+        .mathematics__content-table
         {
-            width: 100%;
+            margin-bottom: 4rem;
 
-            .mathematics__table-head
+            .mathematics__table
             {
-                background-color: #F0F0F0;
-            }
-            .mathematics__table-row
-            {
-                border-radius: 8px;
-                border-bottom: 1px solid #DBDBDB;
+                width: 100%;
 
-                .mathematics__table-heading
+                .mathematics__table-head
                 {
-                    color: #464646;
-                    padding: 0.5rem;
+                    background-color: #F0F0F0;
                 }
-                .mathematics__table-data
+                .mathematics__table-row
                 {
-                    color: #74828F;
-                    padding: 1rem 0.5rem;
-                }
-                .mathematics__table-heading, .mathematics__table-data
-                {
+                    border-radius: 8px;
+                    border-bottom: 1px solid #DBDBDB;
 
-                    text-align: left;
-                    font-size: 14px;
-                    font-weight: 400;
+                    .mathematics__table-heading
+                    {
+                        color: #464646;
+                        padding: 0.5rem;
+                    }
+                    .mathematics__table-data
+                    {
+                        color: #74828F;
+                        padding: 1rem 0.5rem;
+                    }
+                    .mathematics__table-heading, .mathematics__table-data
+                    {
+
+                        text-align: left;
+                        font-size: 14px;
+                        font-weight: 400;
+                    }
                 }
             }
         }
+
         .mathematics__table, .mathematics__table-head
         {
             border: 1px solid #DBDBDB;
@@ -353,21 +359,27 @@ body{
         gap: 0.5rem;
     }
 
-    &--pagination
+    &__pagination
     {
         border: 1px solid #DFE3E8;
         border-radius: 5px;
         padding: 0.5rem 0.75rem;
         color: #C4CDD5;
-
-        &:hover
-        {
-            background-color: #919EAB;
-        ;
-        }
+    }
+    &__arrow:hover
+    {
+        background-color: #919EAB;
+    }
+    &__number
+    {
+        color: #222222;
+    }
+    &__number:hover
+    {
+        border-color: #222222;
     }
 }
-.name,thematic
+.name,.thematic
 {
     width: 20%;
 }

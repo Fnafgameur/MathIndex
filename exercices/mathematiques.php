@@ -10,7 +10,7 @@
     <h1 class="mathematics__title">Exercices</h1>
     <div class="mathematics__content">
         <h2 class="mathematics__content-title">Nouveautés</h2>
-        <div>
+        <div class="mathematics__content-table">
             <table class="mathematics__table">
                 <thead class="mathematics__table-head">
                 <tr class="mathematics__table-row">
@@ -32,7 +32,7 @@
                         <td class="mathematics__table-data"><?=get_thematic_by_exercises($exercise_sorted["thematic_id"])['name'];?>
                         </td>
                         <td class="mathematics__table-data"><?=$exercise_sorted['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$exercise_sorted['duration']??"Aucun"?></td>
+                        <td class="mathematics__table-data"><?=$exercise_sorted['duration'].'h'??"Aucun"?></td>
                         <td class="mathematics__table-data wordbreak"><?php foreach ($keywords_sorted as $keyword) {
                                 echo "<p class='keyword'>$keyword</p>";
                             } ?>
@@ -46,7 +46,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
+        <div class="mathematics__content-table">
             <h2 class="mathematics__content-title">Tous les exercices</h2>
             <table class="mathematics__table">
                 <thead class="mathematics__table-head">
@@ -69,7 +69,7 @@
                         <td class="mathematics__table-data"><?=get_thematic_by_exercises($exercise["thematic_id"])['name'];?>
                         </td>
                         <td class="mathematics__table-data"><?=$exercise['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$exercise['duration']??"Aucun"?></td>
+                        <td class="mathematics__table-data"><?=$exercise['duration'].'h'??"Aucun"?></td>
                         <td class="mathematics__table-data wordbreak"><?php foreach ($keywords as $keyword) {
                                 echo "<p class='keyword'>$keyword</p>";
                             } ?>
@@ -82,13 +82,13 @@
                 <?php } ?>
                 </tbody>
             </table>
-            <div class="mathematics__pagination">
-                <a class="link link--pagination" href="index.php?page=Mathématique&pagination=<?=($current_page - 1) < 1 ? 1 : $current_page - 1;?>"><</a>
-                <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                    <a class="link link--pagination" href="index.php?page=Mathématique&pagination=<?=$i;?>"><?=$i?></a>
-                <?php } ?>
-                <a class="link link--pagination" href="index.php?page=Mathématique&pagination=<?=($current_page + 1) > $pages ? $pages : $current_page + 1;?>">></a>
-            </div>
+        </div>
+        <div class="mathematics__pagination">
+            <a class="link link__pagination link__arrow" href="index.php?page=Mathématique&pagination=<?=($current_page - 1) < 1 ? 1 : $current_page - 1;?>"><</a>
+            <?php for ($i = 1; $i <= $pages; $i++) { ?>
+                <a class="link link__pagination link__number" href="index.php?page=Mathématique&pagination=<?=$i;?>"><?=$i?></a>
+            <?php } ?>
+            <a class="link link__pagination link__arrow" href="index.php?page=Mathématique&pagination=<?=($current_page + 1) > $pages ? $pages : $current_page + 1;?>">></a>
         </div>
     </div>
 </div>
