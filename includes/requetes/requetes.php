@@ -10,21 +10,23 @@ if (isset($db)) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    function get_exercises_with_limit() : mixed {
-        global $db;
-        $query = $db->prepare("SELECT * FROM exercise LIMIT 5");
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     /**
      * Permet d'obtenir tous les exercices stockés en DB
+     * @param int|null $limit - Le nombre d'exercices à retourner (non obligatoire)
      * @param array|null $filtres - Les filtres de recherche (non obligatoire)
      * @return array|false - Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
      */
-    function get_exercices(array $filtres = null) : array|false
+    function get_exercises(int $limit = null, array $filtres = null) : array|false
     {
         global $db;
+
+        if ($limit !== null) {
+            $limitReq = "LIMIT " . $limit;
+        }
+        else {
+            $limitReq = "";
+        }
 
         if (isset($filtres)) {
             $result = [
@@ -48,23 +50,26 @@ if (isset($db)) {
 
             if ($keywordsReq === "") {
                 if ($thematique === "0") {
-                    $query = $db->prepare("SELECT * FROM exercise WHERE classroom_id = :niveau");
+                    $query = $db->prepare("SELECT * FROM exercise 
+            WHERE classroom_id = :niveau $limitReq");
                 }
                 else {
-                    $query = $db->prepare("SELECT * FROM exercise WHERE classroom_id = :niveau AND thematic_id = :thematique");
+                    $query = $db->prepare("SELECT * FROM exercise 
+            WHERE classroom_id = :niveau 
+            AND thematic_id = :thematique $limitReq");
                 }
             }
             else {
                 if ($thematique === "0") {
                     $query = $db->prepare("SELECT * FROM exercise
             WHERE classroom_id = :niveau
-            AND ($keywordsReq)");
+            AND ($keywordsReq) $limitReq");
                 }
                 else {
                     $query = $db->prepare("SELECT * FROM exercise
             WHERE classroom_id = :niveau
             AND thematic_id = :thematique
-            AND ($keywordsReq)");
+            AND ($keywordsReq) $limitReq");
                 }
 
             }
@@ -74,7 +79,7 @@ if (isset($db)) {
                 $query->bindParam(':thematique', $thematique);
             }
         } else {
-            $query = $db->prepare("SELECT * FROM exercise");
+            $query = $db->prepare("SELECT * FROM exercise $limitReq");
         }
 
         $query->execute();

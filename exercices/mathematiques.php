@@ -1,5 +1,5 @@
 <?php
-    $exercises = get_exercises_with_limit();
+    $exercises = get_exercises(5);
     $exercises_sorted = get_exercises_sorted();
 ?>
 <div class="mathematics">
@@ -56,7 +56,7 @@
                 </tr>
                 </thead>
                 <tbody class="mathematics__table-body">
-                <?php foreach ($exercises as $exercise) {
+                <?php foreach ($exercises["exercise"] as $exercise) {
                     $file = get_file_by_exercises($exercise['exercise_file_id']);
                     ?>
                     <tr class="mathematics__table-row">
