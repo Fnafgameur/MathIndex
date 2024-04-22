@@ -1,17 +1,17 @@
 <div class="submit">
     <h1 class="submit__title">Soumettre un exercice</h1>
     <div class="administration__head-bar">
-        <button type="button" class="administration__buttons-button">Contributeurs</button>
+        <button type="button" class="" id="btn_information">Informations</button>
     
-        <button type="button" class="administration__buttons-button">Exercices</button>
+        <button type="button" class=""  id="btn_source">Source</button>
     
-        <button type="button" class="administration__buttons-button">Matières</button>
+        <button type="button" class="" id="btn_file">Fichiers</button>
     </div>
     <div class="submit__content">
         <form action="#" method="post">
-            <div class="submit__information">
+            <div class="submit__information" id="submit__information">
                 <h2>Information générales</h2>
-                <div class="subimit__information__flex">
+                <div class="subimit__information__flex" id="subimit__information">
 
                     <div>
                         <label for="nom">Nom de l'exercice*</label>
@@ -44,9 +44,9 @@
                         <input id="duree"  name="duree">
                     </div>
                 </div>
-                <button>Continuer</button>
+                <button type="button" id="next_source">Continuer</button>
             </div>
-            <div class="submit__source">
+            <div class="submit__source" id="submit__source">
                 <h2>Sources</h2>
                 <label for="origine">Origine: *</label>
                 <select name="origine">
@@ -58,9 +58,9 @@
                 <input id="site"  name="site">
                 <label for="info_comp">Iformation complémentaires:</label>
                 <textarea id="info_comp"  name="info_comp"></textarea>
-                <button>Continuer</button>
+                <button type="button" id="next_file">Continuer</button>
             </div>
-            <div class="submit__file">
+            <div class="submit__file" id="submit__file">
                 <h2>Fichiers</h2>
                 <label for="fichier_exercice">fichier exercice: (pdf, docx)*</label>
                 <input type="file" accept="document/docx, document/pdf, document/txt" id="fichier_exercice"  name="fichier_exercice">
