@@ -341,11 +341,7 @@ body{
             gap: 0.5rem;
             margin-top: 3rem;
         }
-
-
     }
-
-
 }
 .link{
     text-decoration: none;
@@ -364,17 +360,14 @@ body{
         border: 1px solid #DFE3E8;
         border-radius: 5px;
         padding: 0.5rem 0.75rem;
-        color: #C4CDD5;
+        color: #222222;
+        display: flex;
     }
-    &__arrow:hover
+    &__arrow
     {
         background-color: #919EAB;
     }
     &__number
-    {
-        color: #222222;
-    }
-    &__number:hover
     {
         border-color: #222222;
     }

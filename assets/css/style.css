@@ -293,15 +293,13 @@ body {
   border: 1px solid #DFE3E8;
   border-radius: 5px;
   padding: 0.5rem 0.75rem;
-  color: #C4CDD5;
+  color: #222222;
+  display: flex;
 }
-.link__arrow:hover {
+.link__arrow {
   background-color: #919EAB;
 }
 .link__number {
-  color: #222222;
-}
-.link__number:hover {
   border-color: #222222;
 }
 
