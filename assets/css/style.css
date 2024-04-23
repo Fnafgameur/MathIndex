@@ -2,6 +2,19 @@ body {
   margin: 0;
 }
 
+.errormsg, .successmsg {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.errormsg {
+  color: red;
+}
+
+.successmsg {
+  color: green;
+}
+
 .main--flex {
   min-height: 100vh;
   max-height: fit-content;
@@ -187,11 +200,6 @@ body {
 .connexion .connexion__content p a {
   text-decoration: none;
   color: #1B3168;
-}
-.connexion .connexion__content .connexion__errormsg {
-  margin-top: 0;
-  color: red;
-  font-weight: 600;
 }
 .connexion .connexion__content form {
   display: flex;
@@ -576,7 +584,6 @@ body {
   font-size: 20px;
   font-weight: 700;
   font-family: "Noto sans";
-  color: #1B3168;
   margin-top: 2.5rem;
 }
 .contributors .contributors__description {
@@ -620,6 +627,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 30%;
+  text-decoration: none;
 }
 .contributors .contributors__action-bar a button {
   height: 56px;

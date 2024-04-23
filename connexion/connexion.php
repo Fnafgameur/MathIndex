@@ -127,11 +127,11 @@ demande directement en envoyant un email à <a href="mailto:contact@lyceestvince
         <form action="#" method="post">
             <label for="email" class="connexion__label">Email :</label>
             <input type="text" name="email" id="email" class="connexion__input" placeholder="Saisissez votre adresse email" value="<?= $email ?>">
-            <p class="connexion__errormsg" style="display: <?= $informations["email"]["displayValue"] ?>;"><?= $informations["email"]["errorMsg"] ?></p>
+            <p class="errormsg" style="display: <?= $informations["email"]["displayValue"] ?>;"><?= $informations["email"]["errorMsg"] ?></p>
             <?php if ($displayPasswordLabel) { ?>
                 <label for="password" class="connexion__label">Mot de passe :</label>
                 <input type="password" name="password" id="password" class="connexion__input" placeholder="Saisissez votre mot de passe">
-                <p class="connexion__errormsg" style="display: <?= $informations["password"]["displayValue"] ?>;"><?= $informations["password"]["errorMsg"] ?></p>
+                <p class="errormsg" style="display: <?= $informations["password"]["displayValue"] ?>;"><?= $informations["password"]["errorMsg"] ?></p>
             <?php } ?>
             <div class="connexion__buttons">
                 <button type="submit" class="connexion__button-connexion" name="envoi" value="<?= $displayPasswordLabel ? "Connexion" : "Mdp" ?>"><?= $buttonName ?></button>

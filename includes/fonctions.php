@@ -23,7 +23,7 @@
             "msg" => "",
         ];
 
-        if ($email === "") {
+        if (is_null_or_empty($email)["result"]) {
             $result["result"] = false;
             $result["msg"] = $errorMsgEmpty??"Veuillez saisir votre email.";
             return $result;
@@ -31,6 +31,25 @@
         else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $result["result"] = false;
             $result["msg"] = $errorMsgNotMail??"Email invalide.";
+            return $result;
+        }
+        return $result;
+    }
+
+    /**
+     * @param string $value La valeur à vérifier
+     * @param string|null $errorMsg Message d'erreur si la valeur est vide (non obligatoire)
+     * @return array - Un tableau avec comme clé "result", un booléen indiquant si la valeur est vide ou non, et comme clé "msg", le message d'erreur
+     */
+    function is_null_or_empty(string $value, string $errorMsg = null) : array {
+        $result = [
+            "result" => false,
+            "msg" => "",
+        ];
+
+        if (!isset($value) || $value === "") {
+            $result["result"] = true;
+            $result["msg"] = $errorMsg??"Veuillez remplir ce champ.";
             return $result;
         }
         return $result;
