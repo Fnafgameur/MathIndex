@@ -1,6 +1,7 @@
 <?php
 
     $isAdding = isset($_GET["adding"]);
+    $doSendInfos = false;
 
     $contributeurs = [];
 
@@ -41,6 +42,8 @@
             // RECHERCHE AVEC FILTRES
         }
         else {
+            $informations["email"]["value"] = strtolower($informations["email"]["value"]);
+
             $firstName = htmlspecialchars($informations["firstname"]["value"]);
             $lastName = htmlspecialchars($informations["lastname"]["value"]);
             $email = htmlspecialchars($informations["email"]["value"]);
@@ -72,7 +75,6 @@
                 }
             }
 
-            echo $role;
             if ($role !== Role::CONTRIBUTOR->value && $role !== "Eleve") {
                 $informations["role"]["displayValue"] = "block";
                 $informations["role"]["errorMsg"] = "Rôle invalide.";
@@ -184,11 +186,12 @@
                 <option value="<?= Role::CONTRIBUTOR->value ?>" <?= $informations["role"]["value"] === Role::CONTRIBUTOR->value ? "selected" : "" ?>>Contributeur</option>
                 <option value="Eleve" <?= $informations["role"]["value"] === "Eleve" ? "selected" : "" ?>>Elève</option>
             </select>
-            <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["email"]["errorMsg"] ?></p>
+            <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["role"]["errorMsg"] ?></p>
 
             <button type="submit">Enregistrer</button>
             <a href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
             <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
+            <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $informations["role"]["value"] ?> ajouté avec succès.</p>
         </form>
     <?php } ?>
 </div>

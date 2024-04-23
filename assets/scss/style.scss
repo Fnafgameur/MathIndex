@@ -4,10 +4,17 @@ body{
     margin: 0;
 }
 
-.errormsg {
+.errormsg, .successmsg {
     margin-top: 0;
-    color: red;
     font-weight: 600;
+}
+
+.errormsg {
+    color: red;
+}
+
+.successmsg {
+    color: green;
 }
 
 .main--flex{

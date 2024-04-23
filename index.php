@@ -12,7 +12,7 @@ include_once("includes/header.php");
 include_once("includes/sidebar.php");
 
 if (isset($_GET["page"])) {
-    if (isset($_SESSION["user"]) && Role::isGranted($_SESSION["user"]["role"])) {
+    if (isset($_SESSION["user"]) && Role::isAdmin($_SESSION["user"]["role"])) {
         switch ($_GET["page"]) {
             case Page::RECHERCHE->value:
                 include_once("exercices/recherche_ex.php");

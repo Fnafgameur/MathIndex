@@ -54,7 +54,7 @@
 
 
                 <?php if(isset($_SESSION["user"])){
-                        if(Role::isGranted($role)) { ?>
+                        if(Role::isEligible($role)) { ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="<?= Page::MES_EXERCICES->value ?>">
