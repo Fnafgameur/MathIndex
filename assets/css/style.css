@@ -92,8 +92,8 @@ body {
 .side-bar .side-bar__menu button:hover {
   background-color: #F6F6F6;
 }
-.side-bar .side-bar__menu button:hover img {
-  fill: #1B3168;
+.side-bar .side-bar__menu button:hover path {
+  stroke: #1B3168;
 }
 .side-bar .side-bar__menu button:hover p {
   color: #1B3168;
