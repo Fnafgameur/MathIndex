@@ -16,10 +16,8 @@
                 <tr class="mathematics__table-row">
                     <th class="mathematics__table-heading name">Nom</th>
                     <th class="mathematics__table-heading thematic">Thématiques</th>
-                    <th class="mathematics__table-heading difficulty">Difficulté</th>
-                    <th class="mathematics__table-heading duration">Durée</th>
-                    <th class="mathematics__table-heading keywords">Mots-clés</th>
                     <th class="mathematics__table-heading files">Fichiers</th>
+                    <th class="mathematics__table-heading actions">Actions</th>
                 </tr>
                 </thead>
                 <tbody class="mathematics__table-body">
@@ -29,17 +27,20 @@
                     ?>
                     <tr class="mathematics__table-row">
                         <td class="mathematics__table-data"><?=$my_exercise['name']?></td>
-                        <td class="mathematics__table-data"><?=get_thematic_by_exercises($my_exercise["thematic_id"])['name'];?>
-                        </td>
-                        <td class="mathematics__table-data"><?=$my_exercise['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$my_exercise['duration'].'h'??"Aucun"?></td>
-                        <td class="mathematics__table-data wordbreak"><?php foreach ($keywords_sorted as $keyword) {
-                                echo "<p class='keyword'>$keyword</p>";
-                            } ?>
-                        </td>
+                        <td class="mathematics__table-data"><?=get_thematic_by_exercises($my_exercise["thematic_id"])['name'];?></td>
                         <td class="mathematics__table-data">
                             <a class="link link--row" href="" download="<?=$file_sorted['name'].'.'.$file_sorted['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
                             <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                        </td>
+                        <td>
+                            <form action="" method="POST">
+                                <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
+                                <input type="submit" class="btn link--row" value="Modifier">
+                            </form>
+                            <form action="">
+                                <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
+                                <input type="submit" class="btn link--row" value="Supprimer">
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
