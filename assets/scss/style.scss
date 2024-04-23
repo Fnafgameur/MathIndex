@@ -15,7 +15,7 @@ body{
 }
 
 .side-bar{
-    width: 300px;
+    width: 330px;
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -81,7 +81,8 @@ body{
             width: 12rem;
             padding: 2% 5%;
             font-family: 'Poppins';
-            font-weight: 700;
+            font-weight: 400;
+            color: $textGrey;
 
             display: flex;
             flex-direction: row;
@@ -106,12 +107,14 @@ body{
             &:hover{
                 background-color: #F6F6F6;
                
-                img{
-                   fill:#1B3168;
+                path{
+                    stroke: $textBlue;
+                    
                 }
 
                 p{
-                    color: #1B3168;
+                    color: $textBlue;
+                    font-weight: 600;
                 }
             }
         }
@@ -497,15 +500,26 @@ body{
     {
         background-color: #fff;
         padding: 1.5rem 3rem;
-        height: fit-content;
+        min-height: 68vh;    
+        max-height: fit-content;
         border-radius: 7px;
         font-size: $descSize;
+        font-weight: 500;
         
         h2{
             font-size: 20px;
-            font-weight: 400;
+            font-weight: 600;
         }
 
+        ol{
+            margin-top: 2rem;
+        } li{
+            margin-top: 0.8rem;
+        }
+
+        b{
+            font-weight: 800;
+        }
     }
 }
 
@@ -845,6 +859,156 @@ body{
             text-align: left;
             font-size: 14px;
             font-weight: 400;
+        }
+    }
+}
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* --------------------------------------------------------------------------------- submit ---------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.submit {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-left: 2.5%;
+
+    button{
+        cursor: pointer;
+    }
+
+    h1 {
+        font-size: $titleSize;
+        color: $textBlue;
+    }
+
+    .submit__head-bar{
+        display: flex;
+        flex-direction: row;
+        gap: 2%;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        button {
+            border-radius: 7px 7px 0 0;
+            padding: 0.5rem 2%;
+            cursor: pointer;
+            border: none;
+            background-color: #455884;
+            color: white;
+            font-family: 'Noto sans';
+
+            &:hover{
+                background-color: $textBlue;
+            }
+        }
+    }
+
+
+    form{
+
+        width: 100%;
+    }
+    .submit__content {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        padding: 0.5rem 3rem;
+        height: 90%;
+        border-radius: 7px;
+        
+        h2{
+            font-family: 'noto sans';
+        }
+
+        form{
+            width: 100%;
+        }
+        .submit__information__flex{
+            display: flex;
+            flex-direction: row;
+            gap: 5%;
+            justify-content: left;
+            width: 100%;
+
+            div {
+                width: 45%;
+
+                select{
+                    width: 105% !important;
+                }
+            }
+        }
+
+        
+
+        .submit__source{
+            display: none;
+            textarea{
+                height: 10rem;
+            }
+        }
+        .submit__file{
+            display: none;
+
+            
+        }
+
+        label{
+            color: $textGrey;
+            font-family: 'Noto sans';
+            font-weight: 600;
+
+            input{
+                display: none;
+            }
+
+            div{
+                height: 56px;
+                width: 95%;
+                padding: 0 16px;
+                border-radius: 8px;
+                border: solid 2px #DBDBDB;
+                color: $textGrey;
+                font-family: 'Noto sans';
+                font-weight: 600;
+                margin-bottom: 2rem;
+                display: flex;
+                justify-content: space-between;
+
+                img{
+                    height: 32px;
+                    width: 32px;
+                    margin: 1%;
+                }
+            }
+        }
+
+        
+
+        textarea, select, input{
+            height: 56px;
+            width: 95%;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: solid 2px #DBDBDB;
+            color: $textGrey;
+            font-family: 'Noto sans';
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        button{
+            height: 56px;
+            width: 25%;
+            border-radius: 8px;
+            border: solid 2px #F6F6F6;
+            background-color: #F6F6F6;
+            color: $textGrey;
+            font-family: 'Noto sans';
+            font-weight: 600;
+            margin-top: 18px;
         }
     }
 }

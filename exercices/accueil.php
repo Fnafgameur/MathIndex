@@ -10,7 +10,7 @@
         cette ressource en ligne offre un accès
         simplifié à une vaste bibliothèque
         d'exercices mathématiques de qualité.
-        </p>
+        </p><br>
         <h2>
             Explorez les Avantages Spécifiques à Notre Lycée :
         </h2>
