@@ -26,7 +26,7 @@ body {
 }
 
 .side-bar {
-  width: 300px;
+  width: 330px;
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -84,7 +84,8 @@ body {
   width: 12rem;
   padding: 2% 5%;
   font-family: "Poppins";
-  font-weight: 700;
+  font-weight: 400;
+  color: #666666;
   display: flex;
   flex-direction: row;
   gap: 2rem;
@@ -104,11 +105,12 @@ body {
 .side-bar .side-bar__menu button:hover {
   background-color: #F6F6F6;
 }
-.side-bar .side-bar__menu button:hover img {
-  fill: #1B3168;
+.side-bar .side-bar__menu button:hover path {
+  stroke: #1B3168;
 }
 .side-bar .side-bar__menu button:hover p {
   color: #1B3168;
+  font-weight: 600;
 }
 
 .main-content {
@@ -191,7 +193,7 @@ body {
   height: 100%;
 }
 .connexion .connexion__content p {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   padding-bottom: 2rem;
 }
@@ -404,13 +406,24 @@ body {
 .accueil .accueil__content {
   background-color: #fff;
   padding: 1.5rem 3rem;
-  height: fit-content;
+  min-height: 68vh;
+  max-height: fit-content;
   border-radius: 7px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 500;
 }
 .accueil .accueil__content h2 {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 600;
+}
+.accueil .accueil__content ol {
+  margin-top: 2rem;
+}
+.accueil .accueil__content li {
+  margin-top: 0.8rem;
+}
+.accueil .accueil__content b {
+  font-weight: 800;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
@@ -678,4 +691,126 @@ body {
   font-weight: 400;
 }
 
-/*# sourceMappingURL=style.css.map */
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* --------------------------------------------------------------------------------- submit ---------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.submit {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin-left: 2.5%;
+}
+.submit button {
+  cursor: pointer;
+}
+.submit h1 {
+  font-size: 29px;
+  color: #1B3168;
+}
+.submit .submit__head-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.submit .submit__head-bar button {
+  border-radius: 7px 7px 0 0;
+  padding: 0.5rem 2%;
+  cursor: pointer;
+  border: none;
+  background-color: #455884;
+  color: white;
+  font-family: "Noto sans";
+}
+.submit .submit__head-bar button:hover {
+  background-color: #1B3168;
+}
+.submit form {
+  width: 100%;
+}
+.submit .submit__content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 0.5rem 3rem;
+  height: 90%;
+  border-radius: 7px;
+}
+.submit .submit__content h2 {
+  font-family: "noto sans";
+}
+.submit .submit__content form {
+  width: 100%;
+}
+.submit .submit__content .submit__information__flex {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  justify-content: left;
+  width: 100%;
+}
+.submit .submit__content .submit__information__flex div {
+  width: 45%;
+}
+.submit .submit__content .submit__information__flex div select {
+  width: 105% !important;
+}
+.submit .submit__content .submit__source {
+  display: none;
+}
+.submit .submit__content .submit__source textarea {
+  height: 10rem;
+}
+.submit .submit__content .submit__file {
+  display: none;
+}
+.submit .submit__content label {
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+}
+.submit .submit__content label input {
+  display: none;
+}
+.submit .submit__content label div {
+  height: 56px;
+  width: 95%;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: solid 2px #DBDBDB;
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.submit .submit__content label div img {
+  height: 32px;
+  width: 32px;
+  margin: 1%;
+}
+.submit .submit__content textarea, .submit .submit__content select, .submit .submit__content input {
+  height: 56px;
+  width: 95%;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: solid 2px #DBDBDB;
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.submit .submit__content button {
+  height: 56px;
+  width: 25%;
+  border-radius: 8px;
+  border: solid 2px #F6F6F6;
+  background-color: #F6F6F6;
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-top: 18px;
+}/*# sourceMappingURL=style.css.map */
