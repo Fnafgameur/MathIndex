@@ -198,8 +198,8 @@ body{
     height: 84vh;
 
     & h1{
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: $titleSize;
+        color: $textBlue;
         margin-left: 0.5rem;
     }
 
@@ -211,13 +211,13 @@ body{
         height: 100%;
 
         & p {
-            font-size: var(--descSize);
+            font-size: $descSize;
             font-weight: 600;
             padding-bottom: 2rem;
 
             & a {
                 text-decoration: none;
-                color: var(--textBlue);
+                color: $textBlue;
             }
         }
 
@@ -233,7 +233,7 @@ body{
             gap: 1rem;
 
             & label {
-                color: var(--textGrey);
+                color: $textGrey;
                 font-weight: 600;
             }
 
@@ -410,8 +410,8 @@ body{
 
     .exercices__title
     {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: $titleSize;
+        color: $textBlue;
         margin-left: 0.5rem;
     }
     .exercices__content
@@ -489,8 +489,8 @@ body{
 
     .accueil__title
     {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: $titleSize;
+        color: $textBlue;
         margin-left: 0.5rem;
     }
     .accueil__content
@@ -499,7 +499,7 @@ body{
         padding: 1.5rem 3rem;
         height: fit-content;
         border-radius: 7px;
-        font-size: var(--descSize);
+        font-size: $descSize;
         
         h2{
             font-size: 20px;
@@ -522,7 +522,7 @@ body{
 
     .research__title
     {
-        font-size: var($titleSize);
+        font-size: $titleSize;
         color: $textBlue;
         margin-left: 0.5rem;
     }
@@ -537,7 +537,7 @@ body{
             font-size: 20px;
             font-weight: 600;
             font-family: 'epilogue';
-            color: var(--textBlue);
+            color: $textBlue;
             margin-top: 2.5rem;
         }
 
@@ -554,7 +554,7 @@ body{
                 width: 25%;
 
                 label{
-                    color: var(--textGrey);
+                    color: $textGrey;
                     font-family: 'Noto sans';
                     font-weight: 600;
                 }
@@ -565,7 +565,7 @@ body{
                     padding: 0 16px;
                     border-radius: 8px;
                     border: solid 2px #DBDBDB;
-                    color: var(--textGrey);
+                    color: $textGrey;
                     font-family: 'Noto sans';
                     font-weight: 600;
                 }
@@ -576,14 +576,13 @@ body{
                     border-radius: 8px;
                     border: solid 2px #F6F6F6;
                     background-color: #F6F6F6;
-                    color: var(--textGrey);
+                    color: $textGrey;
                     font-family: 'Noto sans';
                     font-weight: 600;
                     margin-top: 18px;
                 }
             }
         }
-
 
 
         .research__table
@@ -611,7 +610,6 @@ body{
                 color: #464646; 
                 padding: 0.5rem;
                 width: 20%;
-                
                 
 
                 &.nom{
@@ -653,8 +651,6 @@ body{
 }
 
 
-
-
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* --------------------------------------------------------------------------------- Admin ---------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -667,8 +663,8 @@ body{
     margin-left: 2.5%;
 
     h1 {
-        font-size: var(--titleSize);
-        color: var(--textBlue);
+        font-size: $titleSize;
+        color: $textBlue;
     }
 
     .administration__content {
@@ -693,7 +689,7 @@ body{
             }
 
             button:hover {
-                background-color: var(--textBlue);
+                background-color: $textBlue;
             }
         }
 
@@ -714,7 +710,7 @@ body{
         font-size: 20px;
         font-weight: 700;
         font-family: 'Noto sans';
-        color: var(--textBlue);
+        color: $textBlue;
         margin-top: 2.5rem;
     }
 
@@ -741,7 +737,7 @@ body{
                 padding: 0 16px;
                 border-radius: 8px;
                 border: solid 2px #DBDBDB;
-                color: var(--textGrey);
+                color: $textGrey;
                 font-family: 'Noto sans';
                 font-weight: 600;
             }
@@ -752,7 +748,7 @@ body{
                 border-radius: 8px;
                 border: solid 2px #F6F6F6;
                 background-color: #F6F6F6;
-                color: var(--textGrey);
+                color: $textGrey;
                 font-family: 'Noto sans';
                 font-weight: 700;
             }
@@ -760,7 +756,6 @@ body{
 
         a{
             display: flex;
-            justify-content: space-between;
             align-items: center;
             justify-content: center;
             width: 30%;
@@ -775,9 +770,7 @@ body{
                 font-family: 'Noto sans';
                 font-weight: 700;
             }
-
         }
-
     }
 
     table
@@ -803,7 +796,7 @@ body{
         
         th
         {
-            color: #464646; 
+            color: #464646;
             padding: 0.5rem;
             width: 20%;
 
@@ -812,7 +805,7 @@ body{
         td
         { 
             color: #74828F;
-            padding: 1rem 0.5rem; 
+            padding: 1rem 0.5rem;
             
             button{
                 width: 10rem;
