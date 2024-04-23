@@ -10,15 +10,28 @@ if (isset($db)) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    function get_exercises_with_limit($currentPage, $perPage) : mixed {
+
+    /**
+     * Permet de limiter le nombre d'exercices retournés en fonction du nombre d'exercices par page
+     * @param int $currentPage La page actuelle
+     * @param int $perPage  Le nombre d'exercices par page
+     * @param int|null $user_id  L'id de l'utilisateur
+     * @return mixed
+     */
+    function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null) : mixed {
         global $db;
+        if ($user_id !== "")
+        {
+            $user_id = "WHERE created_by_id = $user_id";
+        }
         $first = max(0, ($currentPage - 1) * $perPage);
-        $query = $db->prepare("SELECT * FROM exercise LIMIT :first, :perpage");
+        $query = $db->prepare("SELECT * FROM exercise $user_id LIMIT :first, :perpage");
         $query->bindParam(':first', $first, PDO::PARAM_INT);
         $query->bindParam(':perpage', $perPage, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
     /**
      * Permet d'obtenir tous les exercices stockés en DB
