@@ -157,8 +157,10 @@
                         <td><?= $contributeur["role"] ?></td>
                         <td><?= $contributeur["email"] ?></td>
                         <td>
+                            <form action="index.php?page=Administration&adding" method="POST">
+                                <button type="submit" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
+                            </form>
                             <form action="#" method="post">
-                                <button type="button" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
                                 <input type="hidden" name="delete" value="<?= $contributeur["id"] . ',' . $contributeur["first_name"] ?>">
                                 <button type="submit" class="contributeurs__button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');"><img src="assets/icons/delete_file.svg">Supprimer</button>
                             </form>
