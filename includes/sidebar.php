@@ -1,6 +1,4 @@
 <?php
-    include_once("header.php");
-
     if (isset($_SESSION["user"])) {
         $prenom = $_SESSION["user"]["last_name"];
         $nom = $_SESSION["user"]["first_name"];
@@ -70,7 +68,7 @@
 
 
                 <?php if(isset($_SESSION["user"])){
-                        if(Role::isEligible($role)) { ?>
+                    if(Role::isEligible($role)) { ?>
 
                         <form action="#" method="GET">
                             <input type="hidden" id="page" name="page" value="<?= Page::MES_EXERCICES->value ?>">
@@ -97,7 +95,7 @@
                             </button>
                         </form>
                     <?php } ?>
-                    <?php } ?>
+                <?php } ?>
             </div>
 
 
@@ -114,7 +112,7 @@
                             <p>Déconnexion</p>
                         </button>
                     </a>
-                    <?php } ?>
+            <?php } ?>
         </div>
     </div>
 
@@ -140,5 +138,5 @@
                                 <p><?= Page::CONNEXION->value ?></p>
                             </button>
                         </form>
-                    <?php } ?>
+            <?php } ?>
         </header>
