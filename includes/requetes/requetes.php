@@ -3,6 +3,15 @@
 include_once 'includes/db.php';
 
 if (isset($db)) {
+
+    function get_contributors() : mixed {
+        global $db;
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE role = 'Contributeur' LIMIT 4");
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function get_user_with_email($email) : mixed {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = :email");

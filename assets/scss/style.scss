@@ -4,6 +4,12 @@ body{
     margin: 0;
 }
 
+.errormsg {
+    margin-top: 0;
+    color: red;
+    font-weight: 600;
+}
+
 .main--flex{
     min-height: 100vh;
     max-height: fit-content;
@@ -107,7 +113,7 @@ body{
                 background-color: #F6F6F6;
                
                 img{
-                   fill:#1B3168;
+                    fill:#1B3168;
                 }
 
                 p{
@@ -219,12 +225,6 @@ body{
                 text-decoration: none;
                 color: $textBlue;
             }
-        }
-
-        .connexion__errormsg {
-            margin-top: 0;
-            color: red;
-            font-weight: 600;
         }
 
         & form{
@@ -678,6 +678,7 @@ body{
             list-style-type: none;
             padding: 0;
             margin: 0;
+
             button {
                 border-radius: 7px 7px 0 0;
                 padding: 0.5rem 2%;
@@ -706,11 +707,10 @@ body{
     display: flex;
     flex-direction: column;
     
-    h2{
+    h2 {
         font-size: 20px;
         font-weight: 700;
         font-family: 'Noto sans';
-        color: $textBlue;
         margin-top: 2.5rem;
     }
 
@@ -725,13 +725,13 @@ body{
         gap: 2rem;
         width: 100%;
 
-        form{
+        form {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 70%;
 
-            input{
+            input {
                 height: 56px;
                 width: 50%;
                 padding: 0 16px;
@@ -742,7 +742,7 @@ body{
                 font-weight: 600;
             }
 
-            button{
+            button {
                 height: 56px;
                 width: 30%;
                 border-radius: 8px;
@@ -754,11 +754,12 @@ body{
             }
         }
 
-        a{
+        a {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 30%;
+            text-decoration: none;
 
             button{
                 height: 56px;
@@ -825,7 +826,6 @@ body{
                 border-radius: 5px;
 
 
-                
                 &:hover{
                     background-color: #F6F6F6;
                    
