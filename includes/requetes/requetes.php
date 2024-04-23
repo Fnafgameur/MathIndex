@@ -10,6 +10,12 @@ if (isset($db)) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+    function get_exercises_with_limit() : mixed {
+        global $db;
+        $query = $db->prepare("SELECT * FROM exercise LIMIT 5");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     /**
      * Permet d'obtenir tous les exercices stockés en DB
