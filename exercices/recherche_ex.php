@@ -23,14 +23,14 @@
         $searchFilterResult = is_searching_filter_correct($filtres);
 
         if ($searchFilterResult["result"]) {
-            $exercices = get_exercices($filtres);
+            $exercices = get_exercises(null, $filtres);
         }
         else {
-            $exercices = get_exercices();
+            $exercices = get_exercises();
         }
 
     } else {
-        $exercices = get_exercices();
+        $exercices = get_exercises();
     }
 
     $number = $exercices["number"]??0;
