@@ -242,50 +242,68 @@ body {
   height: 90%;
   border-radius: 7px;
 }
-.mathematics .mathematics__content .mathematics__description {
-  font-size: 22px;
+.mathematics .mathematics__content .mathematics__content-table {
+  margin-bottom: 4rem;
 }
-.mathematics .mathematics__content .mathematics__table {
+.mathematics .mathematics__content .mathematics__content-table .mathematics__table {
   width: 100%;
+}
+.mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-head {
+  background-color: #F0F0F0;
+}
+.mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-row {
+  border-radius: 8px;
+  border-bottom: 1px solid #DBDBDB;
+}
+.mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-row .mathematics__table-heading {
+  color: #464646;
+  padding: 0.5rem;
+}
+.mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-row .mathematics__table-data {
+  color: #74828F;
+  padding: 1rem 0.5rem;
+}
+.mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-row .mathematics__table-heading, .mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-row .mathematics__table-data {
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
 }
 .mathematics .mathematics__content .mathematics__table, .mathematics .mathematics__content .mathematics__table-head {
   border: 1px solid #DBDBDB;
   border-collapse: collapse;
 }
-.mathematics .mathematics__content .mathematics__table-head {
-  background-color: #F0F0F0;
-}
-.mathematics .mathematics__content .mathematics__table-row {
-  border-radius: 8px;
-  border-bottom: 1px solid #DBDBDB;
-}
-.mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading {
-  color: #464646;
-  padding: 0.5rem;
-}
-.mathematics .mathematics__content .mathematics__table-row .mathematics__table-data {
-  color: #74828F;
-  padding: 1rem 0.5rem;
-}
-.mathematics .mathematics__content .mathematics__table-row .mathematics__table-heading, .mathematics .mathematics__content .mathematics__table-row .mathematics__table-data {
-  text-align: left;
-  font-size: 14px;
-  font-weight: 400;
+.mathematics .mathematics__content .mathematics__pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
 }
 
 .link {
   text-decoration: none;
   color: #74828F;
   margin-bottom: 0.5rem;
-  display: flex;
   align-items: center;
 }
 .link--row {
   display: flex;
   gap: 0.5rem;
 }
+.link__pagination {
+  border: 1px solid #DFE3E8;
+  border-radius: 5px;
+  padding: 0.5rem 0.75rem;
+  color: #222222;
+  display: flex;
+}
+.link__arrow {
+  background-color: #919EAB;
+}
+.link__number {
+  border-color: #222222;
+}
 
-.name, thematic {
+.name, .thematic {
   width: 20%;
 }
 
@@ -304,7 +322,7 @@ body {
 
 .keyword {
   background-color: #DBDBDB;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 20px;
   color: #222222;
   margin: 0.25rem;

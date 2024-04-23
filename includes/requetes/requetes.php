@@ -10,9 +10,12 @@ if (isset($db)) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
-    function get_exercises_with_limit() : mixed {
+    function get_exercises_with_limit($currentPage, $perPage) : mixed {
         global $db;
-        $query = $db->prepare("SELECT * FROM exercise LIMIT 5");
+        $first = max(0, ($currentPage - 1) * $perPage);
+        $query = $db->prepare("SELECT * FROM exercise LIMIT :first, :perpage");
+        $query->bindParam(':first', $first, PDO::PARAM_INT);
+        $query->bindParam(':perpage', $perPage, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -105,6 +108,27 @@ if (isset($db)) {
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
+    function get_exercise_number() : int {
+        global $db;
+        $query = $db->prepare("SELECT COUNT(*) FROM exercise");
+        $query->execute();
+        return $query->fetchColumn();
+    }
+
+    /**
+     * Permet de vérifier si la pge existe et sur quel page on se trouve
+     * @return int - Le numero de la page
+     */
+    function get_current_page() : int
+    {
+        if(isset($_GET['pagination'])){
+            return (int) strip_tags($_GET['pagination']);
+        }else{
+            return 1;
+        }
+    }
+
+
 }
 
 
