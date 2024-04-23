@@ -12,6 +12,13 @@ if (isset($db)) {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function delete_user_by_id($id) {
+        global $db;
+        $query = $db->prepare("DELETE FROM user WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+    }
+
     function get_user_with_email($email) : mixed {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = :email");

@@ -2,6 +2,8 @@
 
     $isAdding = isset($_GET["adding"]);
     $doSendInfos = false;
+    $didDelete = false;
+    $nameDeleted = "";
 
     $contributeurs = [];
 
@@ -38,6 +40,15 @@
     ];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+        if (isset($_POST["delete"])) {
+            $idDeleted = explode(",", $_POST["delete"])[0];
+            $nameDeleted = explode(",", $_POST["delete"])[1];
+            delete_user_by_id($idDeleted);
+            $contributeurs = get_contributors();
+            $didDelete = true;
+        }
+
         if (!$isAdding) {
             // RECHERCHE AVEC FILTRES
         }
@@ -139,14 +150,6 @@
         </thead>
         <tbody>
             <tr>
-                <td>DOE</td>
-                <td>John</td>
-                <td>Enseignant</td>
-                <td>mail@mail.com</td>
-                <td>
-                    <button type="button" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
-                    <button type="button" class="contributeurs__button"><img src="assets/icons/delete_file.svg">Supprimer</button>
-                </td>
                 <?php foreach ($contributeurs as $contributeur) { ?>
                     <tr>
                         <td><?= $contributeur["last_name"] ?></td>
@@ -154,8 +157,11 @@
                         <td><?= $contributeur["role"] ?></td>
                         <td><?= $contributeur["email"] ?></td>
                         <td>
-                            <button type="button" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
-                            <button type="button" class="contributeurs__button"><img src="assets/icons/delete_file.svg">Supprimer</button>
+                            <form action="#" method="post">
+                                <button type="button" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
+                                <input type="hidden" name="delete" value="<?= $contributeur["id"] . ',' . $contributeur["first_name"] ?>">
+                                <button type="submit" class="contributeurs__button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');"><img src="assets/icons/delete_file.svg">Supprimer</button>
+                            </form>
                         </td>
                     </tr>
                 <?php } ?>
@@ -194,6 +200,9 @@
             <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $informations["role"]["value"] ?> ajouté avec succès.</p>
         </form>
     <?php } ?>
+
+    <p class="successmsg" style="margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>
+
 </div>
 
 
