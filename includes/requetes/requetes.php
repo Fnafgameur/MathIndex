@@ -103,7 +103,7 @@ if (isset($db)) {
      */
     function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null) : mixed {
         global $db;
-        if ($user_id !== "")
+        if ($user_id !== null)
         {
             $user_id = "WHERE created_by_id = $user_id";
         }

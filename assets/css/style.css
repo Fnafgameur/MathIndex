@@ -257,6 +257,8 @@ body {
 }
 .mathematics .mathematics__content .mathematics__content-table .mathematics__table {
   width: 100%;
+  border: 1px solid #DBDBDB;
+  border-collapse: collapse;
 }
 .mathematics .mathematics__content .mathematics__content-table .mathematics__table .mathematics__table-head {
   background-color: #F0F0F0;
@@ -278,11 +280,8 @@ body {
   font-size: 14px;
   font-weight: 400;
 }
-.mathematics .mathematics__content .mathematics__table, .mathematics .mathematics__content .mathematics__table-head {
-  border: 1px solid #DBDBDB;
-  border-collapse: collapse;
-}
-.mathematics .mathematics__content .mathematics__pagination {
+
+.mathematics__pagination {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
@@ -317,7 +316,7 @@ body {
   width: 20%;
 }
 
-.difficulty, .duration, .files {
+.difficulty, .duration, .files, .actions {
   width: 10%;
 }
 
@@ -342,53 +341,57 @@ body {
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* ----------------------------------------------------------------------------- Mes exercices -----------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-.exercices {
+.exercise {
   margin: 2rem;
-  height: 81vh;
 }
-.exercices .exercices__title {
-  font-size: 29px;
+.exercise .exercise__title {
   color: #1B3168;
-  margin-left: 0.5rem;
 }
-.exercices .exercices__content {
+.exercise .exercise__content {
   background-color: #fff;
-  padding: 0.5rem 3rem;
-  height: 90%;
+  padding: 0.5rem 3rem 1.5rem;
   border-radius: 7px;
 }
-.exercices .exercices__content .exercices__description {
-  font-size: 22px;
+.exercise .exercise__content .exercise__content-table {
+  margin-bottom: 4rem;
 }
-.exercices .exercices__content .exercices__table {
+.exercise .exercise__content .exercise__content-table .exercise__table {
   width: 100%;
-}
-.exercices .exercices__content .exercices__table, .exercices .exercices__content .exercices__table-head {
   border: 1px solid #DBDBDB;
   border-collapse: collapse;
 }
-.exercices .exercices__content .exercices__table-head {
+.exercise .exercise__content .exercise__content-table .exercise__table .exercise__table-head {
   background-color: #F0F0F0;
 }
-.exercices .exercices__content .exercices__table-row {
-  border-radius: 8px;
+.exercise .exercise__content .exercise__content-table .exercise__table .exercise__table-row {
+  border-bottom: 1px solid #DBDBDB;
 }
-.exercices .exercices__content .exercices__table-row .exercices__table-heading {
+.exercise .exercise__content .exercise__content-table .exercise__table .exercise__table-row .exercise__table-heading {
   color: #464646;
   padding: 0.5rem;
-  width: 20%;
 }
-.exercices .exercices__content .exercices__table-row .exercices__table-heading:first-child {
-  width: 25%;
-}
-.exercices .exercices__content .exercices__table-row .exercices__table-data {
+.exercise .exercise__content .exercise__content-table .exercise__table .exercise__table-row .exercise__table-data {
   color: #74828F;
   padding: 1rem 0.5rem;
 }
-.exercices .exercices__content .exercices__table-row .exercices__table-heading, .exercices .exercices__content .exercices__table-row .exercices__table-data {
+
+.exercise__table-heading, .exercise__table-data {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
+}
+
+.exercise__form form {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  background-color: #FFF;
+  border: none;
+}
+.btn--lb {
+  color: #74828F;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */

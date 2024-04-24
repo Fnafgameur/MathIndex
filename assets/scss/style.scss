@@ -306,6 +306,8 @@ body{
             .mathematics__table
             {
                 width: 100%;
+                border: 1px solid #DBDBDB;
+                border-collapse: collapse;
 
                 .mathematics__table-head
                 {
@@ -337,22 +339,17 @@ body{
             }
         }
 
-        .mathematics__table, .mathematics__table-head
-        {
-            border: 1px solid #DBDBDB;
-            border-collapse: collapse;
-        }
-
-        .mathematics__pagination
-        {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 3rem;
-        }
     }
 }
-.link{
+.mathematics__pagination
+{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+}
+.link
+{
     text-decoration: none;
     color: #74828F;
     margin-bottom: 0.5rem;
@@ -385,7 +382,7 @@ body{
 {
     width: 20%;
 }
-.difficulty,.duration,.files
+.difficulty,.duration,.files,.actions
 {
     width: 10%;
 }
@@ -411,79 +408,83 @@ body{
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* ----------------------------------------------------------------------------- Mes exercices -----------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-.exercices
+
+.exercise
 {
     margin: 2rem;
-    height: 81vh;
-  
 
-    .exercices__title
+    .exercise__title
     {
-        font-size: $titleSize;
         color: $textBlue;
-        margin-left: 0.5rem;
     }
-    .exercices__content
+    .exercise__content
     {
         background-color: #fff;
-        padding: 0.5rem 3rem;
-        height: 90%;
+        padding: 0.5rem 3rem 1.5rem;
         border-radius: 7px;
 
-        .exercices__description
+        .exercise__content-table
         {
-            font-size: 22px;
-        }
+            margin-bottom: 4rem;
 
-        .exercices__table
-        {
-            width: 100%;
-            
-        }
-
-        .exercices__table, .exercices__table-head
-        {
-            border: 1px solid #DBDBDB;
-            border-collapse: collapse;
-        }
-
-        .exercices__table-head
-        {
-            background-color: #F0F0F0;
-        }
-
-        .exercices__table-row
-        {
-            border-radius: 8px;
-            
-            .exercices__table-heading
+            .exercise__table
             {
-                color: #464646; 
-                padding: 0.5rem;
-                width: 20%;
-                
-                &:first-child
+                width: 100%;
+                border: 1px solid #DBDBDB;
+                border-collapse: collapse;
+
+                .exercise__table-head
                 {
-                    width: 25%;
+                    background-color: #F0F0F0;
                 }
-            }
+                .exercise__table-row
+                {
+                    border-bottom: 1px solid #DBDBDB;
 
-            .exercices__table-data
-            { 
-                color: #74828F;
-                padding: 1rem 0.5rem;   
-            }
-
-            .exercices__table-heading, .exercices__table-data
-            {
-                text-align: left;
-                font-size: 14px;
-                font-weight: 400;
+                    .exercise__table-heading
+                    {
+                        color: #464646;
+                        padding: 0.5rem;
+                    }
+                    .exercise__table-data
+                    {
+                        color: #74828F;
+                        padding: 1rem 0.5rem;
+                    }
+                }
             }
         }
     }
 }
+.exercise__table-heading, .exercise__table-data
+{
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+}
+.exercise__actions
+{
 
+}
+.exercise__form
+{
+    form
+    {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.btn
+{
+    background-color: #FFF;
+    border: none;
+
+    &--lb
+    {
+        color: #74828F;
+    }
+}
 
 
 /* ------------------------------------------------------------------------------------------------------------------- */
