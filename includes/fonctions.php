@@ -47,7 +47,7 @@
             "msg" => "",
         ];
 
-        if (!isset($value) || $value === "") {
+        if (!isset($value) || trim($value) === "") {
             $result["result"] = true;
             $result["msg"] = $errorMsg??"Veuillez remplir ce champ.";
             return $result;

@@ -1,6 +1,15 @@
 <?php
 
-    $isAdding = isset($_GET["adding"]);
+    $currentAction = "";
+    $successMessage = "";
+
+    if (isset($_GET["adding"])) {
+        $currentAction = "adding";
+    }
+    else if (isset($_GET["updating"])) {
+        $currentAction = "updating";
+    }
+
     $doSendInfos = false;
     $didDelete = false;
     $nameDeleted = "";
@@ -48,8 +57,21 @@
             $contributeurs = get_contributors();
             $didDelete = true;
         }
+        else if (isset($_GET["updating"])) {
 
-        if (!$isAdding) {
+            $idToUpdate = $_GET["updating"];
+
+            if (!isset($_POST["Envoyer"])) {
+                $userInfos = get_user_by_id($idToUpdate);
+
+                $informations["firstname"]["value"] = $userInfos["first_name"];
+                $informations["lastname"]["value"] = $userInfos["last_name"];
+                $informations["email"]["value"] = $userInfos["email"];
+                $informations["role"]["value"] = $userInfos["role"];
+            }
+        }
+
+        if ($currentAction === "") {
             // RECHERCHE AVEC FILTRES
         }
         else {
@@ -61,58 +83,69 @@
             $password = htmlspecialchars($informations["password"]["value"]);
             $role = htmlspecialchars($informations["role"]["value"]);
 
-            $isCorrect = true;
+            if ((isset($_GET["adding"]) || isset($_GET["updating"])) && !isset($_GET["first"])) {
+                $isCorrect = true;
 
-            foreach ($informations as $infoKey => $infoValue) {
+                foreach ($informations as $infoKey => $infoValue) {
 
-                if ($infoKey === "assigned") {
-                    continue;
+                    if ($infoKey === "assigned") {
+                        continue;
+                    }
+
+                    if (is_null_or_empty($infoValue["value"])["result"]) {
+                        $informations[$infoKey]["displayValue"] = "block";
+                        $informations[$infoKey]["errorMsg"] = "Veuillez remplir ce champ.";
+                        $isCorrect = false;
+                    }
+
+                    if ($infoKey === "email") {
+                        $checkMail = is_mail_correct($email);
+
+                        if (!$checkMail["result"]) {
+                            $informations["email"]["displayValue"] = "block";
+                            $informations["email"]["errorMsg"] = $checkMail["msg"];
+                            $isCorrect = false;
+                        }
+                    }
                 }
 
-                if (is_null_or_empty($infoValue["value"])["result"]) {
-                    $informations[$infoKey]["displayValue"] = "block";
-                    $informations[$infoKey]["errorMsg"] = "Veuillez remplir ce champ.";
+                if ($role !== Role::CONTRIBUTOR->value && $role !== "Eleve") {
+                    $informations["role"]["displayValue"] = "block";
+                    $informations["role"]["errorMsg"] = "Rôle invalide.";
                     $isCorrect = false;
                 }
 
-                if ($infoKey === "email") {
-                    $checkMail = is_mail_correct($email);
+                if ($isCorrect) {
+                    $doSendInfos = true;
+                    $isAlreadyAssigned = get_user_with_email($email);
 
-                    if (!$checkMail["result"]) {
-                        $informations["email"]["displayValue"] = "block";
-                        $informations["email"]["errorMsg"] = $checkMail["msg"];
-                        $isCorrect = false;
+                    if ($isAlreadyAssigned !== false && $currentAction === "adding") {
+                        $informations["assigned"]["displayValue"] = "block";
+                        $informations["assigned"]["errorMsg"] = "Cet email est déjà associé à un compte.";
+                        $doSendInfos = false;
                     }
-                }
-            }
 
-            if ($role !== Role::CONTRIBUTOR->value && $role !== "Eleve") {
-                $informations["role"]["displayValue"] = "block";
-                $informations["role"]["errorMsg"] = "Rôle invalide.";
-                $isCorrect = false;
-            }
+                    if ($doSendInfos) {
 
-            if ($isCorrect) {
-                $doSendInfos = true;
-                $isAlreadyAssigned = get_user_with_email($email);
+                        $password = password_hash($password, PASSWORD_ARGON2ID);
 
-                if ($isAlreadyAssigned !== false) {
-                    $informations["assigned"]["displayValue"] = "block";
-                    $informations["assigned"]["errorMsg"] = "Cet email est déjà associé à un compte.";
-                    $doSendInfos = false;
-                }
+                        if ($currentAction === "updating") {
+                            update_user_by_id($idToUpdate, $email, $lastName, $firstName, $password, $role);
 
-                if ($doSendInfos) {
+                            $successMessage = "Contributeur modifié avec succès.";
+                        }
+                        else {
+                            $query = $db->prepare("INSERT INTO user (last_name, first_name, email, password, role) VALUES (:last_name, :first_name, :email, :password, :role)");
+                            $query->bindParam(':last_name', $lastName);
+                            $query->bindParam(':first_name', $firstName);
+                            $query->bindParam(':email', $email);
+                            $query->bindParam(':password', $password);
+                            $query->bindParam(':role', $role);
+                            $query->execute();
 
-                    $password = password_hash($password, PASSWORD_ARGON2ID);
-
-                    $query = $db->prepare("INSERT INTO user (last_name, first_name, email, password, role) VALUES (:last_name, :first_name, :email, :password, :role)");
-                    $query->bindParam(':last_name', $lastName);
-                    $query->bindParam(':first_name', $firstName);
-                    $query->bindParam(':email', $email);
-                    $query->bindParam(':password', $password);
-                    $query->bindParam(':role', $role);
-                    $query->execute();
+                            $successMessage = $informations["role"]["value"] . " ajouté avec succès.";
+                        }
+                    }
                 }
             }
         }
@@ -124,9 +157,9 @@
 
 <div class="contributors">
 
-    <h2><?= $isAdding ? "Ajouter un contributeur" : "Gestion des contributeurs" ?></h2>
+    <h2><?= $currentAction === "adding" ? "Ajouter un contributeur" : (($currentAction === "updating") ? "Modifier un contributeur" : "Gestion des contributeurs") ?></h2>
 
-    <?php if (!$isAdding) { ?>
+    <?php if ($currentAction === "") { ?>
 
     <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
     <div class="contributors__action-bar">
@@ -157,7 +190,8 @@
                         <td><?= $contributeur["role"] ?></td>
                         <td><?= $contributeur["email"] ?></td>
                         <td>
-                            <form action="index.php?page=Administration&adding" method="POST">
+                            <form action="index.php?page=Administration&updating=<?= $contributeur["id"] ?>&first" method="post">
+                                <input type="hidden" name="update" value="<?= $contributeur["id"] ?>">
                                 <button type="submit" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
                             </form>
                             <form action="#" method="post">
@@ -172,7 +206,7 @@
 
     <?php } else { ?>
 
-        <form action="#" method="POST">
+        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>" method="post">
             <label for="nom">Nom :</label>
             <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["lastname"]["value"] ?>">
             <p class="errormsg" style="display: <?= $informations["lastname"]["displayValue"] ?>;"><?= $informations["lastname"]["errorMsg"] ?></p>
@@ -196,10 +230,10 @@
             </select>
             <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["role"]["errorMsg"] ?></p>
 
-            <button type="submit">Enregistrer</button>
+            <input type="submit" name="Envoyer" value="Envoyer">
             <a href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
             <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
-            <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $informations["role"]["value"] ?> ajouté avec succès.</p>
+            <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
         </form>
     <?php } ?>
 

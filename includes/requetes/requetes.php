@@ -4,7 +4,7 @@ include_once 'includes/db.php';
 
 if (isset($db)) {
 
-    function get_contributors() : mixed {
+    function get_contributors() : array|false {
         global $db;
         $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE role = 'Contributeur' LIMIT 4");
         $query->execute();
@@ -12,13 +12,58 @@ if (isset($db)) {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    function delete_user_by_id($id) {
+    /**
+     * Permet de supprimer un utilisateur en fonction de son ID
+     * @param $id - L'ID de l'utilisateur à supprimer
+     * @return void
+     */
+    function delete_user_by_id($id) : void {
         global $db;
         $query = $db->prepare("DELETE FROM user WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
     }
 
+    /**
+     * Permet de modifier les informations d'un utilisateur en fonction de son ID
+     * @param $id - L'ID de l'utilisateur
+     * @param $email - L'email de l'utilisateur à mettre à jour
+     * @param $last_name - Le nom de famille de l'utilisateur à mettre à jour
+     * @param $first_name - Le prénom de l'utilisateur à mettre à jour
+     * @param $password - Le mot de passe de l'utilisateur à mettre à jour
+     * @param $role - Le rôle de l'utilisateur à mettre à jour
+     * @return void
+     */
+    function update_user_by_id($id, $email, $last_name, $first_name, $password, $role) : void {
+        global $db;
+        $query = $db->prepare("UPDATE user SET email = :email, last_name = :last_name, first_name = :first_name, password = :password, role = :role WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->bindParam(':email', $email);
+        $query->bindParam(':last_name', $last_name);
+        $query->bindParam(':first_name', $first_name);
+        $query->bindParam(':password', $password);
+        $query->bindParam(':role', $role);
+        $query->execute();
+    }
+
+    /**
+     * Permet d'obtenir les informations d'un utilisateur en fonction de son ID
+     * @param $id - L'ID de l'utilisateur
+     * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
+     */
+    function get_user_by_id($id) : mixed {
+        global $db;
+        $query = $db->prepare("SELECT email, last_name, first_name, role FROM user WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet d'obtenir les informations d'un utilisateur en fonction de son email
+     * @param $email - L'email de l'utilisateur
+     * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
+     */
     function get_user_with_email($email) : mixed {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = :email");
