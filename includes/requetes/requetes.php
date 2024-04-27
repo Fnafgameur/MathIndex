@@ -26,15 +26,15 @@ if (isset($db)) {
 
     /**
      * Permet de modifier les informations d'un utilisateur en fonction de son ID
-     * @param $id - L'ID de l'utilisateur
-     * @param $email - L'email de l'utilisateur à mettre à jour
-     * @param $last_name - Le nom de famille de l'utilisateur à mettre à jour
-     * @param $first_name - Le prénom de l'utilisateur à mettre à jour
-     * @param $password - Le mot de passe de l'utilisateur à mettre à jour
-     * @param $role - Le rôle de l'utilisateur à mettre à jour
-     * @return void
+     * @param string $id L'ID de l'utilisateur
+     * @param string $email L'email de l'utilisateur à mettre à jour
+     * @param string $last_name Le nom de famille de l'utilisateur à mettre à jour
+     * @param string $first_name Le prénom de l'utilisateur à mettre à jour
+     * @param string $password Le mot de passe de l'utilisateur à mettre à jour
+     * @param string $role Le rôle de l'utilisateur à mettre à jour
+     * @return bool - Retourne true si la mise à jour a été effectuée, false sinon
      */
-    function update_user_by_id($id, $email, $last_name, $first_name, $password, $role) : void {
+    function update_user_by_id(string $id, string $email, string $last_name, string $first_name, string $password, string $role) : bool {
         global $db;
         $query = $db->prepare("UPDATE user SET email = :email, last_name = :last_name, first_name = :first_name, password = :password, role = :role WHERE id = :id");
         $query->bindParam(':id', $id);
@@ -44,11 +44,16 @@ if (isset($db)) {
         $query->bindParam(':password', $password);
         $query->bindParam(':role', $role);
         $query->execute();
+
+        if ($query->rowCount() === 0) {
+            return false;
+        }
+        return true;
     }
 
     /**
      * Permet d'obtenir les informations d'un utilisateur en fonction de son ID
-     * @param $id - L'ID de l'utilisateur
+     * @param $id L'ID de l'utilisateur
      * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
      */
     function get_user_by_id($id) : mixed {
@@ -56,6 +61,7 @@ if (isset($db)) {
         $query = $db->prepare("SELECT email, last_name, first_name, role FROM user WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
+
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
