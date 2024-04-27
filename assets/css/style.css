@@ -292,10 +292,11 @@ body {
   text-decoration: none;
   color: #74828F;
   margin-bottom: 0.5rem;
-  align-items: center;
+  margin-right: 0.5rem;
 }
 .link--row {
-  display: flex;
+  display: inline-flex;
+  align-items: end;
   gap: 0.5rem;
 }
 .link__pagination {
@@ -373,6 +374,7 @@ body {
 .exercise .exercise__content .exercise__content-table .exercise__table .exercise__table-row .exercise__table-data {
   color: #74828F;
   padding: 1rem 0.5rem;
+  height: 40px;
 }
 
 .exercise__table-heading, .exercise__table-data {
@@ -382,8 +384,8 @@ body {
 }
 
 .exercise__form form {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
+  align-items: flex-end;
 }
 
 .btn {
