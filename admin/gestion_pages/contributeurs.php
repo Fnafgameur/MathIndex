@@ -54,7 +54,7 @@
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
             delete_user_by_id($idDeleted);
-            $contributeurs = get_contributors();
+            $contributeurs = get_all_users();
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -130,9 +130,16 @@
                         $password = password_hash($password, PASSWORD_ARGON2ID);
 
                         if ($currentAction === "updating") {
-                            update_user_by_id($idToUpdate, $email, $lastName, $firstName, $password, $role);
+                            $isIdUpdated = update_user_by_id($idToUpdate, $email, $lastName, $firstName, $password, $role);
 
-                            $successMessage = "Contributeur modifié avec succès.";
+                            if (!$isIdUpdated) {
+                                $doSendInfos = false;
+                                $informations["assigned"]["displayValue"] = "block";
+                                $informations["assigned"]["errorMsg"] = "Erreur lors de la modification de l'utilisateur : l'utilisateur n'existe pas.";
+                            }
+                            else {
+                                $successMessage = "Contributeur modifié avec succès.";
+                            }
                         }
                         else {
                             $query = $db->prepare("INSERT INTO user (last_name, first_name, email, password, role) VALUES (:last_name, :first_name, :email, :password, :role)");
@@ -150,7 +157,7 @@
             }
         }
     } else {
-        $contributeurs = get_contributors();
+        $contributeurs = get_all_users();
     }
 
 ?>
