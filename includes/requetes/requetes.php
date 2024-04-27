@@ -4,9 +4,13 @@ include_once 'includes/db.php';
 
 if (isset($db)) {
 
-    function get_contributors() : array|false {
+    /**
+     * Permet d'obtenir tous les utilisateurs stockés en DB (limité à 4)
+     * @return array|false - Retourne un tableau associatif contenant les informations de tous les utilisateurs ou false si aucun utilisateur n'existe
+     */
+    function get_all_users() : array|false {
         global $db;
-        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE role = 'Contributeur' LIMIT 4");
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user LIMIT 4");
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);

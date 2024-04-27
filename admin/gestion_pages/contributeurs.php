@@ -54,7 +54,7 @@
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
             delete_user_by_id($idDeleted);
-            $contributeurs = get_contributors();
+            $contributeurs = get_all_users();
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -157,7 +157,7 @@
             }
         }
     } else {
-        $contributeurs = get_contributors();
+        $contributeurs = get_all_users();
     }
 
 ?>
