@@ -1,15 +1,6 @@
----
-name: Bug report
-about: Bug report about MathIndex
-title: ''
-labels: bug
-assignees: ''
-
----
-
-| name                 | about                                                     | issue                                  |
+| name              | about                                      | issue                        |
 | ----------------- | ------------------------------------------ | ---------------------------- |
-| Example Name  | Example bug report about MathIndex |  [issue number (e.g : #00)] |
+| Example Name      | Example bug report about MathIndex         |  [issue number (e.g : #00)]  |
 
 
 ## Expected Behavior
