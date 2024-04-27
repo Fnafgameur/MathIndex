@@ -1,3 +1,11 @@
+---
+name: Bug report
+about: Bug report about MathIndex
+issue: ''
+labels: bug
+assignees: ''
+---
+
 | name              | about                                      | issue                        |
 | ----------------- | ------------------------------------------ | ---------------------------- |
 | Example Name      | Example bug report about MathIndex         |  [issue number (e.g : #00)]  |
