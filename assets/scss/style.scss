@@ -344,11 +344,12 @@ body{
     text-decoration: none;
     color: #74828F;
     margin-bottom: 0.5rem;
-    align-items: center;
+    margin-right: 0.5rem;
 
     &--row
     {
-        display: flex;
+        display: inline-flex;
+        align-items: end;
         gap: 0.5rem;
     }
 
@@ -441,6 +442,7 @@ body{
                     {
                         color: #74828F;
                         padding: 1rem 0.5rem;
+                        height: 40px;
                     }
                 }
             }
@@ -453,16 +455,12 @@ body{
     font-size: 14px;
     font-weight: 400;
 }
-.exercise__actions
-{
-
-}
 .exercise__form
 {
     form
     {
-        display: flex;
-        align-items: center;
+        display: inline-flex;
+        align-items: flex-end;
     }
 }
 
