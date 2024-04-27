@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Bug report about MathIndex
-issue: "[issue number (e.g : #00)]"
+issue: '[issue number (e.g : #00)]'
 labels: ''
 assignees: ''
 ---
