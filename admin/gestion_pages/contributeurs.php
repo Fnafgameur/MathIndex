@@ -170,8 +170,8 @@
 
     <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
     <div class="contributors__action-bar">
-        <form action="#" method="GET" class="contributeurs__form">
-            <input type="text" name="search" id="search" class="contributeurs__input" placeholder="Rechercher">
+        <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
+            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
             <button type="submit">Rechercher</button>
         </form>
         <a href="index.php?page=Administration&adding">

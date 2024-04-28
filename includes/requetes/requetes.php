@@ -17,6 +17,18 @@ if (isset($db)) {
     }
 
     /**
+     * Permet d'obtenir tous les utilisateurs ayant un nom, un prénom ou un email correspondant à la recherche
+     * @param string $filter Le filtre de recherche
+     * @return array|false - Retourne un tableau associatif contenant les informations de tous les utilisateurs correspondant à la recherche ou false si aucun utilisateur n'existe
+     */
+    function get_user_by_keyword(string $filter) : array|false {
+        global $db;
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE last_name LIKE '%$search%' OR first_name LIKE '%$search%' OR email LIKE '%$search%'");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Permet de supprimer un utilisateur en fonction de son ID
      * @param $id - L'ID de l'utilisateur à supprimer
      * @return void
