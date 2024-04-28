@@ -50,11 +50,20 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+        if (isset($_POST["search"])) {
+            if (is_null_or_empty($_POST["search"])["result"]) {
+                $contributeurs = get_all_users(4);
+            }
+            else {
+                $contributeurs = get_user_by_keyword($_POST["search"]);
+            }
+        }
+
         if (isset($_POST["delete"])) {
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
             delete_user_by_id($idDeleted);
-            $contributeurs = get_all_users();
+            $contributeurs = get_all_users(4);
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -157,7 +166,7 @@
             }
         }
     } else {
-        $contributeurs = get_all_users();
+        $contributeurs = get_all_users(4);
     }
 
 ?>
@@ -170,8 +179,8 @@
 
     <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
     <div class="contributors__action-bar">
-        <form action="#" method="GET" class="contributeurs__form">
-            <input type="text" name="search" id="search" class="contributeurs__input" placeholder="Rechercher">
+        <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
+            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
             <button type="submit">Rechercher</button>
         </form>
         <a href="index.php?page=Administration&adding">

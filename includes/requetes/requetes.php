@@ -8,11 +8,23 @@ if (isset($db)) {
      * Permet d'obtenir tous les utilisateurs stockés en DB (limité à 4)
      * @return array|false - Retourne un tableau associatif contenant les informations de tous les utilisateurs ou false si aucun utilisateur n'existe
      */
-    function get_all_users() : array|false {
+    function get_all_users($limit) : array|false {
         global $db;
-        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user LIMIT 4");
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user LIMIT $limit");
         $query->execute();
 
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet d'obtenir tous les utilisateurs ayant un nom, un prénom ou un email correspondant à la recherche
+     * @param string $filter Le filtre de recherche
+     * @return array|false - Retourne un tableau associatif contenant les informations de tous les utilisateurs correspondant à la recherche ou false si aucun utilisateur n'existe
+     */
+    function get_user_by_keyword(string $filter) : array|false {
+        global $db;
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE last_name LIKE '%$filter%' OR first_name LIKE '%$filter%' OR email LIKE '%$filter%'");
+        $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
