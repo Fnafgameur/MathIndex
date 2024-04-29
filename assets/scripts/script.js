@@ -11,6 +11,7 @@ function sendData(element){
     document.querySelector('.modal_delete_form input[name="id"]').value = element.querySelector('input[name="id"]').value;
 }
 
+
 var information = document.getElementById("submit__information");
 var source = document.getElementById("submit__source");
 var file = document.getElementById("submit__file");
