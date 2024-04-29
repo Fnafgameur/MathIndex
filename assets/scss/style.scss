@@ -4,19 +4,6 @@ body{
     margin: 0;
 }
 
-.errormsg, .successmsg {
-    margin-top: 0;
-    font-weight: 600;
-}
-
-.errormsg {
-    color: red;
-}
-
-.successmsg {
-    color: green;
-}
-
 .main--flex{
     min-height: 100vh;
     max-height: fit-content;
@@ -122,12 +109,6 @@ body{
                
                 path{
                     stroke: $textBlue;
-                    
-                }
-
-                .my_exs{
-                    fill: $textBlue;
-                    stroke: none;
                 }
 
                 p{
@@ -776,7 +757,6 @@ body{
             list-style-type: none;
             padding: 0;
             margin: 0;
-
             button {
                 border-radius: 7px 7px 0 0;
                 padding: 0.5rem 2%;

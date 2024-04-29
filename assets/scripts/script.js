@@ -1,3 +1,4 @@
+
 var information = document.getElementById("submit__information");
 var source = document.getElementById("submit__source");
 var file = document.getElementById("submit__file");
@@ -99,3 +100,11 @@ function toggleModal(){
 function sendData(element){
     document.querySelector('.modal_delete_form input[name="id"]').value = element.querySelector('input[name="id"]').value;
 }
+
+btn_exo.addEventListener('change', function(){
+    txt_exo.textContent = btn_exo.files[0].name;
+});
+
+btn_cor.addEventListener('change', function(){
+    txt_cor.textContent = btn_cor.files[0].name;
+});
