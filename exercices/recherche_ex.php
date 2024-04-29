@@ -35,6 +35,11 @@
 
     $number = $exercices["number"]??0;
     $exercices = $exercices["exercise"];
+
+    $current_page = get_current_page();
+    $nb_exercises = get_exercise_number();
+    $per_page = 10;
+    $pages = ceil($nb_exercises / $per_page);
 ?>
           
 <div class="research">
@@ -105,4 +110,3 @@
             <?php } ?>
             </tbody>
         </table>
-    </div>
