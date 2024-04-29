@@ -1,4 +1,6 @@
 <?php
+    $current_page = get_current_page();
+    $per_page = 10;
 
     $exercices = [];
 
@@ -23,23 +25,22 @@
         $searchFilterResult = is_searching_filter_correct($filtres);
 
         if ($searchFilterResult["result"]) {
-            $exercices = get_exercises(null, $filtres);
+            $exercices = get_exercises($current_page,$per_page, $filtres);
         }
         else {
-            $exercices = get_exercises();
+            $exercices = get_exercises($current_page,$per_page, null);
         }
 
     } else {
-        $exercices = get_exercises();
+        $exercices = get_exercises($current_page,$per_page, null);
     }
 
     $number = $exercices["number"]??0;
     $exercices = $exercices["exercise"];
 
-    $current_page = get_current_page();
     $nb_exercises = get_exercise_number();
-    $per_page = 10;
-    $pages = ceil($nb_exercises / $per_page);
+    $pages = ceil($nb_exercises/ $per_page);
+
 ?>
           
 <div class="research">

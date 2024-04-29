@@ -122,12 +122,13 @@ if (isset($db)) {
      * @param array|null $filtres - Les filtres de recherche (non obligatoire)
      * @return array|false - Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
      */
-    function get_exercises(int $limit = null, array $filtres = null) : array|false
+    function get_exercises(int $currentPage = null, int $limit = null, array $filtres = null) : array|false
     {
         global $db;
 
         if ($limit !== null) {
-            $limitReq = "LIMIT " . $limit;
+            $first = max(0, ($currentPage - 1) * $limit);
+            $limitReq = "LIMIT " . $first.','. $limit;
         }
         else {
             $limitReq = "";
