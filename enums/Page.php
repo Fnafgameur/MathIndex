@@ -8,4 +8,5 @@ enum Page: string
     case MES_EXERCICES = "Mes exercices";
     case SOUMETTRE = "Soumettre";
     case CONNEXION = "Connexion";
+    case ADMINISTRATION = "Administration";
 }
