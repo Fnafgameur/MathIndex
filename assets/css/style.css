@@ -242,6 +242,7 @@ body {
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .mathematics {
   margin: 2rem;
+  height: fit-content;
 }
 .mathematics .mathematics__title {
   color: #1B3168;
@@ -344,6 +345,7 @@ body {
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .exercise {
   margin: 2rem;
+  height: fit-content;
 }
 .exercise .exercise__title {
   color: #1B3168;
@@ -352,6 +354,7 @@ body {
   background-color: #fff;
   padding: 0.5rem 3rem 1.5rem;
   border-radius: 7px;
+  height: 90%;
 }
 .exercise .exercise__content .exercise__content-table {
   margin-bottom: 4rem;

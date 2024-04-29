@@ -10,45 +10,48 @@
     <h1 class="exercise__title">Mes exercices</h1>
     <div class="exercise__content">
         <h2 class="exercise__content-title">Vous pouvez modifier ou supprimer un de vos exercices.</h2>
-        <div class="exercise__content-table">
-            <table class="exercise__table">
-                <thead class="exercise__table-head">
-                <tr class="exercise__table-row">
-                    <th class="exercise__table-heading name">Nom</th>
-                    <th class="exercise__table-heading thematic">Thématiques</th>
-                    <th class="exercise__table-heading files">Fichiers</th>
-                    <th class="exercise__table-heading actions">Actions</th>
-                </tr>
-                </thead>
-                <tbody class="exercise__table-body">
-                <?php foreach ($my_exercises as $my_exercise) {
-                    $file_sorted = get_file_by_exercises($my_exercise['exercise_file_id']);
-                    $keywords_sorted = explode(',', $my_exercise['keywords']);
-                    ?>
+        <?php if(empty($my_exercises)) { ?>
+            <p class="exercise__content-text">Vous n'avez pas encore ajouté d'exercice.</p>
+        <?php } else {?>
+            <div class="exercise__content-table">
+                <table class="exercise__table">
+                    <thead class="exercise__table-head">
                     <tr class="exercise__table-row">
-                        <td class="exercise__table-data"><?=$my_exercise['name']?></td>
-                        <td class="exercise__table-data"><?=get_thematic_by_exercises($my_exercise["thematic_id"])['name'];?></td>
-                        <td class="exercise__table-data exercise__actions">
-                            <a class="link link--row" href="" download="<?=$file_sorted['name'].'.'.$file_sorted['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
-                        </td>
-                        <td class="exercise__table-data exercise__form">
-                            <form action="" method="POST">
-                                <img src="./assets/icons/edit_file.svg" alt="logo modification">
-                                <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                <input type="submit" class="btn btn--lb" value="Modifier">
-                            </form>
-                            <form action="">
-                                <img src="./assets/icons/delete_file.svg" alt="logo suppression">
-                                <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                <input type="submit" class="btn btn--lb" value="Supprimer">
-                            </form>
-                        </td>
+                        <th class="exercise__table-heading name">Nom</th>
+                        <th class="exercise__table-heading thematic">Thématiques</th>
+                        <th class="exercise__table-heading files">Fichiers</th>
+                        <th class="exercise__table-heading actions">Actions</th>
                     </tr>
-                <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody class="exercise__table-body">
+                    <?php foreach ($my_exercises as $my_exercise) {
+                        $file_sorted = get_file_by_exercises($my_exercise['exercise_file_id']);
+                        $keywords_sorted = explode(',', $my_exercise['keywords']);
+                        ?>
+                        <tr class="exercise__table-row">
+                            <td class="exercise__table-data"><?=$my_exercise['name']?></td>
+                            <td class="exercise__table-data"><?=get_thematic_by_exercises($my_exercise["thematic_id"])['name'];?></td>
+                            <td class="exercise__table-data exercise__actions">
+                                <a class="link link--row" href="" download="<?=$file_sorted['name'].'.'.$file_sorted['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                                <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            </td>
+                            <td class="exercise__table-data exercise__form">
+                                <form action="" method="POST">
+                                    <img src="./assets/icons/edit_file.svg" alt="logo modification">
+                                    <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
+                                    <input type="submit" class="btn btn--lb" value="Modifier">
+                                </form>
+                                <form action="">
+                                    <img src="./assets/icons/delete_file.svg" alt="logo suppression">
+                                    <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
+                                    <input type="submit" class="btn btn--lb" value="Supprimer">
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         <div class="mathematics__pagination">
             <a class="link link__pagination <?=($current_page) === 1 ? 'link__arrow': null;?>" href="index.php?page=Mes+exercices&pagination=<?=($current_page - 1) < 1 ? 1 : $current_page - 1;?>"><img src="./assets/icons/left_arrow.svg" alt="fleche gauche"></a>
             <?php for ($i = 1; $i <= $pages; $i++) { ?>
@@ -56,6 +59,7 @@
             <?php } ?>
             <a class="link link__pagination <?=($current_page) >= $pages ? 'link__arrow': null;?>" href="index.php?page=Mes+exercices&pagination=<?=($current_page + 1) > $pages ? $pages : $current_page + 1;?>"><img src="./assets/icons/right_arrow.svg" alt="fleche gauche"></a>
         </div>
+        <?php } ?>
     </div>
 </div>
 
