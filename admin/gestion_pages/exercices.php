@@ -32,7 +32,7 @@
 
     <?php if ($currentAction === "") { ?>
 
-    <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
+    <p class="contributors__description">Rechercher un exercice par nom, thématique ou niveau :</p>
     <div class="contributors__action-bar">
         <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
             <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
@@ -47,7 +47,7 @@
         <tr>
             <th class="name">Nom</th>
             <th class="thematic">Thématique</th>
-            <th class="difficulty">Niveau</th>
+            <th class="difficulty">Difficulté</th>
             <th class="files">Fichiers</th>
             <th class="actions">Action</th>
         </tr>
