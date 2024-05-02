@@ -10,7 +10,9 @@ include_once("includes/requetes/requetes.php");
 include_once("includes/fonctions.php");
 
 include_once("includes/header.php");
+include_once ("includes/modal.php");
 include_once("includes/sidebar.php");
+
 
 if (isset($_GET["page"])) {
     if (isset($_SESSION["user"]) && Role::isEligible($_SESSION["user"]["role"])) {

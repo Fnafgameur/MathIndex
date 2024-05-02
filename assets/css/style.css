@@ -289,7 +289,6 @@ body {
 .mathematics__pagination {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
   margin-top: 3rem;
 }
 
@@ -825,6 +824,76 @@ body {
   font-family: "Noto sans";
   font-weight: 600;
   margin-top: 18px;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* --------------------------------------------------------------------------------- Modal ------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.modal-__container {
+  display: none;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: visibility 0.4s;
+  z-index: 100;
+}
+
+.active {
+  display: block;
+  visibility: visible;
+}
+.active .overlay {
+  opacity: 1;
+  transition: opacity 0.4s 0.2s ease-out;
+}
+.active .modal {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
+}
+
+.overlay {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(51, 51, 51, 0.1490196078);
+}
+
+.modal {
+  opacity: 0;
+  width: 95%;
+  max-width: 500px;
+  min-width: 300px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 50px));
+}
+.modal .modal__title {
+  margin-bottom: 10px;
+}
+.modal p {
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.close__modal {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: #ff365e;
+  color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */
