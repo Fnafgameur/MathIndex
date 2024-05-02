@@ -36,15 +36,15 @@
                                 <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                             </td>
                             <td class="exercise__table-data exercise__form">
-                                <form action="" method="POST">
+                                <form action="#" method="POST">
                                     <img src="./assets/icons/edit_file.svg" alt="logo modification">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
                                     <input type="submit" class="btn btn--lb" value="Modifier">
                                 </form>
-                                <form action="">
+                                <form action="" method="POST">
                                     <img src="./assets/icons/delete_file.svg" alt="logo suppression">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                    <input type="submit" class="btn btn--lb" value="Supprimer">
+                                    <button type="button" class="btn btn--lb modal__trigger">Supprimer</button>
                                 </form>
                             </td>
                         </tr>

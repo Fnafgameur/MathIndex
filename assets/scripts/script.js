@@ -1,3 +1,14 @@
+// Javascript of the modal
+const modalContainer = document.querySelector(".modal__container");
+const modalTriggers = document.querySelectorAll(".modal__trigger");
+console.log(modalTriggers)
+console.log(modalContainer)
+modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
+
+function toggleModal(){
+    modalContainer.classList.toggle("active")
+}
+
 var information = document.getElementById("submit__information");
 var source = document.getElementById("submit__source");
 var file = document.getElementById("submit__file");
@@ -72,3 +83,4 @@ next_f.addEventListener("click",function(){
         information.style.display = "none";
     }
 });
+
