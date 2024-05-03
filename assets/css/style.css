@@ -395,11 +395,30 @@ body {
 }
 
 .btn {
-  background-color: #FFF;
   border: none;
+  cursor: pointer;
 }
-.btn--lb {
+.btn--bgwhite {
+  background-color: #FFF;
+}
+.btn--lightgrey {
   color: #74828F;
+}
+.btn--bgdarkgrey {
+  color: #F5F5F5;
+  background-color: #4F4F4F;
+}
+.btn--bglightgrey {
+  background-color: #F0F0F0;
+}
+.btn--textgrey {
+  color: #4F4F4F;
+}
+.btn--paddingmodal {
+  padding: 1rem 1.5rem;
+}
+.btn--border-radius {
+  border-radius: 8px;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
@@ -829,7 +848,7 @@ body {
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* --------------------------------------------------------------------------------- Modal ------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-.modal-__container {
+.modal__container {
   display: none;
   visibility: hidden;
   position: fixed;
@@ -867,33 +886,67 @@ body {
   width: 95%;
   max-width: 500px;
   min-width: 300px;
-  padding: 30px;
+  padding: 1rem;
   background: #fff;
   border-radius: 8px;
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, calc(-50% - 50px));
-}
-.modal .modal__title {
-  margin-bottom: 10px;
-}
-.modal p {
-  line-height: 1.4;
-  margin-bottom: 5px;
+  z-index: 98;
 }
 
 .close__modal {
-  padding: 8px 10px;
   border: none;
-  border-radius: 5px;
-  font-size: 18px;
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
-  background: #ff365e;
-  color: #fff;
+  background: none;
+}
+.close__modal svg {
+  background: #E5E5E5;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  line-height: 0.2;
+  width: 90%;
+  margin: 0.5rem auto 1rem auto;
+}
+.modal__header .modal__images {
+  background-color: #F0F0F0;
+  padding: 0.75rem;
+  border-radius: 8px;
+}
+.modal__header .modal__textContainer {
+  display: flex;
+  flex-direction: column;
+}
+.modal__header .modal__textContainer #modal__title {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+}
+.modal__header .modal__textContainer #modal__paragraph {
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: rgba(84, 89, 94, 0.6);
+}
+
+.modal__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 90%;
+  margin: 0 auto 1rem auto;
+}
+.modal__buttons .btn {
+  width: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */
