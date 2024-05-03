@@ -26,7 +26,6 @@
                     <tbody class="exercise__table-body">
                     <?php foreach ($my_exercises as $my_exercise) {
                         $file_sorted = get_file_by_exercises($my_exercise['exercise_file_id']);
-                        $keywords_sorted = explode(',', $my_exercise['keywords']);
                         ?>
                         <tr class="exercise__table-row">
                             <td class="exercise__table-data"><?=$my_exercise['name']?></td>
@@ -39,12 +38,12 @@
                                 <form action="#" method="POST">
                                     <img src="./assets/icons/edit_file.svg" alt="logo modification">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                    <input type="submit" class="btn btn--lb" value="Modifier">
+                                    <input type="submit" class="btn btn--bgwhite btn--lightgrey" value="Modifier">
                                 </form>
                                 <form action="" method="POST">
                                     <img src="./assets/icons/delete_file.svg" alt="logo suppression">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                    <button type="button" class="btn btn--lb modal__trigger">Supprimer</button>
+                                    <button type="button" class="btn btn--bgwhite btn--lightgrey modal__trigger">Supprimer</button>
                                 </form>
                             </td>
                         </tr>
