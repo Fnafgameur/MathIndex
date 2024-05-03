@@ -352,10 +352,6 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 3rem;
-
-    form {
-        display: flex;
-    }
 }
 .link
 {
@@ -377,6 +373,7 @@ body{
         border-radius: 5px;
         padding: 0.5rem 0.75rem;
         color: #222222;
+        display: flex;
     }
     &__arrow
     {
@@ -421,7 +418,7 @@ body{
 .exercise
 {
     margin: 2rem;
-    height: fit-content ;
+    height: fit-content;
 
     .exercise__title
     {
@@ -733,18 +730,17 @@ body{
             padding: 0;
             margin: 0;
 
-            a {
+            button {
                 border-radius: 7px 7px 0 0;
                 padding: 0.5rem 2%;
                 cursor: pointer;
                 border: none;
                 background-color: #455884;
                 color: white;
-                text-decoration: none;
                 font-family: 'Noto sans';
             }
 
-            a:hover {
+            button:hover {
                 background-color: $textBlue;
             }
         }
@@ -1060,6 +1056,7 @@ body{
 
 .modal__container
 {
+    display: none;
     visibility: hidden;
     position: fixed;
     top: 0;
@@ -1067,26 +1064,25 @@ body{
     height: 100vh;
     transition: visibility 0.4s;
     z-index: 100;
+}
+.active
+{
+    display: block;
+    visibility: visible;
 
-    &--active
+    .overlay
     {
-        display: block;
-        visibility: visible;
-
-        .overlay
-        {
-            opacity: 1;
-            transition: opacity 0.4s 0.2s ease-out;
-        }
-
-        .modal
-        {
-            opacity: 1;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
-        }
-
+        opacity: 1;
+        transition: opacity 0.4s 0.2s ease-out;
     }
+
+    .modal
+    {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
+    }
+
 }
 .overlay
 {
@@ -1131,6 +1127,7 @@ body{
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    line-height: 0.2;
     width: 90%;
     margin: 0.5rem auto 1rem auto;
 
@@ -1144,21 +1141,19 @@ body{
     {
         display: flex;
         flex-direction: column;
-        line-height: 2;
 
         #modal__title
         {
             font-size: 20px;
             font-weight: 600;
             font-family: 'Inter', sans-serif;
-            margin: 0;
         }
         #modal__paragraph
         {
             font-size: 14px;
             font-family: 'Inter', sans-serif;
             color: #54595E99;
-            margin: 0;
+
         }
     }
 }
