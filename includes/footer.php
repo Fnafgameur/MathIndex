@@ -2,11 +2,7 @@
         switch ($_GET['page'])
         {
             case Page::RECHERCHE->value:
-                include_once("includes/pagination.php");
-                break;
             case Page::MATHEMATIQUE->value:
-                include_once("includes/pagination.php");
-                break;
             case Page::MES_EXERCICES->value:
                 include_once("includes/pagination.php");
                 break;

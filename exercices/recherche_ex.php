@@ -43,7 +43,7 @@
     $pages = ceil($number / $per_page);
 
 ?>
-          
+
 <div class="research">
     <h1 class="research__title">Rechercher un exercice</h1>
     <div class="research__content">
