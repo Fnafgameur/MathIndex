@@ -177,7 +177,6 @@ if (isset($db)) {
             AND thematic_id = :thematique
             AND ($keywordsReq) $limitReq");
                 }
-
             }
 
             $query->bindParam(':niveau', $niveau);
@@ -191,6 +190,14 @@ if (isset($db)) {
         $query->execute();
 
         $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $query = str_replace($limitReq, "", $query->queryString);
+        $query = $db->prepare($query);
+        $query->bindParam(':niveau', $niveau);
+        if ($thematique !== "0") {
+            $query->bindParam(':thematique', $thematique);
+        }
+        $query->execute();
+
         $result["number"] = $query->rowCount();
 
         return $result;

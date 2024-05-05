@@ -4,9 +4,9 @@
 
     $exercices = [];
 
-    $filtres = [
-            "niveau" => "",
-            "thematique" => "",
+    $filtres = $_SESSION["formValues"]??[
+            "niveau" => "1",
+            "thematique" => "0",
             "mots-cles" => "",
     ];
 
@@ -28,25 +28,26 @@
             $exercices = get_exercises($current_page,$per_page, $filtres);
         }
         else {
-            $exercices = get_exercises($current_page,$per_page, null);
+            $exercices = get_exercises($current_page,$per_page);
         }
 
+        $_SESSION["formValues"] = $filtres;
+
     } else {
-        $exercices = get_exercises($current_page,$per_page, null);
+        $exercices = get_exercises($current_page,$per_page, $filtres);
     }
 
     $number = $exercices["number"]??0;
     $exercices = $exercices["exercise"];
 
-    $nb_exercises = get_exercise_number();
-    $pages = ceil($nb_exercises/ $per_page);
+    $pages = ceil($number / $per_page);
 
 ?>
           
 <div class="research">
     <h1 class="research__title">Rechercher un exercice</h1>
     <div class="research__content">
-        <form class="research__form" method="post" action="#">
+        <form class="research__form" method="post" action="index.php?page=<?= Page::RECHERCHE->value ?>&pagination=1">
 
             <div>
                 <label for="niveau">Niveau:</label>
@@ -111,3 +112,4 @@
             <?php } ?>
             </tbody>
         </table>
+
