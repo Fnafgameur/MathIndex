@@ -289,8 +289,10 @@ body {
 .mathematics__pagination {
   display: flex;
   justify-content: center;
-  gap: 0.25rem;
   margin-top: 3rem;
+}
+.mathematics__pagination form {
+  display: flex;
 }
 
 .link {
@@ -309,7 +311,6 @@ body {
   border-radius: 5px;
   padding: 0.5rem 0.75rem;
   color: #222222;
-  display: flex;
 }
 .link__arrow {
   background-color: #919EAB;
