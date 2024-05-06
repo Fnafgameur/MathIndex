@@ -570,16 +570,17 @@ body {
   padding: 0;
   margin: 0;
 }
-.administration .administration__content .administration__head-bar button {
+.administration .administration__content .administration__head-bar a {
   border-radius: 7px 7px 0 0;
   padding: 0.5rem 2%;
   cursor: pointer;
   border: none;
   background-color: #455884;
   color: white;
+  text-decoration: none;
   font-family: "Noto sans";
 }
-.administration .administration__content .administration__head-bar button:hover {
+.administration .administration__content .administration__head-bar a:hover {
   background-color: #1B3168;
 }
 .administration .administration__content .administration__gestion {

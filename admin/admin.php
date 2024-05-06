@@ -1,26 +1,42 @@
+<?php
+
+    $currentPage = $_GET["onglet"]??"contributeurs";
+
+?>
 
 <div class="administration">
     <h1 class="administration__title">Administration</h1>
     <div class="administration__content">
         <div class="administration__head-bar">
-            <button type="button" class="administration__buttons-button">Contributeurs</button>
+            <a href="index.php?page=Administration&onglet=contributeurs" class="administration__buttons-button">Contributeurs</a>
         
-            <button type="button" class="administration__buttons-button">Exercices</button>
+            <a href="index.php?page=Administration&onglet=exercices" class="administration__buttons-button">Exercices</a>
         
-            <button type="button" class="administration__buttons-button">Matières</button>
+            <a class="administration__buttons-button">Matières</a>
         
-            <button type="button" class="administration__buttons-button">Classes</button>
+            <a class="administration__buttons-button">Classes</a>
         
-            <button type="button" class="administration__buttons-button">Thématiques</button>
+            <a class="administration__buttons-button">Thématiques</a>
         
-            <button type="button" class="administration__buttons-button">Niveaux</button>
+            <a class="administration__buttons-button">Niveaux</a>
         
-            <button type="button" class="administration__buttons-button">Compétences</button>
+            <a class="administration__buttons-button">Compétences</a>
         
-            <button type="button" class="administration__buttons-button">Origines</button>
+            <a class="administration__buttons-button">Origines</a>
         </div>
         <div class="administration__gestion">
-            <?php include_once("admin/gestion_pages/contributeurs.php"); ?>
+            <?php
+            switch ($currentPage) {
+                case "contributeurs":
+                    include_once("admin/gestion_pages/contributeurs.php");
+                    break;
+                case "exercices":
+                    include_once("admin/gestion_pages/exercices.php");
+                    break;
+                default:
+                    include_once("admin/gestion_pages/contributeurs.php");
+            }
+            ?>
         </div>
     </div>
 </div>
