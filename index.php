@@ -5,6 +5,7 @@ session_start();
 
 include_once("enums/Role.php");
 include_once("enums/Page.php");
+include_once("enums/Type.php");
 
 include_once("includes/requetes/requetes.php");
 include_once("includes/fonctions.php");

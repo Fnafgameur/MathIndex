@@ -852,7 +852,6 @@ body {
 /* --------------------------------------------------------------------------------- Modal ------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .modal__container {
-  display: none;
   visibility: hidden;
   position: fixed;
   top: 0;
@@ -861,16 +860,15 @@ body {
   transition: visibility 0.4s;
   z-index: 100;
 }
-
-.active {
+.modal__container--active {
   display: block;
   visibility: visible;
 }
-.active .overlay {
+.modal__container--active .overlay {
   opacity: 1;
   transition: opacity 0.4s 0.2s ease-out;
 }
-.active .modal {
+.modal__container--active .modal {
   opacity: 1;
   transform: translate(-50%, -50%);
   transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
@@ -917,7 +915,6 @@ body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  line-height: 0.2;
   width: 90%;
   margin: 0.5rem auto 1rem auto;
 }
@@ -929,16 +926,19 @@ body {
 .modal__header .modal__textContainer {
   display: flex;
   flex-direction: column;
+  line-height: 2;
 }
 .modal__header .modal__textContainer #modal__title {
   font-size: 20px;
   font-weight: 600;
   font-family: "Inter", sans-serif;
+  margin: 0;
 }
 .modal__header .modal__textContainer #modal__paragraph {
   font-size: 14px;
   font-family: "Inter", sans-serif;
   color: rgba(84, 89, 94, 0.6);
+  margin: 0;
 }
 
 .modal__buttons {
