@@ -311,6 +311,7 @@ body {
   border-radius: 5px;
   padding: 0.5rem 0.75rem;
   color: #222222;
+  display: flex;
 }
 .link__arrow {
   background-color: #919EAB;

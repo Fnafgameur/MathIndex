@@ -242,7 +242,7 @@ if (isset($db)) {
         {
             foreach ($params as $param)
             {
-                if ($param !== "")
+                if ($param != "")
                 {
                     $query->bindParam($param[0], $param[1]);
                 }
