@@ -79,4 +79,3 @@
         </tbody>
     </table>
     <?php } ?>
-</div>
