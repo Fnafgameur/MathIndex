@@ -2,6 +2,17 @@
 
     $newPage = $_GET["pagination"]??$current_page;
 
+    if ($pages != 0) {
+        if ($newPage > $pages) {
+            $newPage = $pages;
+            header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage);
+        } else if ($newPage < 1) {
+            $newPage = 1;
+            header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage);
+        }
+    }
+
+
     if ($_GET["page"] === Page::RECHERCHE->value) {
 
         $formValues = $_SESSION["formValues"] ?? [

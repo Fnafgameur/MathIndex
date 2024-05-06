@@ -236,9 +236,17 @@ if (isset($db)) {
      */
     function get_current_page() : int
     {
-        if(isset($_GET['pagination'])){
+        if(isset($_GET['pagination'])) {
+            $page = (int) strip_tags($_GET['pagination']);
+
+            // Limite de 1 à 1,000,000 afin d'éviter tout bug concernant la limite d'un entier
+            if ($page < 1) {
+                return 1;
+            } else if ($page > 1000000) {
+                return 1000000;
+            }
             return (int) strip_tags($_GET['pagination']);
-        }else{
+        } else {
             return 1;
         }
     }
