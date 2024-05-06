@@ -4,7 +4,7 @@
     $nb_exercises = get_exercise_number();
     $per_page = 5;
     $pages = ceil($nb_exercises / $per_page);
-    $exercises = get_exercises_with_limit($current_page, $per_page);
+    $exercises = get_exercises_with_limit($current_page, $per_page)["exercises"];
 ?>
 <div class="mathematics">
     <h1 class="mathematics__title">Exercices</h1>

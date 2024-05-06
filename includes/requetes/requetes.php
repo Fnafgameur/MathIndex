@@ -128,6 +128,9 @@ if (isset($db)) {
      */
     function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null) : mixed {
         global $db;
+
+        $result = [];
+
         if ($user_id !== null)
         {
             $user_id = "WHERE created_by_id = $user_id";
@@ -137,7 +140,11 @@ if (isset($db)) {
         $query->bindParam(':first', $first, PDO::PARAM_INT);
         $query->bindParam(':perpage', $perPage, PDO::PARAM_INT);
         $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $result["exercises"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result["number"] = get_number_of_rows($query->queryString, "LIMIT :first, :perpage");
+
+        return $result;
     }
 
 
@@ -226,10 +233,10 @@ if (isset($db)) {
      * Permet d'obtenir le nombre de lignes d'une requête
      * @param string $query La requête à exécuter
      * @param string|null $actionToErase L'action à supprimer de la requête (en général le "LIMIT x,y") (non obligatoire)
-     * @param array ...$params Les paramètres à passer à la requête (du bindParam) (non obligatoire)
+     * @param array|string ...$params Les paramètres à passer à la requête (du bindParam) (non obligatoire)
      * @return int Le nombre de lignes de la requête
      */
-    function get_number_of_rows(string $query, string $actionToErase = null, array ...$params) : int {
+    function get_number_of_rows(string $query, string $actionToErase = null, array|string ...$params) : int {
         global $db;
 
         if ($actionToErase !== null)

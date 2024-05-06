@@ -1,9 +1,10 @@
 <?php
     $current_page = get_current_page();
-    $nb_exercises = get_exercise_number();
     $per_page = 10;
-    $pages = ceil($nb_exercises / $per_page);
     $my_exercises = get_exercises_with_limit($current_page, $per_page, $_SESSION['user']['id']);
+    $nb_exercises = $my_exercises['number'];
+    $my_exercises = $my_exercises['exercises'];
+    $pages = ceil($nb_exercises / $per_page);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         $id_exercise = $_POST['id'];
