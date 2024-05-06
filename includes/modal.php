@@ -1,21 +1,11 @@
 <?php
-    switch ($_GET["page"]) {
-        case Page::MES_EXERCICES->value:
-            $nom_page = "cet exercice";
-            break;
-        case Page::ADMINISTRATION->value:
-            $nom_page = "ce contributeur";
-            break;
-        default:
-            $nom_page = "cet élément";
+    if (isset($_GET["page"])) {
+        $nom_page = match ($_GET["page"]) {
+            Page::MES_EXERCICES->value => "cet exercice",
+            Page::ADMINISTRATION->value => "ce contributeur",
+            default => "cet élément",
+        };
     }
-
-    if (($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])))
-    {
-
-    }
-
-
 ?>
 
 
@@ -44,10 +34,11 @@
                 <p id="modal__paragraph">Êtes-vous certain de vouloir supprimer <?=$nom_page?> ?</p>
             </div>
         </div>
-        <form action="" method="POST">
+        <form action="" method="POST" class="modal_delete_form">
             <div class="modal__buttons">
                 <button class="btn btn--bglightgrey btn--textgrey btn--paddingmodal btn--border-radius modal__trigger">Annuler</button>
-                <button class="btn btn--bgdarkgrey btn--paddingmodal btn--border-radius">Confirmer</button>
+                <input type="hidden" name="id" value="">
+                <button type="submit" class="btn btn--bgdarkgrey btn--paddingmodal btn--border-radius">Confirmer</button>
             </div>
         </form>
     </div>

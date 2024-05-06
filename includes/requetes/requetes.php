@@ -30,12 +30,13 @@ if (isset($db)) {
 
     /**
      * Permet de supprimer un utilisateur en fonction de son ID
-     * @param $id - L'ID de l'utilisateur à supprimer
+     * @param string $type Le type de l'élément à supprimer
+     * @param string $id L'ID de l'utilisateur
      * @return void
      */
-    function delete_user_by_id($id) : void {
+    function delete_by_id($type, $id) : void {
         global $db;
-        $query = $db->prepare("DELETE FROM user WHERE id = :id");
+        $query = $db->prepare("DELETE FROM $type WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
     }
