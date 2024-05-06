@@ -270,6 +270,4 @@
 
     <p class="successmsg" style="margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>
 
-</div>
-
 
