@@ -559,6 +559,23 @@ body {
   color: #74828F;
   padding: 1rem 0.5rem;
 }
+.research .research__content .research__table-row .research__table-data.file-container {
+  display: flex;
+  gap: 1rem;
+}
+.research .research__content .research__table-row .research__table-file {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  flex-direction: row;
+}
+.research .research__content .research__table-row .research__table-file a {
+  text-decoration: none;
+  color: #74828F;
+}
+.research .research__content .research__table-row .research__table-file a:hover {
+  color: #666666;
+}
 .research .research__content .research__table-row .research__table-heading, .research .research__content .research__table-row .research__table-data {
   text-align: left;
   font-size: 14px;

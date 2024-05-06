@@ -111,8 +111,15 @@
                     <td class="research__table-data"><?= $exercice["difficulty"] ?></td>
                     <td class="research__table-data"><?= $exercice["keywords"] ?></td>
                     <td class="research__table-data"><?= $exercice["duration"] ?></td>
-                    <td class="research__table-data">
-                        <a href="<?= $exercice["file"]??"" ?>" download="<?= $exercice["file"]??"" ?>">Télécharger</a>
+                    <td class="research__table-data file-container">
+                        <div class="research__table-file">
+                            <img src="./assets/icons/download_file.svg" alt="logo téléchargement">
+                            <a href="<?= $exercice["file"]??"" ?>" download="<?= $exercice["file"]??"" ?>">Exercice</a>
+                        </div>
+                        <div class="research__table-file">
+                            <img src="./assets/icons/download_file.svg" alt="logo téléchargement">
+                            <a href="<?= $exercice["file_corrected"]??"" ?>" download="<?= $exercice["file_corrected"]??"" ?>">Corrigé</a>
+                        </div>
                     </td>
                 </tr>
             <?php } ?>
