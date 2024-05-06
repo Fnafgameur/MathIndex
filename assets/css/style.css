@@ -2,19 +2,6 @@ body {
   margin: 0;
 }
 
-.errormsg, .successmsg {
-  margin-top: 0;
-  font-weight: 600;
-}
-
-.errormsg {
-  color: red;
-}
-
-.successmsg {
-  color: green;
-}
-
 .main--flex {
   min-height: 100vh;
   max-height: fit-content;
@@ -107,10 +94,6 @@ body {
 }
 .side-bar .side-bar__menu button:hover path {
   stroke: #1B3168;
-}
-.side-bar .side-bar__menu button:hover .my_exs {
-  fill: #1B3168;
-  stroke: none;
 }
 .side-bar .side-bar__menu button:hover p {
   color: #1B3168;
@@ -215,6 +198,11 @@ body {
 .connexion .connexion__content p a {
   text-decoration: none;
   color: #1B3168;
+}
+.connexion .connexion__content .connexion__errormsg {
+  margin-top: 0;
+  color: red;
+  font-weight: 600;
 }
 .connexion .connexion__content form {
   display: flex;
@@ -646,6 +634,7 @@ body {
   font-size: 20px;
   font-weight: 700;
   font-family: "Noto sans";
+  color: #1B3168;
   margin-top: 2.5rem;
 }
 .contributors .contributors__description {
@@ -689,7 +678,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 30%;
-  text-decoration: none;
 }
 .contributors .contributors__action-bar a button {
   height: 56px;
@@ -803,9 +791,6 @@ body {
 .submit .submit__content h2 {
   font-family: "noto sans";
 }
-.submit .submit__content form {
-  width: 100%;
-}
 .submit .submit__content .submit__information__flex {
   display: flex;
   flex-direction: row;
@@ -819,22 +804,13 @@ body {
 .submit .submit__content .submit__information__flex div select {
   width: 105% !important;
 }
-.submit .submit__content .submit__source {
-  display: none;
-}
 .submit .submit__content .submit__source textarea {
   height: 10rem;
-}
-.submit .submit__content .submit__file {
-  display: none;
 }
 .submit .submit__content label {
   color: #666666;
   font-family: "Noto sans";
   font-weight: 600;
-}
-.submit .submit__content label input {
-  display: none;
 }
 .submit .submit__content label div {
   height: 56px;
@@ -875,110 +851,6 @@ body {
   font-family: "Noto sans";
   font-weight: 600;
   margin-top: 18px;
-}
-
-/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* --------------------------------------------------------------------------------- Modal ------------------------------------------------------------------------------*/
-/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-.modal__container {
-  visibility: hidden;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  transition: visibility 0.4s;
-  z-index: 100;
-}
-.modal__container--active {
-  display: block;
-  visibility: visible;
-}
-.modal__container--active .overlay {
-  opacity: 1;
-  transition: opacity 0.4s 0.2s ease-out;
-}
-.modal__container--active .modal {
-  opacity: 1;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.4s 0.2s ease-out, transform 0.4s 0.2s ease-out;
-}
-
-.overlay {
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(51, 51, 51, 0.1490196078);
-}
-
-.modal {
-  opacity: 0;
-  width: 95%;
-  max-width: 500px;
-  min-width: 300px;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 8px;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, calc(-50% - 50px));
-  z-index: 98;
-}
-
-.close__modal {
-  border: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  background: none;
-}
-.close__modal svg {
-  background: #E5E5E5;
-  border-radius: 50%;
-  padding: 0.5rem;
-}
-
-.modal__header {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  width: 90%;
-  margin: 0.5rem auto 1rem auto;
-}
-.modal__header .modal__images {
-  background-color: #F0F0F0;
-  padding: 0.75rem;
-  border-radius: 8px;
-}
-.modal__header .modal__textContainer {
-  display: flex;
-  flex-direction: column;
-  line-height: 2;
-}
-.modal__header .modal__textContainer #modal__title {
-  font-size: 20px;
-  font-weight: 600;
-  font-family: "Inter", sans-serif;
-  margin: 0;
-}
-.modal__header .modal__textContainer #modal__paragraph {
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-  color: rgba(84, 89, 94, 0.6);
-  margin: 0;
-}
-
-.modal__buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  width: 90%;
-  margin: 0 auto 1rem auto;
-}
-.modal__buttons .btn {
-  width: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */
