@@ -3,7 +3,25 @@
     $currentAction = "";
     $exercises = [];
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
+    if (isset($_SESSION["formValues"])) {
+        if (!array_key_exists("search_ex", $_SESSION["formValues"])) {
+            $_SESSION["formValues"] = null;
+        }
+    }
+
+    $research = $_POST["search"]??$_SESSION["formValues"]["search_ex"]??"";
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+        if (isset($research)) {
+            if (is_null_or_empty($research)["result"]) {
+                $exercises = get_exercises($current_page, $per_page);
+            }
+            else {
+                $exercises = get_exercises_by_keywords($current_page, $per_page, $research);
+            }
+        }
+
         if (isset($_POST["search"])) {
             $exercises = get_exercises_by_keywords($current_page, $per_page, $_POST["search"]);
         }
@@ -18,9 +36,16 @@
                 echo "<script>alert('Une erreur est survenue lors de la suppression de l\'exercice de $name.');</script>";
             }
         }
+
+        $_SESSION["formValues"]["search_ex"] = $research;
     }
     else {
-        $exercises = get_exercises($current_page, $per_page);
+        if ($research === "") {
+            $exercises = get_exercises($current_page, $per_page);
+        }
+        else {
+            $exercises = get_exercises_by_keywords($current_page, $per_page, $research);
+        }
     }
 
     $number = $exercises["number"] ?? 0;
@@ -35,7 +60,7 @@
     <p class="contributors__description">Rechercher un exercice par nom, thématique ou niveau :</p>
     <div class="contributors__action-bar">
         <form action="index.php?page=Administration&onglet=exercices" method="POST" class="contributeurs__form">
-            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
+            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research ?>">
             <button type="submit">Rechercher</button>
         </form>
         <a href="index.php?page=Administration&adding">

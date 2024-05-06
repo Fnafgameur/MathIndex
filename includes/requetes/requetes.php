@@ -249,7 +249,6 @@ if (isset($db)) {
         $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
         $result["number"] = get_number_of_rows($query->queryString, $limitReq);
 
-        echo $result["number"];
         return $result;
     }
 

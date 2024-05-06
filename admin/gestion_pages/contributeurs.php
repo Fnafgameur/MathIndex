@@ -49,12 +49,12 @@
     ];
 
     if (isset($_SESSION["formValues"])) {
-        if (!array_key_exists("search", $_SESSION["formValues"])) {
+        if (!array_key_exists("search_contrib", $_SESSION["formValues"])) {
             $_SESSION["formValues"] = null;
         }
     }
 
-    $research = $_POST["search"]??$_SESSION["formValues"]["search"]??"";
+    $research = $_POST["search"]??$_SESSION["formValues"]["search_contrib"]??"";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -170,7 +170,7 @@
             }
         }
 
-        $_SESSION["formValues"]["search"] = $research;
+        $_SESSION["formValues"]["search_contrib"] = $research;
 
     } else {
         if ($research === "") {
@@ -194,7 +194,7 @@
 
     <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
     <div class="contributors__action-bar">
-        <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
+        <form action="index.php?page=Administration&onglet=contributeurs" method="POST" class="contributeurs__form">
             <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research??'' ?>">
             <button type="submit">Rechercher</button>
         </form>

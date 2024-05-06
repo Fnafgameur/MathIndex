@@ -35,7 +35,7 @@
                     include_once("admin/gestion_pages/exercices.php");
                     break;
                 default:
-                    include_once("admin/gestion_pages/contributeurs.php");
+                    header("Location: index.php?page=Administration&onglet=contributeurs");
             }
             ?>
         </div>

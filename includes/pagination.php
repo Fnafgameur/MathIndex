@@ -27,11 +27,23 @@
         ];
     } else if ($_GET["page"] === Page::ADMINISTRATION->value) {
 
-        $formValueKeys = ["search"];
-
-        $formValues = $_SESSION["formValues"] ?? [
-            "search" => $_POST["search"] ?? "",
-        ];
+        switch ($_GET["onglet"]) {
+            case "contributeurs":
+                $formValueKeys = ["search_contrib"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_contrib"] ?? "",
+                ];
+                break;
+            case "exercices":
+                $formValueKeys = ["search_ex"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_ex"] ?? "",
+                ];
+                break;
+            default:
+                $formValueKeys = [];
+                $formValues = [];
+        }
     }
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["newPagination"])) {
@@ -47,7 +59,7 @@
         }
 
         $_SESSION["formValues"] = $formValues;
-        header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage);
+        header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage.$onglet);
 
     }
 
