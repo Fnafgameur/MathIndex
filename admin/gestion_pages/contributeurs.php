@@ -70,8 +70,8 @@
         if (isset($_POST["delete"])) {
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
-            delete_user_by_id($idDeleted);
-            $contributeurs = get_all_users($current_page, $per_page);
+            delete_by_id(Type::USER->value, $idDeleted);
+            $contributeurs = get_all_users(4);
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -86,6 +86,10 @@
                 $informations["email"]["value"] = $userInfos["email"];
                 $informations["role"]["value"] = $userInfos["role"];
             }
+        }
+
+        if ($currentAction === "") {
+            // RECHERCHE AVEC FILTRES
         }
         else {
             $informations["email"]["value"] = strtolower($informations["email"]["value"]);
@@ -169,20 +173,9 @@
                 }
             }
         }
-
-        $_SESSION["formValues"]["search"] = $research;
-
     } else {
-        if ($research === "") {
-            $contributeurs = get_all_users($current_page, $per_page);
-        }
-        else {
-            $contributeurs = get_user_by_keyword($current_page, $per_page, $research);
-        }
+        $contributeurs = get_all_users(4);
     }
-
-    $number = $contributeurs["number"]??0;
-    $contributeurs = $contributeurs["users"];
 
 ?>
 
@@ -195,8 +188,8 @@
     <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
     <div class="contributors__action-bar">
         <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
-            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research??''?>">
-            <button type="submit" name="rechercher_contrib">Rechercher</button>
+            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
+            <button type="submit">Rechercher</button>
         </form>
         <a href="index.php?page=Administration&adding">
             <button type="submit">Ajouter +</button>
