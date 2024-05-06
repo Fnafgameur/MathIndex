@@ -2,19 +2,6 @@ body {
   margin: 0;
 }
 
-.errormsg, .successmsg {
-  margin-top: 0;
-  font-weight: 600;
-}
-
-.errormsg {
-  color: red;
-}
-
-.successmsg {
-  color: green;
-}
-
 .main--flex {
   min-height: 100vh;
   max-height: fit-content;
@@ -108,10 +95,6 @@ body {
 .side-bar .side-bar__menu button:hover path {
   stroke: #1B3168;
 }
-.side-bar .side-bar__menu button:hover .my_exs {
-  fill: #1B3168;
-  stroke: none;
-}
 .side-bar .side-bar__menu button:hover p {
   color: #1B3168;
   font-weight: 600;
@@ -204,6 +187,11 @@ body {
 .connexion .connexion__content p a {
   text-decoration: none;
   color: #1B3168;
+}
+.connexion .connexion__content .connexion__errormsg {
+  margin-top: 0;
+  color: red;
+  font-weight: 600;
 }
 .connexion .connexion__content form {
   display: flex;
@@ -596,6 +584,7 @@ body {
   font-size: 20px;
   font-weight: 700;
   font-family: "Noto sans";
+  color: #1B3168;
   margin-top: 2.5rem;
 }
 .contributors .contributors__description {
@@ -639,7 +628,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 30%;
-  text-decoration: none;
 }
 .contributors .contributors__action-bar a button {
   height: 56px;
@@ -753,9 +741,6 @@ body {
 .submit .submit__content h2 {
   font-family: "noto sans";
 }
-.submit .submit__content form {
-  width: 100%;
-}
 .submit .submit__content .submit__information__flex {
   display: flex;
   flex-direction: row;
@@ -769,22 +754,13 @@ body {
 .submit .submit__content .submit__information__flex div select {
   width: 105% !important;
 }
-.submit .submit__content .submit__source {
-  display: none;
-}
 .submit .submit__content .submit__source textarea {
   height: 10rem;
-}
-.submit .submit__content .submit__file {
-  display: none;
 }
 .submit .submit__content label {
   color: #666666;
   font-family: "Noto sans";
   font-weight: 600;
-}
-.submit .submit__content label input {
-  display: none;
 }
 .submit .submit__content label div {
   height: 56px;
@@ -825,6 +801,4 @@ body {
   font-family: "Noto sans";
   font-weight: 600;
   margin-top: 18px;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
