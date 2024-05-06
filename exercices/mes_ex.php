@@ -4,6 +4,19 @@
     $per_page = 10;
     $pages = ceil($nb_exercises / $per_page);
     $my_exercises = get_exercises_with_limit($current_page, $per_page, $_SESSION['user']['id']);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+        $id_exercise = $_POST['id'];
+        delete_by_id(Type::EXERCISE->value, $id_exercise);
+        header('Location: index.php?page=Mes+exercices&pagination='.$current_page);
+    }
+    if (empty($my_exercises)){
+        if ($current_page > 1){
+            header('Location: index.php?page=Mes+exercices&pagination='.($current_page - 1));
+        } else {
+            header('Location: index.php?page=Mes+exercices');
+        }
+    }
 ?>
 
 <div class="exercise">
@@ -26,7 +39,6 @@
                     <tbody class="exercise__table-body">
                     <?php foreach ($my_exercises as $my_exercise) {
                         $file_sorted = get_file_by_exercises($my_exercise['exercise_file_id']);
-                        $keywords_sorted = explode(',', $my_exercise['keywords']);
                         ?>
                         <tr class="exercise__table-row">
                             <td class="exercise__table-data"><?=$my_exercise['name']?></td>
@@ -36,15 +48,15 @@
                                 <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                             </td>
                             <td class="exercise__table-data exercise__form">
-                                <form action="" method="POST">
+                                <form action="" method="post">
                                     <img src="./assets/icons/edit_file.svg" alt="logo modification">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                    <input type="submit" class="btn btn--lb" value="Modifier">
+                                    <input type="submit" class="btn btn--bgwhite btn--lightgrey" value="Modifier">
                                 </form>
-                                <form action="">
+                                <form action="" method="post" class="exercise_delete_form">
                                     <img src="./assets/icons/delete_file.svg" alt="logo suppression">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
-                                    <input type="submit" class="btn btn--lb" value="Supprimer">
+                                    <button type="button" class="btn btn--bgwhite btn--lightgrey modal__trigger" onclick="sendData(this.parentElement)">Supprimer</button>
                                 </form>
                             </td>
                         </tr>

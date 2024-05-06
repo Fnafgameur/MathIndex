@@ -1,4 +1,5 @@
-    <?php
+<?php
+    if (isset($_GET["page"])) {
         switch ($_GET['page'])
         {
             case Page::RECHERCHE->value:
@@ -17,6 +18,7 @@
                 }
                 break;
         }
+    }
     ?>
 
     <p class="footer__text">Mentions légales • Contact • Lycée Saint-Vincent</p>

@@ -54,12 +54,13 @@ if (isset($db)) {
 
     /**
      * Permet de supprimer un utilisateur en fonction de son ID
-     * @param $id L'ID de l'utilisateur à supprimer
+     * @param string $type Le type de l'élément à supprimer
+     * @param string $id L'ID de l'utilisateur
      * @return void
      */
-    function delete_user_by_id($id) : void {
+    function delete_by_id(string $type, int $id) : void {
         global $db;
-        $query = $db->prepare("DELETE FROM user WHERE id = :id");
+        $query = $db->prepare("DELETE FROM $type WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
     }
@@ -94,7 +95,7 @@ if (isset($db)) {
     /**
      * Permet d'obtenir les informations d'un utilisateur en fonction de son ID
      * @param $id L'ID de l'utilisateur
-     * @return mixed Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
+     * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
      */
     function get_user_by_id($id) : mixed {
         global $db;
@@ -122,7 +123,7 @@ if (isset($db)) {
      * Permet de limiter le nombre d'exercices retournés en fonction du nombre d'exercices par page
      * @param int $currentPage La page actuelle
      * @param int $perPage  Le nombre d'exercices par page
-     * @param int|null $user_id L'id de l'utilisateur
+     * @param int|null $user_id  L'id de l'utilisateur
      * @return mixed Retourne un tableau associatif contenant les informations des exercices ou null si aucun exercice n'existe
      */
     function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null) : mixed {
@@ -241,7 +242,7 @@ if (isset($db)) {
         {
             foreach ($params as $param)
             {
-                if ($param !== "")
+                if ($param != "")
                 {
                     $query->bindParam($param[0], $param[1]);
                 }
