@@ -3,6 +3,10 @@
 ob_start();
 session_start();
 
+if (!isset($_GET["page"])) {
+    header("Location: index.php?page=Accueil");
+}
+
 include_once("enums/Role.php");
 include_once("enums/Page.php");
 include_once("enums/Type.php");
