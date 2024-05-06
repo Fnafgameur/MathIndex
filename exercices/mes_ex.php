@@ -12,9 +12,9 @@
         header('Location: index.php?page=Mes+exercices&pagination='.$current_page);
     }
     if (empty($my_exercises)){
-        if ($current_page > 1){
+        if ($current_page > 1) {
             header('Location: index.php?page=Mes+exercices&pagination='.($current_page - 1));
-        } else {
+        } else if ($current_page !== 1) {
             header('Location: index.php?page=Mes+exercices');
         }
     }

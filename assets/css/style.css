@@ -116,6 +116,17 @@ body {
   color: #1B3168;
   font-weight: 600;
 }
+.side-bar .side-bar__menu .selected {
+  color: #1B3168;
+  font-weight: 600;
+  background-color: #F6F6F6;
+}
+.side-bar .side-bar__menu .selected-svg {
+  stroke: #1B3168;
+}
+.side-bar .side-bar__menu .selected-svg-fill {
+  fill: #1B3168;
+}
 
 .main-content {
   width: 100%;
