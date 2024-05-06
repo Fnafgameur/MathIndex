@@ -122,12 +122,13 @@ if (isset($db)) {
      * @param array|null $filtres - Les filtres de recherche (non obligatoire)
      * @return array|false - Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
      */
-    function get_exercises(int $limit = null, array $filtres = null) : array|false
+    function get_exercises(int $currentPage = null, int $limit = null, array $filtres = null) : array|false
     {
         global $db;
 
         if ($limit !== null) {
-            $limitReq = "LIMIT " . $limit;
+            $first = max(0, ($currentPage - 1) * $limit);
+            $limitReq = "LIMIT " . $first.','. $limit;
         }
         else {
             $limitReq = "";
@@ -176,7 +177,6 @@ if (isset($db)) {
             AND thematic_id = :thematique
             AND ($keywordsReq) $limitReq");
                 }
-
             }
 
             $query->bindParam(':niveau', $niveau);
@@ -190,6 +190,14 @@ if (isset($db)) {
         $query->execute();
 
         $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $query = str_replace($limitReq, "", $query->queryString);
+        $query = $db->prepare($query);
+        $query->bindParam(':niveau', $niveau);
+        if ($thematique !== "0") {
+            $query->bindParam(':thematique', $thematique);
+        }
+        $query->execute();
+
         $result["number"] = $query->rowCount();
 
         return $result;
@@ -228,9 +236,17 @@ if (isset($db)) {
      */
     function get_current_page() : int
     {
-        if(isset($_GET['pagination'])){
+        if(isset($_GET['pagination'])) {
+            $page = (int) strip_tags($_GET['pagination']);
+
+            // Limite de 1 à 1,000,000 afin d'éviter tout bug concernant la limite d'un entier
+            if ($page < 1) {
+                return 1;
+            } else if ($page > 1000000) {
+                return 1000000;
+            }
             return (int) strip_tags($_GET['pagination']);
-        }else{
+        } else {
             return 1;
         }
     }

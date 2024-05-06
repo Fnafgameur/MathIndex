@@ -351,8 +351,11 @@ body{
 {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
     margin-top: 3rem;
+
+    form {
+        display: flex;
+    }
 }
 .link
 {
@@ -374,7 +377,6 @@ body{
         border-radius: 5px;
         padding: 0.5rem 0.75rem;
         color: #222222;
-        display: flex;
     }
     &__arrow
     {
@@ -419,7 +421,7 @@ body{
 .exercise
 {
     margin: 2rem;
-    height: fit-content;
+    height: fit-content ;
 
     .exercise__title
     {
