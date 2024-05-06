@@ -5,12 +5,12 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
         if (isset($_POST["search"])) {
-            $exercises = get_exercises($current_page, $per_page, $_POST["search"]);
+            $exercises = get_exercises_by_keywords($current_page, $per_page, $_POST["search"]);
         }
         else if (isset($_POST["delete"])) {
             $id = explode(",", $_POST["delete"])[0];
             $name = explode(",", $_POST["delete"])[1];
-            $delete = delete_exercise($id);
+            $delete = delete_by_id(Type::EXERCISE->value, $id);
             if ($delete) {
                 echo "<script>alert('L\'exercice de $name a bien été supprimé.');</script>";
             }
@@ -34,7 +34,7 @@
 
     <p class="contributors__description">Rechercher un exercice par nom, thématique ou niveau :</p>
     <div class="contributors__action-bar">
-        <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
+        <form action="index.php?page=Administration&onglet=exercices" method="POST" class="contributeurs__form">
             <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
             <button type="submit">Rechercher</button>
         </form>

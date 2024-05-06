@@ -63,7 +63,7 @@
                 $contributeurs = get_all_users($current_page, $per_page);
             }
             else {
-                $contributeurs = get_user_by_keyword($current_page, $per_page, $research);
+                $contributeurs = get_user_by_keywords($current_page, $per_page, $research);
             }
         }
 
@@ -177,7 +177,7 @@
             $contributeurs = get_all_users($current_page, $per_page);
         }
         else {
-            $contributeurs = get_user_by_keyword($current_page, $per_page, $research);
+            $contributeurs = get_user_by_keywords($current_page, $per_page, $research);
         }
     }
 

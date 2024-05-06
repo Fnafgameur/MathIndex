@@ -1,6 +1,7 @@
 <?php
 
     $newPage = $_GET["pagination"]??$current_page;
+    $onglet = isset($_GET["onglet"]) ? "&onglet=".$_GET["onglet"] : "";
 
     $formValueKeys = [];
     $formValues = [];
@@ -8,10 +9,10 @@
     if ($pages != 0) {
         if ($newPage > $pages) {
             $newPage = $pages;
-            header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage);
+            header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage.$onglet);
         } else if ($newPage < 1) {
             $newPage = 1;
-            header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage);
+            header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage.$onglet);
         }
     }
 
@@ -53,7 +54,7 @@
 ?>
 
         <div class="mathematics__pagination">
-            <form method="post" action="index.php?page=<?= $_GET["page"] ?>&pagination=<?= $newPage; ?>">
+            <form method="post" action="index.php?page=<?= $_GET["page"] ?>&pagination=<?= $newPage; echo $onglet; ?>">
                 <?php foreach ($formValueKeys as $key) { ?>
                     <input type="hidden" name="<?= $key??'' ?>" value="<?= $formValues[$key]??'' ?>">
                 <?php } ?>

@@ -35,7 +35,7 @@ if (isset($db)) {
      * @param string $filter Le filtre de recherche
      * @return array|false Retourne un tableau associatif contenant les informations de tous les utilisateurs correspondant à la recherche ou false si aucun utilisateur n'existe
      */
-    function get_user_by_keyword($current_page, $limit, string $filter) : array|false {
+    function get_user_by_keywords($current_page, $limit, string $filter) : array|false {
         global $db;
 
         $result = [];
@@ -58,11 +58,16 @@ if (isset($db)) {
      * @param string $id L'ID de l'utilisateur
      * @return void
      */
-    function delete_by_id(string $type, int $id) : void {
+    function delete_by_id(string $type, int $id) : bool {
         global $db;
         $query = $db->prepare("DELETE FROM $type WHERE id = :id");
         $query->bindParam(':id', $id);
         $query->execute();
+
+        if ($query->rowCount() === 0) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -226,6 +231,25 @@ if (isset($db)) {
         $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
         $result["number"] = get_number_of_rows($query->queryString, $limitReq, $niveau === "" ? "" : [':niveau', $niveau], $thematique === "0" ? "" : [':thematique', $thematique]);
 
+        return $result;
+    }
+
+    function get_exercises_by_keywords($currentPage, $limit, $keywords) : mixed {
+        global $db;
+
+        $result = [];
+
+        $first = max(0, ($currentPage - 1) * $limit);
+        $limitReq = "LIMIT " . $first.','. $limit;
+
+        // A FAIRE : recherche par nom pour thematic & difficulty
+        $query = $db->prepare("SELECT * FROM exercise WHERE name LIKE '%$keywords%' OR thematic_id LIKE '%$keywords%' OR difficulty LIKE '%$keywords%' $limitReq");
+        $query->execute();
+
+        $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        echo $result["number"];
         return $result;
     }
 
