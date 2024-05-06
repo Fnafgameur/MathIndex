@@ -347,7 +347,7 @@ body{
                     }
                     .mathematics__table-data
                     {
-                        color: #74828F;
+                        color: $textLightGrey;
                         padding: 1rem 0.5rem;
                     }
                     .mathematics__table-heading, .mathematics__table-data
@@ -377,7 +377,7 @@ body{
 .link
 {
     text-decoration: none;
-    color: #74828F;
+    color: $textLightGrey;
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
 
@@ -477,7 +477,7 @@ body{
                     }
                     .exercise__table-data
                     {
-                        color: #74828F;
+                        color: $textLightGrey;
                         padding: 1rem 0.5rem;
                         height: 40px;
                     }
@@ -512,7 +512,7 @@ body{
     }
     &--lightgrey
     {
-        color: #74828F;
+        color: $textLightGrey;
     }
     &--bgdarkgrey
     {
@@ -706,9 +706,30 @@ body{
             }
 
             .research__table-data
-            { 
-                color: #74828F;
-                padding: 1rem 0.5rem;   
+            {
+                color: $textLightGrey;
+                padding: 1rem 0.5rem;
+
+                &.file-container {
+                    display: flex;
+                    gap: 1rem;
+                }
+            }
+
+            .research__table-file {
+                display: flex;
+                gap: 0.25rem;
+                align-items: center;
+                flex-direction: row;
+
+                a {
+                    text-decoration: none;
+                    color: $textLightGrey;
+                }
+
+                a:hover {
+                    color: $textGrey;
+                }
             }
 
             .research__table-heading, .research__table-data
@@ -878,7 +899,7 @@ body{
 
         td
         { 
-            color: #74828F;
+            color: $textLightGrey;
             padding: 1rem 0.5rem;
             
             button{
