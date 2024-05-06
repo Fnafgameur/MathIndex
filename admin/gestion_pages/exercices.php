@@ -5,7 +5,7 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
         if (isset($_POST["search"])) {
-            $exercises = get_exercises(null, $_POST["search"]);
+            $exercises = get_exercises($current_page, $per_page, $_POST["search"]);
         }
         else if (isset($_POST["delete"])) {
             $id = explode(",", $_POST["delete"])[0];
@@ -20,10 +20,10 @@
         }
     }
     else {
-        $exercises = get_exercises();
+        $exercises = get_exercises($current_page, $per_page);
     }
 
-
+    $number = $exercises["number"] ?? 0;
 ?>
 
 <div class="contributors">

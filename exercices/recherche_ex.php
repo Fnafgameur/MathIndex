@@ -4,6 +4,12 @@
 
     $exercices = [];
 
+    if (isset($_SESSION["formValues"])) {
+        if (!array_key_exists("niveau", $_SESSION["formValues"])) {
+            $_SESSION["formValues"] = null;
+        }
+    }
+
     $filtres = $_SESSION["formValues"]??[
             "niveau" => "1",
             "thematique" => "0",

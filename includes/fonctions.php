@@ -14,7 +14,7 @@
      * @param string $email L'email à vérifier
      * @param string|null $errorMsgEmpty Message d'erreur si l'email est vide (non obligatoire)
      * @param string|null $errorMsgNotMail Message d'erreur si l'email n'est pas valide (non obligatoire)
-     * @return array - Un tableau avec comme clé "result", un booléen indiquant si l'email est correct ou non, et comme clé "msg", le message d'erreur
+     * @return array Un tableau avec comme clé "result", un booléen indiquant si l'email est correct ou non, et comme clé "msg", le message d'erreur
      */
     function is_mail_correct(string $email, string $errorMsgEmpty = null, string $errorMsgNotMail = null) : array {
 
@@ -39,7 +39,7 @@
     /**
      * @param string $value La valeur à vérifier
      * @param string|null $errorMsg Message d'erreur si la valeur est vide (non obligatoire)
-     * @return array - Un tableau avec comme clé "result", un booléen indiquant si la valeur est vide ou non, et comme clé "msg", le message d'erreur
+     * @return array Un tableau avec comme clé "result", un booléen indiquant si la valeur est vide ou non, et comme clé "msg", le message d'erreur
      */
     function is_null_or_empty(string $value, string $errorMsg = null) : array {
         $result = [
@@ -58,7 +58,7 @@
     /**
      * Permet de checker si les filtres de recherche sont corrects et n'ont pas été modifiés côté client
      * @param array $searchFilter Les filtres de recherche
-     * @return array - Un tableau avec comme clé "result", un booléen indiquant si les filtres sont corrects ou non, et comme clé "msg", le message d'erreur
+     * @return array Un tableau avec comme clé "result", un booléen indiquant si les filtres sont corrects ou non, et comme clé "msg", le message d'erreur
      */
     function is_searching_filter_correct(array $searchFilter) : array {
 

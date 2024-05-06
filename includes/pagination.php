@@ -2,6 +2,9 @@
 
     $newPage = $_GET["pagination"]??$current_page;
 
+    $formValueKeys = [];
+    $formValues = [];
+
     if ($pages != 0) {
         if ($newPage > $pages) {
             $newPage = $pages;
@@ -12,13 +15,21 @@
         }
     }
 
-
     if ($_GET["page"] === Page::RECHERCHE->value) {
+
+        $formValueKeys = ["niveau", "thematique", "mots-cles"];
 
         $formValues = $_SESSION["formValues"] ?? [
             "niveau" => $_POST["niveau"] ?? "1",
             "thematique" => $_POST["thematique"] ?? "0",
             "mots-cles" => $_POST["mots-cles"] ?? "",
+        ];
+    } else if ($_GET["page"] === Page::ADMINISTRATION->value) {
+
+        $formValueKeys = ["search"];
+
+        $formValues = $_SESSION["formValues"] ?? [
+            "search" => $_POST["search"] ?? "",
         ];
     }
 
@@ -35,18 +46,20 @@
         }
 
         $_SESSION["formValues"] = $formValues;
-
         header("Location: index.php?page=".$_GET["page"]."&pagination=".$newPage);
-    }
 
+    }
 
 ?>
 
         <div class="mathematics__pagination">
             <form method="post" action="index.php?page=<?= $_GET["page"] ?>&pagination=<?= $newPage; ?>">
-                <input type="hidden" name="niveau" value="<?= $formValues["niveau"] ?>">
-                <input type="hidden" name="thematique" value="<?= $formValues["thematique"] ?>">
-                <input type="hidden" name="mots-cles" value="<?= $formValues["mots-cles"] ?>">
+<!--                <input type="hidden" name="niveau" value="--><?php //= $formValues["niveau"] ?><!--">-->
+<!--                <input type="hidden" name="thematique" value="--><?php //= $formValues["thematique"] ?><!--">-->
+<!--                <input type="hidden" name="mots-cles" value="--><?php //= $formValues["mots-cles"] ?><!--">-->
+                <?php foreach ($formValueKeys as $key) { ?>
+                    <input type="hidden" name="<?= $key??'' ?>" value="<?= $formValues[$key]??'' ?>">
+                <?php } ?>
                 <button type="submit" class="link link__pagination <?php echo ($current_page) === 1 ? 'link__arrow': null;?>" name="newPagination" value="-1"><img src="./assets/icons/left_arrow.svg" alt="fleche gauche"></button>
                 <?php for ($i = 1; $i <= $pages; $i++) { ?>
                     <input type="submit" class="link link__pagination <?php echo ($current_page) === $i ? 'link__number' : null;?>" name="newPagination" value="<?php echo $i ?>" onclick="window.location.href='index.php?page=<?php echo $_GET['page']?>&pagination=<?php echo $i;?>'">

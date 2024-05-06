@@ -1,7 +1,8 @@
 <?php
 
-    $currentPage = $_GET["onglet"]??"contributeurs";
-
+    $pageName = $_GET["onglet"]??null;
+    $current_page = get_current_page();
+    $per_page = 4;
 ?>
 
 <div class="administration">
@@ -26,7 +27,7 @@
         </div>
         <div class="administration__gestion">
             <?php
-            switch ($currentPage) {
+            switch ($pageName) {
                 case "contributeurs":
                     include_once("admin/gestion_pages/contributeurs.php");
                     break;
@@ -40,3 +41,9 @@
         </div>
     </div>
 </div>
+
+<?php
+
+    $pages = ceil($number / $per_page);
+
+?>

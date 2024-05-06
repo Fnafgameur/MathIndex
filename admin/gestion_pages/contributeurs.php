@@ -48,14 +48,22 @@
         ],
     ];
 
+    if (isset($_SESSION["formValues"])) {
+        if (!array_key_exists("search", $_SESSION["formValues"])) {
+            $_SESSION["formValues"] = null;
+        }
+    }
+
+    $research = $_POST["search"]??$_SESSION["formValues"]["search"]??"";
+
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-        if (isset($_POST["search"])) {
-            if (is_null_or_empty($_POST["search"])["result"]) {
-                $contributeurs = get_all_users(4);
+        if (isset($research)) {
+            if (is_null_or_empty($research)["result"]) {
+                $contributeurs = get_all_users($current_page, $per_page);
             }
             else {
-                $contributeurs = get_user_by_keyword($_POST["search"]);
+                $contributeurs = get_user_by_keyword($current_page, $per_page, $research);
             }
         }
 
@@ -63,7 +71,7 @@
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
             delete_user_by_id($idDeleted);
-            $contributeurs = get_all_users(4);
+            $contributeurs = get_all_users($current_page, $per_page);
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -78,10 +86,6 @@
                 $informations["email"]["value"] = $userInfos["email"];
                 $informations["role"]["value"] = $userInfos["role"];
             }
-        }
-
-        if ($currentAction === "") {
-            // RECHERCHE AVEC FILTRES
         }
         else {
             $informations["email"]["value"] = strtolower($informations["email"]["value"]);
@@ -165,9 +169,20 @@
                 }
             }
         }
+
+        $_SESSION["formValues"]["search"] = $research;
+
     } else {
-        $contributeurs = get_all_users(4);
+        if ($research === "") {
+            $contributeurs = get_all_users($current_page, $per_page);
+        }
+        else {
+            $contributeurs = get_user_by_keyword($current_page, $per_page, $research);
+        }
     }
+
+    $number = $contributeurs["number"]??0;
+    $contributeurs = $contributeurs["users"];
 
 ?>
 
@@ -180,8 +195,8 @@
     <p class="contributors__description">Rechercher un contributeur par nom, prénom ou email :</p>
     <div class="contributors__action-bar">
         <form action="index.php?page=Administration" method="POST" class="contributeurs__form">
-            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher">
-            <button type="submit">Rechercher</button>
+            <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research??''?>">
+            <button type="submit" name="rechercher_contrib">Rechercher</button>
         </form>
         <a href="index.php?page=Administration&adding">
             <button type="submit">Ajouter +</button>

@@ -6,31 +6,55 @@ if (isset($db)) {
 
     /**
      * Permet d'obtenir tous les utilisateurs stockés en DB (limité à 4)
-     * @return array|false - Retourne un tableau associatif contenant les informations de tous les utilisateurs ou false si aucun utilisateur n'existe
+     * @return array|false Retourne un tableau associatif contenant les informations de tous les utilisateurs ou false si aucun utilisateur n'existe
      */
-    function get_all_users($limit) : array|false {
+    function get_all_users($currentPage, $limit) : array|false {
         global $db;
-        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user LIMIT $limit");
+
+        $return = [];
+
+        if ($limit !== null) {
+            $first = max(0, ($currentPage - 1) * $limit);
+            $limitReq = "LIMIT " . $first.','. $limit;
+        }
+        else {
+            $limitReq = "";
+        }
+
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user $limitReq");
         $query->execute();
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $return["users"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $return["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        return $return;
     }
 
     /**
      * Permet d'obtenir tous les utilisateurs ayant un nom, un prénom ou un email correspondant à la recherche
      * @param string $filter Le filtre de recherche
-     * @return array|false - Retourne un tableau associatif contenant les informations de tous les utilisateurs correspondant à la recherche ou false si aucun utilisateur n'existe
+     * @return array|false Retourne un tableau associatif contenant les informations de tous les utilisateurs correspondant à la recherche ou false si aucun utilisateur n'existe
      */
-    function get_user_by_keyword(string $filter) : array|false {
+    function get_user_by_keyword($current_page, $limit, string $filter) : array|false {
         global $db;
-        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE last_name LIKE '%$filter%' OR first_name LIKE '%$filter%' OR email LIKE '%$filter%'");
+
+        $result = [];
+
+        $first = max(0, ($current_page - 1) * $limit);
+        $limitReq = "LIMIT " . $first.','. $limit;
+
+        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE last_name LIKE '%$filter%' OR first_name LIKE '%$filter%' OR email LIKE '%$filter%' $limitReq");
         $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $result["users"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        return $result;
     }
 
     /**
      * Permet de supprimer un utilisateur en fonction de son ID
-     * @param $id - L'ID de l'utilisateur à supprimer
+     * @param $id L'ID de l'utilisateur à supprimer
      * @return void
      */
     function delete_user_by_id($id) : void {
@@ -48,7 +72,7 @@ if (isset($db)) {
      * @param string $first_name Le prénom de l'utilisateur à mettre à jour
      * @param string $password Le mot de passe de l'utilisateur à mettre à jour
      * @param string $role Le rôle de l'utilisateur à mettre à jour
-     * @return bool - Retourne true si la mise à jour a été effectuée, false sinon
+     * @return bool Retourne true si la mise à jour a été effectuée, false sinon
      */
     function update_user_by_id(string $id, string $email, string $last_name, string $first_name, string $password, string $role) : bool {
         global $db;
@@ -70,7 +94,7 @@ if (isset($db)) {
     /**
      * Permet d'obtenir les informations d'un utilisateur en fonction de son ID
      * @param $id L'ID de l'utilisateur
-     * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
+     * @return mixed Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
      */
     function get_user_by_id($id) : mixed {
         global $db;
@@ -83,8 +107,8 @@ if (isset($db)) {
 
     /**
      * Permet d'obtenir les informations d'un utilisateur en fonction de son email
-     * @param $email - L'email de l'utilisateur
-     * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
+     * @param $email L'email de l'utilisateur
+     * @return mixed Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
      */
     function get_user_with_email($email) : mixed {
         global $db;
@@ -98,8 +122,8 @@ if (isset($db)) {
      * Permet de limiter le nombre d'exercices retournés en fonction du nombre d'exercices par page
      * @param int $currentPage La page actuelle
      * @param int $perPage  Le nombre d'exercices par page
-     * @param int|null $user_id  L'id de l'utilisateur
-     * @return mixed
+     * @param int|null $user_id L'id de l'utilisateur
+     * @return mixed Retourne un tableau associatif contenant les informations des exercices ou null si aucun exercice n'existe
      */
     function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null) : mixed {
         global $db;
@@ -118,13 +142,15 @@ if (isset($db)) {
 
     /**
      * Permet d'obtenir tous les exercices stockés en DB
-     * @param int|null $limit - Le nombre d'exercices à retourner (non obligatoire)
-     * @param array|null $filtres - Les filtres de recherche (non obligatoire)
-     * @return array|false - Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
+     * @param int|null $limit Le nombre d'exercices à retourner (non obligatoire)
+     * @param array|null $filtres Les filtres de recherche (non obligatoire)
+     * @return array|false Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
      */
     function get_exercises(int $currentPage = null, int $limit = null, array $filtres = null) : array|false
     {
         global $db;
+        $thematique = "0";
+        $niveau = "";
 
         if ($limit !== null) {
             $first = max(0, ($currentPage - 1) * $limit);
@@ -190,17 +216,40 @@ if (isset($db)) {
         $query->execute();
 
         $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
-        $query = str_replace($limitReq, "", $query->queryString);
+        $result["number"] = get_number_of_rows($query->queryString, $limitReq, $niveau === "" ? "" : [':niveau', $niveau], $thematique === "0" ? "" : [':thematique', $thematique]);
+
+        return $result;
+    }
+
+    /**
+     * Permet d'obtenir le nombre de lignes d'une requête
+     * @param string $query La requête à exécuter
+     * @param string|null $actionToErase L'action à supprimer de la requête (en général le "LIMIT x,y") (non obligatoire)
+     * @param array ...$params Les paramètres à passer à la requête (du bindParam) (non obligatoire)
+     * @return int Le nombre de lignes de la requête
+     */
+    function get_number_of_rows(string $query, string $actionToErase = null, array ...$params) : int {
+        global $db;
+
+        if ($actionToErase !== null)
+        {
+            $query = str_replace($actionToErase, "", $query);
+        }
+
         $query = $db->prepare($query);
-        $query->bindParam(':niveau', $niveau);
-        if ($thematique !== "0") {
-            $query->bindParam(':thematique', $thematique);
+        if (count($params) > 0)
+        {
+            foreach ($params as $param)
+            {
+                if ($param !== "")
+                {
+                    $query->bindParam($param[0], $param[1]);
+                }
+            }
         }
         $query->execute();
 
-        $result["number"] = $query->rowCount();
-
-        return $result;
+        return $query->rowCount();
     }
 
     function get_exercises_sorted() : mixed {
@@ -232,7 +281,7 @@ if (isset($db)) {
 
     /**
      * Permet de vérifier si la pge existe et sur quel page on se trouve
-     * @return int - Le numero de la page
+     * @return int Le numero de la page
      */
     function get_current_page() : int
     {
