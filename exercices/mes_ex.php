@@ -6,7 +6,7 @@
     $my_exercises = $my_exercises['exercises'];
     $pages = ceil($nb_exercises / $per_page);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) ) {
         $id_exercise = $_POST['id'];
         delete_by_id(Type::EXERCISE->value, $id_exercise);
         header('Location: index.php?page=Mes+exercices&pagination='.$current_page);
@@ -49,7 +49,7 @@
                                 <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                             </td>
                             <td class="exercise__table-data exercise__form">
-                                <form action="" method="post">
+                                <form action="index.php?page<?=Page::SOUMETTRE->value?>" method="post" class="exercise_modify_form">
                                     <img src="./assets/icons/edit_file.svg" alt="logo modification">
                                     <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
                                     <input type="submit" class="btn btn--bgwhite btn--lightgrey" value="Modifier">
