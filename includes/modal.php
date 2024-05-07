@@ -36,9 +36,9 @@
         </div>
         <form action="" method="POST" class="modal_delete_form">
             <div class="modal__buttons">
-                <button class="btn btn--bglightgrey btn--textgrey btn--paddingmodal btn--border-radius modal__trigger">Annuler</button>
+                <button type="button" class="btn btn--bglightgrey btn--textgrey btn--paddingmodal btn--border-radius modal__trigger">Annuler</button>
                 <input type="hidden" name="id" value="">
-                <button type="submit" class="btn btn--bgdarkgrey btn--paddingmodal btn--border-radius">Confirmer</button>
+                <input type="submit" class="btn btn--bgdarkgrey btn--paddingmodal btn--border-radius" value="Confirmer">
             </div>
         </form>
     </div>
