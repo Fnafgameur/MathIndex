@@ -17,7 +17,7 @@
         
             <a class="administration__buttons-button">Classes</a>
         
-            <a class="administration__buttons-button">Thématiques</a>
+            <a href="index.php?page=Administration&onglet=thematiques" class="administration__buttons-button">Thématiques</a>
         
             <a class="administration__buttons-button">Niveaux</a>
         
@@ -33,6 +33,9 @@
                     break;
                 case "exercices":
                     include_once("admin/gestion_pages/exercices.php");
+                    break;
+                case "thematiques":
+                    include_once("admin/gestion_pages/thematiques.php");
                     break;
                 default:
                     header("Location: index.php?page=Administration&onglet=contributeurs");

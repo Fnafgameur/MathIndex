@@ -311,6 +311,64 @@ if (isset($db)) {
     }
 
     /**
+     * Permet d'obtenir toutes les matières stockées en DB
+     * @param int|null $currentPage La page actuelle
+     * @param int|null $limit Le nombre de matières à retourner (non obligatoire)
+     * @return array Retourne un tableau associatif contenant les informations de toutes les matières
+     */
+    function get_thematics(int $currentPage = null, int $limit = null) : array
+    {
+        global $db;
+
+        if ($limit !== null) {
+            $first = max(0, ($currentPage - 1) * $limit);
+            $limitReq = "LIMIT " . $first.','. $limit;
+        }
+        else {
+            $limitReq = "";
+        }
+        $query = $db->prepare("SELECT * FROM thematic $limitReq");
+        $query->execute();
+
+        $result["thematic"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        return $result;
+    }
+
+    /**
+     * Permet d'obtenir toutes les matières ayant un nom correspondant à la recherche
+     * @param int $currentPage La page actuelle
+     * @param int $limit Le nombre de matières à retourner
+     * @param string $keywords Les mots-clés de recherche
+     * @return array Retourne un tableau associatif contenant les informations de toutes les matières correspondant à la recherche
+     */
+    function get_thematics_by_keywords(int $currentPage, int $limit, string $keywords) : array
+    {
+        global $db;
+
+        $result = [];
+
+        $first = max(0, ($currentPage - 1) * $limit);
+        $limitReq = "LIMIT " . $first.','. $limit;
+
+        $query = $db->prepare("SELECT * FROM thematic WHERE name LIKE '%$keywords%'$limitReq");
+        $query->execute();
+
+        $result["thematic"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        return $result;
+    }
+    function get_exercises_count_by_thematic() : array {
+        global $db;
+        $query = $db->prepare("SELECT thematic.name, COUNT(exercise.id) AS nbExercises FROM exercise INNER JOIN thematic ON exercise.thematic_id = thematic.id GROUP BY thematic.name");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return array_column($result, 'nbExercises', 'name');
+    }
+
+    /**
      * Permet de vérifier si la pge existe et sur quel page on se trouve
      * @return int Le numero de la page
      */
@@ -330,7 +388,6 @@ if (isset($db)) {
             return 1;
         }
     }
-
 
 }
 
