@@ -1,8 +1,16 @@
 <?php
-    if (isset($_GET["page"])) {
+    if ($_GET["page"] !== Page::ADMINISTRATION->value) {
         $nom_page = match ($_GET["page"]) {
             Page::MES_EXERCICES->value => "cet exercice",
             Page::ADMINISTRATION->value => "ce contributeur",
+            default => "cet élément",
+        };
+    }
+    else {
+        $nom_page = match ($_GET["onglet"]) {
+            "contributeurs" => "ce contributeur",
+            "exercices" => "cet exercice",
+            "thematiques" => "cette thématique",
             default => "cet élément",
         };
     }
@@ -37,7 +45,7 @@
         <form action="" method="POST" class="modal_delete_form">
             <div class="modal__buttons">
                 <button type="button" class="btn btn--bglightgrey btn--textgrey btn--paddingmodal btn--border-radius modal__trigger">Annuler</button>
-                <input type="hidden" name="id" value="">
+                <input type="hidden" name="delete" value="">
                 <input type="submit" class="btn btn--bgdarkgrey btn--paddingmodal btn--border-radius" value="Confirmer">
             </div>
         </form>

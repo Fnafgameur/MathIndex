@@ -6,8 +6,8 @@
     $my_exercises = $my_exercises['exercises'];
     $pages = ceil($nb_exercises / $per_page);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) ) {
-        $id_exercise = $_POST['id'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) ) {
+        $id_exercise = $_POST['delete'];
         delete_by_id(Type::EXERCISE->value, $id_exercise);
         header('Location: index.php?page=Mes+exercices&pagination='.$current_page);
     }
@@ -56,7 +56,7 @@
                                 </form>
                                 <form action="" method="post" class="exercise_delete_form">
                                     <img src="./assets/icons/delete_file.svg" alt="logo suppression">
-                                    <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
+                                    <input type="hidden" name="delete" value="<?=$my_exercise['id']?>">
                                     <button type="button" class="btn btn--bgwhite btn--lightgrey modal__trigger" onclick="sendData(this.parentElement)">Supprimer</button>
                                 </form>
                             </td>
