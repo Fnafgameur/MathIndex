@@ -88,6 +88,7 @@
             }
         }
         $informations["email"]["value"] = strtolower($informations["email"]["value"]);
+        $informations["email"]["value"] = str_replace(' ', '', $informations["email"]["value"]);
 
         $firstName = htmlspecialchars($informations["firstname"]["value"]);
         $lastName = htmlspecialchars($informations["lastname"]["value"]);
@@ -154,7 +155,7 @@
                         }
                     }
                     else {
-                        $isAdded = add_user($email, $lastName, $firstName, $password, $role);
+                        $isAdded = add_user($lastName, $firstName, $email, $password, $role);
 
                         if (!$isAdded) {
                             $doSendInfos = false;
