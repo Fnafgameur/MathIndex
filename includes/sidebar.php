@@ -11,7 +11,7 @@
     <div class="side-bar">
 
 
-        <div class="side-bar__flex-logo">
+        <div class="side-bar__flex-logo" onclick="window.location.href='index.php?page=Accueil'">
             <img src="./assets/icons/stvincentlogo.png">
             <p>
                 <span>
