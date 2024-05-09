@@ -111,6 +111,9 @@ body {
 .side-bar .side-bar__menu button:hover path {
   stroke: #1B3168;
 }
+.side-bar .side-bar__menu button:hover circle {
+  stroke: #1B3168;
+}
 .side-bar .side-bar__menu button:hover .my_exs {
   fill: #1B3168;
   stroke: none;

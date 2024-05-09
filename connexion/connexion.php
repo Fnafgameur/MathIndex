@@ -13,6 +13,8 @@
         ],
     ];
 
+    $informations["email"]["value"] = str_replace(" ", "", $informations["email"]["value"]);
+
     $pageName = "";
     $displayPasswordLabel = null;
     $buttonName = "";
