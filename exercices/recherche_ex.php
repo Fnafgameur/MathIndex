@@ -108,7 +108,7 @@
 
                 <tr class="research__table-row">
                     <td class="research__table-data"><?= $exercice["name"] ?></td>
-                    <td class="research__table-data"><?= $exercice["difficulty"] ?></td>
+                    <td class="research__table-data">Niveau <?= $exercice["difficulty"] ?></td>
                     <td class="research__table-data"><?= $exercice["keywords"] ?></td>
                     <td class="research__table-data"><?= $exercice["duration"] ?></td>
                     <td class="research__table-data file-container">

@@ -57,6 +57,9 @@ body {
   font-weight: 600;
   color: #1B3168;
 }
+.side-bar .side-bar__flex-logo :hover {
+  cursor: pointer;
+}
 .side-bar .side-bar__menu {
   display: flex;
   height: 100%;
@@ -106,6 +109,9 @@ body {
   background-color: #F6F6F6;
 }
 .side-bar .side-bar__menu button:hover path {
+  stroke: #1B3168;
+}
+.side-bar .side-bar__menu button:hover circle {
   stroke: #1B3168;
 }
 .side-bar .side-bar__menu button:hover .my_exs {
@@ -329,6 +335,9 @@ body {
 }
 .link__number {
   border-color: #222222;
+}
+.link:hover {
+  cursor: pointer;
 }
 
 .name, .thematic {
@@ -684,12 +693,18 @@ body {
   font-family: "Noto sans";
   font-weight: 700;
 }
+.contributors .contributors__action-bar form button:hover {
+  cursor: pointer;
+}
 .contributors .contributors__action-bar a {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 30%;
   text-decoration: none;
+}
+.contributors .contributors__action-bar a :hover {
+  cursor: pointer;
 }
 .contributors .contributors__action-bar a button {
   height: 56px;
@@ -700,6 +715,12 @@ body {
   color: #FFFFFF;
   font-family: "Noto sans";
   font-weight: 700;
+}
+.contributors .contributors__action-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 .contributors table {
   margin-top: 1rem;
@@ -924,6 +945,8 @@ body {
   left: 50%;
   transform: translate(-50%, calc(-50% - 50px));
   z-index: 98;
+  -webkit-box-shadow: 3px 20px 20px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 3px 20px 20px 0 rgba(0, 0, 0, 0.08);
 }
 
 .close__modal {

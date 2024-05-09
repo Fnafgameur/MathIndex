@@ -55,8 +55,8 @@ if (isset($db)) {
     /**
      * Permet de supprimer un utilisateur en fonction de son ID
      * @param string $type Le type de l'élément à supprimer
-     * @param string $id L'ID de l'utilisateur
-     * @return void
+     * @param int $id L'ID de l'utilisateur
+     * @return bool Retourne true si la suppression a été effectuée, false sinon
      */
     function delete_by_id(string $type, int $id) : bool {
         global $db;
@@ -122,6 +122,32 @@ if (isset($db)) {
         $query->bindParam(':email', $email);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet d'ajouter un utilisateur en DB
+     * @param string $last_name
+     * @param string $first_name
+     * @param string $email
+     * @param string $password
+     * @param string $role
+     * @return bool Retourne true si l'ajout a été effectué, false sinon
+     */
+    function add_user(string $last_name, string $first_name, string $email, string $password, string $role) : bool {
+        global $db;
+        $query = $db->prepare("INSERT INTO user (email, last_name, first_name, password, role) VALUES (:email, :last_name, :first_name, :password, :role)");
+        $query->bindParam(':last_name', $last_name);
+        $query->bindParam(':first_name', $first_name);
+        $query->bindParam(':email', $email);
+        $query->bindParam(':password', $password);
+        $query->bindParam(':role', $role);
+
+        $query->execute();
+
+        if ($query->rowCount() === 0) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -234,7 +260,14 @@ if (isset($db)) {
         return $result;
     }
 
-    function get_exercises_by_keywords($currentPage, $limit, $keywords) : mixed {
+    /**
+     * Permet d'obtenir les exercices ayant un nom, une thématique ou un niveau correspondant à la recherche
+     * @param string $currentPage La page actuelle
+     * @param int $limit Le nombre d'exercices à retourner
+     * @param string $keywords Les mots-clés de recherche
+     * @return mixed Retourne un tableau associatif contenant les informations de tous les exercices correspondant à la recherche
+     */
+    function get_exercises_by_keywords(string $currentPage, int $limit, string $keywords) : mixed {
         global $db;
 
         $result = [];
@@ -283,35 +316,45 @@ if (isset($db)) {
         return $query->rowCount();
     }
 
+    /**
+     * Permet d'obtenir les exercices triés par date d'ajout (limité à 3)
+     * @return mixed Retourne un tableau associatif contenant les informations des exercices triés par date d'ajout ou null si aucun exercice n'existe
+     */
     function get_exercises_sorted() : mixed {
         global $db;
         $query = $db->prepare("SELECT * FROM exercise ORDER BY date_uploaded ASC LIMIT 3");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    function get_thematic_by_exercises($exercise_thematic) : mixed {
+
+    /**
+     * Permet d'obtenir une thématique en fonction de l'ID de la thématique de l'exercice
+     * @param $exercise_thematic_id L'ID de la thématique de l'exercice
+     * @return mixed Retourne un tableau associatif contenant les informations de la thématique ou null si la thématique n'existe pas
+     */
+    function get_thematic_by_exercises($exercise_thematic_id) : mixed {
         global $db;
         $query = $db->prepare("SELECT thematic.name from thematic INNER JOIN exercise ON thematic.id = exercise.thematic_id WHERE thematic.id = :exercise;");
-        $query->bindParam(':exercise', $exercise_thematic);
+        $query->bindParam(':exercise', $exercise_thematic_id);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
-    }
-    function get_file_by_exercises($exercise_file) : mixed {
-        global $db;
-        $query = $db->prepare("SELECT file.id, file.name, file.extension, file.size from file INNER JOIN exercise ON file.id = exercise.exercise_file_id WHERE file.id = :exercise;");
-        $query->bindParam(':exercise', $exercise_file);
-        $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
-    function get_exercise_number() : int {
-        global $db;
-        $query = $db->prepare("SELECT COUNT(*) FROM exercise");
-        $query->execute();
-        return $query->fetchColumn();
     }
 
     /**
-     * Permet d'obtenir toutes les matières stockées en DB
+     * Permet d'obtenir un fichier en fonction de l'ID de l'exercice
+     * @param int $exercise_file_id L'ID de l'exercice
+     * @return mixed Retourne un tableau associatif contenant les informations du fichier ou null si le fichier n'existe pas
+     */
+    function get_file_by_exercises(int $exercise_file_id) : mixed {
+        global $db;
+        $query = $db->prepare("SELECT file.id, file.name, file.extension, file.size from file INNER JOIN exercise ON file.id = exercise.exercise_file_id WHERE file.id = :exercise;");
+        $query->bindParam(':exercise', $exercise_file_id);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet d'obtenir toutes les matières stockées en DB avec une limite si spécifiée
      * @param int|null $currentPage La page actuelle
      * @param int|null $limit Le nombre de matières à retourner (non obligatoire)
      * @return array Retourne un tableau associatif contenant les informations de toutes les matières

@@ -88,6 +88,7 @@
             }
         }
         $informations["email"]["value"] = strtolower($informations["email"]["value"]);
+        $informations["email"]["value"] = str_replace(' ', '', $informations["email"]["value"]);
 
         $firstName = htmlspecialchars($informations["firstname"]["value"]);
         $lastName = htmlspecialchars($informations["lastname"]["value"]);
@@ -154,15 +155,16 @@
                         }
                     }
                     else {
-                        $query = $db->prepare("INSERT INTO user (last_name, first_name, email, password, role) VALUES (:last_name, :first_name, :email, :password, :role)");
-                        $query->bindParam(':last_name', $lastName);
-                        $query->bindParam(':first_name', $firstName);
-                        $query->bindParam(':email', $email);
-                        $query->bindParam(':password', $password);
-                        $query->bindParam(':role', $role);
-                        $query->execute();
+                        $isAdded = add_user($lastName, $firstName, $email, $password, $role);
 
-                        $successMessage = $informations["role"]["value"] . " ajouté avec succès.";
+                        if (!$isAdded) {
+                            $doSendInfos = false;
+                            $informations["assigned"]["displayValue"] = "block";
+                            $informations["assigned"]["errorMsg"] = "Erreur lors de l'ajout de l'utilisateur.";
+                        }
+                        else {
+                            $successMessage = $informations["role"]["value"] . " ajouté avec succès.";
+                        }
                     }
                 }
             }
@@ -197,7 +199,12 @@
             <button type="submit">Rechercher</button>
         </form>
         <a href="index.php?page=Administration&adding&onglet=contributeurs">
-            <button type="submit">Ajouter +</button>
+            <button class="contributors__action-add" type="submit">Ajouter
+                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.5 6V0H8.5V6H14.5V8H8.5V14H6.5V8H0.5V6H6.5Z" fill="white"/>
+                </svg>
+            </button>
+
         </a>
     </div>
     <table class="contributors__table">
