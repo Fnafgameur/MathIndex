@@ -1,5 +1,6 @@
 <?php
 
+    $doDisplayPagination = true;
     $newPage = $_GET["pagination"]??$current_page;
     $onglet = isset($_GET["onglet"]) ? "&onglet=".$_GET["onglet"] : "";
 
@@ -26,6 +27,10 @@
             "mots-cles" => $_POST["mots-cles"] ?? "",
         ];
     } else if ($_GET["page"] === Page::ADMINISTRATION->value) {
+
+        if (isset($_GET["adding"]) || isset($_GET["updating"])) {
+            $doDisplayPagination = false;
+        }
 
         switch ($_GET["onglet"]) {
             case "contributeurs":
@@ -63,6 +68,7 @@
 
     }
 
+    if ($doDisplayPagination) {
 ?>
 
         <div class="mathematics__pagination">
@@ -77,6 +83,7 @@
                 <button type="submit" class="link link__pagination <?php echo ($current_page) >= $pages ? 'link__arrow': null;?>" name="newPagination" value="+1"><img src="./assets/icons/right_arrow.svg" alt="fleche droite"></button>
             </form>
         </div>
+    <?php } ?>
     </div>
 </div>
 
