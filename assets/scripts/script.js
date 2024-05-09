@@ -29,16 +29,6 @@ var btn_cor = document.getElementById("ficher_correction");
 var txt_exo = document.getElementById("fichier_exercice_choisit");
 var txt_cor = document.getElementById("fichier_correction_choisit");
 
-var btn_exo = document.getElementById("fichier_exercice");
-var btn_cor = document.getElementById("ficher_correction");
-var txt_exo = document.getElementById("fichier_exercice_choisit");
-var txt_cor = document.getElementById("fichier_correction_choisit");
-
-var btn_exo = document.getElementById("fichier_exercice");
-var btn_cor = document.getElementById("ficher_correction");
-var txt_exo = document.getElementById("fichier_exercice_choisit");
-var txt_cor = document.getElementById("fichier_correction_choisit");
-
 btn_i.addEventListener("click",function(){
     if (information.style.display === "none"){
         information.style.display = "block";
@@ -102,15 +92,6 @@ next_f.addEventListener("click",function(){
         source.style.display = "none"
         information.style.display = "none";
     }
-});
-
-
-btn_exo.addEventListener('change', function(){
-    txt_exo.textContent = btn_exo.files[0].name;
-});
-
-btn_cor.addEventListener('change', function(){
-    txt_cor.textContent = btn_cor.files[0].name;
 });
 
 

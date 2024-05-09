@@ -109,7 +109,10 @@ body{
                
                 path{
                     stroke: $textBlue;
-                    
+                    .my_exs{
+                        fill: $textBlue;
+                        stroke: none;
+                    }    
                 }
 
                 p{
