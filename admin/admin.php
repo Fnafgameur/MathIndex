@@ -13,15 +13,9 @@
         
             <a href="index.php?page=Administration&onglet=exercices" class="administration__buttons-button">Exercices</a>
         
-            <a class="administration__buttons-button">Matières</a>
-        
             <a class="administration__buttons-button">Classes</a>
         
             <a href="index.php?page=Administration&onglet=thematiques" class="administration__buttons-button">Thématiques</a>
-        
-            <a class="administration__buttons-button">Niveaux</a>
-        
-            <a class="administration__buttons-button">Compétences</a>
         
             <a class="administration__buttons-button">Origines</a>
         </div>
