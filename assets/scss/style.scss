@@ -65,6 +65,10 @@ body{
                 color: #1B3168;
             }
         }
+
+        & :hover{
+            cursor: pointer;
+        }
     }
 
     .side-bar__menu{
@@ -403,6 +407,10 @@ body{
     &__number
     {
         border-color: #222222;
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 }
 .name,.thematic
@@ -845,6 +853,10 @@ body{
                 color: $textGrey;
                 font-family: 'Noto sans';
                 font-weight: 700;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
 
@@ -854,6 +866,10 @@ body{
             justify-content: center;
             width: 30%;
             text-decoration: none;
+
+            & :hover {
+                cursor: pointer;
+            }
 
             button{
                 height: 56px;
@@ -866,6 +882,13 @@ body{
                 font-weight: 700;
             }
         }
+    }
+
+    .contributors__action-add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
     }
 
     table
@@ -1149,6 +1172,8 @@ body{
     left: 50%;
     transform: translate(-50%, calc(-50% - 50px));
     z-index: 98;
+    -webkit-box-shadow: 3px 20px 20px 0 rgba(0,0,0,0.08);
+    box-shadow: 3px 20px 20px 0 rgba(0,0,0,0.08);
 }
 .close__modal
 {

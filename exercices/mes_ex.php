@@ -31,10 +31,10 @@
                 <table class="exercise__table">
                     <thead class="exercise__table-head">
                     <tr class="exercise__table-row">
-                        <th class="exercise__table-heading name">Nom</th>
-                        <th class="exercise__table-heading thematic">Thématiques</th>
-                        <th class="exercise__table-heading files">Fichiers</th>
-                        <th class="exercise__table-heading actions">Actions</th>
+                        <th class="exercise__table-heading" style="width: 10%">Nom</th>
+                        <th class="exercise__table-heading" style="width: 10%">Thématiques</th>
+                        <th class="exercise__table-heading" style="width: 10%">Fichiers</th>
+                        <th class="exercise__table-heading" style="width: 5%">Actions</th>
                     </tr>
                     </thead>
                     <tbody class="exercise__table-body">
