@@ -1,6 +1,7 @@
 <?php
     $uploads_exo = './assets/files/exercises/';
     $uploads_cor = './assets/files/corrections/';
+    /* mis en commentaire le temps de faire les verifs
     $alter = 0;
     foreach ($_FILES as $file) {
         if ($file["error"] === UPLOAD_ERR_OK) {
@@ -24,7 +25,75 @@
         }
         $alter += 1;
     }
+    */
     
+    $classrooms = get_classrooms_names();
+
+    $thematics = get_thematics_names();
+
+    $difficulty = [];
+    for ($i = 0; $i <= 20; $i++) {
+        $difficulty[$i] = $i;
+    }
+
+    $origins = get_origins_names();
+
+    $errors=[
+        'name' => "",
+        'classroom' => "",
+        'thematic' => "",
+        'chapter' => "",
+        'keywords' => "",
+        'difficulty' => "",
+        'duration' => "",
+        'origin_name' => "",
+        'origin_information' => "",
+    ];
+
+    $displays = [
+        "info" => "block",
+        "source" => "none",
+        "file" => "none",
+    ];
+
+    $values=[
+        'name' => "",
+        'classroom' => "",
+        'thematic' => "",
+        'chapter' => "",
+        'keywords' => "",
+        'difficulty' => "",
+        'duration' => "",
+        "origin" => "",
+        'origin_name' => "",
+        'origin_information' => "",
+    ];
+
+    if (isset($_POST['name'])){
+    
+        var_dump($_POST);
+
+        foreach($_POST as $key => $value){
+            if($key === "origin" or
+            $key === "classroom" or
+            $key === "thematic" or
+            $key === "difficulty"){
+                $values[$key]= ("<option value='".$value."'>".$value."</option>");
+            }
+            else if($key === "origin_information"){
+                $values[$key] = $value;
+
+            }
+            else if(isset($value)){
+                $values[$key] = "value='".$value."'";
+            }
+        }
+
+        
+    }
+
+        
+          
 ?>
 
 <div class="submit">
@@ -38,60 +107,80 @@
     </div>
     <div class="submit__content">
         <form action="#" method="post" enctype="multipart/form-data">
-            <div class="submit__information" id="submit__information">
+            <div class="submit__information" id="submit__information" style="display:<?= $displays["info"] ?>">
                 <h2>Information générales</h2>
                 <div class="submit__information__flex">
 
                     <div>
-                        <label for="nom">Nom de l'exercice: *</label><br>
-                        <input id="nom" name="nom"><br>
-                        <label for="classe">Classe: *</label><br>
-                        <select name="classe" id="classe">
-                            <option value="classe" style="padding:12rem">Collège</option>
-                            <option value="classe">Lycée</option>
-                            <option value="classe">Supérieur</option>
+                        <label for="name">Nom de l'exercice: *</label><br>
+                        <input id="name" name="name" <?= $values["name"]?>><br>
+                        <label for="classroom">Classe: *</label><br>
+                        <select name="classroom" id="classroom">
+                            <?php
+                                echo $values["classroom"];
+                                foreach($classrooms as $class){
+                                    echo'
+                                    <option value='.$class["name"].'>'.$class["name"].'</option>
+                                    ';
+                                }
+                            ?>
                         </select><br>
-                        <label for="thematique">Thématique: *</label><br>
-                        <select name="thematique"id="thematique">
-                            <option value="thematique">Listes</option>
-                            <option value="thematique">Pythagore</option>
-                            <option value="thematique">Thales</option>
+                        <label for="thematic">Thématique: *</label><br>
+                        <select name="thematic"id="thematic">
+                            <?php
+                                echo $values["thematic"];
+                                foreach($thematics as $them){
+                                    echo'
+                                    <option value='.$them["name"].'>'.$them["name"].'</option>
+                                    ';
+                                }
+                            ?>
                         </select><br>
-                        <label for="chapitre">Chapitre du cours:</label><br>
-                        <input id="chapitre"  name="chapitre">
+                        <label for="chapter">Chapitre du cours:</label><br>
+                        <input id="chapter"  name="chapter" <?= $values["chapter"]?>>
                     </div>
                     <div>
-                        <label for="mots_cles">Mots clés</label><br>
-                        <input id="mots_cles"  name="mots_cles"><br>
-                        <label for="difficulte">Difficulté: *</label><br>
-                        <select name="difficulte" id="difficulte">
-                            <option value="difficulte">eazy</option>
-                            <option value="difficulte">hard</option>
-                            <option value="difficulte">ultra hard</option>
+                        <label for="keywords">Mots clés</label><br>
+                        <input id="keywords"  name="keywords" <?= $values["keywords"]?>><br>
+                        <label for="difficulty">Difficulté: *</label><br>
+                        <select name="difficulty" id="difficulty" >
+                            <?php
+                                echo $values["difficulty"];
+                                foreach($difficulty as $diff){
+                                    echo'
+                                    <option value='.$diff.'>'.$diff.'</option>
+                                    ';
+                                }
+                            ?>
                         </select><br>
-                        <label for="duree">Durée (en heure):</label><br>
-                        <input id="duree"  name="duree">
+                        <label for="duration">Durée (en heure):</label><br>
+                        <input id="duration"  name="duration" <?= $values["duration"]?>>
                     </div>
                 </div>
                 <button type="button" id="next_source">Continuer</button>
             </div>
 
-            <div class="submit__source" id="submit__source"  style="display: none;">
+            <div class="submit__source" id="submit__source"  style="display:<?= $displays["source"] ?>">
                 <h2>Sources</h2>
-                <label for="origine">Origine: *</label>
-                <select name="origine" id="origine">
-                    <option value="origine">Collège</option>
-                    <option  value="origine">Nigger</option>
-                    <option  value="origine">Supérieur</option>
+                <label for="origin">Origine: *</label>
+                <select name="origin" id="origin">
+                    <?php
+                        echo $values["origin"];
+                        foreach($origins as $origin){
+                            echo'
+                            <option value='.$origin["name"].'>'.$origin["name"].'</option>
+                            ';
+                        }
+                    ?>
                 </select><br>
-                <label for="site">Nom de la source/lien du site: *</label>
-                <input id="site"  name="site">
-                <label for="info_comp">Information complémentaires:</label>
-                <textarea id="info_comp"  name="info_comp"></textarea>
+                <label for="origin_name">Nom de la source/lien du site: *</label>
+                <input id="origin_name"  name="origin_name" <?= $values["origin_name"]?>>
+                <label for="origin_information">Information complémentaires:</label>
+                <textarea id="origin_information"  name="origin_information" ><?= $values["origin_information"] ?></textarea>
                 <button type="button" id="next_file">Continuer</button>
             </div>
 
-            <div class="submit__file" id="submit__file" style="display: none;">
+            <div class="submit__file" id="submit__file" style="display:<?= $displays["file"] ?>">
                 <h2>Fichiers</h2>
                 <label for="fichier_exercice">fichier exercice: (pdf, docx)*<br>
                     <div>

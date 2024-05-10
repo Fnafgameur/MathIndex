@@ -95,6 +95,10 @@ body {
 .side-bar .side-bar__menu button:hover path {
   stroke: #1B3168;
 }
+.side-bar .side-bar__menu button:hover path .my_exs {
+  fill: #1B3168;
+  stroke: none;
+}
 .side-bar .side-bar__menu button:hover p {
   color: #1B3168;
   font-weight: 600;

@@ -389,6 +389,33 @@ if (isset($db)) {
         }
     }
 
+
+    function get_classrooms_names() : array
+    {
+        global $db;
+        $query = $db->prepare("SELECT name FROM classroom");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function get_thematics_names() : array
+    {
+        global $db;
+        $query = $db->prepare("SELECT name FROM thematic");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    function get_origins_names() : array
+    {
+        global $db;
+        $query = $db->prepare("SELECT name FROM origin");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
 
 
