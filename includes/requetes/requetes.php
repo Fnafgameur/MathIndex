@@ -314,9 +314,10 @@ if (isset($db)) {
      * Permet d'obtenir toutes les matières stockées en DB avec une limite si spécifiée
      * @param int|null $currentPage La page actuelle (non obligatoire)
      * @param int|null $limit Le nombre de matières à retourner (non obligatoire)
+     * @param int|null $id L'ID de la thematique à retourner (non obligatoire)
      * @return array Retourne un tableau associatif contenant les informations de toutes les matières
      */
-    function get_thematics(int $currentPage = null, int $limit = null) : array
+    function get_thematics(int $currentPage = null, int $limit = null, int $id = null) : array
     {
         global $db;
 
@@ -326,6 +327,9 @@ if (isset($db)) {
         }
         else {
             $limitReq = "";
+        }
+        if ($id !== null) {
+            $limitReq = "WHERE id = $id";
         }
         $query = $db->prepare("SELECT * FROM thematic $limitReq");
         $query->execute();
