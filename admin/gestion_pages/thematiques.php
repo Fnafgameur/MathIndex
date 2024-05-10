@@ -1,7 +1,25 @@
 <?php
 
 $currentAction = "";
+
+if (isset($_GET["adding"])) {
+    $currentAction = "adding";
+}
+else if (isset($_GET["updating"])) {
+    $currentAction = "updating";
+}
+
 $thematics = [];
+
+$informations = [
+    "name" => [
+        "value" => $_POST["nom"]??"",
+        "displayValue" => "none",
+        "errorMsg" => ""
+    ]
+];
+
+
 $didDelete = false;
 
 if (isset($_SESSION["formValues"])) {
@@ -37,6 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             echo "<script>alert('Une erreur est survenue lors de la suppression de la thématique de $nameDeleted.');</script>";
             header('Location: index.php?page='.$_GET["page"].'&pagination='.$current_page.'&onglet=thematiques');
         }
+    }
+    else if (isset($_GET["updating"])) {
+        $idToUpdate = $_GET["updating"];
+        $thematic = get_thematics($idToUpdate);
+        $informations["name"]["value"] = $thematic["name"];
     }
 
     $_SESSION["formValues"]["search_ex"] = $research;
@@ -101,6 +124,14 @@ $number = $thematics["number"] ?? 0;
             <?php } ?>
             </tbody>
         </table>
+
+    <?php } else { ?>
+
+        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=thematiques" method="post">
+            <label for="nom">Nom :</label>
+            <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["name"]["value"] ?>">
+            <p class="errormsg" style="display: <?= $informations["lastname"]["displayValue"] ?>;"><?= $informations["name"]["errorMsg"] ?></p>
+        </form>
     <?php } ?>
 
     <p class="successmsg" style="margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>
