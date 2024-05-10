@@ -1,5 +1,6 @@
 <?php
 
+    $type = Type::USER->value;
     $currentAction = "";
     $successMessage = "";
 
@@ -60,10 +61,10 @@
 
         if (isset($research)) {
             if (is_null_or_empty($research)["result"]) {
-                $contributeurs = get_all_users($current_page, $per_page);
+                $contributeurs = get_all($type, $current_page, $per_page);
             }
             else {
-                $contributeurs = get_user_by_keywords($current_page, $per_page, $research);
+                $contributeurs = get_by_keywords($type, $current_page, $per_page, $research);
             }
         }
 
@@ -71,7 +72,7 @@
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
             delete_by_id(Type::USER->value, $idDeleted);
-            $contributeurs = get_all_users($current_page, $per_page);
+            $contributeurs = get_all($type, $current_page, $per_page);
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -79,7 +80,7 @@
             $idToUpdate = $_GET["updating"];
 
             if (!isset($_POST["Envoyer"])) {
-                $userInfos = get_user_by_id($idToUpdate);
+                $userInfos = get_by_id($type, $idToUpdate);
 
                 $informations["firstname"]["value"] = $userInfos["first_name"];
                 $informations["lastname"]["value"] = $userInfos["last_name"];
@@ -143,7 +144,16 @@
                     $password = password_hash($password, PASSWORD_ARGON2ID);
 
                     if ($currentAction === "updating") {
-                        $isIdUpdated = update_user_by_id($idToUpdate, $email, $lastName, $firstName, $password, $role);
+
+                        $toUpdate = [
+                            "email" => $email,
+                            "last_name" => $lastName,
+                            "first_name" => $firstName,
+                            "password" => $password,
+                            "role" => $role,
+                        ];
+
+                        $isIdUpdated = update_value_by_id($type, $toUpdate, $idToUpdate);
 
                         if (!$isIdUpdated) {
                             $doSendInfos = false;
@@ -155,7 +165,18 @@
                         }
                     }
                     else {
-                        $isAdded = add_user($lastName, $firstName, $email, $password, $role);
+
+                        $whereToAdd = ["email", "last_name", "first_name", "password", "role"];
+
+                        $toAdd = [
+                            $email,
+                            $lastName,
+                            $firstName,
+                            $password,
+                            $role,
+                        ];
+
+                        $isAdded = add_to_db($type, $whereToAdd, $toAdd);
 
                         if (!$isAdded) {
                             $doSendInfos = false;
@@ -174,15 +195,15 @@
 
     } else {
         if ($research === "") {
-            $contributeurs = get_all_users($current_page, $per_page);
+            $contributeurs = get_all($type, $current_page, $per_page);
         }
         else {
-            $contributeurs = get_user_by_keywords($current_page, $per_page, $research);
+            $contributeurs = get_by_keywords($type, $current_page, $per_page, $research);
         }
     }
 
     $number = $contributeurs["number"]??0;
-    $contributeurs = $contributeurs["users"];
+    $contributeurs = $contributeurs["values"];
 
 ?>
 

@@ -10,6 +10,7 @@ if (!isset($_GET["page"])) {
 include_once("enums/Role.php");
 include_once("enums/Page.php");
 include_once("enums/Type.php");
+include_once("enums/AdminPage.php");
 
 include_once("includes/requetes/requetes.php");
 include_once("includes/fonctions.php");
