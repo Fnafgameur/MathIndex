@@ -81,6 +81,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
     }
+    else if (isset($_GET["adding"])) {
+        if (isset($_POST["submit"])) {
+            $informations["name"]["value"] = $_POST["name"];
+            $informations["name"]["displayValue"] = "none";
+            $informations["name"]["errorMsg"] = "";
+            $doSendInfos = true;
+            $add = add_thematic($informations["name"]["value"]);
+            if (!$add) {
+                $doSendInfos = false;
+                $informations["name"]["displayValue"] = "block";
+                $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+            }
+            else {
+                $successMessage = "La thématique a bien été ajoutée.";
+            }
+        }
+    }
 
     $_SESSION["formValues"]["search_ex"] = $research;
 }
@@ -109,7 +126,7 @@ $number = $thematics["number"] ?? 0;
                 <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research ?>">
                 <button type="submit">Rechercher</button>
             </form>
-            <a href="index.php?page=Administration&adding">
+            <a href="index.php?page=Administration&adding&onglet=thematiques">
                 <button type="submit">Ajouter +</button>
             </a>
         </div>
@@ -150,7 +167,7 @@ $number = $thematics["number"] ?? 0;
         <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=thematiques" class="contributors__form" method="post">
             <div class="contributors__input">
                 <label for="name">Nom :</label>
-                <input type="text" name="name" id="name" placeholder="Nom" value="<?= $informations["name"]["value"] ?>">
+                <input type="text" name="name" id="name" placeholder="Saisissez une thématique" value="<?= $informations["name"]["value"] ?>">
                 <p class="errormsg" style="display: <?= $informations["name"]["displayValue"] ?>;"><?= $informations["name"]["errorMsg"] ?></p>
             </div>
             <div class="contributors__errormsg" style="display: <?= $informations['name']['errorMsg'] === "" ? 'flex' : 'none';?>;">

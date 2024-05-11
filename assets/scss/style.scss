@@ -1006,6 +1006,9 @@ body{
             border-radius: 8px;
             border: 1px solid #DBDBDB;
             margin-bottom: 1rem;
+            font-size: 16px;
+            font-family: 'Noto sans';
+            font-weight: 400;
         }
     }
     .contributors__submit-button
@@ -1017,6 +1020,11 @@ body{
         svg
         {
             margin-right: 0.5rem;
+        }
+
+        input
+        {
+            font-size: 16px;
         }
     }
     .contributors__errormsg

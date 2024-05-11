@@ -311,10 +311,10 @@ if (isset($db)) {
     }
 
     /**
-     * Permet d'obtenir toutes les matières stockées en DB avec une limite si spécifiée
+     * Permet d'obtenir toutes les thématiques stockées en DB avec une limite si spécifiée
      * @param int|null $currentPage La page actuelle (non obligatoire)
-     * @param int|null $limit Le nombre de matières à retourner (non obligatoire)
-     * @return array Retourne un tableau associatif contenant les informations de toutes les matières
+     * @param int|null $limit Le nombre de thématiques à retourner (non obligatoire)
+     * @return array Retourne un tableau associatif contenant les informations de toutes les thématiques
      */
     function get_thematics(int $currentPage = null, int $limit = null) : array
     {
@@ -352,11 +352,11 @@ if (isset($db)) {
     }
 
     /**
-     * Permet d'obtenir toutes les matières ayant un nom correspondant à la recherche
+     * Permet d'obtenir toutes les thématiques ayant un nom correspondant à la recherche
      * @param int $currentPage La page actuelle
-     * @param int $limit Le nombre de matières à retourner
+     * @param int $limit Le nombre de thématiques à retourner
      * @param string $keywords Les mots-clés de recherche
-     * @return array Retourne un tableau associatif contenant les informations de toutes les matières correspondant à la recherche
+     * @return array Retourne un tableau associatif contenant les informations de toutes les thématiques correspondant à la recherche
      */
     function get_thematics_by_keywords(int $currentPage, int $limit, string $keywords) : array
     {
@@ -389,9 +389,9 @@ if (isset($db)) {
     }
 
     /**
-     * Permet de modifier une matière en fonction de son ID
-     * @param int $idToUpdate L'ID de la matière à modifier
-     * @param string $name Le nom de la matière à mettre à jour
+     * Permet de modifier une thématique en fonction de son ID
+     * @param int $idToUpdate L'ID de la thématique à modifier
+     * @param string $name Le nom de la thématique à mettre à jour
      * @return bool Retourne true si la mise à jour a été effectuée, false sinon
      */
     function update_thematic(int $idToUpdate, string $name) : bool
@@ -422,6 +422,39 @@ if (isset($db)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Permet de vérifier si une thématique existe déjà
+     * @param string $name Le nom de la thématique
+     * @return bool Retourne true si la thématique existe déjà, false sinon
+     */
+    function is_thematic_exists(string $name) : bool
+    {
+        global $db;
+        $query = $db->prepare("SELECT * FROM thematic WHERE name = :name");
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+        $result = $query->fetch();
+        return $result !== false;
+    }
+
+    /**
+     * Permet de vérifier si une thématique existe déjà
+     * @param string $name Le nom de la thématique
+     * @return bool Retourne true si la thématique existe déjà, false sinon
+     */
+    function add_thematic(string $name) : bool
+    {
+        global $db;
+
+        if (is_thematic_exists($name)) {
+            return false;
+        }
+        $query = $db->prepare("INSERT INTO thematic (name) VALUES (:name)");
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+        return $db->lastInsertId();
     }
 
     /**

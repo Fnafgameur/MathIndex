@@ -804,6 +804,9 @@ body {
   border-radius: 8px;
   border: 1px solid #DBDBDB;
   margin-bottom: 1rem;
+  font-size: 16px;
+  font-family: "Noto sans";
+  font-weight: 400;
 }
 .contributors__form .contributors__submit-button {
   display: flex;
@@ -812,6 +815,9 @@ body {
 }
 .contributors__form .contributors__submit-button svg {
   margin-right: 0.5rem;
+}
+.contributors__form .contributors__submit-button input {
+  font-size: 16px;
 }
 .contributors__form .contributors__errormsg {
   margin-top: 1rem;
