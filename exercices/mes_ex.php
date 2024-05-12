@@ -10,7 +10,6 @@
         $ids = $_POST['delete'];
         $exId = explode(',', $ids)[0];
         $fileId = explode(',', $ids)[1];
-        var_dump($ids);
         $exs = get_file_by_exercises($fileId);
         $exercisePath = $exs["exercise"];
         $correctionPath = $exs["correction"];
