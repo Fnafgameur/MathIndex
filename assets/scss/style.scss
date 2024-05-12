@@ -28,14 +28,14 @@ body{
         width: 32px;
         box-shadow:none;
     }
-   
+
     .side-bar__flex-logo{
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 1rem;
         margin-left: 1rem;
-       
+
         background: none;
         box-shadow:none;
 
@@ -49,6 +49,10 @@ body{
                 font-weight: 600;
                 color: #1B3168;
             }
+        }
+
+        & :hover{
+            cursor: pointer;
         }
     }
 
@@ -106,13 +110,23 @@ body{
 
             &:hover{
                 background-color: #F6F6F6;
-               
+
                 path{
                     stroke: $textBlue;
+
                     .my_exs{
                         fill: $textBlue;
                         stroke: none;
                     }    
+                }
+
+                circle {
+                    stroke: $textBlue;
+                }
+
+                .my_exs{
+                    fill: $textBlue;
+                    stroke: none;
                 }
 
                 p{
@@ -172,9 +186,9 @@ body{
 
             &:hover{
                 background-color: #F6F6F6;
-               
+
                 img{
-                   fill:#1B3168;
+                    fill:#1B3168;
                 }
 
                 p{
@@ -201,7 +215,7 @@ body{
 
 .footer__text{
     margin-left: 2rem;
-   
+
 }
 
 
@@ -405,6 +419,10 @@ body{
     {
         border-color: #222222;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 .name,.thematic
 {
@@ -536,6 +554,18 @@ body{
     {
         border-radius: 8px;
     }
+    &--no-decoration
+    {
+        text-decoration: none;
+    }
+    &--fontNoto
+    {
+        font-family: 'Noto sans';
+    }
+    &--font-weight-700
+    {
+        font-weight: 700;
+    }
 }
 
 
@@ -547,7 +577,7 @@ body{
 {
     margin: 2rem ;
     height: fit-content;
-  
+
 
     .accueil__title
     {
@@ -559,12 +589,12 @@ body{
     {
         background-color: #fff;
         padding: 1.5rem 3rem;
-        min-height: 68vh;    
+        min-height: 68vh;
         max-height: fit-content;
         border-radius: 7px;
         font-size: $descSize;
         font-weight: 500;
-        
+
         h2{
             font-size: 20px;
             font-weight: 600;
@@ -573,8 +603,8 @@ body{
         ol{
             margin-top: 2rem;
         } li{
-            margin-top: 0.8rem;
-        }
+              margin-top: 0.8rem;
+          }
 
         b{
             font-weight: 800;
@@ -591,7 +621,7 @@ body{
 {
     margin: 2rem ;
     height: fit-content;
-  
+
 
     .research__title
     {
@@ -605,7 +635,7 @@ body{
         padding: 0.5rem 3rem;
         height: 90%;
         border-radius: 7px;
-        
+
         h2{
             font-size: 20px;
             font-weight: 600;
@@ -677,13 +707,13 @@ body{
         .research__table-row
         {
             border-radius: 8px;
-            
+
             .research__table-heading
             {
-                color: #464646; 
+                color: #464646;
                 padding: 0.5rem;
                 width: 20%;
-                
+
 
                 &.nom{
                     width: 30%;
@@ -777,10 +807,14 @@ body{
                 padding: 0.5rem 2%;
                 cursor: pointer;
                 border: none;
-                background-color: #455884;
+                background-color: $bgBlueButtonAdmin;
                 color: white;
                 text-decoration: none;
                 font-family: 'Noto sans';
+
+                &.selected-admin {
+                    background-color: $textBlue;
+                }
             }
 
             a:hover {
@@ -846,6 +880,10 @@ body{
                 color: $textGrey;
                 font-family: 'Noto sans';
                 font-weight: 700;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
 
@@ -854,6 +892,10 @@ body{
             align-items: center;
             justify-content: center;
             width: 30%;
+
+            & :hover {
+                cursor: pointer;
+            }
 
             button{
                 height: 56px;
@@ -868,7 +910,14 @@ body{
         }
     }
 
-    table
+    .contributors__action-add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+  
+    .contributors__table
     {
         margin-top: 1rem;
         width: 100%;
@@ -888,7 +937,7 @@ body{
     tr
     {
         border-radius: 8px;
-        
+
         th
         {
             color: #464646;
@@ -898,10 +947,10 @@ body{
         }
 
         td
-        { 
+        {
             color: $textLightGrey;
             padding: 1rem 0.5rem;
-            
+
             button{
                 width: 10rem;
                 padding: 2% 5%;
@@ -923,11 +972,11 @@ body{
                 
                 &:hover{
                     background-color: #F6F6F6;
-                   
+
                     img{
-                       fill:#1B3168;
+                        fill:#1B3168;
                     }
-    
+
                     p{
                         color: #1B3168;
                     }
@@ -941,6 +990,57 @@ body{
             font-size: 14px;
             font-weight: 400;
         }
+    }
+}
+.contributors__form
+{
+    display: flex;
+    flex-direction: column;
+
+    .contributors__input
+    {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        label
+        {
+            color: $textGrey;
+            font-family: 'Noto sans';
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        input
+        {
+            width: 45%;
+            padding: 1rem 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #DBDBDB;
+            margin-bottom: 1rem;
+            font-size: 16px;
+            font-family: 'Noto sans';
+            font-weight: 400;
+        }
+    }
+    .contributors__submit-button
+    {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+
+        svg
+        {
+            margin-right: 0.5rem;
+        }
+
+        input
+        {
+            font-size: 16px;
+        }
+    }
+    .contributors__errormsg
+    {
+        margin-top: 1rem;
     }
 }
 
@@ -996,7 +1096,7 @@ body{
         padding: 0.5rem 3rem;
         height: 90%;
         border-radius: 7px;
-        
+
         h2{
             font-family: 'noto sans';
         }
@@ -1021,6 +1121,10 @@ body{
             textarea{
                 height: 10rem;
             }
+        }
+      
+        .submit__file{
+            display: none;
         }
 
         label{
@@ -1132,6 +1236,8 @@ body{
     left: 50%;
     transform: translate(-50%, calc(-50% - 50px));
     z-index: 98;
+    -webkit-box-shadow: 3px 20px 20px 0 rgba(0,0,0,0.08);
+    box-shadow: 3px 20px 20px 0 rgba(0,0,0,0.08);
 }
 .close__modal
 {

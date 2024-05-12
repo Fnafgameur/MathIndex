@@ -44,6 +44,9 @@ body {
   font-weight: 600;
   color: #1B3168;
 }
+.side-bar .side-bar__flex-logo :hover {
+  cursor: pointer;
+}
 .side-bar .side-bar__menu {
   display: flex;
   height: 100%;
@@ -95,7 +98,10 @@ body {
 .side-bar .side-bar__menu button:hover path {
   stroke: #1B3168;
 }
-.side-bar .side-bar__menu button:hover path .my_exs {
+.side-bar .side-bar__menu button:hover circle {
+  stroke: #1B3168;
+}
+.side-bar .side-bar__menu button:hover .my_exs {
   fill: #1B3168;
   stroke: none;
 }
@@ -331,6 +337,9 @@ body {
 .link__number {
   border-color: #222222;
 }
+.link:hover {
+  cursor: pointer;
+}
 
 .name, .thematic {
   width: 20%;
@@ -434,6 +443,15 @@ body {
 }
 .btn--border-radius {
   border-radius: 8px;
+}
+.btn--no-decoration {
+  text-decoration: none;
+}
+.btn--fontNoto {
+  font-family: "Noto sans";
+}
+.btn--font-weight-700 {
+  font-weight: 700;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
@@ -629,6 +647,9 @@ body {
   text-decoration: none;
   font-family: "Noto sans";
 }
+.administration .administration__content .administration__head-bar a.selected-admin {
+  background-color: #1B3168;
+}
 .administration .administration__content .administration__head-bar a:hover {
   background-color: #1B3168;
 }
@@ -686,11 +707,17 @@ body {
   font-family: "Noto sans";
   font-weight: 700;
 }
+.contributors .contributors__action-bar form button:hover {
+  cursor: pointer;
+}
 .contributors .contributors__action-bar a {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 30%;
+}
+.contributors .contributors__action-bar a :hover {
+  cursor: pointer;
 }
 .contributors .contributors__action-bar a button {
   height: 56px;
@@ -702,7 +729,13 @@ body {
   font-family: "Noto sans";
   font-weight: 700;
 }
-.contributors table {
+.contributors .contributors__action-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.contributors .contributors__table {
   margin-top: 1rem;
   width: 100%;
 }
@@ -752,6 +785,46 @@ body {
   text-align: left;
   font-size: 14px;
   font-weight: 400;
+}
+
+.contributors__form {
+  display: flex;
+  flex-direction: column;
+}
+.contributors__form .contributors__input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.contributors__form .contributors__input label {
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.contributors__form .contributors__input input {
+  width: 45%;
+  padding: 1rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #DBDBDB;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  font-family: "Noto sans";
+  font-weight: 400;
+}
+.contributors__form .contributors__submit-button {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.contributors__form .contributors__submit-button svg {
+  margin-right: 0.5rem;
+}
+.contributors__form .contributors__submit-button input {
+  font-size: 16px;
+}
+.contributors__form .contributors__errormsg {
+  margin-top: 1rem;
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -913,6 +986,8 @@ body {
   left: 50%;
   transform: translate(-50%, calc(-50% - 50px));
   z-index: 98;
+  -webkit-box-shadow: 3px 20px 20px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 3px 20px 20px 0 rgba(0, 0, 0, 0.08);
 }
 
 .close__modal {

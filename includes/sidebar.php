@@ -3,6 +3,7 @@
         $prenom = $_SESSION["user"]["last_name"];
         $nom = $_SESSION["user"]["first_name"];
         $role = $_SESSION["user"]["role"];
+        $profilepic_path = $_SESSION["user"]["profilepic_path"];
     }
 ?>
 
@@ -11,7 +12,7 @@
     <div class="side-bar">
 
 
-        <div class="side-bar__flex-logo">
+        <div class="side-bar__flex-logo" onclick="window.location.href='index.php?page=Accueil'">
             <img src="./assets/icons/stvincentlogo.png">
             <p>
                 <span>
@@ -93,6 +94,20 @@
                                 <p><?= Page::SOUMETTRE->value ?></p>
                             </button>
                         </form>
+                    <?php } if (Role::isAdmin($role)) { ?>
+                        <form action="#" method="GET">
+                            <input type="hidden" id="page" name="page" value="<?= Page::ADMINISTRATION->value ?>">
+                            <button type="submit" class="<?= @$_GET["page"] === Page::ADMINISTRATION->value ? "selected" : "" ?>">
+                                <svg width="25" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none">
+                                    <g>
+                                        <circle cx="32" cy="18.14" r="11.14"/>
+                                        <path class="<?= @$_GET["page"] === Page::ADMINISTRATION->value ? "selected-svg" : "" ?>" id="Vector" d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z"/>
+                                    </g>
+                                </svg>
+
+                                <p><?= Page::ADMINISTRATION->value ?></p>
+                            </button>
+                        </form>
                     <?php } ?>
                 <?php } ?>
             </div>
@@ -125,7 +140,7 @@
                             <p>
                                 <?= $nom . " " . $prenom ?>
                             </p>
-                            <img src="https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif">
+                            <img src="<?= $profilepic_path; ?>">
                         </div>
                     <?php } else { ?>
                         <form action="#" method="GET">

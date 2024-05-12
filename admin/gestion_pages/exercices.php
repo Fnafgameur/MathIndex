@@ -84,7 +84,7 @@
                     <tr>
                         <td><?= $exercise["name"] ?></td>
                         <td><?= get_thematic_by_exercises($exercise["thematic_id"])["name"] ?></td>
-                        <td><?= $exercise["difficulty"] ?></td>
+                        <td>Niveau <?= $exercise["difficulty"] ?></td>
                         <td>
                             <a class="link link--row" href="<?= $file ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
                             <a class="link link--row" href="<?= $file ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>

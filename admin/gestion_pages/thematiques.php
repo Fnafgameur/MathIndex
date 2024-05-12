@@ -1,7 +1,28 @@
 <?php
 
 $currentAction = "";
+$successMessage = "";
+$doSendInfos = false;
+$type = Type::THEMATIC->value;
+
+if (isset($_GET["adding"])) {
+    $currentAction = "adding";
+}
+else if (isset($_GET["updating"])) {
+    $currentAction = "updating";
+}
+
 $thematics = [];
+
+$informations = [
+    "name" => [
+        "value" => $_POST["nom"]??"",
+        "displayValue" => "none",
+        "errorMsg" => ""
+    ],
+];
+
+
 $didDelete = false;
 
 if (isset($_SESSION["formValues"])) {
@@ -10,43 +31,99 @@ if (isset($_SESSION["formValues"])) {
     }
 }
 
-$research = $_POST["search"]??$_SESSION["formValues"]["search_ex"]??"";
+$research = $_POST["search"]??$_SESSION["formValues"]["search_them"]??"";
+
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (isset($research)) {
         if (is_null_or_empty($research)["result"]) {
-            $thematics = get_thematics($current_page, $per_page);
+            $thematics = get_all($type,$current_page, $per_page);
         }
         else {
-            $thematics = get_thematics_by_keywords($current_page, $per_page, $research);
+            $thematics = get_by_keywords($type,$current_page, $per_page, $research);
         }
     }
 
     if (isset($_POST["search"])) {
-        $thematics = get_thematics_by_keywords($current_page, $per_page, $_POST["search"]);
+        $thematics = get_by_keywords($type,$current_page, $per_page, $research);
     }
     else if (isset($_POST["delete"])) {
         $id_thematic = explode(",", $_POST["delete"])[0];
         $nameDeleted = explode(",", $_POST["delete"])[1];
-        $delete = delete_by_id(Type::THEMATIC->value, $id_thematic);
+        $delete = delete_by_id($type, $id_thematic);
         if ($delete) {
             $didDelete = true;
+            $thematics = get_all($type,$current_page, $per_page);
         }
         else {
             echo "<script>alert('Une erreur est survenue lors de la suppression de la thématique de $nameDeleted.');</script>";
             header('Location: index.php?page='.$_GET["page"].'&pagination='.$current_page.'&onglet=thematiques');
         }
     }
+    else if (isset($_GET["updating"])) {
+        $idToUpdate = $_GET["updating"];
+        $thematic = get_thematics_by_id($idToUpdate);
+        $informations["name"]["value"] = $thematic["name"];
 
-    $_SESSION["formValues"]["search_ex"] = $research;
+        if (isset($_POST["submit"])) {
+            $informations["name"]["value"] = $_POST["name"];
+            $informations["name"]["displayValue"] = "none";
+            $informations["name"]["errorMsg"] = "";
+
+            if (is_null_or_empty($informations["name"]["value"])['result']) {
+                $informations["name"]["displayValue"] = "block";
+                $informations["name"]["errorMsg"] = "Le champ nom ne peut pas être vide.";
+            }
+            else {
+                $doSendInfos = true;
+                $update = update_thematic($idToUpdate, $informations["name"]["value"]);
+
+                if (!$update) {
+                    $doSendInfos = false;
+                    $informations["name"]["displayValue"] = "block";
+                    $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+                }
+                else {
+                    $successMessage = "La thématique a bien été modifiée.";
+                }
+            }
+
+        }
+    }
+    else if (isset($_GET["adding"])) {
+        if (isset($_POST["submit"])) {
+            $informations["name"]["value"] = $_POST["name"];
+            $informations["name"]["displayValue"] = "none";
+            $informations["name"]["errorMsg"] = "";
+
+            if (is_null_or_empty($informations["name"]["value"])['result']) {
+                $informations["name"]["displayValue"] = "block";
+                $informations["name"]["errorMsg"] = "Le champ nom ne peut pas être vide.";
+            }
+            else {
+                $doSendInfos = true;
+                $add = add_thematic($informations["name"]["value"]);
+                if (!$add) {
+                    $doSendInfos = false;
+                    $informations["name"]["displayValue"] = "block";
+                    $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+                } else {
+                    $successMessage = "La thématique a bien été ajoutée.";
+                }
+            }
+        }
+    }
+
+    $_SESSION["formValues"]["search_them"] = $research;
 }
 else {
     if ($research === "") {
-        $thematics = get_thematics($current_page, $per_page);
+        $thematics =get_all($type,$current_page, $per_page);
     }
     else {
-        $thematics = get_thematics_by_keywords($current_page, $per_page, $research);
+        $thematics = get_by_keywords($type,$current_page, $per_page, $research);
     }
 }
 
@@ -66,7 +143,7 @@ $number = $thematics["number"] ?? 0;
                 <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research ?>">
                 <button type="submit">Rechercher</button>
             </form>
-            <a href="index.php?page=Administration&adding">
+            <a href="index.php?page=Administration&adding&onglet=thematiques">
                 <button type="submit">Ajouter +</button>
             </a>
         </div>
@@ -80,7 +157,7 @@ $number = $thematics["number"] ?? 0;
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($thematics["thematic"] as $thematic) {
+            <?php foreach ($thematics["values"] as $thematic) {
                 $nb_exercises = get_exercises_count_by_thematic();
                 ?>
                 <tr>
@@ -88,7 +165,7 @@ $number = $thematics["number"] ?? 0;
                     <td>Mathématiques</td>
                     <td><?= $nb_exercises[$thematic["name"]]??0?></td>
                     <td>
-                        <form action="index.php?page=Administration&updating=<?= $thematic["id"] ?>&first" method="post">
+                        <form action="index.php?page=Administration&updating=<?= $thematic["id"]?>&onglet=thematiques" method="post">
                             <input type="hidden" name="update" value="<?= $thematic["id"] ?>">
                             <button type="submit" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
                         </form>
@@ -101,6 +178,28 @@ $number = $thematics["number"] ?? 0;
             <?php } ?>
             </tbody>
         </table>
+
+    <?php } else { ?>
+
+        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=thematiques" class="contributors__form" method="post">
+            <div class="contributors__input">
+                <label for="name">Nom :</label>
+                <input type="text" name="name" id="name" placeholder="Saisissez une thématique" value="<?= $informations["name"]["value"] ?>">
+                <p class="errormsg" style="display: <?= $informations["name"]["displayValue"] ?>;"><?= $informations["name"]["errorMsg"] ?></p>
+            </div>
+            <div class="contributors__errormsg" style="display: <?= $informations['name']['errorMsg'] === "" ? 'flex' : 'none';?>;">
+                <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage?></p>
+            </div>
+            <div class="contributors__submit-button">
+                <a href="index.php?page=Administration&onglet=thematiques" class="btn btn--border-radius btn--paddingmodal btn--no-decoration btn--textgrey btn--bglightgrey btn--fontNoto">
+                    <svg width="9" height="12" viewBox="0 0 9 12" fill="#757575" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.16 1.41L3.58 6L8.16 10.59L6.75 12L0.750004 6L6.75 0L8.16 1.41Z" fill=""/>
+                    </svg>
+                    Retour à la liste
+                </a>
+                <input type="submit" name="submit" class="btn btn--border-radius btn--paddingmodal btn--textgrey btn--bglightgrey btn--fontNoto" value="Enregistrer">
+            </div>
+        </form>
     <?php } ?>
 
     <p class="successmsg" style="margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>

@@ -1,7 +1,7 @@
 <?php
     $exercises_sorted = get_exercises_sorted();
     $current_page = get_current_page();
-    $nb_exercises = get_exercise_number();
+    $nb_exercises = get_exercises()["number"];
     $per_page = 5;
     $pages = ceil($nb_exercises / $per_page);
     $exercises = get_exercises_with_limit($current_page, $per_page)["exercises"];
@@ -31,8 +31,8 @@
                         <td class="mathematics__table-data"><?=$exercise_sorted['name']?></td>
                         <td class="mathematics__table-data"><?=get_thematic_by_exercises($exercise_sorted["thematic_id"])['name'];?>
                         </td>
-                        <td class="mathematics__table-data"><?=$exercise_sorted['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$exercise_sorted['duration'].'h'??"Aucun"?></td>
+                        <td class="mathematics__table-data">Niveau <?=$exercise_sorted['difficulty']?></td>
+                        <td class="mathematics__table-data"><?=$exercise_sorted['duration'].'h00'??"Aucun"?></td>
                         <td class="mathematics__table-data wordbreak"><?php foreach ($keywords_sorted as $keyword) {
                                 echo "<p class='keyword'>$keyword</p>";
                             } ?>
@@ -68,8 +68,8 @@
                         <td class="mathematics__table-data"><?=$exercise['name']?></td>
                         <td class="mathematics__table-data"><?=get_thematic_by_exercises($exercise["thematic_id"])['name'];?>
                         </td>
-                        <td class="mathematics__table-data"><?=$exercise['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$exercise['duration'].'h'??"Aucun"?></td>
+                        <td class="mathematics__table-data">Niveau <?=$exercise['difficulty']?></td>
+                        <td class="mathematics__table-data"><?=$exercise['duration'].'h00'??"Aucun"?></td>
                         <td class="mathematics__table-data wordbreak"><?php foreach ($keywords as $keyword) {
                                 echo "<p class='keyword'>$keyword</p>";
                             } ?>

@@ -33,16 +33,34 @@
         }
 
         switch ($_GET["onglet"]) {
-            case "contributeurs":
+            case AdminTab::CONTRIBUTEURS->value:
                 $formValueKeys = ["search_contrib"];
                 $formValues = $_SESSION["formValues"] ?? [
                     "search" => $_POST["search_contrib"] ?? "",
                 ];
                 break;
-            case "exercices":
+            case AdminTab::EXERCICES->value:
                 $formValueKeys = ["search_ex"];
                 $formValues = $_SESSION["formValues"] ?? [
                     "search" => $_POST["search_ex"] ?? "",
+                ];
+                break;
+            case AdminTab::ORIGINES->value:
+                $formValueKeys = ["search_orig"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_orig"] ?? "",
+                ];
+                break;
+            case AdminTab::CLASSES->value:
+                $formValueKeys = ["search_classe"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_classe"] ?? "",
+                ];
+                break;
+            case AdminTab::THEMATIQUES->value:
+                $formValueKeys = ["search_them"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_them"] ?? "",
                 ];
                 break;
             default:
