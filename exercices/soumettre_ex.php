@@ -309,7 +309,7 @@
                         <p class="errormsg" style="display: <?= $displays["duration"] ?>"><?= $errors["duration"] ?></p>
                     </div>
                 </div>
-                <p class="errormsg--success" style="display: <?= $displays["success"] ?>"><?= $values["success"] ?></p>
+                <p class="errormsg" style="color: limegreen; display: <?= $displays["success"] ?>"><?= $values["success"] ?></p>
                 <button type="button" id="next_source">Continuer</button>
             </div>
 
