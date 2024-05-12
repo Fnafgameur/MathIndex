@@ -773,6 +773,83 @@ body{
     }
 }
 
+.contributor__flex{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    gap: 10%;
+
+    &__mini-flex{
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+    }
+
+    &__side{
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        gap: 10%;
+        &--right{
+            gap: 20%;
+        }
+
+    }
+
+    
+    label{
+        color: $textGrey;
+        font-family: 'Noto sans';
+        font-weight: 600;
+
+
+        div{
+            height: 56px;
+            width: 95%;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: solid 2px #DBDBDB;
+            color: $textGrey;
+            font-family: 'Noto sans';
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+
+            img{
+                height: 32px;
+                width: 32px;
+                margin: 1%;
+            }
+        }
+    }
+
+    select, input{
+        height: 56px;
+        width: 95%;
+        padding: 0 16px;
+        border-radius: 8px;
+        border: solid 2px #DBDBDB;
+        color: $textGrey;
+        font-family: 'Noto sans';
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    
+    .button{
+        height: 56px;
+        width: 25%;
+        border-radius: 8px;
+        border: solid 2px #F6F6F6;
+        background-color: #F6F6F6;
+        color: $textGrey;
+        font-family: 'Noto sans';
+        font-weight: 600;
+        margin-top: 18px;
+    }
+}
+
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* --------------------------------------------------------------------------------- Admin ---------------------------------------------------------------------------------*/
