@@ -279,6 +279,7 @@ body {
   padding: 0.5rem 3rem 1.5rem;
   height: 90%;
   border-radius: 7px;
+  margin-bottom: 3rem;
 }
 .mathematics .mathematics__content .mathematics__content-table {
   margin-bottom: 4rem;
@@ -387,6 +388,7 @@ body {
   padding: 0.5rem 3rem 1.5rem;
   border-radius: 7px;
   height: 90%;
+  margin-bottom: 3rem;
 }
 .exercise .exercise__content .exercise__content-table {
   margin-bottom: 4rem;
@@ -617,6 +619,73 @@ body {
   font-weight: 400;
 }
 
+.contributor__flex {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  gap: 10%;
+}
+.contributor__flex__mini-flex {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.contributor__flex__side {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 10%;
+}
+.contributor__flex__side--right {
+  gap: 20%;
+}
+.contributor__flex label {
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+}
+.contributor__flex label div {
+  height: 56px;
+  width: 95%;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: solid 2px #DBDBDB;
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.contributor__flex label div img {
+  height: 32px;
+  width: 32px;
+  margin: 1%;
+}
+.contributor__flex select, .contributor__flex input {
+  height: 56px;
+  width: 95%;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: solid 2px #DBDBDB;
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.contributor__flex .button {
+  height: 56px;
+  width: 25%;
+  border-radius: 8px;
+  border: solid 2px #F6F6F6;
+  background-color: #F6F6F6;
+  color: #666666;
+  font-family: "Noto sans";
+  font-weight: 600;
+  margin-top: 18px;
+}
+
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* --------------------------------------------------------------------------------- Admin ---------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -663,6 +732,7 @@ body {
   padding: 0.5rem 3rem;
   height: 90%;
   border-radius: 0 7px 7px 7px;
+  margin-bottom: 3rem;
 }
 
 .contributors {
@@ -879,6 +949,7 @@ body {
   padding: 0.5rem 3rem;
   height: 90%;
   border-radius: 7px;
+  margin-bottom: 3rem;
 }
 .submit .submit__content h2 {
   font-family: "noto sans";
@@ -1293,3 +1364,4 @@ body {
 }
 
 /*# sourceMappingURL=style.css.map */
+
