@@ -3,6 +3,7 @@
 $currentAction = "";
 $successMessage = "";
 $doSendInfos = false;
+$type = Type::THEMATIC->value;
 
 if (isset($_GET["adding"])) {
     $currentAction = "adding";
@@ -30,7 +31,7 @@ if (isset($_SESSION["formValues"])) {
     }
 }
 
-$research = $_POST["search"]??$_SESSION["formValues"]["search_ex"]??"";
+$research = $_POST["search"]??$_SESSION["formValues"]["search_them"]??"";
 
 
 
@@ -38,22 +39,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (isset($research)) {
         if (is_null_or_empty($research)["result"]) {
-            $thematics = get_thematics($current_page, $per_page);
+            $thematics = get_all($type,$current_page, $per_page);
         }
         else {
-            $thematics = get_thematics_by_keywords($current_page, $per_page, $research);
+            $thematics = get_by_keywords($type,$current_page, $per_page, $research);
         }
     }
 
     if (isset($_POST["search"])) {
-        $thematics = get_thematics_by_keywords($current_page, $per_page, $_POST["search"]);
+        $thematics = get_by_keywords($type,$current_page, $per_page, $research);
     }
     else if (isset($_POST["delete"])) {
         $id_thematic = explode(",", $_POST["delete"])[0];
         $nameDeleted = explode(",", $_POST["delete"])[1];
-        $delete = delete_by_id(Type::THEMATIC->value, $id_thematic);
+        $delete = delete_by_id($type, $id_thematic);
         if ($delete) {
             $didDelete = true;
+            $thematics = get_all($type,$current_page, $per_page);
         }
         else {
             echo "<script>alert('Une erreur est survenue lors de la suppression de la thématique de $nameDeleted.');</script>";
@@ -69,16 +71,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $informations["name"]["value"] = $_POST["name"];
             $informations["name"]["displayValue"] = "none";
             $informations["name"]["errorMsg"] = "";
-            $doSendInfos = true;
-            $update = update_thematic($idToUpdate, $informations["name"]["value"]);
-            if (!$update) {
-                $doSendInfos = false;
+
+            if (is_null_or_empty($informations["name"]["value"])['result']) {
                 $informations["name"]["displayValue"] = "block";
-                $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+                $informations["name"]["errorMsg"] = "Le champ nom ne peut pas être vide.";
             }
             else {
-                $successMessage = "La thématique a bien été modifiée.";
+                $doSendInfos = true;
+                $update = update_thematic($idToUpdate, $informations["name"]["value"]);
+
+                if (!$update) {
+                    $doSendInfos = false;
+                    $informations["name"]["displayValue"] = "block";
+                    $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+                }
+                else {
+                    $successMessage = "La thématique a bien été modifiée.";
+                }
             }
+
         }
     }
     else if (isset($_GET["adding"])) {
@@ -86,27 +97,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $informations["name"]["value"] = $_POST["name"];
             $informations["name"]["displayValue"] = "none";
             $informations["name"]["errorMsg"] = "";
-            $doSendInfos = true;
-            $add = add_thematic($informations["name"]["value"]);
-            if (!$add) {
-                $doSendInfos = false;
+
+            if (is_null_or_empty($informations["name"]["value"])['result']) {
                 $informations["name"]["displayValue"] = "block";
-                $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+                $informations["name"]["errorMsg"] = "Le champ nom ne peut pas être vide.";
             }
             else {
-                $successMessage = "La thématique a bien été ajoutée.";
+                $doSendInfos = true;
+                $add = add_thematic($informations["name"]["value"]);
+                if (!$add) {
+                    $doSendInfos = false;
+                    $informations["name"]["displayValue"] = "block";
+                    $informations["name"]["errorMsg"] = "Le nom de la thématique est déjà utilisé.";
+                } else {
+                    $successMessage = "La thématique a bien été ajoutée.";
+                }
             }
         }
     }
 
-    $_SESSION["formValues"]["search_ex"] = $research;
+    $_SESSION["formValues"]["search_them"] = $research;
 }
 else {
     if ($research === "") {
-        $thematics = get_thematics($current_page, $per_page);
+        $thematics =get_all($type,$current_page, $per_page);
     }
     else {
-        $thematics = get_thematics_by_keywords($current_page, $per_page, $research);
+        $thematics = get_by_keywords($type,$current_page, $per_page, $research);
     }
 }
 
@@ -140,7 +157,7 @@ $number = $thematics["number"] ?? 0;
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($thematics["thematic"] as $thematic) {
+            <?php foreach ($thematics["values"] as $thematic) {
                 $nb_exercises = get_exercises_count_by_thematic();
                 ?>
                 <tr>

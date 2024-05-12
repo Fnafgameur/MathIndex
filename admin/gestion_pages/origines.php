@@ -183,15 +183,25 @@
 
 <?php } else { ?>
 
-        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=origines" method="post">
-            <label for="nom">Nom :</label>
-            <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["name"]["value"] ?>">
-            <p class="errormsg" style="display: <?= $informations["name"]["displayValue"] ?>;"><?= $informations["name"]["errorMsg"] ?></p>
-
-            <input type="submit" name="Envoyer" value="Envoyer">
-            <a href="index.php?page=Administration&onglet=origines" class="contributeurs__button">Retour à la liste</a>
-            <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
-            <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=origines" class="contributors__form" method="post">
+            <div class="contributors__input">
+                <label for="nom">Nom :</label>
+                <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["name"]["value"] ?>">
+                <p class="errormsg" style="display: <?= $informations["name"]["displayValue"] ?>;"><?= $informations["name"]["errorMsg"] ?></p>
+                <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
+            </div>
+            <div class="contributors__errormsg" style="display: <?= $informations['name']['errorMsg'] === "" ? 'flex' : 'none';?>;">
+                <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+            </div>
+            <div class="contributors__submit-button">
+                <a href="index.php?page=Administration&onglet=origines" class="btn btn--border-radius btn--paddingmodal btn--no-decoration btn--textgrey btn--bglightgrey btn--fontNoto">
+                    <svg width="9" height="12" viewBox="0 0 9 12" fill="#757575" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.16 1.41L3.58 6L8.16 10.59L6.75 12L0.750004 6L6.75 0L8.16 1.41Z" fill=""/>
+                    </svg>
+                    Retour à la liste
+                </a>
+                <input type="submit" name="Envoyer" class="btn btn--border-radius btn--paddingmodal btn--textgrey btn--bglightgrey btn--fontNoto" value="Enregistrer">
+            </div>
         </form>
     <?php } ?>
 

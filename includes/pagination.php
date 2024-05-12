@@ -57,6 +57,12 @@
                     "search" => $_POST["search_classe"] ?? "",
                 ];
                 break;
+            case AdminTab::THEMATIQUES->value:
+                $formValueKeys = ["search_them"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_them"] ?? "",
+                ];
+                break;
             default:
                 $formValueKeys = [];
                 $formValues = [];
