@@ -889,9 +889,6 @@ body {
 .submit .submit__content .submit__information__flex div {
   width: 45%;
 }
-.submit .submit__content .submit__information__flex div select {
-  width: 105% !important;
-}
 .submit .submit__content .submit__source textarea {
   height: 10rem;
 }
@@ -1048,4 +1045,242 @@ body {
 }
 .modal__buttons .btn {
   width: 50%;
+}
+
+@media screen and (max-width: 1930px) {
+  .submit .submit__content .submit__information select {
+    width: 40rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 38rem;
+  }
+  .submit .submit__content .submit__source select {
+    width: 87rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 85rem;
+  }
+}
+@media screen and (max-width: 1850px) {
+  .submit .submit__content .submit__information select {
+    width: 36rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 34rem;
+  }
+  .submit .submit__content .submit__source select {
+    width: 78rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 76rem;
+  }
+}
+@media screen and (max-width: 1680px) {
+  .submit .submit__content .submit__information select {
+    width: 34rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 32rem;
+  }
+  .submit .submit__content .submit__source select {
+    width: 72rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 70rem;
+  }
+}
+@media screen and (max-width: 1570px) {
+  .submit .submit__content .submit__information select {
+    width: 33rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 31rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 8%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 68rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 66rem;
+  }
+}
+@media screen and (max-width: 1480px) {
+  .submit .submit__content .submit__information select {
+    width: 29rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 27rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 8%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 62rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 60rem;
+  }
+}
+@media screen and (max-width: 1480px) {
+  .submit .submit__content .submit__source select {
+    width: 58rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 56rem;
+  }
+}
+@media screen and (max-width: 1350px) {
+  .submit .submit__content .submit__information select {
+    width: 24rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 22rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 10%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 54rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 52rem;
+  }
+}
+@media screen and (max-width: 1260px) {
+  .submit .submit__content .submit__source select {
+    width: 48rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 46rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .submit .submit__content .submit__information select {
+    width: 18rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 16rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 7%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 40rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 38rem;
+  }
+}
+@media screen and (max-width: 995px) {
+  .submit .submit__content .submit__information select {
+    width: 13rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 11rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 7%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 32rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 30rem;
+  }
+}
+@media screen and (max-width: 850px) {
+  .side-bar {
+    margin-left: -330px;
+  }
+  .submit .submit__head-bar {
+    justify-content: space-between;
+  }
+  .submit .submit__head-bar button {
+    padding: 0.5rem 5%;
+  }
+  .submit .submit__content .submit__information select {
+    width: 18rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 16rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 7%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 36rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 34rem;
+  }
+}
+@media screen and (max-width: 850px) {
+  .submit .submit__content .submit__information select {
+    width: 13rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 11rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 10%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 30rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 28rem;
+  }
+}
+@media screen and (max-width: 570px) {
+  .submit .submit__content .submit__information select {
+    width: 12rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 10rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 8%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 25rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 23rem;
+  }
+}
+@media screen and (max-width: 570px) {
+  .submit .submit__content .submit__information select {
+    width: 12rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 10rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 8%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 25rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 23rem;
+  }
+}
+@media screen and (max-width: 570px) {
+  .submit .submit__content .submit__information select {
+    width: 8rem;
+  }
+  .submit .submit__content .submit__information input {
+    width: 6rem;
+  }
+  .submit .submit__content .submit__information__flex {
+    gap: 15%;
+  }
+  .submit .submit__content .submit__source select {
+    width: 20rem;
+  }
+  .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
+    width: 18rem;
+  }
 }/*# sourceMappingURL=style.css.map */

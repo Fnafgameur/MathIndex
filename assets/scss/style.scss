@@ -1108,10 +1108,6 @@ body{
 
             div {
                 width: 45%;
-
-                select{
-                    width: 105% !important;
-                }
             }
         }
 
@@ -1303,3 +1299,437 @@ body{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1930px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 40rem;
+                    }
+                    
+                    input{
+                        width: 38rem;
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 87rem;
+                    }
+                    
+                    input, textarea{
+                        width: 85rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1850px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 36rem;
+                    }
+                    
+                    input{
+                        width: 34rem;
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 78rem;
+                    }
+                    
+                    input, textarea{
+                        width: 76rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1680px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 34rem;
+                    }
+                    
+                    input{
+                        width: 32rem;
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 72rem;
+                    }
+                    
+                    input, textarea{
+                        width: 70rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1570px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 33rem;
+                    }
+                    
+                    input{
+                        width: 31rem;
+                    }
+
+                    &__flex{
+                        gap:8%
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 68rem;
+                    }
+                    
+                    input, textarea{
+                        width: 66rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1480px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 29rem;
+                    }
+                    
+                    input{
+                        width: 27rem;
+                    }
+
+                    &__flex{
+                        gap:8%
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 62rem;
+                    }
+                    
+                    input, textarea{
+                        width: 60rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1480px) {
+    .submit{
+            .submit__content {
+                .submit__source{
+                    select{
+                        width: 58rem;
+                    }
+                    
+                    input, textarea{
+                        width: 56rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 24rem;
+                    }
+                    
+                    input{
+                        width: 22rem;
+                    }
+
+                    &__flex{
+                        gap:10%
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 54rem;
+                    }
+                    
+                    input, textarea{
+                        width: 52rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1260px) {
+    .submit{
+            .submit__content {
+                .submit__source{
+                    select{
+                        width: 48rem;
+                    }
+                    
+                    input, textarea{
+                        width: 46rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 18rem;
+                    }
+                    
+                    input{
+                        width: 16rem;
+                    }
+
+                    &__flex{
+                        gap:7%
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 40rem;
+                    }
+                    
+                    input, textarea{
+                        width: 38rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 995px) {
+    .submit{
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 13rem;
+                    }
+                    
+                    input{
+                        width: 11rem;
+                    }
+
+                    &__flex{
+                        gap:7%
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 32rem;
+                    }
+                    
+                    input, textarea{
+                        width: 30rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 850px) {
+
+    .side-bar{
+        margin-left: -330px;
+    }
+
+    .submit{
+            .submit__head-bar{
+                justify-content: space-between;
+                
+                button{
+                    padding: 0.5rem 5%;
+                }
+            }
+            .submit__content {
+                .submit__information{
+                    select{
+                        width: 18rem;
+                    }
+                    
+                    input{
+                        width: 16rem;
+                    }
+
+                    &__flex{
+                        gap:7%
+                    }
+                }
+
+                .submit__source{
+                    select{
+                        width: 36rem;
+                    }
+                    
+                    input, textarea{
+                        width: 34rem;
+                    }
+                }
+            }
+    }
+}
+
+@media screen and (max-width: 850px) {
+
+    .submit{
+        .submit__content {
+            .submit__information{
+                select{
+                    width: 13rem;
+                }
+                
+                input{
+                    width: 11rem;
+                }
+
+                &__flex{
+                    gap:10%
+                }
+            }
+
+            .submit__source{
+                select{
+                    width: 30rem;
+                }
+                
+                input, textarea{
+                    width: 28rem;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 570px) {
+
+    .submit{
+        .submit__content {
+            .submit__information{
+                select{
+                    width: 12rem;
+                }
+                
+                input{
+                    width: 10rem;
+                }
+
+                &__flex{
+                    gap:8%
+                }
+            }
+
+            .submit__source{
+                select{
+                    width: 25rem;
+                }
+                
+                input, textarea{
+                    width: 23rem;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 570px) {
+
+    .submit{
+        .submit__content {
+            .submit__information{
+                select{
+                    width: 12rem;
+                }
+                
+                input{
+                    width: 10rem;
+                }
+
+                &__flex{
+                    gap:8%
+                }
+            }
+
+            .submit__source{
+                select{
+                    width: 25rem;
+                }
+                
+                input, textarea{
+                    width: 23rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 570px) {
+
+    .submit{
+        .submit__content {
+            .submit__information{
+                select{
+                    width: 8rem;
+                }
+                
+                input{
+                    width: 6rem;
+                }
+
+                &__flex{
+                    gap:15%
+                }
+            }
+
+            .submit__source{
+                select{
+                    width: 20rem;
+                }
+                
+                input, textarea{
+                    width: 18rem;
+                }
+            }
+        }
+    }
+}
