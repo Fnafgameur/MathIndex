@@ -310,47 +310,57 @@
     <?php } else { ?>
 
         <form class="contributor__flex" action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=contributeurs" method="post" enctype="multipart/form-data">
-            <div>
+            <div class="contributor__flex__side">
                 <div class="contributor__flex__mini-flex">
-                    <label for="nom">Nom :</label>
-                    <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["lastname"]["value"] ?>">
+                    <label for="nom">Nom :</label><br>
+                    <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["lastname"]["value"] ?>"><br>
                     <p class="errormsg" style="display: <?= $informations["lastname"]["displayValue"] ?>;"><?= $informations["lastname"]["errorMsg"] ?></p>
 
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" name="prenom" id="prenom" placeholder="Prénom" value="<?= $informations["firstname"]["value"] ?>">
+                    <label for="prenom">Prénom :</label><br>
+                    <input type="text" name="prenom" id="prenom" placeholder="Prénom" value="<?= $informations["firstname"]["value"] ?>"><br>
                     <p class="errormsg" style="display: <?= $informations["firstname"]["displayValue"] ?>;"><?= $informations["firstname"]["errorMsg"] ?></p>
 
-                    <label for="email">Email :</label>
-                    <input type="text" name="email" id="email" placeholder="Email" value="<?= $informations["email"]["value"] ?>">
+                    <label for="email">Email :</label><br>
+                    <input type="text" name="email" id="email" placeholder="Email" value="<?= $informations["email"]["value"] ?>"><br>
                     <p class="errormsg" style="display: <?= $informations["email"]["displayValue"] ?>;"><?= $informations["email"]["errorMsg"] ?></p>
 
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" placeholder="Mot de passe" value="<?= $informations["password"]["value"] ?>">
+                    <label for="password">Mot de passe</label><br>
+                    <input type="password" name="password" id="password" placeholder="Mot de passe" value="<?= $informations["password"]["value"] ?>"><br>
                     <p class="errormsg" style="display: <?= $informations["password"]["displayValue"] ?>;"><?= $informations["password"]["errorMsg"] ?></p>
                 </div>
                 <div class="contributor__flex__mini-flex">
-                    <label for="role">Rôle :</label>
+                    <label for="role">Rôle :</label><br>
                     <select name="role" id="role">
                         <option value="<?= Role::CONTRIBUTOR->value ?>" <?= $informations["role"]["value"] === Role::CONTRIBUTOR->value ? "selected" : "" ?>>Contributeur</option>
                         <option value="Eleve" <?= $informations["role"]["value"] === "Eleve" ? "selected" : "" ?>>Elève</option>
-                    </select>
+                    </select><br>
                     <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["role"]["errorMsg"] ?></p>
 
-                    <label for="profilepic">Photo de profil :</label>
-                    <input type="file" name="profilepic" id="profilepic" accept="image/png, image/jpeg">
+                    <label for="profilepic">Photo de profil : (png, jpeg, jpg)*<br>
+                        <div>
+                            <p id="profilepic_choisit">choisir une photo de profil</p>
+                            <img src="./assets/icons/upload_cloud.svg">
+                        </div>
+                        <input type="file" name="profilepic" id="profilepic" accept="image/png, image/jpeg, image/jpg" hidden/>
+                    </label>
                     <p class="errormsg" style="display: <?= $informations["profilepic"]["displayValue"] ?>;"><?= $informations["profilepic"]["errorMsg"] ?></p>
                 </div>
             </div>
 
-            <div>
-                <input type="submit" name="Envoyer" value="Envoyer">
-                <a href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
-                <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
-                <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+            <div class="contributor__flex__side--right">
+
+                <input class="button" type="submit" name="Envoyer" value="Envoyer">
+                <a class="button" href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
+                <div>
+                    <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
+                    <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+                </div>
             </div>
         </form>
     <?php } ?>
 
     <p class="successmsg" style="margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>
 
+    
+    <script src="assets/scripts/contributor.js"></script>
 
