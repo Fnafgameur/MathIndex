@@ -346,15 +346,15 @@
                     <p class="errormsg" style="display: <?= $informations["profilepic"]["displayValue"] ?>;"><?= $informations["profilepic"]["errorMsg"] ?></p>
                 </div>
             </div>
-
+            <div>
+                <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
+                <p class="successmsg" style="color: limegreen; display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+            </div>
             <div class="contributor__flex__side--right">
 
                 <input class="button" type="submit" name="Envoyer" value="Envoyer">
                 <a  href="index.php?page=Administration"><button class="button">retour à la liste</button></a>
-                <div>
-                    <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
-                    <p class="successmsg" style="color: limegreen; display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
-                </div>
+                
             </div>
         </form>
     <?php } ?>
