@@ -13,7 +13,7 @@
         
             <a href="index.php?page=Administration&onglet=exercices" class="administration__buttons-button <?= $pageName === AdminTab::EXERCICES->value ? "selected-admin" : "" ?>">Exercices</a>
         
-            <a class="administration__buttons-button <?= $pageName === AdminTab::CLASSES->value ? "selected-admin" : "" ?>">Classes</a>
+            <a href="index.php?page=Administration&onglet=classes" class="administration__buttons-button <?= $pageName === AdminTab::CLASSES->value ? "selected-admin" : "" ?>">Classes</a>
         
             <a href="index.php?page=Administration&onglet=thematiques" class="administration__buttons-button <?= $pageName === AdminTab::THEMATIQUES->value ? "selected-admin" : "" ?>">Thématiques</a>
         
@@ -33,6 +33,9 @@
                     break;
                 case AdminTab::ORIGINES->value:
                     include_once("admin/gestion_pages/origines.php");
+                    break;
+                case AdminTab::CLASSES->value:
+                    include_once("admin/gestion_pages/classes.php");
                     break;
                 default:
                     header("Location: index.php?page=Administration&onglet=contributeurs");
