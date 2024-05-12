@@ -454,11 +454,13 @@ if (isset($db)) {
         return $success && $query->rowCount() > 0;
     }
 
-    function get_last_id($type) : int {
+    function get_next_id($type) : int {
         global $db;
-        $query = $db->prepare("SELECT id FROM $type ORDER BY id DESC LIMIT 1");
+        $query = $db->prepare("SHOW TABLE STATUS LIKE '$type'");
         $query->execute();
-        return $query->fetch(PDO::FETCH_ASSOC)["id"];
+
+        $id = $query->fetch(PDO::FETCH_ASSOC)["Auto_increment"];
+        return $id;
     }
 
 }

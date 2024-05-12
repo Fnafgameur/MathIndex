@@ -91,7 +91,7 @@
                 $informations["lastname"]["value"] = $userInfos["last_name"];
                 $informations["email"]["value"] = $userInfos["email"];
                 $informations["role"]["value"] = $userInfos["role"];
-                $informations["profilepic"]["value"] = $userInfos["profilepic"];
+                $informations["profilepic"]["value"] = $userInfos["profilepic_path"];
             }
         }
         $informations["email"]["value"] = strtolower($informations["email"]["value"]);
@@ -179,12 +179,15 @@
 
                     if ($currentAction === "updating") {
 
+                        $profilepic = $targetDir . $lastName . "_" . $idToUpdate . "." . $imageFileType;
+
                         $toUpdate = [
                             "email" => $email,
                             "last_name" => $lastName,
                             "first_name" => $firstName,
                             "password" => $password,
                             "role" => $role,
+                            "profilepic_path" => $profilepic,
                         ];
 
                         $isIdUpdated = update_value_by_id($type, $toUpdate, $idToUpdate);
@@ -196,12 +199,13 @@
                         }
                         else {
                             $successMessage = "Contributeur modifié avec succès.";
+                            $isImageMoved = move_uploaded_file($_FILES["profilepic"]["tmp_name"], $profilepic);
                         }
                     }
                     else {
 
                         $whereToAdd = ["email", "last_name", "first_name", "password", "role", "profilepic_path"];
-                        $id = get_last_id($type) + 1;
+                        $id = get_next_id($type);
                         $profilepic = $targetDir . $lastName . "_" . $id . "." . $imageFileType;
 
                         $toAdd = [
@@ -222,7 +226,6 @@
                         }
                         else {
                             $successMessage = $informations["role"]["value"] . " ajouté avec succès.";
-
                             $isImageMoved = move_uploaded_file($_FILES["profilepic"]["tmp_name"], $profilepic);
                         }
                     }
