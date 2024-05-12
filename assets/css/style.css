@@ -638,7 +638,17 @@ body {
   gap: 10%;
 }
 .contributor__flex__side--right {
-  gap: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 5%;
+  width: 100%;
+}
+.contributor__flex__side--right a {
+  width: 20vw;
+}
+.contributor__flex__side--right a .button {
+  width: 100%;
 }
 .contributor__flex label {
   color: #666666;
@@ -1361,6 +1371,4 @@ body {
   .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
     width: 18rem;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
