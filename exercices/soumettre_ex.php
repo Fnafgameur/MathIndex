@@ -260,7 +260,7 @@
                     <div>
                         <label for="name">Nom de l'exercice: *</label><br>
                         <input id="name" name="name" <?= $values["name"]?>><br>
-                        <p class="errormsg" style="display: <?= $displays["name"] .'">'.$errors["name"] ?> </p>
+                        <p class="errormsg" style="display: <?= $displays["name"] .'">'.$errors["name"] ?>"></p>
                         <label for="classroom">Classe: *</label><br>
                         <select name="classroom" id="classroom">
                             <?php
@@ -274,7 +274,7 @@
                         </select>
                         <p class="errormsg" style="display: <?= $displays["classroom"] ?>"><?= $errors["classroom"] ?></p><br>
                         <label for="thematic">Thématique: *</label><br>
-                        <select name="thematic"id="thematic">
+                        <select name="thematic" id="thematic">
                             <?php
                                 echo $values["thematic"];
                                 foreach($thematics as $them){

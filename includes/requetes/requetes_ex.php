@@ -167,10 +167,7 @@ function get_file_by_exercises(int $exercise_file_id): array
 {
     global $db;
 
-    $result = [
-        "exercise" => [],
-        "correction" => [],
-    ];
+    $result = [];
 
     $query = $db->prepare("SELECT file.id, file.name, file.extension, file.size from file INNER JOIN exercise ON file.id = exercise.exercise_file_id WHERE file.id = :exercise;");
     $query->bindParam(':exercise', $exercise_file_id);

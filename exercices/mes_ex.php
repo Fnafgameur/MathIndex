@@ -7,9 +7,17 @@
     $pages = ceil($nb_exercises / $per_page);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete']) ) {
-        $id_exercise = $_POST['delete'];
-        delete_by_id(Type::EXERCISE->value, $id_exercise);
-        header('Location: index.php?page=Mes+exercices&pagination='.$current_page);
+        $ids = $_POST['delete'];
+        $exId = explode(',', $ids)[0];
+        $fileId = explode(',', $ids)[1];
+        var_dump($ids);
+        $exs = get_file_by_exercises($fileId);
+        $exercisePath = $exs["exercise"];
+        $correctionPath = $exs["correction"];
+        unlink('./assets/files/exercises/'.$exercisePath['name'].'.'.$exercisePath['extension']);
+        unlink('./assets/files/corrections/'.$correctionPath['name'].'.'.$correctionPath['extension']);
+        delete_by_id(Type::EXERCISE->value, $exId);
+        header('Location: index.php?page=Mes+exercices');
     }
     if (empty($my_exercises)){
         if ($current_page > 1) {
@@ -39,7 +47,9 @@
                     </thead>
                     <tbody class="exercise__table-body">
                     <?php foreach ($my_exercises as $my_exercise) {
-                        $file_sorted = get_file_by_exercises($my_exercise['exercise_file_id']);
+                        $exId = $my_exercise['id'];
+                        $fileId = $my_exercise['exercise_file_id'];
+                        $file_sorted = get_file_by_exercises($fileId);
                         $exerciceFile = $file_sorted['exercise'];
                         $correctionFile = $file_sorted['correction'];
                         ?>
@@ -51,14 +61,14 @@
                                 <a class="link link--row" href="./assets/files/corrections/<?=$correctionFile['name'].'.'.$correctionFile['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                             </td>
                             <td class="exercise__table-data exercise__form">
-                                <form action="index.php?page<?=Page::SOUMETTRE->value?>" method="post" class="exercise_modify_form">
+                                <form action="index.php?page=<?=Page::SOUMETTRE->value?>&updating=<?= $exId ?>" method="post" class="exercise_modify_form">
                                     <img src="./assets/icons/edit_file.svg" alt="logo modification">
-                                    <input type="hidden" name="id" value="<?=$my_exercise['id']?>">
+                                    <input type="hidden" name="id" value="<?=$exId?>">
                                     <input type="submit" class="btn btn--bgwhite btn--lightgrey" value="Modifier">
                                 </form>
-                                <form action="" method="post" class="exercise_delete_form">
+                                <form action="#" method="post" class="exercise_delete_form">
                                     <img src="./assets/icons/delete_file.svg" alt="logo suppression">
-                                    <input type="hidden" name="delete" value="<?=$my_exercise['id']?>">
+                                    <input type="hidden" name="delete" value="<?=$exId . ',' . $fileId?>">
                                     <button type="button" class="btn btn--bgwhite btn--lightgrey modal__trigger" onclick="sendData(this.parentElement)">Supprimer</button>
                                 </form>
                             </td>

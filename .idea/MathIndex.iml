@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/database" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/assets/profilepics" />
+      <excludeFolder url="file://$MODULE_DIR$/assets/files" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
