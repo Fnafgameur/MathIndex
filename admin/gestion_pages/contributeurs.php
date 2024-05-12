@@ -76,7 +76,11 @@
         if (isset($_POST["delete"])) {
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
+            $profilepic = get_by_id($type, $idDeleted)["profilepic_path"];
             delete_by_id($type, $idDeleted);
+            if (str_starts_with($profilepic, "./assets/profilepics/") && file_exists($profilepic)) {
+                unlink($profilepic);
+            }
             $contributeurs = get_all($type, $current_page, $per_page);
             $didDelete = true;
         }
@@ -294,7 +298,7 @@
                                 <button type="submit" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
                             </form>
                             <form action="#" method="post">
-                                <input type="hidden" name="delete" value="<?= $contributeur["id"] . ',' . $contributeur["first_name"] ?>">
+                                <input type="hidden" name="delete" value="<?= $contributeur["id"] . ',' . $contributeur["last_name"] ?>">
                                 <button type="button" class="contributeurs__button modal__trigger" onclick="sendData(this.parentElement);"><img src="assets/icons/delete_file.svg">Supprimer</button>
                             </form>
                         </td>
