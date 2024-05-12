@@ -10,7 +10,8 @@ if (isset($db)) {
      * @param int $id L'ID de l'utilisateur
      * @return bool Retourne true si la suppression a été effectuée, false sinon
      */
-    function delete_by_id(string $type, int $id) : bool {
+    function delete_by_id(string $type, int $id): bool
+    {
         global $db;
         $query = $db->prepare("DELETE FROM $type WHERE id = :id");
         $query->bindParam(':id', $id);
@@ -27,7 +28,8 @@ if (isset($db)) {
      * @param $email L'email de l'utilisateur
      * @return mixed Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
      */
-    function get_user_with_email($email) : mixed {
+    function get_user_with_email($email): mixed
+    {
         global $db;
         $query = $db->prepare("SELECT * FROM user WHERE email = :email");
         $query->bindParam(':email', $email);
@@ -38,17 +40,17 @@ if (isset($db)) {
     /**
      * Permet de limiter le nombre d'exercices retournés en fonction du nombre d'exercices par page
      * @param int $currentPage La page actuelle
-     * @param int $perPage  Le nombre d'exercices par page
-     * @param int|null $user_id  L'id de l'utilisateur
+     * @param int $perPage Le nombre d'exercices par page
+     * @param int|null $user_id L'id de l'utilisateur
      * @return mixed Retourne un tableau associatif contenant les informations des exercices ou null si aucun exercice n'existe
      */
-    function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null) : mixed {
+    function get_exercises_with_limit(int $currentPage, int $perPage, int $user_id = null): mixed
+    {
         global $db;
 
         $result = [];
 
-        if ($user_id !== null)
-        {
+        if ($user_id !== null) {
             $user_id = "WHERE created_by_id = $user_id";
         }
         $first = max(0, ($currentPage - 1) * $perPage);
@@ -70,7 +72,7 @@ if (isset($db)) {
      * @param array|null $filtres Les filtres de recherche (non obligatoire)
      * @return array|false Retourne un tableau associatif contenant les informations de tous les exercices ou false si aucun exercice n'existe
      */
-    function get_exercises(int $currentPage = null, int $limit = null, array $filtres = null) : array|false
+    function get_exercises(int $currentPage = null, int $limit = null, array $filtres = null): array|false
     {
         global $db;
         $thematique = "0";
@@ -78,9 +80,8 @@ if (isset($db)) {
 
         if ($limit !== null) {
             $first = max(0, ($currentPage - 1) * $limit);
-            $limitReq = "LIMIT " . $first.','. $limit;
-        }
-        else {
+            $limitReq = "LIMIT " . $first . ',' . $limit;
+        } else {
             $limitReq = "";
         }
 
@@ -108,20 +109,17 @@ if (isset($db)) {
                 if ($thematique === "0") {
                     $query = $db->prepare("SELECT * FROM exercise 
             WHERE classroom_id = :niveau $limitReq");
-                }
-                else {
+                } else {
                     $query = $db->prepare("SELECT * FROM exercise 
             WHERE classroom_id = :niveau 
             AND thematic_id = :thematique $limitReq");
                 }
-            }
-            else {
+            } else {
                 if ($thematique === "0") {
                     $query = $db->prepare("SELECT * FROM exercise
             WHERE classroom_id = :niveau
             AND ($keywordsReq) $limitReq");
-                }
-                else {
+                } else {
                     $query = $db->prepare("SELECT * FROM exercise
             WHERE classroom_id = :niveau
             AND thematic_id = :thematique
@@ -152,13 +150,14 @@ if (isset($db)) {
      * @param string $keywords Les mots-clés de recherche
      * @return mixed Retourne un tableau associatif contenant les informations de tous les exercices correspondant à la recherche
      */
-    function get_exercises_by_keywords(string $currentPage, int $limit, string $keywords) : mixed {
+    function get_exercises_by_keywords(string $currentPage, int $limit, string $keywords): mixed
+    {
         global $db;
 
         $result = [];
 
         $first = max(0, ($currentPage - 1) * $limit);
-        $limitReq = "LIMIT " . $first.','. $limit;
+        $limitReq = "LIMIT " . $first . ',' . $limit;
 
         // A FAIRE : recherche par nom pour thematic & difficulty
         $query = $db->prepare("SELECT * FROM exercise WHERE name LIKE '%$keywords%' OR thematic_id LIKE '%$keywords%' OR difficulty LIKE '%$keywords%' $limitReq");
@@ -177,21 +176,18 @@ if (isset($db)) {
      * @param array|string ...$params Les paramètres à passer à la requête (du bindParam) (non obligatoire)
      * @return int Le nombre de lignes de la requête
      */
-    function get_number_of_rows(string $query, string $actionToErase = null, array|string ...$params) : int {
+    function get_number_of_rows(string $query, string $actionToErase = null, array|string ...$params): int
+    {
         global $db;
 
-        if ($actionToErase !== null)
-        {
+        if ($actionToErase !== null) {
             $query = str_replace($actionToErase, "", $query);
         }
 
         $query = $db->prepare($query);
-        if (count($params) > 0)
-        {
-            foreach ($params as $param)
-            {
-                if ($param != "")
-                {
+        if (count($params) > 0) {
+            foreach ($params as $param) {
+                if ($param != "") {
                     $query->bindParam($param[0], $param[1]);
                 }
             }
@@ -205,7 +201,8 @@ if (isset($db)) {
      * Permet d'obtenir les exercices triés par date d'ajout (limité à 3)
      * @return mixed Retourne un tableau associatif contenant les informations des exercices triés par date d'ajout ou null si aucun exercice n'existe
      */
-    function get_exercises_sorted() : mixed {
+    function get_exercises_sorted(): mixed
+    {
         global $db;
         $query = $db->prepare("SELECT * FROM exercise ORDER BY date_uploaded ASC LIMIT 3");
         $query->execute();
@@ -217,7 +214,8 @@ if (isset($db)) {
      * @param $exercise_thematic_id L'ID de la thématique de l'exercice
      * @return mixed Retourne un tableau associatif contenant les informations de la thématique ou null si la thématique n'existe pas
      */
-    function get_thematic_by_exercises($exercise_thematic_id) : mixed {
+    function get_thematic_by_exercises($exercise_thematic_id): mixed
+    {
         global $db;
         $query = $db->prepare("SELECT thematic.name from thematic INNER JOIN exercise ON thematic.id = exercise.thematic_id WHERE thematic.id = :exercise;");
         $query->bindParam(':exercise', $exercise_thematic_id);
@@ -230,7 +228,8 @@ if (isset($db)) {
      * @param int $exercise_file_id L'ID de l'exercice
      * @return mixed Retourne un tableau associatif contenant les informations du fichier ou null si le fichier n'existe pas
      */
-    function get_file_by_exercises(int $exercise_file_id) : mixed {
+    function get_file_by_exercises(int $exercise_file_id): mixed
+    {
         global $db;
         $query = $db->prepare("SELECT file.id, file.name, file.extension, file.size from file INNER JOIN exercise ON file.id = exercise.exercise_file_id WHERE file.id = :exercise;");
         $query->bindParam(':exercise', $exercise_file_id);
@@ -244,15 +243,14 @@ if (isset($db)) {
      * @param int|null $limit Le nombre de thématiques à retourner (non obligatoire)
      * @return array Retourne un tableau associatif contenant les informations de toutes les thématiques
      */
-    function get_thematics(int $currentPage = null, int $limit = null) : array
+    function get_thematics(int $currentPage = null, int $limit = null): array
     {
         global $db;
 
         if ($limit !== null) {
             $first = max(0, ($currentPage - 1) * $limit);
-            $limitReq = "LIMIT " . $first.','. $limit;
-        }
-        else {
+            $limitReq = "LIMIT " . $first . ',' . $limit;
+        } else {
             $limitReq = "";
         }
 
@@ -270,7 +268,7 @@ if (isset($db)) {
      * @param int $id L'ID de la thématique
      * @return mixed Retourne un tableau associatif contenant les informations de la thématique ou null si la thématique n'existe pas
      */
-    function get_thematics_by_id(int $id) : mixed
+    function get_thematics_by_id(int $id): mixed
     {
         global $db;
         $query = $db->prepare("SELECT * FROM thematic WHERE id = :id");
@@ -286,14 +284,14 @@ if (isset($db)) {
      * @param string $keywords Les mots-clés de recherche
      * @return array Retourne un tableau associatif contenant les informations de toutes les thématiques correspondant à la recherche
      */
-    function get_thematics_by_keywords(int $currentPage, int $limit, string $keywords) : array
+    function get_thematics_by_keywords(int $currentPage, int $limit, string $keywords): array
     {
         global $db;
 
         $result = [];
 
         $first = max(0, ($currentPage - 1) * $limit);
-        $limitReq = "LIMIT " . $first.','. $limit;
+        $limitReq = "LIMIT " . $first . ',' . $limit;
 
         $query = $db->prepare("SELECT * FROM thematic WHERE name LIKE '%$keywords%'$limitReq");
         $query->execute();
@@ -308,7 +306,8 @@ if (isset($db)) {
      * Permet de compter le nombre d'exercices par thématique
      * @return array Retourne un tableau associatif contenant le nombre d'exercices par thématique
      */
-    function get_exercises_count_by_thematic() : array {
+    function get_exercises_count_by_thematic(): array
+    {
         global $db;
         $query = $db->prepare("SELECT thematic.name, COUNT(exercise.id) AS nbExercises FROM exercise INNER JOIN thematic ON exercise.thematic_id = thematic.id GROUP BY thematic.name");
         $query->execute();
@@ -322,7 +321,7 @@ if (isset($db)) {
      * @param string $name Le nom de la thématique à mettre à jour
      * @return bool Retourne true si la mise à jour a été effectuée, false sinon
      */
-    function update_thematic(int $idToUpdate, string $name) : bool
+    function update_thematic(int $idToUpdate, string $name): bool
     {
         $thematic = get_thematics_by_id($idToUpdate);
         if ($thematic["name"] === $name) {
@@ -338,7 +337,7 @@ if (isset($db)) {
      * @param string $name Le nom de la thématique à mettre à jour
      * @return bool Retourne true si la mise à jour a été effectuée, false sinon
      */
-    function update_by_id(string $value, int $idToUpdate, string $name) : bool
+    function update_by_id(string $value, int $idToUpdate, string $name): bool
     {
         global $db;
         $query = $db->prepare("UPDATE $value SET name = :name WHERE id = :id");
@@ -357,7 +356,7 @@ if (isset($db)) {
      * @param string $name Le nom de la thématique
      * @return bool Retourne true si la thématique existe déjà, false sinon
      */
-    function is_thematic_exists(string $name) : bool
+    function is_thematic_exists(string $name): bool
     {
         global $db;
         $query = $db->prepare("SELECT * FROM thematic WHERE name = :name");
@@ -372,7 +371,7 @@ if (isset($db)) {
      * @param string $name Le nom de la thématique
      * @return bool Retourne true si la thématique existe déjà, false sinon
      */
-    function add_thematic(string $name) : bool
+    function add_thematic(string $name): bool
     {
         global $db;
 
@@ -389,10 +388,10 @@ if (isset($db)) {
      * Permet de vérifier si la pge existe et sur quel page on se trouve
      * @return int Le numero de la page
      */
-    function get_current_page() : int
+    function get_current_page(): int
     {
-        if(isset($_GET['pagination'])) {
-            $page = (int) strip_tags($_GET['pagination']);
+        if (isset($_GET['pagination'])) {
+            $page = (int)strip_tags($_GET['pagination']);
 
             // Limite de 1 à 1,000,000 afin d'éviter tout bug concernant la limite d'un entier
             if ($page < 1) {
@@ -400,12 +399,12 @@ if (isset($db)) {
             } else if ($page > 1000000) {
                 return 1000000;
             }
-            return (int) strip_tags($_GET['pagination']);
+            return (int)strip_tags($_GET['pagination']);
         } else {
             return 1;
         }
     }
-  
+
     /**
      * Permet d'obtenir toutes les valeurs d'une table
      * @param string $type Le type de l'élément à obtenir
@@ -413,16 +412,16 @@ if (isset($db)) {
      * @param int $limit Le nombre d'éléments à retourner
      * @return array Retourne un tableau associatif contenant les informations des éléments ou null si aucun élément n'existe
      */
-    function get_all($type, $currentPage, $limit): array {
+    function get_all($type, $currentPage, $limit): array
+    {
         global $db;
 
         $return = [];
 
         if ($limit !== null) {
             $first = max(0, ($currentPage - 1) * $limit);
-            $limitReq = "LIMIT " . $first.','. $limit;
-        }
-        else {
+            $limitReq = "LIMIT " . $first . ',' . $limit;
+        } else {
             $limitReq = "";
         }
 
@@ -443,16 +442,17 @@ if (isset($db)) {
      * @param string $keywords Les mots-clés de recherche
      * @return array|false Retourne un tableau associatif contenant les informations des éléments correspondant à la recherche ou false si aucun élément n'existe
      */
-    function get_by_keywords(string $type, int $currentPage, int $limit, string $keywords) : array|false {
+    function get_by_keywords(string $type, int $currentPage, int $limit, string $keywords): array|false
+    {
         global $db;
 
         $result = [];
 
         $first = max(0, ($currentPage - 1) * $limit);
-        $limitReq = "LIMIT " . $first.','. $limit;
+        $limitReq = "LIMIT " . $first . ',' . $limit;
         $query = "";
 
-        switch ($type ) {
+        switch ($type) {
             case Type::USER->value:
                 $query = $db->prepare("SELECT * FROM $type WHERE last_name LIKE '%$keywords%' OR first_name LIKE '%$keywords%' OR email LIKE '%$keywords%' $limitReq");
                 break;
@@ -477,7 +477,8 @@ if (isset($db)) {
      * @param int $id L'ID de l'élément à obtenir
      * @return mixed Retourne un tableau associatif contenant les informations de l'élément ou null si l'élément n'existe pas
      */
-    function get_by_id(string $type, int $id) {
+    function get_by_id(string $type, int $id)
+    {
         global $db;
         $query = $db->prepare("SELECT * FROM $type WHERE id = :id");
         $query->bindParam(':id', $id);
@@ -491,7 +492,8 @@ if (isset($db)) {
      * @param string $name Le nom de l'élément à obtenir
      * @return mixed Retourne un tableau associatif contenant les informations de l'élément ou null si l'élément n'existe pas
      */
-    function get_with_name(string $type, string $name) {
+    function get_with_name(string $type, string $name)
+    {
         global $db;
         $query = $db->prepare("SELECT * FROM $type WHERE name = :name");
         $query->bindParam(':name', $name);
@@ -506,7 +508,8 @@ if (isset($db)) {
      * @param int $id L'ID de l'élément à mettre à jour
      * @return bool Retourne true si la mise à jour a été effectuée, false sinon
      */
-    function update_value_by_id(string $type, array $updates, int $id): bool {
+    function update_value_by_id(string $type, array $updates, int $id): bool
+    {
         global $db;
 
         $setClauses = [];
@@ -532,7 +535,8 @@ if (isset($db)) {
      * @param array $values Les valeurs à insérer (à mettre dans le même ordre que les colonnes où insérer les valeurs)
      * @return bool Retourne true si l'ajout a été effectué, false sinon
      */
-    function add_to_db(string $type, array $whereToInsert, array $values) : bool {
+    function add_to_db(string $type, array $whereToInsert, array $values): bool
+    {
         global $db;
 
         $columns = implode(", ", $whereToInsert);
@@ -545,7 +549,13 @@ if (isset($db)) {
         return $success && $query->rowCount() > 0;
     }
 
-    function get_next_id($type) : int {
+    /**
+     * Permet d'obtenir la prochaine ID d'une table
+     * @param $type Le type de l'élément
+     * @return int L'ID suivant
+     */
+    function get_next_id($type): int
+    {
         global $db;
         $query = $db->prepare("SHOW TABLE STATUS LIKE '$type'");
         $query->execute();
@@ -554,13 +564,11 @@ if (isset($db)) {
         return $id;
     }
 
-}
-
     /**
      * Permet d'obtenir tous les noms des classes
      * @return array un tableau contennant tout les noms des classes
      */
-    function get_classrooms_names() : array
+    function get_classrooms_names(): array
     {
         global $db;
         $query = $db->prepare("SELECT name FROM classroom");
@@ -573,7 +581,7 @@ if (isset($db)) {
      * Permet d'obtenir tous les noms des thématiques
      * @return array un tableau contennant tout les noms des thématiques
      */
-    function get_thematics_names() : array
+    function get_thematics_names(): array
     {
         global $db;
         $query = $db->prepare("SELECT name FROM thematic");
@@ -586,7 +594,7 @@ if (isset($db)) {
      * Permet d'obtenir tous les noms des sources
      * @return array un tableau contennant tout les noms des sources
      */
-    function get_origins_names() : array
+    function get_origins_names(): array
     {
         global $db;
         $query = $db->prepare("SELECT name FROM origin");
@@ -596,21 +604,22 @@ if (isset($db)) {
     }
 
     /**
-     *  Permet d'obtenir une id avec un nom et une table en paramèttre
+     * Permet d'obtenir une id avec un nom et une table en paramèttre
      * @param string $name nom du champ
      * @param string $table nom de la table où se trouve le nom du champ
-     * @return array un tableau contennant tout les noms des sources
+     * @return string retourne l'id du champ
      */
-    function get_id_by_name(string $name, string $table) : string
+    function get_id_by_name(string $name, string $table): string
     {
         global $db;
-        $query = $db->prepare("SELECT id FROM ".$table." WHERE name=:name ;");
+        $query = $db->prepare("SELECT id FROM " . $table . " WHERE name=:name ;");
         $query->bindParam(':name', $name);
         $query->execute();
         $array = $query->fetchAll(PDO::FETCH_ASSOC);
         $result = $array[0]["id"];
         return $result;
     }
+}
 
 
 
