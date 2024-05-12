@@ -7,10 +7,12 @@
         };
     }
     else {
-        @$nom_page = match ($_GET["onglet"]) {
+        $nom_page = match ($_GET["onglet"]) {
             "contributeurs" => "ce contributeur",
             "exercices" => "cet exercice",
             "thematiques" => "cette thématique",
+            "classes" => "cette classe",
+            "origines" => "cette origine",
             default => "cet élément",
         };
     }
