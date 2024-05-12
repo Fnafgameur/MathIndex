@@ -309,38 +309,45 @@
 
     <?php } else { ?>
 
-        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=contributeurs" method="post" enctype="multipart/form-data">
-            <label for="nom">Nom :</label>
-            <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["lastname"]["value"] ?>">
-            <p class="errormsg" style="display: <?= $informations["lastname"]["displayValue"] ?>;"><?= $informations["lastname"]["errorMsg"] ?></p>
+        <form class="contributor__flex" action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=contributeurs" method="post" enctype="multipart/form-data">
+            <div>
+                <div class="contributor__flex__mini-flex">
+                    <label for="nom">Nom :</label>
+                    <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["lastname"]["value"] ?>">
+                    <p class="errormsg" style="display: <?= $informations["lastname"]["displayValue"] ?>;"><?= $informations["lastname"]["errorMsg"] ?></p>
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" name="prenom" id="prenom" placeholder="Prénom" value="<?= $informations["firstname"]["value"] ?>">
-            <p class="errormsg" style="display: <?= $informations["firstname"]["displayValue"] ?>;"><?= $informations["firstname"]["errorMsg"] ?></p>
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" name="prenom" id="prenom" placeholder="Prénom" value="<?= $informations["firstname"]["value"] ?>">
+                    <p class="errormsg" style="display: <?= $informations["firstname"]["displayValue"] ?>;"><?= $informations["firstname"]["errorMsg"] ?></p>
 
-            <label for="email">Email :</label>
-            <input type="text" name="email" id="email" placeholder="Email" value="<?= $informations["email"]["value"] ?>">
-            <p class="errormsg" style="display: <?= $informations["email"]["displayValue"] ?>;"><?= $informations["email"]["errorMsg"] ?></p>
+                    <label for="email">Email :</label>
+                    <input type="text" name="email" id="email" placeholder="Email" value="<?= $informations["email"]["value"] ?>">
+                    <p class="errormsg" style="display: <?= $informations["email"]["displayValue"] ?>;"><?= $informations["email"]["errorMsg"] ?></p>
 
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" placeholder="Mot de passe" value="<?= $informations["password"]["value"] ?>">
-            <p class="errormsg" style="display: <?= $informations["password"]["displayValue"] ?>;"><?= $informations["password"]["errorMsg"] ?></p>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" placeholder="Mot de passe" value="<?= $informations["password"]["value"] ?>">
+                    <p class="errormsg" style="display: <?= $informations["password"]["displayValue"] ?>;"><?= $informations["password"]["errorMsg"] ?></p>
+                </div>
+                <div class="contributor__flex__mini-flex">
+                    <label for="role">Rôle :</label>
+                    <select name="role" id="role">
+                        <option value="<?= Role::CONTRIBUTOR->value ?>" <?= $informations["role"]["value"] === Role::CONTRIBUTOR->value ? "selected" : "" ?>>Contributeur</option>
+                        <option value="Eleve" <?= $informations["role"]["value"] === "Eleve" ? "selected" : "" ?>>Elève</option>
+                    </select>
+                    <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["role"]["errorMsg"] ?></p>
 
-            <label for="role">Rôle :</label>
-            <select name="role" id="role">
-                <option value="<?= Role::CONTRIBUTOR->value ?>" <?= $informations["role"]["value"] === Role::CONTRIBUTOR->value ? "selected" : "" ?>>Contributeur</option>
-                <option value="Eleve" <?= $informations["role"]["value"] === "Eleve" ? "selected" : "" ?>>Elève</option>
-            </select>
-            <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["role"]["errorMsg"] ?></p>
+                    <label for="profilepic">Photo de profil :</label>
+                    <input type="file" name="profilepic" id="profilepic" accept="image/png, image/jpeg">
+                    <p class="errormsg" style="display: <?= $informations["profilepic"]["displayValue"] ?>;"><?= $informations["profilepic"]["errorMsg"] ?></p>
+                </div>
+            </div>
 
-            <label for="profilepic">Photo de profil :</label>
-            <input type="file" name="profilepic" id="profilepic" accept="image/png, image/jpeg">
-            <p class="errormsg" style="display: <?= $informations["profilepic"]["displayValue"] ?>;"><?= $informations["profilepic"]["errorMsg"] ?></p>
-
-            <input type="submit" name="Envoyer" value="Envoyer">
-            <a href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
-            <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
-            <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+            <div>
+                <input type="submit" name="Envoyer" value="Envoyer">
+                <a href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
+                <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
+                <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+            </div>
         </form>
     <?php } ?>
 
