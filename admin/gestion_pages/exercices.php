@@ -48,10 +48,10 @@
     }
     else {
         if ($research === "") {
-            $exercises = get_exercises($current_page, $per_page);
+            $exercises = get_all($type,$current_page, $per_page);
         }
         else {
-            $exercises = get_exercises_by_keywords($current_page, $per_page, $research);
+            $exercises = get_by_keywords($type,$current_page, $per_page, $research);
         }
     }
 
