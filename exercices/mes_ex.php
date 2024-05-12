@@ -40,13 +40,15 @@
                     <tbody class="exercise__table-body">
                     <?php foreach ($my_exercises as $my_exercise) {
                         $file_sorted = get_file_by_exercises($my_exercise['exercise_file_id']);
+                        $exerciceFile = $file_sorted['exercise'];
+                        $correctionFile = $file_sorted['correction'];
                         ?>
                         <tr class="exercise__table-row">
                             <td class="exercise__table-data"><?=$my_exercise['name']?></td>
                             <td class="exercise__table-data"><?=get_thematic_by_exercises($my_exercise["thematic_id"])['name'];?></td>
                             <td class="exercise__table-data exercise__actions">
-                                <a class="link link--row" href="" download="<?=$file_sorted['name'].'.'.$file_sorted['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                                <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                                <a class="link link--row" href="./assets/files/exercises/<?=$exerciceFile['name'].'.'.$exerciceFile['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                                <a class="link link--row" href="./assets/files/corrections/<?=$correctionFile['name'].'.'.$correctionFile['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                             </td>
                             <td class="exercise__table-data exercise__form">
                                 <form action="index.php?page<?=Page::SOUMETTRE->value?>" method="post" class="exercise_modify_form">

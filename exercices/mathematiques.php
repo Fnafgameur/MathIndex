@@ -25,6 +25,8 @@
                 <tbody class="mathematics__table-body">
                 <?php foreach ($exercises_sorted as $exercise_sorted) {
                     $file_sorted = get_file_by_exercises($exercise_sorted['exercise_file_id']);
+                    $exercice = $file_sorted['exercise'];
+                    $correction = $file_sorted['correction'];
                     $keywords_sorted = explode(' ', $exercise_sorted['keywords']);
                     ?>
                     <tr class="mathematics__table-row">
@@ -38,8 +40,8 @@
                             } ?>
                         </td>
                         <td class="mathematics__table-data">
-                            <a class="link link--row" href="" download="<?=$file_sorted['name'].'.'.$file_sorted['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -61,7 +63,9 @@
                 </thead>
                 <tbody class="mathematics__table-body">
                 <?php foreach ($exercises as $exercise) {
-                    $file = get_file_by_exercises($exercise['exercise_file_id']);
+                    $file_sorted = get_file_by_exercises($exercise_sorted['exercise_file_id']);
+                    $exercice = $file_sorted['exercise'];
+                    $correction = $file_sorted['correction'];
                     $keywords = explode(' ', $exercise['keywords']);
                     ?>
                     <tr class="mathematics__table-row">
@@ -75,8 +79,8 @@
                             } ?>
                         </td>
                         <td class="mathematics__table-data">
-                            <a class="link link--row" href="" download="<?=$file_sorted['name'].'.'.$file_sorted['extension']?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="" download="<?=str_contains(strtolower($file_sorted['name']),'_corrigé')?$file_sorted['name'].'_corrigé':$file_sorted['name'].$file_sorted['extension'];?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                     </tr>
                 <?php } ?>
