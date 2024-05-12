@@ -33,19 +33,19 @@
         }
 
         switch ($_GET["onglet"]) {
-            case AdminPage::CONTRIBUTEURS->value:
+            case AdminTab::CONTRIBUTEURS->value:
                 $formValueKeys = ["search_contrib"];
                 $formValues = $_SESSION["formValues"] ?? [
                     "search" => $_POST["search_contrib"] ?? "",
                 ];
                 break;
-            case AdminPage::EXERCICES->value:
+            case AdminTab::EXERCICES->value:
                 $formValueKeys = ["search_ex"];
                 $formValues = $_SESSION["formValues"] ?? [
                     "search" => $_POST["search_ex"] ?? "",
                 ];
                 break;
-            case AdminPage::ORIGINES->value:
+            case AdminTab::ORIGINES->value:
                 $formValueKeys = ["search_orig"];
                 $formValues = $_SESSION["formValues"] ?? [
                     "search" => $_POST["search_orig"] ?? "",

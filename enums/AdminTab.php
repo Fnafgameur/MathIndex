@@ -1,6 +1,6 @@
 <?php
 
-enum AdminPage: string
+enum AdminTab: string
 {
     case CONTRIBUTEURS = "contributeurs";
     case EXERCICES = "exercices";
