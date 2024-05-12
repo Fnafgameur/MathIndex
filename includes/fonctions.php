@@ -96,6 +96,12 @@
         }
     }
 
+    /**
+     * Permet de verifier si une valeur est dans un array d'array
+     * @param mixed $value la valeur cherchée
+     * @param array $array l'array d'array
+     * @return bool true s
+     */
     function name_in_array(mixed $value, array $arrays) : bool {
         foreach ($arrays as $kay => $names){
             if(in_array($value,$names,true)){

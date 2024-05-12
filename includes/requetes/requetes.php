@@ -429,7 +429,7 @@ if (isset($db)) {
     }
 
     /**
-     * Permet d'obtenir une id avec un nom
+     *  Permet d'obtenir une id avec un nom et une table en paramèttre
      * @param string $name nom du champ
      * @param string $table nom de la table où se trouve le nom du champ
      * @return array un tableau contennant tout les noms des sources

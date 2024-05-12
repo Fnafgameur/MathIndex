@@ -1,4 +1,8 @@
 <?php
+
+    var_dump($_POST);
+    echo "maldfjclm";
+
     $uploads_exo = './assets/files/exercises/';
     $uploads_cor = './assets/files/corrections/';
 
@@ -44,6 +48,7 @@
         'origin_information' => "none",
         "fichier_exercice" => "none",
         "fichier_correction" => "none",
+        "succes" => "none"
     ];
 
     $values=[
@@ -59,6 +64,7 @@
         'origin_information' => "",
         "fichier_exercice" => "Selectionné un fichier à télécharger",
         "fichier_correction" => "Selectionné un fichier à télécharger",
+        "succes" => "L'exercice a été envoyé avec succés"
     ];
 
     if (!(empty($_POST))){
@@ -90,9 +96,6 @@
                     $errors[$key] = "Ce champs ne peut pas dépassé les 255 caractères";
                     $displays[$key] = "block";
                 }
-
-            }
-            else if($key === "file"){
 
             }
             else if(isset($value))
@@ -135,7 +138,6 @@
                 }
             }
         }
-
         if (empty($errors['name']) and 
         empty($errors['classroom']) and 
         empty($errors['thematic']) and 
@@ -147,8 +149,8 @@
         empty($errors['origin_name']) and 
         empty($errors['origin_information']) and 
         empty($errors["fichier_exercice"]) and 
-        empty($errors["fichier_correction"])){
-            /* envoie dans la bdd à faire ici*/
+        empty($errors["fichier_correction"] and
+        isset($_POST))){
 
             $alter = 0;
             foreach ($_FILES as $file) {
@@ -186,12 +188,11 @@
                         $query->bindParam(':new_name', $new_name);
                         $query->bindParam(':last_id', $last_id);
                         $query->execute();
-                        $uploads_dir = $uploads_exo ;
+                        $uploads_dir = $uploads_cor ;
                         $correction_file_id = $last_id;
                     }
                     $destination = $uploads_dir . $new_name . "." . $file_extention ;
                     if (move_uploaded_file($tmp_name, $destination )) {
-                        echo "File uploaded successfully.";
                         $fileContents = file_get_contents($destination);
                     } else {
                         echo "Failed to move the file.";
@@ -202,48 +203,45 @@
 
             
             
-                $classroom_id  = get_id_by_name($_POST['classroom'], "classroom");
-                $origin_id  = get_id_by_name($_POST['origin'], "origin");
-                $thematic_id  = get_id_by_name($_POST['thematic'], "thematic");
-                $user_id  = $_SESSION['user']['id'];
+            $classroom_id  = get_id_by_name($_POST['classroom'], "classroom");
+            $origin_id  = get_id_by_name($_POST['origin'], "origin");
+            $thematic_id  = get_id_by_name($_POST['thematic'], "thematic");
+            $user_id  = $_SESSION['user']['id'];
 
-                $query = $db->prepare("INSERT INTO exercise (name, classroom_id, thematic_id, chapter, keywords, difficulty, duration, origin_id, origin_name, origin_information, exercise_file_id, correction_file_id, created_by_id) 
-                VALUES (:name, :classroom_id, :thematic_id, :chapter, :keywords, :difficulty, :duration, :origin_id, :origin_name, :origin_information, :exercice_file_id, :correction_file_id, :created_by_id);");
-                $query->bindParam(':name', $_POST['name']);
-                var_dump($_POST['name']);
-                $query->bindParam(':classroom_id', $classroom_id);
-                var_dump($classroom_id);
-                $query->bindParam(':thematic_id', $thematic_id);
-                var_dump($thematic_id);
-                $query->bindParam(':chapter', $_POST['chapter']);
-                var_dump($_POST['chapter']);
-                $query->bindParam(':keywords', $_POST['keywords']);
-                var_dump($_POST['keywords']);
-                $query->bindParam(':difficulty', $_POST['difficulty']);
-                var_dump($_POST['difficulty']);
-                $query->bindParam(':duration', $_POST['duration']);
-                var_dump($_POST['duration']);
-                $query->bindParam(':origin_id', $origin_id);
-                var_dump($origin_id);
-                $query->bindParam(':origin_name', $_POST['origin_name']);
-                var_dump($_POST['origin_name']);
-                $query->bindParam(':origin_information', $_POST['origin_information']);
-                var_dump($_POST['origin_information']);
-                $query->bindParam(':exercice_file_id', $exercice_file_id);
-                var_dump($exercice_file_id);
-                $query->bindParam(':correction_file_id', $correction_file_id);
-                var_dump($correction_file_id);
-                var_dump($user_id);
-                $query->bindParam(':created_by_id', $user_id);
-                try {
-                    $a = $query->execute();
-                    echo $a;}
-                catch (PDOException $e){
-                    echo $e->getMessage();
-                };
-                            
-            
-        } 
+            $query = $db->prepare("INSERT INTO exercise (name, classroom_id, thematic_id, chapter, keywords, difficulty, duration, origin_id, origin_name, origin_information, exercise_file_id, correction_file_id, created_by_id) 
+            VALUES (:name, :classroom_id, :thematic_id, :chapter, :keywords, :difficulty, :duration, :origin_id, :origin_name, :origin_information, :exercice_file_id, :correction_file_id, :created_by_id);");
+            $query->bindParam(':name', $_POST['name']);
+            $query->bindParam(':classroom_id', $classroom_id);
+            $query->bindParam(':thematic_id', $thematic_id);
+            $query->bindParam(':chapter', $_POST['chapter']);
+            $query->bindParam(':keywords', $_POST['keywords']);
+            $query->bindParam(':difficulty', $_POST['difficulty']);
+            $query->bindParam(':duration', $_POST['duration']);
+            $query->bindParam(':origin_id', $origin_id);
+            $query->bindParam(':origin_name', $_POST['origin_name']);
+            $query->bindParam(':origin_information', $_POST['origin_information']);
+            $query->bindParam(':exercice_file_id', $exercice_file_id);
+            $query->bindParam(':correction_file_id', $correction_file_id);
+            $query->bindParam(':created_by_id', $user_id);
+            try {
+                $query->execute();
+                $displays["succes"] = "block";
+            }
+            catch (PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+        else if ( !(empty($errors["origin"])) or 
+        !(empty($errors['origin_name'])) or 
+        !(empty($errors['origin_information']))){
+            $displays["info"] = "none";
+            $displays["source"] = "block";
+        }
+        else if (!(empty($errors['fichier_exercice'])) or 
+        !(empty($errors['fichier_correction']))){
+            $displays["info"] = "none";
+            $displays["file"] = "block";
+        }
     }             
 ?>
 
@@ -314,6 +312,7 @@
                         <p class="errormsg" class="display: <?= $displays["duration"] ?>"><?= $errors["duration"] ?></p>
                     </div>
                 </div>
+                <p class="errormsg--succes" class="display: <?= $displays["succes"] ?>"><?= $values["succes"] ?></p>
                 <button type="button" id="next_source">Continuer</button>
             </div>
 
