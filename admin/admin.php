@@ -9,15 +9,15 @@
     <h1 class="administration__title">Administration</h1>
     <div class="administration__content">
         <div class="administration__head-bar">
-            <a href="index.php?page=Administration&onglet=contributeurs" class="administration__buttons-button">Contributeurs</a>
+            <a href="index.php?page=Administration&onglet=contributeurs" class="administration__buttons-button <?= $pageName === AdminPage::CONTRIBUTEURS->value ? "selected-admin" : "" ?>">Contributeurs</a>
         
-            <a href="index.php?page=Administration&onglet=exercices" class="administration__buttons-button">Exercices</a>
+            <a href="index.php?page=Administration&onglet=exercices" class="administration__buttons-button <?= $pageName === AdminPage::EXERCICES->value ? "selected-admin" : "" ?>">Exercices</a>
         
-            <a class="administration__buttons-button">Classes</a>
+            <a class="administration__buttons-button <?= $pageName === AdminPage::CLASSES->value ? "selected-admin" : "" ?>">Classes</a>
         
-            <a href="index.php?page=Administration&onglet=thematiques" class="administration__buttons-button">Thématiques</a>
+            <a href="index.php?page=Administration&onglet=thematiques" class="administration__buttons-button <?= $pageName === AdminPage::THEMATIQUES->value ? "selected-admin" : "" ?>">Thématiques</a>
         
-            <a href="index.php?page=Administration&onglet=origines" class="administration__buttons-button">Origines</a>
+            <a href="index.php?page=Administration&onglet=origines" class="administration__buttons-button <?= $pageName === AdminPage::ORIGINES->value ? "selected-admin" : "" ?>">Origines</a>
         </div>
         <div class="administration__gestion">
             <?php
