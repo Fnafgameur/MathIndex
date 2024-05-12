@@ -427,14 +427,24 @@ if (isset($db)) {
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    /**
+     * Permet d'obtenir une id avec un nom
+     * @param string $name nom du champ
+     * @param string $table nom de la table où se trouve le nom du champ
+     * @return array un tableau contennant tout les noms des sources
+     */
+    function get_id_by_name(string $name, string $table) : string
+    {
+        global $db;
+        $query = $db->prepare("SELECT id FROM ".$table." WHERE name=:name ;");
+        $query->bindParam(':name', $name);
+        $query->execute();
+        $array = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $array[0]["id"];
+        return $result;
+    }
 }
-
-
-
-
-
-
-
 
 
 

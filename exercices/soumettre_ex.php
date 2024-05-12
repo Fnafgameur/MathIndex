@@ -1,31 +1,7 @@
 <?php
     $uploads_exo = './assets/files/exercises/';
     $uploads_cor = './assets/files/corrections/';
-    /* mis en commentaire le temps de faire les verifs
-    $alter = 0;
-    foreach ($_FILES as $file) {
-        if ($file["error"] === UPLOAD_ERR_OK) {
-            $tmp_name = $file["tmp_name"];
-            $name = basename($file["name"]);
-            if (($alter%2) === 0){
-                $uploads_dir = $uploads_exo ;
-                echo "exo";
-            } else {
-                $uploads_dir = $uploads_cor;
-                echo "cor";
-            }
-            $destination = $uploads_dir . $name ;
-            var_dump($destination);
-            if (move_uploaded_file($tmp_name, $destination )) {
-                echo "File uploaded successfully.";
-                $fileContents = file_get_contents($destination);
-            } else {
-                echo "Failed to move the file.";
-            }
-        }
-        $alter += 1;
-    }
-    */
+
     $classrooms = get_classrooms_names();
     
     $thematics = get_thematics_names();
@@ -36,7 +12,6 @@
     }
 
     $origins = get_origins_names();
-    echo "<pre>".var_dump($origins)."</pre>";
 
     $errors=[
         'name' => "",
@@ -87,8 +62,6 @@
     ];
 
     if (!(empty($_POST))){
-        
-        
 
         foreach($_POST as $key => $value){
             if($key === "origin" or
@@ -114,7 +87,6 @@
             {
                 $values[$key] = $value;
                 if(!is_under_255($_POST[$key])){
-                    var_dump($key);
                     $errors[$key] = "Ce champs ne peut pas dépassé les 255 caractères";
                     $displays[$key] = "block";
                 }
@@ -137,7 +109,7 @@
             if ($key === "fichier_exercice" or
             $key === "fichier_correction"){
                 if (!empty($_FILES[$key])){
-                    $values[$key] = $_FILES[$key]["name"];
+                    
                     if ($_FILES[$key]["size"] > 2000000){
                         $errors[$key] = "Un fichié à une taille de 2mo maximum";
                         $displays[$key] = "block";
@@ -150,27 +122,129 @@
             }
         }
 
-        if ($errores['name'] and 
-        $errores['classroom'] and 
-        $errores['thematic'] and 
-        $errores['chapter'] and 
-        $errores['keywords'] and 
-        $errores['difficulty'] and 
-        $errores['duration'] and 
-        $errores["origin"] and 
-        $errores['origin_name'] and 
-        $errores['origin_information'] and 
-        $errores["fichier_exercice"] and 
-        $errores["fichier_correction"]){
-            /* envoie dans la bdd à faire ici*/
-            
+        foreach($_POST as $key => $value){
+            if($key === "origin" or
+            $key === "classroom" or
+            $key === "thematic" or
+            $key === "difficulty" or
+            $key === "name" or
+            $key === "origin_name"){
+                if (empty($value)){
+                    $errors[$key] = "ce champ est obligatoire";
+                    $displays[$key] = "block";
+                }
+            }
         }
 
-        
-    }
+        if (empty($errors['name']) and 
+        empty($errors['classroom']) and 
+        empty($errors['thematic']) and 
+        empty($errors['chapter']) and 
+        empty($errors['keywords']) and 
+        empty($errors['difficulty']) and 
+        empty($errors['duration']) and 
+        empty($errors["origin"]) and 
+        empty($errors['origin_name']) and 
+        empty($errors['origin_information']) and 
+        empty($errors["fichier_exercice"]) and 
+        empty($errors["fichier_correction"])){
+            /* envoie dans la bdd à faire ici*/
 
-        
-          
+            $alter = 0;
+            foreach ($_FILES as $file) {
+                if ($file["error"] === UPLOAD_ERR_OK) {
+                    $tmp_name = $file["tmp_name"];
+                    if (($alter%2) === 0){
+                        list($file_name, $file_extention) = explode(".",$file["name"]);
+                        $query = $db->prepare("INSERT INTO file (name, original_name, extension, size)
+                        VALUES (:name, :original_name, :extension, :size);");
+                        $query->bindParam(':name', $file_name);
+                        $query->bindParam(':original_name', $file_name);
+                        $query->bindParam(':extension', $file_extention);
+                        $query->bindParam(':size', $file['size']);
+                        $query->execute();
+                        $last_id = get_id_by_name($file_name, "file");
+                        $new_name = "exercice_id_".$last_id;
+                        $query = $db->prepare("UPDATE file SET name = :new_name WHERE id = :last_id;");
+                        $query->bindParam(':new_name', $new_name);
+                        $query->bindParam(':last_id', $last_id);
+                        $query->execute();
+                        $uploads_dir = $uploads_exo ;
+                        $exercice_file_id = $last_id;
+                    } else {
+                        $uploads_dir = $uploads_cor;list($file_name, $file_extention) = explode(".",$file["name"]);
+                        $query = $db->prepare("INSERT INTO file (name, original_name, extension, size)
+                        VALUES (:name, :original_name, :extension, :size);");
+                        $query->bindParam(':name', $file_name);
+                        $query->bindParam(':original_name', $file_name);
+                        $query->bindParam(':extension', $file_extention);
+                        $query->bindParam(':size', $file['size']);
+                        $query->execute();
+                        $last_id = get_id_by_name($file_name, "file");
+                        $new_name = "correction_id_".$last_id;
+                        $query = $db->prepare("UPDATE file SET name = :new_name WHERE id = :last_id;");
+                        $query->bindParam(':new_name', $new_name);
+                        $query->bindParam(':last_id', $last_id);
+                        $query->execute();
+                        $uploads_dir = $uploads_exo ;
+                        $correction_file_id = $last_id;
+                    }
+                    $destination = $uploads_dir . $new_name . "." . $file_extention ;
+                    if (move_uploaded_file($tmp_name, $destination )) {
+                        echo "File uploaded successfully.";
+                        $fileContents = file_get_contents($destination);
+                    } else {
+                        echo "Failed to move the file.";
+                    }
+                }
+                $alter += 1;
+            }
+
+            
+            
+                $classroom_id  = get_id_by_name($_POST['classroom'], "classroom");
+                $origin_id  = get_id_by_name($_POST['origin'], "origin");
+                $thematic_id  = get_id_by_name($_POST['thematic'], "thematic");
+                $user_id  = $_SESSION['user']['id'];
+
+                $query = $db->prepare("INSERT INTO exercise (name, classroom_id, thematic_id, chapter, keywords, difficulty, duration, origin_id, origin_name, origin_information, exercise_file_id, correction_file_id, created_by_id) 
+                VALUES (:name, :classroom_id, :thematic_id, :chapter, :keywords, :difficulty, :duration, :origin_id, :origin_name, :origin_information, :exercice_file_id, :correction_file_id, :created_by_id);");
+                $query->bindParam(':name', $_POST['name']);
+                var_dump($_POST['name']);
+                $query->bindParam(':classroom_id', $classroom_id);
+                var_dump($classroom_id);
+                $query->bindParam(':thematic_id', $thematic_id);
+                var_dump($thematic_id);
+                $query->bindParam(':chapter', $_POST['chapter']);
+                var_dump($_POST['chapter']);
+                $query->bindParam(':keywords', $_POST['keywords']);
+                var_dump($_POST['keywords']);
+                $query->bindParam(':difficulty', $_POST['difficulty']);
+                var_dump($_POST['difficulty']);
+                $query->bindParam(':duration', $_POST['duration']);
+                var_dump($_POST['duration']);
+                $query->bindParam(':origin_id', $origin_id);
+                var_dump($origin_id);
+                $query->bindParam(':origin_name', $_POST['origin_name']);
+                var_dump($_POST['origin_name']);
+                $query->bindParam(':origin_information', $_POST['origin_information']);
+                var_dump($_POST['origin_information']);
+                $query->bindParam(':exercice_file_id', $exercice_file_id);
+                var_dump($exercice_file_id);
+                $query->bindParam(':correction_file_id', $correction_file_id);
+                var_dump($correction_file_id);
+                var_dump($user_id);
+                $query->bindParam(':created_by_id', $user_id);
+                try {
+                    $a = $query->execute();
+                    echo $a;}
+                catch (PDOException $e){
+                    echo $e->getMessage();
+                };
+                            
+            
+        } 
+    }             
 ?>
 
 <div class="submit">
@@ -198,7 +272,7 @@
                                 echo $values["classroom"];
                                 foreach($classrooms as $class){
                                     echo'
-                                    <option value='.$class["name"].'>'.$class["name"].'</option>
+                                    <option value="'.$class["name"].'">'.$class["name"].'</option>
                                     ';
                                 }
                             ?>
@@ -210,7 +284,7 @@
                                 echo $values["thematic"];
                                 foreach($thematics as $them){
                                     echo'
-                                    <option value='.$them["name"].'>'.$them["name"].'</option>
+                                    <option value="'.$them["name"].'">'.$them["name"].'</option>
                                     ';
                                 }
                             ?>
@@ -229,12 +303,11 @@
                             <?php
                                 echo $values["difficulty"];
                                 foreach($difficulty as $diff){
-                                    echo'
-                                    <option value='.$diff.'>'.$diff.'</option>
-                                    ';
+                                    echo'<option value="'.$diff.'">'.$diff.'</option>';
                                 }
                             ?>
                         </select>
+
                         <p class="errormsg" class="display: <?= $displays["difficulty"] ?>"><?= $errors["difficulty"] ?></p><br>
                         <label for="duration">Durée (en heure):</label><br>
                         <input id="duration"  name="duration" <?= $values["duration"]?>>
@@ -252,7 +325,7 @@
                         echo $values["origin"];
                         foreach($origins as $origin){
                             echo'
-                            <option value='.$origin["name"].'>'.$origin["name"].'</option>
+                            <option value="'.$origin["name"].'">'.$origin["name"].'</option>
                             ';
                         }
                     ?>

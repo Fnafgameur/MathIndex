@@ -101,7 +101,6 @@
             if(in_array($value,$names,true)){
                 return true;
             }
-            
         }
         return false;
     }
