@@ -48,7 +48,7 @@
         'origin_information' => "none",
         "fichier_exercice" => "none",
         "fichier_correction" => "none",
-        "succes" => "none"
+        "success" => "none"
     ];
 
     $values=[
@@ -64,7 +64,7 @@
         'origin_information' => "",
         "fichier_exercice" => "Selectionné un fichier à télécharger",
         "fichier_correction" => "Selectionné un fichier à télécharger",
-        "succes" => "L'exercice a été envoyé avec succés"
+        "success" => "L'exercice a été envoyé avec succés"
     ];
 
     if (!(empty($_POST))){
@@ -225,7 +225,7 @@
             $query->bindParam(':created_by_id', $user_id);
             try {
                 $query->execute();
-                $displays["succes"] = "block";
+                $displays["success"] = "block";
             }
             catch (PDOException $e){
                 echo $e->getMessage();
@@ -263,7 +263,7 @@
                     <div>
                         <label for="name">Nom de l'exercice: *</label><br>
                         <input id="name" name="name" <?= $values["name"]?>><br>
-                        <p class="errormsg" class="display: <?= $displays["name"] .'">'.$errors["name"] ?> </p>
+                        <p class="errormsg" style="display: <?= $displays["name"] .'">'.$errors["name"] ?> </p>
                         <label for="classroom">Classe: *</label><br>
                         <select name="classroom" id="classroom">
                             <?php
@@ -275,7 +275,7 @@
                                 }
                             ?>
                         </select>
-                        <p class="errormsg" class="display: <?= $displays["classroom"] ?>"><?= $errors["classroom"] ?></p><br>
+                        <p class="errormsg" style="display: <?= $displays["classroom"] ?>"><?= $errors["classroom"] ?></p><br>
                         <label for="thematic">Thématique: *</label><br>
                         <select name="thematic"id="thematic">
                             <?php
@@ -287,15 +287,15 @@
                                 }
                             ?>
                         </select>
-                        <p class="errormsg" class="display: <?= $displays["thematic"] ?>"><?= $errors["thematic"] ?></p><br>
+                        <p class="errormsg" style="display: <?= $displays["thematic"] ?>"><?= $errors["thematic"] ?></p><br>
                         <label for="chapter">Chapitre du cours:</label><br>
                         <input id="chapter"  name="chapter" <?= $values["chapter"]?>>
-                        <p class="errormsg" class="display: <?= $displays["chapter"] ?>"><?= $errors["chapter"] ?></p>
+                        <p class="errormsg" style="display: <?= $displays["chapter"] ?>"><?= $errors["chapter"] ?></p>
                     </div>
                     <div>
                         <label for="keywords">Mots clés</label><br>
                         <input id="keywords"  name="keywords" <?= $values["keywords"]?>>
-                        <p class="errormsg" class="display: <?= $displays["keywords"] ?>"><?= $errors["keywords"] ?></p><br>
+                        <p class="errormsg" style="display: <?= $displays["keywords"] ?>"><?= $errors["keywords"] ?></p><br>
                         <label for="difficulty">Difficulté: *</label><br>
                         <select name="difficulty" id="difficulty" >
                             <?php
@@ -306,13 +306,13 @@
                             ?>
                         </select>
 
-                        <p class="errormsg" class="display: <?= $displays["difficulty"] ?>"><?= $errors["difficulty"] ?></p><br>
+                        <p class="errormsg" style="display: <?= $displays["difficulty"] ?>"><?= $errors["difficulty"] ?></p><br>
                         <label for="duration">Durée (en heure):</label><br>
                         <input id="duration"  name="duration" <?= $values["duration"]?>>
-                        <p class="errormsg" class="display: <?= $displays["duration"] ?>"><?= $errors["duration"] ?></p>
+                        <p class="errormsg" style="display: <?= $displays["duration"] ?>"><?= $errors["duration"] ?></p>
                     </div>
                 </div>
-                <p class="errormsg--succes" class="display: <?= $displays["succes"] ?>"><?= $values["succes"] ?></p>
+                <p class="errormsg--success" style="display: <?= $displays["success"] ?>"><?= $values["success"] ?></p>
                 <button type="button" id="next_source">Continuer</button>
             </div>
 
@@ -329,13 +329,13 @@
                         }
                     ?>
                 </select>
-                <p class="errormsg" class="display: <?= $displays["origin"] ?>"><?= $errors["origin"] ?></p><br>
+                <p class="errormsg" style="display: <?= $displays["origin"] ?>"><?= $errors["origin"] ?></p><br>
                 <label for="origin_name">Nom de la source/lien du site: *</label>
                 <input id="origin_name"  name="origin_name" <?= $values["origin_name"]?>>
-                <p class="errormsg" class="display: <?= $displays["origin_name"] ?>"><?= $errors["origin_name"] ?></p>
+                <p class="errormsg" style="display: <?= $displays["origin_name"] ?>"><?= $errors["origin_name"] ?></p>
                 <label for="origin_information">Information complémentaires:</label>
                 <textarea id="origin_information"  name="origin_information" ><?= $values["origin_information"] ?></textarea>
-                <p class="errormsg" class="display: <?= $displays["origin_information"] ?>"><?= $errors["origin_information"] ?></p>
+                <p class="errormsg" style="display: <?= $displays["origin_information"] ?>"><?= $errors["origin_information"] ?></p>
                 <button type="button" id="next_file">Continuer</button>
             </div>
 
@@ -348,7 +348,7 @@
                     </div>
                     <input type="file" accept=".docx, .pdf, .txt" id="fichier_exercice"  name="fichier_exercice" hidden/>
                 </label>
-                <p class="errormsg" class="display: <?= $displays["fichier_exercice"] ?>"><?= $errors["fichier_exercice"] ?></p>
+                <p class="errormsg" style="display: <?= $displays["fichier_exercice"] ?>"><?= $errors["fichier_exercice"] ?></p>
                 <label for="fichier_correction">fichier correction: (pdf, docx)*<br>
                     <div>
                         <p id="fichier_correction_choisit"><?= $values["fichier_correction"] ?></p>
@@ -356,7 +356,7 @@
                     </div>
                     <input type="file" accept=".docx, .pdf, .txt" id="fichier_correction"  name="fichier_correction"  hidden/>
                 </label>
-                <p class="errormsg" class="display: <?= $displays["fichier_correction"] ?>"><?= $errors["fichier_correction"] ?></p>
+                <p class="errormsg" style="display: <?= $displays["fichier_correction"] ?>"><?= $errors["fichier_correction"] ?></p>
                 <button type="submit">Enregistrer</button>
             </div>
         </form>
