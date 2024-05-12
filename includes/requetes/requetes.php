@@ -354,10 +354,10 @@ if (isset($db)) {
     }
 
     /**
-     * Permet d'obtenir toutes les matières stockées en DB avec une limite si spécifiée
-     * @param int|null $currentPage La page actuelle
-     * @param int|null $limit Le nombre de matières à retourner (non obligatoire)
-     * @return array Retourne un tableau associatif contenant les informations de toutes les matières
+     * Permet d'obtenir toutes les thématiques stockées en DB avec une limite si spécifiée
+     * @param int|null $currentPage La page actuelle (non obligatoire)
+     * @param int|null $limit Le nombre de thématiques à retourner (non obligatoire)
+     * @return array Retourne un tableau associatif contenant les informations de toutes les thématiques
      */
     function get_thematics(int $currentPage = null, int $limit = null) : array
     {
@@ -370,6 +370,7 @@ if (isset($db)) {
         else {
             $limitReq = "";
         }
+
         $query = $db->prepare("SELECT * FROM thematic $limitReq");
         $query->execute();
 
@@ -380,11 +381,25 @@ if (isset($db)) {
     }
 
     /**
-     * Permet d'obtenir toutes les matières ayant un nom correspondant à la recherche
+     * Permet d'obtenir une thématique en fonction de son ID
+     * @param int $id L'ID de la thématique
+     * @return mixed Retourne un tableau associatif contenant les informations de la thématique ou null si la thématique n'existe pas
+     */
+    function get_thematics_by_id(int $id) : mixed
+    {
+        global $db;
+        $query = $db->prepare("SELECT * FROM thematic WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet d'obtenir toutes les thématiques ayant un nom correspondant à la recherche
      * @param int $currentPage La page actuelle
-     * @param int $limit Le nombre de matières à retourner
+     * @param int $limit Le nombre de thématiques à retourner
      * @param string $keywords Les mots-clés de recherche
-     * @return array Retourne un tableau associatif contenant les informations de toutes les matières correspondant à la recherche
+     * @return array Retourne un tableau associatif contenant les informations de toutes les thématiques correspondant à la recherche
      */
     function get_thematics_by_keywords(int $currentPage, int $limit, string $keywords) : array
     {
@@ -403,12 +418,86 @@ if (isset($db)) {
 
         return $result;
     }
+
+    /**
+     * Permet de compter le nombre d'exercices par thématique
+     * @return array Retourne un tableau associatif contenant le nombre d'exercices par thématique
+     */
     function get_exercises_count_by_thematic() : array {
         global $db;
         $query = $db->prepare("SELECT thematic.name, COUNT(exercise.id) AS nbExercises FROM exercise INNER JOIN thematic ON exercise.thematic_id = thematic.id GROUP BY thematic.name");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
         return array_column($result, 'nbExercises', 'name');
+    }
+
+    /**
+     * Permet de modifier une thématique en fonction de son ID
+     * @param int $idToUpdate L'ID de la thématique à modifier
+     * @param string $name Le nom de la thématique à mettre à jour
+     * @return bool Retourne true si la mise à jour a été effectuée, false sinon
+     */
+    function update_thematic(int $idToUpdate, string $name) : bool
+    {
+        $thematic = get_thematics_by_id($idToUpdate);
+        if ($thematic["name"] === $name) {
+            return false;
+        }
+        return update_by_id(Type::THEMATIC->value, $idToUpdate, $name);
+    }
+
+    /**
+     * Permet de modifier une difficulté en fonction de son ID
+     * @param string $value La table à mettre à jour
+     * @param int $idToUpdate L'ID de la thématique à mettre à jour
+     * @param string $name Le nom de la thématique à mettre à jour
+     * @return bool Retourne true si la mise à jour a été effectuée, false sinon
+     */
+    function update_by_id(string $value, int $idToUpdate, string $name) : bool
+    {
+        global $db;
+        $query = $db->prepare("UPDATE $value SET name = :name WHERE id = :id");
+        $query->bindParam(':id', $idToUpdate);
+        $query->bindParam(':name', $name);
+        $query->execute();
+
+        if ($query->rowCount() === 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Permet de vérifier si une thématique existe déjà
+     * @param string $name Le nom de la thématique
+     * @return bool Retourne true si la thématique existe déjà, false sinon
+     */
+    function is_thematic_exists(string $name) : bool
+    {
+        global $db;
+        $query = $db->prepare("SELECT * FROM thematic WHERE name = :name");
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+        $result = $query->fetch();
+        return $result !== false;
+    }
+
+    /**
+     * Permet de vérifier si une thématique existe déjà
+     * @param string $name Le nom de la thématique
+     * @return bool Retourne true si la thématique existe déjà, false sinon
+     */
+    function add_thematic(string $name) : bool
+    {
+        global $db;
+
+        if (is_thematic_exists($name)) {
+            return false;
+        }
+        $query = $db->prepare("INSERT INTO thematic (name) VALUES (:name)");
+        $query->bindParam(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+        return $db->lastInsertId();
     }
 
     /**
