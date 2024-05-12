@@ -1,7 +1,9 @@
 <?php
 
+    $type = Type::EXERCISE->value;
     $currentAction = "";
     $exercises = [];
+
 
     if (isset($_SESSION["formValues"])) {
         if (!array_key_exists("search_ex", $_SESSION["formValues"])) {
@@ -15,26 +17,31 @@
 
         if (isset($research)) {
             if (is_null_or_empty($research)["result"]) {
-                $exercises = get_exercises($current_page, $per_page);
+                $exercises = get_all($type,$current_page, $per_page);
             }
             else {
-                $exercises = get_exercises_by_keywords($current_page, $per_page, $research);
+                $exercises = get_by_keywords($type,$current_page, $per_page, $research);
             }
         }
 
         if (isset($_POST["search"])) {
-            $exercises = get_exercises_by_keywords($current_page, $per_page, $_POST["search"]);
+            $exercises = get_by_keywords($type,$current_page, $per_page, $research);
         }
         else if (isset($_POST["delete"])) {
             $id = explode(",", $_POST["delete"])[0];
             $name = explode(",", $_POST["delete"])[1];
             $delete = delete_by_id(Type::EXERCISE->value, $id);
             if ($delete) {
-                echo "<script>alert('L\'exercice de $name a bien été supprimé.');</script>";
+                $didDelete = true;
+                $exercises = get_all($type,$current_page, $per_page);
             }
             else {
                 echo "<script>alert('Une erreur est survenue lors de la suppression de l\'exercice de $name.');</script>";
+                header('Location: index.php?page='.$_GET["page"].'&pagination='.$current_page.'&onglet=exercices');
             }
+        }
+        else if (isset($_GET["updating"]) && isset($_POST["submit"])) {
+            $_SESSION["modify_exercise"] = $_POST["submit"];
         }
 
         $_SESSION["formValues"]["search_ex"] = $research;
@@ -94,13 +101,13 @@
                             <a class="link link--row" href="<?= $file ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                         <td>
-                            <form action="index.php?page=Administration&updating=<?= $exercise["id"] ?>&first" method="post">
+                            <form action="index.php?page=Soumettre&updating=<?= $exercise["id"] ?>&first" method="post">
                                 <input type="hidden" name="update" value="<?= $exercise["id"] ?>">
                                 <button type="submit" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
                             </form>
-                            <form action="#" method="post">
+                            <form action="" method="post">
                                 <input type="hidden" name="delete" value="<?= $exercise["id"] . ',' . $exercise["name"] ?>">
-                                <button type="submit" class="contributeurs__button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');"><img src="assets/icons/delete_file.svg">Supprimer</button>
+                                <button type="button" class="contributeurs__button modal__trigger" onclick="sendData(this.parentElement)"><img src="assets/icons/delete_file.svg">Supprimer</button>
                             </form>
                         </td>
                     </tr>
