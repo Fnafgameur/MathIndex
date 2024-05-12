@@ -51,6 +51,12 @@
                     "search" => $_POST["search_orig"] ?? "",
                 ];
                 break;
+            case AdminTab::CLASSES->value:
+                $formValueKeys = ["search_classe"];
+                $formValues = $_SESSION["formValues"] ?? [
+                    "search" => $_POST["search_classe"] ?? "",
+                ];
+                break;
             default:
                 $formValueKeys = [];
                 $formValues = [];

@@ -51,7 +51,7 @@
         if (isset($_POST["delete"])) {
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
-            delete_by_id(Type::ORIGIN->value, $idDeleted);
+            delete_by_id($type, $idDeleted);
             $origines = get_all($type, $current_page, $per_page);
             $didDelete = true;
         }
@@ -136,7 +136,7 @@
 
 <div class="contributors">
 
-    <h2><?= $currentAction === "adding" ? "Ajouter une origines" : (($currentAction === "updating") ? "Modifier une origines" : "Gestion des origines") ?></h2>
+    <h2><?= $currentAction === "adding" ? "Ajouter une origine" : (($currentAction === "updating") ? "Modifier une origine" : "Gestion des origines") ?></h2>
 
     <?php if ($currentAction === "") { ?>
 

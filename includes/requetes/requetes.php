@@ -456,6 +456,8 @@ if (isset($db)) {
             case Type::USER->value:
                 $query = $db->prepare("SELECT * FROM $type WHERE last_name LIKE '%$keywords%' OR first_name LIKE '%$keywords%' OR email LIKE '%$keywords%' $limitReq");
                 break;
+            case Type::THEMATIC->value:
+            case Type::CLASSROOM->value:
             case Type::ORIGIN->value:
                 $query = $db->prepare("SELECT * FROM $type WHERE name LIKE '%$keywords%' $limitReq");
                 break;

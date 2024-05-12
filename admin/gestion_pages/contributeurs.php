@@ -76,7 +76,7 @@
         if (isset($_POST["delete"])) {
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
-            delete_by_id(Type::USER->value, $idDeleted);
+            delete_by_id($type, $idDeleted);
             $contributeurs = get_all($type, $current_page, $per_page);
             $didDelete = true;
         }
