@@ -28,13 +28,22 @@
                     $exercice = $file_sorted['exercise'];
                     $correction = $file_sorted['correction'];
                     $keywords_sorted = explode(' ', $exercise_sorted['keywords']);
+                    $duration = $exercise_sorted["duration"];
+                    if (substr($duration, -2) === ".5") {
+                        $duration = str_replace(".5", "h30", $duration);
+                    }
+                    else {
+                        if (floor($duration) == $duration) {
+                            $duration .= "h00";
+                        }
+                    }
                     ?>
                     <tr class="mathematics__table-row">
                         <td class="mathematics__table-data"><?=$exercise_sorted['name']?></td>
                         <td class="mathematics__table-data"><?=get_thematic_by_exercises($exercise_sorted["thematic_id"])['name'];?>
                         </td>
                         <td class="mathematics__table-data">Niveau <?=$exercise_sorted['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$exercise_sorted['duration'].'h00'??"Aucun"?></td>
+                        <td class="mathematics__table-data"><?=$duration??"Aucun"?></td>
                         <td class="mathematics__table-data wordbreak"><?php foreach ($keywords_sorted as $keyword) {
                                 echo "<p class='keyword'>$keyword</p>";
                             } ?>
@@ -67,13 +76,22 @@
                     $exercice = $file_sorted['exercise'];
                     $correction = $file_sorted['correction'];
                     $keywords = explode(' ', $exercise['keywords']);
+                    $duration = $exercise["duration"];
+                    if (substr($duration, -2) === ".5") {
+                        $duration = str_replace(".5", "h30", $duration);
+                    }
+                    else {
+                        if (floor($duration) == $duration) {
+                            $duration .= "h00";
+                        }
+                    }
                     ?>
                     <tr class="mathematics__table-row">
                         <td class="mathematics__table-data"><?=$exercise['name']?></td>
                         <td class="mathematics__table-data"><?=get_thematic_by_exercises($exercise["thematic_id"])['name'];?>
                         </td>
                         <td class="mathematics__table-data">Niveau <?=$exercise['difficulty']?></td>
-                        <td class="mathematics__table-data"><?=$exercise['duration'].'h00'??"Aucun"?></td>
+                        <td class="mathematics__table-data"><?=$duration??"Aucune"?></td>
                         <td class="mathematics__table-data wordbreak"><?php foreach ($keywords as $keyword) {
                                 echo "<p class='keyword'>$keyword</p>";
                             } ?>
