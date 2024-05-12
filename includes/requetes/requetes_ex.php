@@ -161,15 +161,32 @@ function get_thematic_by_exercises($exercise_thematic_id): mixed
 /**
  * Permet d'obtenir un fichier en fonction de l'ID de l'exercice
  * @param int $exercise_file_id L'ID de l'exercice
- * @return mixed Retourne un tableau associatif contenant les informations du fichier ou null si le fichier n'existe pas
+ * @return array Retourne un tableau associatif contenant les informations du fichier ou null si le fichier n'existe pas
  */
-function get_file_by_exercises(int $exercise_file_id): mixed
+function get_file_by_exercises(int $exercise_file_id): array
 {
     global $db;
+
+    $result = [
+        "exercise" => [],
+        "correction" => [],
+    ];
+
     $query = $db->prepare("SELECT file.id, file.name, file.extension, file.size from file INNER JOIN exercise ON file.id = exercise.exercise_file_id WHERE file.id = :exercise;");
     $query->bindParam(':exercise', $exercise_file_id);
     $query->execute();
-    return $query->fetch(PDO::FETCH_ASSOC);
+
+    $result["exercise"] = $query->fetch(PDO::FETCH_ASSOC);
+
+    $exercise_file_id++;
+
+    $query = $db->prepare("SELECT file.id, file.name, file.extension, file.size from file INNER JOIN exercise ON file.id = exercise.correction_file_id WHERE file.id = :exercise;");
+    $query->bindParam(':exercise', $exercise_file_id);
+    $query->execute();
+
+    $result["correction"] = $query->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
 }
 
 /**

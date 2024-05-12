@@ -104,7 +104,11 @@
             </thead>
             <tbody>
             <?php
-                foreach ($exercices as $exercice) { ?>
+                foreach ($exercices as $exercice) {
+                    $file_sorted = get_file_by_exercises($exercice['exercise_file_id']);
+                    $exerciceFile = $file_sorted['exercise'];
+                    $correctionFile = $file_sorted['correction'];
+                    ?>
 
                 <tr class="research__table-row">
                     <td class="research__table-data"><?= $exercice["name"] ?></td>
@@ -114,11 +118,11 @@
                     <td class="research__table-data file-container">
                         <div class="research__table-file">
                             <img src="./assets/icons/download_file.svg" alt="logo téléchargement">
-                            <a href="<?= $exercice["file"]??"" ?>" download="<?= $exercice["file"]??"" ?>">Exercice</a>
+                            <a href="./assets/files/exercises/<?=$exerciceFile['name'].'.'.$exerciceFile['extension']?>" download>Exercice</a>
                         </div>
                         <div class="research__table-file">
                             <img src="./assets/icons/download_file.svg" alt="logo téléchargement">
-                            <a href="<?= $exercice["file_corrected"]??"" ?>" download="<?= $exercice["file_corrected"]??"" ?>">Corrigé</a>
+                            <a href="./assets/files/corrections/<?=$correctionFile['name'].'.'.$correctionFile['extension']?>" download>Corrigé</a>
                         </div>
                     </td>
                 </tr>
