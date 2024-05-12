@@ -801,10 +801,14 @@ body{
                 padding: 0.5rem 2%;
                 cursor: pointer;
                 border: none;
-                background-color: #455884;
+                background-color: $bgBlueButtonAdmin;
                 color: white;
                 text-decoration: none;
                 font-family: 'Noto sans';
+
+                &.selected-admin {
+                    background-color: $textBlue;
+                }
             }
 
             a:hover {

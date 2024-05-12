@@ -1,5 +1,6 @@
 <?php
 
+    $type = Type::USER->value;
     $currentAction = "";
     $successMessage = "";
 
@@ -42,6 +43,11 @@
             "displayValue" => "none",
             "errorMsg" => "",
         ],
+        "profilepic" => [
+            "value" => $_FILES["profilepic"]??"",
+            "displayValue" => "none",
+            "errorMsg" => "",
+        ],
         "assigned" => [
             "displayValue" => "none",
             "errorMsg" => "",
@@ -60,10 +66,10 @@
 
         if (isset($research)) {
             if (is_null_or_empty($research)["result"]) {
-                $contributeurs = get_all_users($current_page, $per_page);
+                $contributeurs = get_all($type, $current_page, $per_page);
             }
             else {
-                $contributeurs = get_user_by_keywords($current_page, $per_page, $research);
+                $contributeurs = get_by_keywords($type, $current_page, $per_page, $research);
             }
         }
 
@@ -71,7 +77,7 @@
             $idDeleted = explode(",", $_POST["delete"])[0];
             $nameDeleted = explode(",", $_POST["delete"])[1];
             delete_by_id(Type::USER->value, $idDeleted);
-            $contributeurs = get_all_users($current_page, $per_page);
+            $contributeurs = get_all($type, $current_page, $per_page);
             $didDelete = true;
         }
         else if (isset($_GET["updating"])) {
@@ -79,12 +85,13 @@
             $idToUpdate = $_GET["updating"];
 
             if (!isset($_POST["Envoyer"])) {
-                $userInfos = get_user_by_id($idToUpdate);
+                $userInfos = get_by_id($type, $idToUpdate);
 
                 $informations["firstname"]["value"] = $userInfos["first_name"];
                 $informations["lastname"]["value"] = $userInfos["last_name"];
                 $informations["email"]["value"] = $userInfos["email"];
                 $informations["role"]["value"] = $userInfos["role"];
+                $informations["profilepic"]["value"] = $userInfos["profilepic_path"];
             }
         }
         $informations["email"]["value"] = strtolower($informations["email"]["value"]);
@@ -95,9 +102,14 @@
         $email = htmlspecialchars($informations["email"]["value"]);
         $password = htmlspecialchars($informations["password"]["value"]);
         $role = htmlspecialchars($informations["role"]["value"]);
+        $profilepic = $informations["profilepic"]["value"];
 
         if ((isset($_GET["adding"]) || isset($_GET["updating"])) && !isset($_GET["first"])) {
             $isCorrect = true;
+
+            $targetDir = "./assets/profilepics/";
+            $target_file = $targetDir . basename($_FILES["profilepic"]["name"]);
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
             foreach ($informations as $infoKey => $infoValue) {
 
@@ -105,7 +117,7 @@
                     continue;
                 }
 
-                if (is_null_or_empty($infoValue["value"])["result"]) {
+                if ($infoKey !== "profilepic" && is_null_or_empty($infoValue["value"])["result"]) {
                     $informations[$infoKey]["displayValue"] = "block";
                     $informations[$infoKey]["errorMsg"] = "Veuillez remplir ce champ.";
                     $isCorrect = false;
@@ -117,6 +129,29 @@
                     if (!$checkMail["result"]) {
                         $informations["email"]["displayValue"] = "block";
                         $informations["email"]["errorMsg"] = $checkMail["msg"];
+                        $isCorrect = false;
+                    }
+                }
+                if ($infoKey === "profilepic") {
+
+                    if ($profilepic["name"] === "") {
+                        $informations["profilepic"]["displayValue"] = "block";
+                        $informations["profilepic"]["errorMsg"] = "Veuillez choisir une image.";
+                        $isCorrect = false;
+                        continue;
+                    }
+
+                    $checkPp = getimagesize($profilepic["tmp_name"]);
+
+                    if (!$checkPp) {
+                        $informations["profilepic"]["displayValue"] = "block";
+                        $informations["profilepic"]["errorMsg"] = "Veuillez choisir une image valide (PNG/JPEG).";
+                        $isCorrect = false;
+                    }
+
+                    if ($profilepic["size"] > 2000000) {
+                        $informations["profilepic"]["displayValue"] = "block";
+                        $informations["profilepic"]["errorMsg"] = "Fichier trop volumineux (2Mo max).";
                         $isCorrect = false;
                     }
                 }
@@ -143,7 +178,19 @@
                     $password = password_hash($password, PASSWORD_ARGON2ID);
 
                     if ($currentAction === "updating") {
-                        $isIdUpdated = update_user_by_id($idToUpdate, $email, $lastName, $firstName, $password, $role);
+
+                        $profilepic = $targetDir . $lastName . "_" . $idToUpdate . "." . $imageFileType;
+
+                        $toUpdate = [
+                            "email" => $email,
+                            "last_name" => $lastName,
+                            "first_name" => $firstName,
+                            "password" => $password,
+                            "role" => $role,
+                            "profilepic_path" => $profilepic,
+                        ];
+
+                        $isIdUpdated = update_value_by_id($type, $toUpdate, $idToUpdate);
 
                         if (!$isIdUpdated) {
                             $doSendInfos = false;
@@ -152,18 +199,34 @@
                         }
                         else {
                             $successMessage = "Contributeur modifié avec succès.";
+                            $isImageMoved = move_uploaded_file($_FILES["profilepic"]["tmp_name"], $profilepic);
                         }
                     }
                     else {
-                        $isAdded = add_user($lastName, $firstName, $email, $password, $role);
 
-                        if (!$isAdded) {
+                        $whereToAdd = ["email", "last_name", "first_name", "password", "role", "profilepic_path"];
+                        $id = get_next_id($type);
+                        $profilepic = $targetDir . $lastName . "_" . $id . "." . $imageFileType;
+
+                        $toAdd = [
+                            $email,
+                            $lastName,
+                            $firstName,
+                            $password,
+                            $role,
+                            $profilepic,
+                        ];
+
+                        $reqResult = add_to_db($type, $whereToAdd, $toAdd);
+
+                        if (!$reqResult) {
                             $doSendInfos = false;
                             $informations["assigned"]["displayValue"] = "block";
                             $informations["assigned"]["errorMsg"] = "Erreur lors de l'ajout de l'utilisateur.";
                         }
                         else {
                             $successMessage = $informations["role"]["value"] . " ajouté avec succès.";
+                            $isImageMoved = move_uploaded_file($_FILES["profilepic"]["tmp_name"], $profilepic);
                         }
                     }
                 }
@@ -174,15 +237,15 @@
 
     } else {
         if ($research === "") {
-            $contributeurs = get_all_users($current_page, $per_page);
+            $contributeurs = get_all($type, $current_page, $per_page);
         }
         else {
-            $contributeurs = get_user_by_keywords($current_page, $per_page, $research);
+            $contributeurs = get_by_keywords($type, $current_page, $per_page, $research);
         }
     }
 
     $number = $contributeurs["number"]??0;
-    $contributeurs = $contributeurs["users"];
+    $contributeurs = $contributeurs["values"];
 
 ?>
 
@@ -242,7 +305,7 @@
 
     <?php } else { ?>
 
-        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=contributeurs" method="post">
+        <form action="index.php?page=Administration&<?= $currentAction ?><?= $currentAction === "updating" ? "=" . $_GET["updating"] : "" ?>&onglet=contributeurs" method="post" enctype="multipart/form-data">
             <label for="nom">Nom :</label>
             <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["lastname"]["value"] ?>">
             <p class="errormsg" style="display: <?= $informations["lastname"]["displayValue"] ?>;"><?= $informations["lastname"]["errorMsg"] ?></p>
@@ -265,6 +328,10 @@
                 <option value="Eleve" <?= $informations["role"]["value"] === "Eleve" ? "selected" : "" ?>>Elève</option>
             </select>
             <p class="errormsg" style="display: <?= $informations["role"]["displayValue"] ?>;"><?= $informations["role"]["errorMsg"] ?></p>
+
+            <label for="profilepic">Photo de profil :</label>
+            <input type="file" name="profilepic" id="profilepic" accept="image/png, image/jpeg">
+            <p class="errormsg" style="display: <?= $informations["profilepic"]["displayValue"] ?>;"><?= $informations["profilepic"]["errorMsg"] ?></p>
 
             <input type="submit" name="Envoyer" value="Envoyer">
             <a href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>

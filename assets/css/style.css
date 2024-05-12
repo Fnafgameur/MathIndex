@@ -646,6 +646,9 @@ body {
   text-decoration: none;
   font-family: "Noto sans";
 }
+.administration .administration__content .administration__head-bar a.selected-admin {
+  background-color: #1B3168;
+}
 .administration .administration__content .administration__head-bar a:hover {
   background-color: #1B3168;
 }

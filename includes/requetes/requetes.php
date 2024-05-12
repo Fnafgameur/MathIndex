@@ -5,54 +5,6 @@ include_once 'includes/db.php';
 if (isset($db)) {
 
     /**
-     * Permet d'obtenir tous les utilisateurs stockés en DB (limité à 4)
-     * @return array|false Retourne un tableau associatif contenant les informations de tous les utilisateurs ou false si aucun utilisateur n'existe
-     */
-    function get_all_users($currentPage, $limit) : array|false {
-        global $db;
-
-        $return = [];
-
-        if ($limit !== null) {
-            $first = max(0, ($currentPage - 1) * $limit);
-            $limitReq = "LIMIT " . $first.','. $limit;
-        }
-        else {
-            $limitReq = "";
-        }
-
-        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user $limitReq");
-        $query->execute();
-
-        $return["users"] = $query->fetchAll(PDO::FETCH_ASSOC);
-        $return["number"] = get_number_of_rows($query->queryString, $limitReq);
-
-        return $return;
-    }
-
-    /**
-     * Permet d'obtenir tous les utilisateurs ayant un nom, un prénom ou un email correspondant à la recherche
-     * @param string $filter Le filtre de recherche
-     * @return array|false Retourne un tableau associatif contenant les informations de tous les utilisateurs correspondant à la recherche ou false si aucun utilisateur n'existe
-     */
-    function get_user_by_keywords($current_page, $limit, string $filter) : array|false {
-        global $db;
-
-        $result = [];
-
-        $first = max(0, ($current_page - 1) * $limit);
-        $limitReq = "LIMIT " . $first.','. $limit;
-
-        $query = $db->prepare("SELECT id, email, last_name, first_name, role FROM user WHERE last_name LIKE '%$filter%' OR first_name LIKE '%$filter%' OR email LIKE '%$filter%' $limitReq");
-        $query->execute();
-
-        $result["users"] = $query->fetchAll(PDO::FETCH_ASSOC);
-        $result["number"] = get_number_of_rows($query->queryString, $limitReq);
-
-        return $result;
-    }
-
-    /**
      * Permet de supprimer un utilisateur en fonction de son ID
      * @param string $type Le type de l'élément à supprimer
      * @param int $id L'ID de l'utilisateur
@@ -71,47 +23,6 @@ if (isset($db)) {
     }
 
     /**
-     * Permet de modifier les informations d'un utilisateur en fonction de son ID
-     * @param string $id L'ID de l'utilisateur
-     * @param string $email L'email de l'utilisateur à mettre à jour
-     * @param string $last_name Le nom de famille de l'utilisateur à mettre à jour
-     * @param string $first_name Le prénom de l'utilisateur à mettre à jour
-     * @param string $password Le mot de passe de l'utilisateur à mettre à jour
-     * @param string $role Le rôle de l'utilisateur à mettre à jour
-     * @return bool Retourne true si la mise à jour a été effectuée, false sinon
-     */
-    function update_user_by_id(string $id, string $email, string $last_name, string $first_name, string $password, string $role) : bool {
-        global $db;
-        $query = $db->prepare("UPDATE user SET email = :email, last_name = :last_name, first_name = :first_name, password = :password, role = :role WHERE id = :id");
-        $query->bindParam(':id', $id);
-        $query->bindParam(':email', $email);
-        $query->bindParam(':last_name', $last_name);
-        $query->bindParam(':first_name', $first_name);
-        $query->bindParam(':password', $password);
-        $query->bindParam(':role', $role);
-        $query->execute();
-
-        if ($query->rowCount() === 0) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Permet d'obtenir les informations d'un utilisateur en fonction de son ID
-     * @param $id L'ID de l'utilisateur
-     * @return mixed - Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
-     */
-    function get_user_by_id($id) : mixed {
-        global $db;
-        $query = $db->prepare("SELECT email, last_name, first_name, role FROM user WHERE id = :id");
-        $query->bindParam(':id', $id);
-        $query->execute();
-
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
-
-    /**
      * Permet d'obtenir les informations d'un utilisateur en fonction de son email
      * @param $email L'email de l'utilisateur
      * @return mixed Retourne un tableau associatif contenant les informations de l'utilisateur ou null si l'utilisateur n'existe pas
@@ -122,32 +33,6 @@ if (isset($db)) {
         $query->bindParam(':email', $email);
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * Permet d'ajouter un utilisateur en DB
-     * @param string $last_name
-     * @param string $first_name
-     * @param string $email
-     * @param string $password
-     * @param string $role
-     * @return bool Retourne true si l'ajout a été effectué, false sinon
-     */
-    function add_user(string $last_name, string $first_name, string $email, string $password, string $role) : bool {
-        global $db;
-        $query = $db->prepare("INSERT INTO user (email, last_name, first_name, password, role) VALUES (:email, :last_name, :first_name, :password, :role)");
-        $query->bindParam(':last_name', $last_name);
-        $query->bindParam(':first_name', $first_name);
-        $query->bindParam(':email', $email);
-        $query->bindParam(':password', $password);
-        $query->bindParam(':role', $role);
-
-        $query->execute();
-
-        if ($query->rowCount() === 0) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -519,6 +404,152 @@ if (isset($db)) {
         } else {
             return 1;
         }
+    }
+
+    /**
+     * Permet d'obtenir toutes les valeurs d'une table
+     * @param string $type Le type de l'élément à obtenir
+     * @param int $currentPage La page actuelle
+     * @param int $limit Le nombre d'éléments à retourner
+     * @return array Retourne un tableau associatif contenant les informations des éléments ou null si aucun élément n'existe
+     */
+    function get_all($type, $currentPage, $limit): array {
+        global $db;
+
+        $return = [];
+
+        if ($limit !== null) {
+            $first = max(0, ($currentPage - 1) * $limit);
+            $limitReq = "LIMIT " . $first.','. $limit;
+        }
+        else {
+            $limitReq = "";
+        }
+
+        $query = $db->prepare("SELECT * FROM $type $limitReq");
+        $query->execute();
+
+        $return["values"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $return["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        return $return;
+    }
+
+    /**
+     * Permet d'obtenir les valeurs en fonction des mots-clés
+     * @param string $type Le type de l'élément à obtenir
+     * @param int $currentPage La page actuelle
+     * @param int $limit Le nombre d'éléments à retourner
+     * @param string $keywords Les mots-clés de recherche
+     * @return array|false Retourne un tableau associatif contenant les informations des éléments correspondant à la recherche ou false si aucun élément n'existe
+     */
+    function get_by_keywords(string $type, int $currentPage, int $limit, string $keywords) : array|false {
+        global $db;
+
+        $result = [];
+
+        $first = max(0, ($currentPage - 1) * $limit);
+        $limitReq = "LIMIT " . $first.','. $limit;
+        $query = "";
+
+        switch ($type ) {
+            case Type::USER->value:
+                $query = $db->prepare("SELECT * FROM $type WHERE last_name LIKE '%$keywords%' OR first_name LIKE '%$keywords%' OR email LIKE '%$keywords%' $limitReq");
+                break;
+            case Type::ORIGIN->value:
+                $query = $db->prepare("SELECT * FROM $type WHERE name LIKE '%$keywords%' $limitReq");
+                break;
+        }
+
+        $query->execute();
+
+        $result["values"] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result["number"] = get_number_of_rows($query->queryString, $limitReq);
+
+        return $result;
+    }
+
+    /**
+     * Permet d'obtenir une valeur en fonction de son ID
+     * @param string $type Le type de l'élément à obtenir
+     * @param int $id L'ID de l'élément à obtenir
+     * @return mixed Retourne un tableau associatif contenant les informations de l'élément ou null si l'élément n'existe pas
+     */
+    function get_by_id(string $type, int $id) {
+        global $db;
+        $query = $db->prepare("SELECT * FROM $type WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet d'obtenir une valeur en fonction de son nom
+     * @param string $type Le type de l'élément à obtenir
+     * @param string $name Le nom de l'élément à obtenir
+     * @return mixed Retourne un tableau associatif contenant les informations de l'élément ou null si l'élément n'existe pas
+     */
+    function get_with_name(string $type, string $name) {
+        global $db;
+        $query = $db->prepare("SELECT * FROM $type WHERE name = :name");
+        $query->bindParam(':name', $name);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Permet de mettre à jour une valeur en fonction de son ID
+     * @param string $type Le type de l'élément à mettre à jour
+     * @param array $updates Les colonnes à mettre à jour (clé = nom de la colonne, valeur = nouvelle valeur)
+     * @param int $id L'ID de l'élément à mettre à jour
+     * @return bool Retourne true si la mise à jour a été effectuée, false sinon
+     */
+    function update_value_by_id(string $type, array $updates, int $id): bool {
+        global $db;
+
+        $setClauses = [];
+        foreach ($updates as $column => $value) {
+            $setClauses[] = "$column = ?";
+        }
+        $setClauseString = implode(", ", $setClauses);
+
+        $query = $db->prepare("UPDATE $type SET $setClauseString WHERE id = ?");
+
+        $params = array_values($updates);
+        $params[] = $id;
+
+        $success = $query->execute($params);
+
+        return $success && $query->rowCount() > 0;
+    }
+
+    /**
+     * Permet d'ajouter une valeur à la base de données
+     * @param string $type Le type de l'élément à ajouter
+     * @param array $whereToInsert Les colonnes où insérer les valeurs (à mettre dans le même ordre que les valeurs à insérer)
+     * @param array $values Les valeurs à insérer (à mettre dans le même ordre que les colonnes où insérer les valeurs)
+     * @return bool Retourne true si l'ajout a été effectué, false sinon
+     */
+    function add_to_db(string $type, array $whereToInsert, array $values) : bool {
+        global $db;
+
+        $columns = implode(", ", $whereToInsert);
+        $placeholders = implode(", ", array_fill(0, count($values), '?'));
+
+        $query = $db->prepare("INSERT INTO $type ($columns) VALUES ($placeholders)");
+
+        $success = $query->execute($values);
+
+        return $success && $query->rowCount() > 0;
+    }
+
+    function get_next_id($type) : int {
+        global $db;
+        $query = $db->prepare("SHOW TABLE STATUS LIKE '$type'");
+        $query->execute();
+
+        $id = $query->fetch(PDO::FETCH_ASSOC)["Auto_increment"];
+        return $id;
     }
 
 }

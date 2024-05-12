@@ -3,6 +3,7 @@
         $prenom = $_SESSION["user"]["last_name"];
         $nom = $_SESSION["user"]["first_name"];
         $role = $_SESSION["user"]["role"];
+        $profilepic_path = $_SESSION["user"]["profilepic_path"];
     }
 ?>
 
@@ -139,7 +140,7 @@
                             <p>
                                 <?= $nom . " " . $prenom ?>
                             </p>
-                            <img src="https://f.hellowork.com/blogdumoderateur/2013/02/nyan-cat-gif-1.gif">
+                            <img src="<?= $profilepic_path; ?>">
                         </div>
                     <?php } else { ?>
                         <form action="#" method="GET">
