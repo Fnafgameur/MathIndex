@@ -8,7 +8,7 @@
     $thematics = get_thematics_names();
 
     $difficulty = [];
-    for ($i = 0; $i <= 20; $i++) {
+    for ($i = 1; $i <= 20; $i++) {
         $difficulty[$i] = $i;
     }
 
@@ -315,7 +315,7 @@
 
             <div class="submit__source" id="submit__source"  style="display:<?= $displays["source"] ?>">
                 <h2>Sources</h2>
-                <label for="origin">Origine: *</label>
+                <label for="origin">Origine: *</label><br>
                 <select name="origin" id="origin">
                     <?php
                         echo $values["origin"];
@@ -325,14 +325,14 @@
                             ';
                         }
                     ?>
-                </select>
+                </select><br>
                 <p class="errormsg" style="display: <?= $displays["origin"] ?>"><?= $errors["origin"] ?></p><br>
-                <label for="origin_name">Nom de la source/lien du site: *</label>
+                <label for="origin_name">Nom de la source/lien du site: *</label><br>
                 <input id="origin_name"  name="origin_name" <?= $values["origin_name"]?>>
-                <p class="errormsg" style="display: <?= $displays["origin_name"] ?>"><?= $errors["origin_name"] ?></p>
-                <label for="origin_information">Information complémentaires:</label>
-                <textarea id="origin_information"  name="origin_information" ><?= $values["origin_information"] ?></textarea>
-                <p class="errormsg" style="display: <?= $displays["origin_information"] ?>"><?= $errors["origin_information"] ?></p>
+                <p class="errormsg" style="display: <?= $displays["origin_name"] ?>"><?= $errors["origin_name"] ?></p><br>
+                <label for="origin_information">Information complémentaires:</label><br>
+                <textarea id="origin_information"  name="origin_information" ><?= $values["origin_information"] ?></textarea><br>
+                <p class="errormsg" style="display: <?= $displays["origin_information"] ?>"><?= $errors["origin_information"] ?></p><br>
                 <button type="button" id="next_file">Continuer</button>
             </div>
 
