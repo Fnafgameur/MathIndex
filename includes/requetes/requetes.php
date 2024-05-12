@@ -454,6 +454,13 @@ if (isset($db)) {
         return $success && $query->rowCount() > 0;
     }
 
+    function get_last_id($type) : int {
+        global $db;
+        $query = $db->prepare("SELECT id FROM $type ORDER BY id DESC LIMIT 1");
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC)["id"];
+    }
+
 }
 
 
