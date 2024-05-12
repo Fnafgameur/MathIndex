@@ -1,8 +1,5 @@
 <?php
 
-    var_dump($_POST);
-    echo "maldfjclm";
-
     $uploads_exo = './assets/files/exercises/';
     $uploads_cor = './assets/files/corrections/';
 

@@ -98,6 +98,10 @@ body {
 .side-bar .side-bar__menu button:hover path {
   stroke: #1B3168;
 }
+.side-bar .side-bar__menu button:hover path .my_exs {
+  fill: #1B3168;
+  stroke: none;
+}
 .side-bar .side-bar__menu button:hover circle {
   stroke: #1B3168;
 }
@@ -637,7 +641,7 @@ body {
   padding: 0;
   margin: 0;
 }
-.administration .administration__content .administration__head-bar button {
+.administration .administration__content .administration__head-bar a {
   border-radius: 7px 7px 0 0;
   padding: 0.5rem 2%;
   cursor: pointer;
@@ -893,6 +897,9 @@ body {
 .submit .submit__content .submit__source textarea {
   height: 10rem;
 }
+.submit .submit__content .submit__file {
+  display: none;
+}
 .submit .submit__content label {
   color: #666666;
   font-family: "Noto sans";
@@ -1043,4 +1050,6 @@ body {
 }
 .modal__buttons .btn {
   width: 50%;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

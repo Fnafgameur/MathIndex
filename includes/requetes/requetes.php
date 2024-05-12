@@ -611,7 +611,6 @@ if (isset($db)) {
         $result = $array[0]["id"];
         return $result;
     }
-}
 
 
 
