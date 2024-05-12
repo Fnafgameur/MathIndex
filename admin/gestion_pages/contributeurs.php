@@ -350,16 +350,16 @@
             <div class="contributor__flex__side--right">
 
                 <input class="button" type="submit" name="Envoyer" value="Envoyer">
-                <a class="button" href="index.php?page=Administration" class="contributeurs__button">Retour à la liste</a>
+                <a  href="index.php?page=Administration"><button class="button">retour à la liste</button></a>
                 <div>
                     <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
-                    <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
+                    <p class="successmsg" style="color: limegreen; display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
                 </div>
             </div>
         </form>
     <?php } ?>
 
-    <p class="successmsg" style="margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>
+    <p class="successmsg" style="color: limegreen;margin-top: 1%; display: <?= $didDelete ? "block" : "none" ?>"><?= $nameDeleted ?> supprimé avec succès.</p>
 
     
     <script src="assets/scripts/contributor.js"></script>
