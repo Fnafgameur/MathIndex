@@ -949,6 +949,7 @@ body {
   padding: 0.5rem 3rem;
   height: 90%;
   border-radius: 7px;
+  margin-bottom: 3rem;
 }
 .submit .submit__content h2 {
   font-family: "noto sans";

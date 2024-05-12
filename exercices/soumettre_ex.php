@@ -228,6 +228,15 @@
                 echo $e->getMessage();
             }
         }
+        else if(!empty($errors['name']) or 
+        !empty($errors['classroom']) or 
+        !empty($errors['thematic']) or 
+        !empty($errors['chapter']) or 
+        !empty($errors['keywords']) or 
+        !empty($errors['difficulty']) or 
+        !empty($errors['duration'])){
+
+        }
         else if ( !(empty($errors["origin"])) or 
         !(empty($errors['origin_name'])) or 
         !(empty($errors['origin_information']))){
