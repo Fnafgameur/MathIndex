@@ -650,6 +650,12 @@ body {
 .contributor__flex__side--right a .button {
   width: 100%;
 }
+.contributor__flex__side--right a :hover {
+  cursor: pointer;
+}
+.contributor__flex__side--right input:hover {
+  cursor: pointer;
+}
 .contributor__flex label {
   color: #666666;
   font-family: "Noto sans";
@@ -1371,4 +1377,6 @@ body {
   .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
     width: 18rem;
   }
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */

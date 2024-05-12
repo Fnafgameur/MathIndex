@@ -143,6 +143,7 @@ function get_by_keywords(string $type, int $currentPage, int $limit, string $key
         case Type::THEMATIC->value:
         case Type::CLASSROOM->value:
         case Type::ORIGIN->value:
+        case Type::EXERCISE->value:
             $query = $db->prepare("SELECT * FROM $type WHERE name LIKE '%$keywords%' $limitReq");
             break;
     }

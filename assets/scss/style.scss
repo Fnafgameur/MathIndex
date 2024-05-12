@@ -805,6 +805,15 @@ body{
                 .button{
                     width: 100%;
                 }
+                & :hover {
+                    cursor: pointer;
+                }
+            }
+
+            input {
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
 
