@@ -28,9 +28,16 @@
             $exercises = get_by_keywords($type,$current_page, $per_page, $research);
         }
         else if (isset($_POST["delete"])) {
-            $id = explode(",", $_POST["delete"])[0];
-            $name = explode(",", $_POST["delete"])[1];
-            $delete = delete_by_id(Type::EXERCISE->value, $id);
+            $ids = $_POST['delete'];
+            $exId = explode(',', $ids)[0];
+            $fileId = explode(',', $ids)[1];
+            $name = explode(',', $ids)[2];
+            $exs = get_file_by_exercises($fileId);
+            $exercisePath = $exs["exercise"];
+            $correctionPath = $exs["correction"];
+            unlink('./assets/files/exercises/'.$exercisePath['name'].'.'.$exercisePath['extension']);
+            unlink('./assets/files/corrections/'.$correctionPath['name'].'.'.$correctionPath['extension']);
+            $delete = delete_by_id(Type::EXERCISE->value, $exId);
             if ($delete) {
                 $didDelete = true;
                 $exercises = get_all($type,$current_page, $per_page);
@@ -89,16 +96,18 @@
         </tr>
         </thead>
         <tbody>
-            <?php foreach ($exercises["exercise"] as $exercise) {
-                $file = get_file_by_exercises($exercise['exercise_file_id']);
+            <?php foreach ($exercises["values"] as $exercise) {
+                $file_sorted = get_file_by_exercises($exercise['exercise_file_id']);
+                $exercice = $file_sorted['exercise'];
+                $correction = $file_sorted['correction'];
                 ?>
                     <tr>
                         <td><?= $exercise["name"] ?></td>
                         <td><?= get_thematic_by_exercises($exercise["thematic_id"])["name"] ?></td>
                         <td>Niveau <?= $exercise["difficulty"] ?></td>
                         <td>
-                            <a class="link link--row" href="<?= $file ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="<?= $file ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                         <td>
                             <form action="index.php?page=Soumettre&updating=<?= $exercise["id"] ?>&first" method="post">
@@ -106,7 +115,7 @@
                                 <button type="submit" class="contributeurs__button"><img src="assets/icons/edit_file.svg">Modifier</button>
                             </form>
                             <form action="" method="post">
-                                <input type="hidden" name="delete" value="<?= $exercise["id"] . ',' . $exercise["name"] ?>">
+                                <input type="hidden" name="delete" value="<?= $exercise["id"] . ',' . $exercise["exercise_file_id"] . ',' . $exercise["name"] ?>">
                                 <button type="button" class="contributeurs__button modal__trigger" onclick="sendData(this.parentElement)"><img src="assets/icons/delete_file.svg">Supprimer</button>
                             </form>
                         </td>
