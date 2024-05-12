@@ -26,7 +26,7 @@ $informations = [
 $didDelete = false;
 
 if (isset($_SESSION["formValues"])) {
-    if (!array_key_exists("search_ex", $_SESSION["formValues"])) {
+    if (!array_key_exists("search_them", $_SESSION["formValues"])) {
         $_SESSION["formValues"] = null;
     }
 }

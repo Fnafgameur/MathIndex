@@ -8,7 +8,7 @@ function toggleModal(){
     modalContainer.classList.toggle("modal__container--active");
 }
 function sendData(element){
-    document.querySelector('.modal_delete_form input[name="id"]').value = element.querySelector('input[name="id"]').value;
+    document.querySelector('.modal_delete_form input[name="delete"]').value = element.querySelector('input[name="delete"]').value;
 }
 
 
