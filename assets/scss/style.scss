@@ -43,14 +43,14 @@ body{
         width: 32px;
         box-shadow:none;
     }
-   
+
     .side-bar__flex-logo{
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 1rem;
         margin-left: 1rem;
-       
+
         background: none;
         box-shadow:none;
 
@@ -125,7 +125,7 @@ body{
 
             &:hover{
                 background-color: #F6F6F6;
-               
+
                 path{
                     stroke: $textBlue;
                 }
@@ -196,9 +196,9 @@ body{
 
             &:hover{
                 background-color: #F6F6F6;
-               
+
                 img{
-                   fill:#1B3168;
+                    fill:#1B3168;
                 }
 
                 p{
@@ -225,7 +225,7 @@ body{
 
 .footer__text{
     margin-left: 2rem;
-   
+
 }
 
 
@@ -547,6 +547,18 @@ body{
     {
         border-radius: 8px;
     }
+    &--no-decoration
+    {
+        text-decoration: none;
+    }
+    &--fontNoto
+    {
+        font-family: 'Noto sans';
+    }
+    &--font-weight-700
+    {
+        font-weight: 700;
+    }
 }
 
 
@@ -558,7 +570,7 @@ body{
 {
     margin: 2rem ;
     height: fit-content;
-  
+
 
     .accueil__title
     {
@@ -570,12 +582,12 @@ body{
     {
         background-color: #fff;
         padding: 1.5rem 3rem;
-        min-height: 68vh;    
+        min-height: 68vh;
         max-height: fit-content;
         border-radius: 7px;
         font-size: $descSize;
         font-weight: 500;
-        
+
         h2{
             font-size: 20px;
             font-weight: 600;
@@ -584,8 +596,8 @@ body{
         ol{
             margin-top: 2rem;
         } li{
-            margin-top: 0.8rem;
-        }
+              margin-top: 0.8rem;
+          }
 
         b{
             font-weight: 800;
@@ -602,7 +614,7 @@ body{
 {
     margin: 2rem ;
     height: fit-content;
-  
+
 
     .research__title
     {
@@ -616,7 +628,7 @@ body{
         padding: 0.5rem 3rem;
         height: 90%;
         border-radius: 7px;
-        
+
         h2{
             font-size: 20px;
             font-weight: 600;
@@ -688,13 +700,13 @@ body{
         .research__table-row
         {
             border-radius: 8px;
-            
+
             .research__table-heading
             {
-                color: #464646; 
+                color: #464646;
                 padding: 0.5rem;
                 width: 20%;
-                
+
 
                 &.nom{
                     width: 30%;
@@ -816,7 +828,7 @@ body{
 .contributors {
     display: flex;
     flex-direction: column;
-    
+
     h2 {
         font-size: 20px;
         font-weight: 700;
@@ -898,8 +910,8 @@ body{
         align-items: center;
         gap: 10px;
     }
-
-    table
+  
+    .contributors__table
     {
         margin-top: 1rem;
         width: 100%;
@@ -919,7 +931,7 @@ body{
     tr
     {
         border-radius: 8px;
-        
+
         th
         {
             color: #464646;
@@ -929,10 +941,10 @@ body{
         }
 
         td
-        { 
+        {
             color: $textLightGrey;
             padding: 1rem 0.5rem;
-            
+
             button{
                 width: 10rem;
                 padding: 2% 5%;
@@ -953,11 +965,11 @@ body{
 
                 &:hover{
                     background-color: #F6F6F6;
-                   
+
                     img{
-                       fill:#1B3168;
+                        fill:#1B3168;
                     }
-    
+
                     p{
                         color: #1B3168;
                     }
@@ -971,6 +983,57 @@ body{
             font-size: 14px;
             font-weight: 400;
         }
+    }
+}
+.contributors__form
+{
+    display: flex;
+    flex-direction: column;
+
+    .contributors__input
+    {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        label
+        {
+            color: $textGrey;
+            font-family: 'Noto sans';
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        input
+        {
+            width: 45%;
+            padding: 1rem 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #DBDBDB;
+            margin-bottom: 1rem;
+            font-size: 16px;
+            font-family: 'Noto sans';
+            font-weight: 400;
+        }
+    }
+    .contributors__submit-button
+    {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+
+        svg
+        {
+            margin-right: 0.5rem;
+        }
+
+        input
+        {
+            font-size: 16px;
+        }
+    }
+    .contributors__errormsg
+    {
+        margin-top: 1rem;
     }
 }
 
@@ -1028,7 +1091,7 @@ body{
         padding: 0.5rem 3rem;
         height: 90%;
         border-radius: 7px;
-        
+
         h2{
             font-family: 'noto sans';
         }
@@ -1052,7 +1115,7 @@ body{
             }
         }
 
-        
+
 
         .submit__source{
             display: none;
@@ -1063,7 +1126,7 @@ body{
         .submit__file{
             display: none;
 
-            
+
         }
 
         label{
@@ -1096,7 +1159,7 @@ body{
             }
         }
 
-        
+
 
         textarea, select, input{
             height: 56px;
