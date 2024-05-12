@@ -8,7 +8,7 @@
     $thematics = get_thematics_names();
 
     $difficulty = [];
-    for ($i = 0; $i <= 20; $i++) {
+    for ($i = 1; $i <= 20; $i++) {
         $difficulty[$i] = $i;
     }
 
