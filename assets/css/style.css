@@ -2,19 +2,6 @@ body {
   margin: 0;
 }
 
-.errormsg, .successmsg {
-  margin-top: 0;
-  font-weight: 600;
-}
-
-.errormsg {
-  color: red;
-}
-
-.successmsg {
-  color: green;
-}
-
 .main--flex {
   min-height: 100vh;
   max-height: fit-content;
@@ -222,6 +209,11 @@ body {
   text-decoration: none;
   color: #1B3168;
 }
+.connexion .connexion__content .connexion__errormsg {
+  margin-top: 0;
+  color: red;
+  font-weight: 600;
+}
 .connexion .connexion__content form {
   display: flex;
   flex-direction: column;
@@ -256,6 +248,15 @@ body {
 .connexion .connexion__content form .connexion__buttons .connexion__button-pwforget {
   background-color: #fff;
   width: 15rem;
+}
+
+.errormsg {
+  margin-top: 0;
+  color: red;
+  font-weight: 600;
+}
+.errormsg--succes {
+  color: limegreen;
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -636,7 +637,7 @@ body {
   padding: 0;
   margin: 0;
 }
-.administration .administration__content .administration__head-bar a {
+.administration .administration__content .administration__head-bar button {
   border-radius: 7px 7px 0 0;
   padding: 0.5rem 2%;
   cursor: pointer;
@@ -667,6 +668,7 @@ body {
   font-size: 20px;
   font-weight: 700;
   font-family: "Noto sans";
+  color: #1B3168;
   margin-top: 2.5rem;
 }
 .contributors .contributors__description {
@@ -713,7 +715,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 30%;
-  text-decoration: none;
 }
 .contributors .contributors__action-bar a :hover {
   cursor: pointer;
@@ -876,9 +877,6 @@ body {
 .submit .submit__content h2 {
   font-family: "noto sans";
 }
-.submit .submit__content form {
-  width: 100%;
-}
 .submit .submit__content .submit__information__flex {
   display: flex;
   flex-direction: row;
@@ -892,22 +890,13 @@ body {
 .submit .submit__content .submit__information__flex div select {
   width: 105% !important;
 }
-.submit .submit__content .submit__source {
-  display: none;
-}
 .submit .submit__content .submit__source textarea {
   height: 10rem;
-}
-.submit .submit__content .submit__file {
-  display: none;
 }
 .submit .submit__content label {
   color: #666666;
   font-family: "Noto sans";
   font-weight: 600;
-}
-.submit .submit__content label input {
-  display: none;
 }
 .submit .submit__content label div {
   height: 56px;
@@ -1054,6 +1043,4 @@ body {
 }
 .modal__buttons .btn {
   width: 50%;
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

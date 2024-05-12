@@ -405,7 +405,7 @@ if (isset($db)) {
             return 1;
         }
     }
-
+  
     /**
      * Permet d'obtenir toutes les valeurs d'une table
      * @param string $type Le type de l'élément à obtenir
@@ -556,12 +556,62 @@ if (isset($db)) {
 
 }
 
+    /**
+     * Permet d'obtenir tous les noms des classes
+     * @return array un tableau contennant tout les noms des classes
+     */
+    function get_classrooms_names() : array
+    {
+        global $db;
+        $query = $db->prepare("SELECT name FROM classroom");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
+    /**
+     * Permet d'obtenir tous les noms des thématiques
+     * @return array un tableau contennant tout les noms des thématiques
+     */
+    function get_thematics_names() : array
+    {
+        global $db;
+        $query = $db->prepare("SELECT name FROM thematic");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
+    /**
+     * Permet d'obtenir tous les noms des sources
+     * @return array un tableau contennant tout les noms des sources
+     */
+    function get_origins_names() : array
+    {
+        global $db;
+        $query = $db->prepare("SELECT name FROM origin");
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
-
-
-
+    /**
+     *  Permet d'obtenir une id avec un nom et une table en paramèttre
+     * @param string $name nom du champ
+     * @param string $table nom de la table où se trouve le nom du champ
+     * @return array un tableau contennant tout les noms des sources
+     */
+    function get_id_by_name(string $name, string $table) : string
+    {
+        global $db;
+        $query = $db->prepare("SELECT id FROM ".$table." WHERE name=:name ;");
+        $query->bindParam(':name', $name);
+        $query->execute();
+        $array = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $array[0]["id"];
+        return $result;
+    }
+}
 
 
 
