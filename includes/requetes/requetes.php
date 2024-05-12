@@ -389,7 +389,10 @@ if (isset($db)) {
         }
     }
 
-
+    /**
+     * Permet d'obtenir tous les noms des classes
+     * @return array un tableau contennant tout les noms des classes
+     */
     function get_classrooms_names() : array
     {
         global $db;
@@ -399,6 +402,10 @@ if (isset($db)) {
         return $result;
     }
 
+    /**
+     * Permet d'obtenir tous les noms des thématiques
+     * @return array un tableau contennant tout les noms des thématiques
+     */
     function get_thematics_names() : array
     {
         global $db;
@@ -408,6 +415,10 @@ if (isset($db)) {
         return $result;
     }
 
+    /**
+     * Permet d'obtenir tous les noms des sources
+     * @return array un tableau contennant tout les noms des sources
+     */
     function get_origins_names() : array
     {
         global $db;
