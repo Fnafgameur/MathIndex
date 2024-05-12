@@ -63,7 +63,7 @@
             <input type="text" name="search" class="contributeurs__input" placeholder="Rechercher" value="<?= $research ?>">
             <button type="submit">Rechercher</button>
         </form>
-        <a href="index.php?page=Administration&adding">
+        <a href="index.php?page=Soumettre#">
             <button class="contributors__action-add" type="submit">Ajouter
                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.5 6V0H8.5V6H14.5V8H8.5V14H6.5V8H0.5V6H6.5Z" fill="white"/>

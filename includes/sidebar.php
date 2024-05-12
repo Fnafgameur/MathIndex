@@ -126,6 +126,7 @@
                             <p>Déconnexion</p>
                         </button>
                     </a>
+                    <p class="footer__text">Mentions légales • Contact • Lycée Saint-Vincent</p>
             <?php } ?>
         </div>
     </div>

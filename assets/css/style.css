@@ -54,6 +54,7 @@ body {
   justify-content: space-between;
   margin-top: 1rem;
   box-shadow: none;
+  position: relative;
 }
 .side-bar .side-bar__menu .side-bar__menu__flex {
   display: flex;
@@ -180,7 +181,10 @@ body {
 }
 
 .footer__text {
-  margin-left: 2rem;
+  width: 400px;
+  margin-left: 300px;
+  position: absolute;
+  bottom: 0;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------- */
@@ -1193,6 +1197,9 @@ body {
 @media screen and (max-width: 850px) {
   .side-bar {
     margin-left: -330px;
+  }
+  .footer__text {
+    margin-left: 350px;
   }
   .submit .submit__head-bar {
     justify-content: space-between;
