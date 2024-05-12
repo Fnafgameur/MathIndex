@@ -25,7 +25,7 @@
                 <tbody class="mathematics__table-body">
                 <?php foreach ($exercises_sorted as $exercise_sorted) {
                     $file_sorted = get_file_by_exercises($exercise_sorted['exercise_file_id']);
-                    $keywords_sorted = explode(',', $exercise_sorted['keywords']);
+                    $keywords_sorted = explode(' ', $exercise_sorted['keywords']);
                     ?>
                     <tr class="mathematics__table-row">
                         <td class="mathematics__table-data"><?=$exercise_sorted['name']?></td>
@@ -62,7 +62,7 @@
                 <tbody class="mathematics__table-body">
                 <?php foreach ($exercises as $exercise) {
                     $file = get_file_by_exercises($exercise['exercise_file_id']);
-                    $keywords = explode(',', $exercise['keywords']);
+                    $keywords = explode(' ', $exercise['keywords']);
                     ?>
                     <tr class="mathematics__table-row">
                         <td class="mathematics__table-data"><?=$exercise['name']?></td>

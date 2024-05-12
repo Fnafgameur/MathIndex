@@ -719,6 +719,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 30%;
+  text-decoration: none;
 }
 .contributors .contributors__action-bar a :hover {
   cursor: pointer;
