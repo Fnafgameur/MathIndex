@@ -255,11 +255,11 @@
 <div class="submit">
     <h1 class="submit__title">Soumettre un exercice</h1>
     <div class="submit__head-bar">
-        <button type="button" class="" id="btn_information">Informations</button>
+        <button type="button" id="btn_information">Informations</button>
     
-        <button type="button" class=""  id="btn_source">Source</button>
+        <button type="button"  id="btn_source">Source</button>
     
-        <button type="button" class="" id="btn_file">Fichiers</button>
+        <button type="button" id="btn_file">Fichiers</button>
     </div>
     <div class="submit__content">
         <form action="#" method="post" enctype="multipart/form-data">

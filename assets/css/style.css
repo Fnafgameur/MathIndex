@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+.only_smart {
+  display: none;
+}
+
 .errormsg, .successmsg {
   margin-top: 0;
   font-weight: 600;
@@ -152,6 +156,10 @@ body {
   justify-content: end;
   padding-right: 5%;
   align-items: center;
+  gap: 40%;
+}
+.main-content header .only_smart {
+  display: none;
 }
 .main-content header button {
   width: 10rem;
@@ -1289,6 +1297,38 @@ body {
   }
 }
 @media screen and (max-width: 850px) {
+  .main-content header .only_smart {
+    display: block;
+    width: 95px;
+    padding: 1% 2%;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: #666666;
+    cursor: pointer;
+    background-color: #E5E5E5;
+    border: none;
+    border-radius: 5px;
+  }
+  .main-content header .only_smart img {
+    height: 24px;
+    width: 24px;
+  }
+  .main-content header .only_smart:hover {
+    background-color: #F6F6F6;
+  }
+  .main-content header .only_smart:hover path {
+    stroke: #1B3168;
+  }
+  .main-content header .only_smart:hover circle {
+    stroke: #1B3168;
+  }
+  .main-content header .only_smart:hover p {
+    color: #1B3168;
+    font-weight: 600;
+  }
+  .main-content header .only_smart svg {
+    width: 64px;
+  }
   .side-bar {
     margin-left: -330px;
   }
@@ -1384,6 +1424,4 @@ body {
   .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
     width: 18rem;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
