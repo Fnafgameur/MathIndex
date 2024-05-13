@@ -11,7 +11,7 @@
                 include_once("exercices/soumettre_ex.php");
                 break;
             case Page::ADMINISTRATION->value:
-                if (Role::isAdmin($_SESSION["user"]["role"])) {
+                if (isset($_SESSION["user"]) && Role::isAdmin($_SESSION["user"]["role"])) {
                     include_once("includes/pagination.php");
                 } else {
                     include_once("exercices/accueil.php");
