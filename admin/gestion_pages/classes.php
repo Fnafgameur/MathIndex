@@ -188,6 +188,7 @@ $classes = $classes["values"];
                 <label for="nom">Nom :</label>
                 <input type="text" name="nom" id="nom" placeholder="Nom" value="<?= $informations["name"]["value"] ?>">
                 <p class="errormsg" style="display: <?= $informations["name"]["displayValue"] ?>;"><?= $informations["name"]["errorMsg"] ?></p>
+                <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
             </div>
             <div class="contributors__errormsg" style="display: <?= $informations['name']['errorMsg'] === "" ? 'flex' : 'none';?>;">
                 <p class="successmsg" style="display: <?= $doSendInfos ? "block" : "none" ?>"><?= $successMessage ?></p>
@@ -200,7 +201,6 @@ $classes = $classes["values"];
                     Retour à la liste
                 </a>
                 <input type="submit" name="Envoyer" class="btn btn--border-radius btn--paddingmodal btn--textgrey btn--bglightgrey btn--fontNoto" value="Enregistrer">
-                <p class="errormsg" style="display: <?= $informations["assigned"]["displayValue"] ?>;"><?= $informations["assigned"]["errorMsg"] ?></p>
             </div>
         </form>
     <?php } ?>

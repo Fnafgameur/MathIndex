@@ -2,6 +2,19 @@ body {
   margin: 0;
 }
 
+.errormsg, .successmsg {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.errormsg {
+  color: red;
+}
+
+.successmsg {
+  color: green;
+}
+
 .main--flex {
   min-height: 100vh;
   max-height: fit-content;
@@ -256,12 +269,6 @@ body {
 .connexion .connexion__content form .connexion__buttons .connexion__button-pwforget {
   background-color: #fff;
   width: 15rem;
-}
-
-.errormsg {
-  margin-top: 0;
-  color: red;
-  font-weight: 600;
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
