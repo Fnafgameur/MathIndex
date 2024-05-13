@@ -1,5 +1,7 @@
 # __**MathIndex**__
 
-MathIndex est une bibliothèque d'éxercices en tous genre
+MathIndex est une bibliothèque d'exercices en tous genre
 
-(projet de fin d'année de bts1)
+Projet de fin d'année de BTS 1.
+
+# Par **__Djimmy__**, Théo, Milan
