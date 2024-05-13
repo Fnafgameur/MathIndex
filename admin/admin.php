@@ -1,5 +1,9 @@
 <?php
 
+    if (!isset($_SESSION["user"]) || !Role::isAdmin($_SESSION["user"]["role"])) {
+        header("Location: ../index.php?page=Accueil");
+    }
+
     $pageName = $_GET["onglet"]??null;
     $current_page = get_current_page();
     $per_page = 10;
