@@ -107,6 +107,7 @@
                 foreach ($exercices as $exercice) {
                     $file_sorted = get_file_by_exercises($exercice['exercise_file_id']);
                     $exerciceFile = $file_sorted['exercise'];
+                    $keywords = explode(' ', $exercice['keywords']);
                     $correctionFile = $file_sorted['correction'];
                     $duration = $exercice["duration"];
                     if (substr($duration, -2) === ".5") {
@@ -122,7 +123,9 @@
                 <tr class="research__table-row">
                     <td class="research__table-data"><?= $exercice["name"] ?></td>
                     <td class="research__table-data">Niveau <?= $exercice["difficulty"] ?></td>
-                    <td class="research__table-data"><?= $exercice["keywords"] ?></td>
+                    <td class="research__table-data wordbreak"><?php foreach ($keywords as $keyword) {
+                            echo "<p class='keyword'>$keyword</p>";
+                        } ?></td>
                     <td class="research__table-data"><?= $duration?></td>
                     <td class="research__table-data file-container">
                         <div class="research__table-file">
