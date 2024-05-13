@@ -220,6 +220,7 @@ body {
   padding: 0.5rem 1.3rem;
   border-radius: 7px;
   height: 100%;
+  margin-bottom: 3rem;
 }
 .connexion .connexion__content p {
   font-size: 18px;
@@ -488,6 +489,7 @@ body {
   border-radius: 7px;
   font-size: 18px;
   font-weight: 500;
+  margin-bottom: 3rem;
 }
 .accueil .accueil__content h2 {
   font-size: 20px;
@@ -520,6 +522,7 @@ body {
   padding: 0.5rem 3rem;
   height: 90%;
   border-radius: 7px;
+  margin-bottom: 3rem;
 }
 .research .research__content h2 {
   font-size: 20px;
@@ -1384,6 +1387,4 @@ body {
   .submit .submit__content .submit__source input, .submit .submit__content .submit__source textarea {
     width: 18rem;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
