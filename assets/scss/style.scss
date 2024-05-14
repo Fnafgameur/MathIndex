@@ -4,6 +4,10 @@ body{
     margin: 0;
 }
 
+.only_smart{
+    display: none;
+}
+
 .errormsg, .successmsg
 {
     margin-top: 0;
@@ -98,6 +102,8 @@ body{
             text-decoration: none;
         }
 
+        
+
         button{
             width: 12rem;
             padding: 2% 5%;
@@ -182,6 +188,12 @@ body{
         justify-content: end;
         padding-right: 5%;
         align-items: center;
+        gap: 40%;
+
+        .only_smart{
+            display: none;
+            
+        }
 
         button{
             width: 10rem;
@@ -1688,7 +1700,47 @@ body{
 }
 
 @media screen and (max-width: 850px) {
+    .main-content header .only_smart{
+        display: block;
+        width: 95px;
+        padding: 1% 2%;
+        font-family: 'Poppins';
+        font-weight: 400;
+        color: $textGrey;
 
+        
+
+        cursor: pointer;
+        background-color: #E5E5E5;
+        border: none;
+        border-radius: 5px;
+
+        img{
+            height: 24px;
+            width: 24px;
+        }
+
+        &:hover{
+            background-color: #F6F6F6;
+
+            path{
+                stroke: $textBlue;
+            }
+
+            circle {
+                stroke: $textBlue;
+            }
+
+            p{
+                color: $textBlue;
+                font-weight: 600;
+            }
+        }
+        svg
+        {
+            width: 64px;
+        }
+    }
     .side-bar{
         margin-left: -330px;
     }
