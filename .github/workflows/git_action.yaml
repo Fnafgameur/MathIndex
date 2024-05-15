@@ -1,18 +1,1 @@
-name: MathIndex
-run-name: ${{ github.actor }} is ${{ github.event_name }}ing on the ${{ github.ref_name }} branch
-
-on:
-  push:
-    branches: [ $default-branch ]
-  pull_request:
-    branches: [ $default-branch ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run a one-line script
-        run: echo test
+# See "https://docs.github.com/en/actions/using-workflows/creating-starter-workflows-for-your-organization" for actions template
