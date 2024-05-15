@@ -204,6 +204,7 @@
             $origin_id  = get_id_by_name($_POST['origin'], "origin");
             $thematic_id  = get_id_by_name($_POST['thematic'], "thematic");
             $user_id  = $_SESSION['user']['id'];
+            $_POST["duration"] = str_replace(",",".",$_POST["duration"]);
 
             $query = $db->prepare("INSERT INTO exercise (name, classroom_id, thematic_id, chapter, keywords, difficulty, duration, origin_id, origin_name, origin_information, exercise_file_id, correction_file_id, created_by_id) 
             VALUES (:name, :classroom_id, :thematic_id, :chapter, :keywords, :difficulty, :duration, :origin_id, :origin_name, :origin_information, :exercice_file_id, :correction_file_id, :created_by_id);");
@@ -254,11 +255,11 @@
 <div class="submit">
     <h1 class="submit__title">Soumettre un exercice</h1>
     <div class="submit__head-bar">
-        <button type="button" class="" id="btn_information">Informations</button>
+        <button type="button" id="btn_information">Informations</button>
     
-        <button type="button" class=""  id="btn_source">Source</button>
+        <button type="button"  id="btn_source">Source</button>
     
-        <button type="button" class="" id="btn_file">Fichiers</button>
+        <button type="button" id="btn_file">Fichiers</button>
     </div>
     <div class="submit__content">
         <form action="#" method="post" enctype="multipart/form-data">

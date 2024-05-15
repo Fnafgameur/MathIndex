@@ -183,6 +183,13 @@
 
                     if ($currentAction === "updating") {
 
+                        $currentLastName = get_by_id($type, $idToUpdate)["last_name"];
+                        $profilepic = $targetDir . $currentLastName . "_" . $idToUpdate . "." . $imageFileType;
+
+                        if (file_exists($profilepic)) {
+                            unlink($profilepic);
+                        }
+
                         $profilepic = $targetDir . $lastName . "_" . $idToUpdate . "." . $imageFileType;
 
                         $toUpdate = [

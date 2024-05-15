@@ -9,7 +9,7 @@
 
 
 <div class="main--flex">
-    <div class="side-bar">
+    <div class="side-bar" id="side-bar">
 
 
         <div class="side-bar__flex-logo" onclick="window.location.href='index.php?page=Accueil'">
@@ -126,16 +126,23 @@
                             <p>Déconnexion</p>
                         </button>
                     </a>
-                    <p class="footer__text">Mentions légales • Contact • Lycée Saint-Vincent</p>
             <?php } ?>
+                    <p class="footer__text">Mentions légales • Contact • Lycée Saint-Vincent</p>
         </div>
     </div>
 
 
     <div class="main-content">
         <header>
-
-
+            
+            <button  type="button" id="move_side-bar" class="only_smart">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none">
+                <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+                <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            </button>
+            <script src="assets/scripts/side_bar.js"></script>
             <?php if (isset($_SESSION["user"])) { ?>
                         <div class="header__container">
                             <p>

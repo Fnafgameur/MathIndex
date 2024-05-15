@@ -93,8 +93,18 @@
                     $informations["password"]["errorMsg"] = "";
                     $displaySuccess = true;
 
-                    // Envoyer le mail
-                    // mail(to, subject, msg);
+                    $firstName = $user["first_name"];
+                    $lastName = $user["last_name"];
+
+                    $to = "contact@lyceestvincent.net";
+                    $subject = "MathIndex : $lastName $firstName demande un changement de mot de passe";
+                    $message = "$lastName $firstName demande un changement de mot de passe." .
+                        "\nAdresse email de la personne : '$email'." .
+                        "\n\nAprès changement, merci de notifier l’utilisateur de son nouveau mot de passe.";
+                    $headers = "From: $email";
+
+                    // Décommenter pour activer l'envoi de mail
+                    // mail($to, $subject, $message, $headers);
                 }
             }
 

@@ -4,6 +4,26 @@ body{
     margin: 0;
 }
 
+.only_smart{
+    display: none;
+}
+
+.errormsg, .successmsg
+{
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.errormsg
+{
+    color: red;
+}
+
+.successmsg
+{
+    color: green;
+}
+
 .main--flex{
     min-height: 100vh;
     max-height: fit-content;
@@ -81,6 +101,8 @@ body{
             align-items: center;
             text-decoration: none;
         }
+
+        
 
         button{
             width: 12rem;
@@ -166,6 +188,12 @@ body{
         justify-content: end;
         padding-right: 5%;
         align-items: center;
+        gap: 40%;
+
+        .only_smart{
+            display: none;
+            
+        }
 
         button{
             width: 10rem;
@@ -246,6 +274,7 @@ body{
         padding: 0.5rem 1.3rem;
         border-radius: 7px;
         height: 100%;
+        margin-bottom: 3rem;
 
         & p {
             font-size: $descSize;
@@ -309,12 +338,6 @@ body{
     }
 }
 
-.errormsg 
-{
-    margin-top: 0;
-    color: red;
-    font-weight: 600;
-}
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* ----------------------------------------------------------------------------- Exercices -----------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -595,6 +618,7 @@ body{
         border-radius: 7px;
         font-size: $descSize;
         font-weight: 500;
+        margin-bottom: 3rem;
 
         h2{
             font-size: 20px;
@@ -636,6 +660,7 @@ body{
         padding: 0.5rem 3rem;
         height: 90%;
         border-radius: 7px;
+        margin-bottom: 3rem;
 
         h2{
             font-size: 20px;
@@ -1675,7 +1700,47 @@ body{
 }
 
 @media screen and (max-width: 850px) {
+    .main-content header .only_smart{
+        display: block;
+        width: 95px;
+        padding: 1% 2%;
+        font-family: 'Poppins';
+        font-weight: 400;
+        color: $textGrey;
 
+        
+
+        cursor: pointer;
+        background-color: #E5E5E5;
+        border: none;
+        border-radius: 5px;
+
+        img{
+            height: 24px;
+            width: 24px;
+        }
+
+        &:hover{
+            background-color: #F6F6F6;
+
+            path{
+                stroke: $textBlue;
+            }
+
+            circle {
+                stroke: $textBlue;
+            }
+
+            p{
+                color: $textBlue;
+                font-weight: 600;
+            }
+        }
+        svg
+        {
+            width: 64px;
+        }
+    }
     .side-bar{
         margin-left: -330px;
     }

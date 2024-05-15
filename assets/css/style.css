@@ -2,6 +2,23 @@ body {
   margin: 0;
 }
 
+.only_smart {
+  display: none;
+}
+
+.errormsg, .successmsg {
+  margin-top: 0;
+  font-weight: 600;
+}
+
+.errormsg {
+  color: red;
+}
+
+.successmsg {
+  color: green;
+}
+
 .main--flex {
   min-height: 100vh;
   max-height: fit-content;
@@ -139,6 +156,10 @@ body {
   justify-content: end;
   padding-right: 5%;
   align-items: center;
+  gap: 40%;
+}
+.main-content header .only_smart {
+  display: none;
 }
 .main-content header button {
   width: 10rem;
@@ -207,6 +228,7 @@ body {
   padding: 0.5rem 1.3rem;
   border-radius: 7px;
   height: 100%;
+  margin-bottom: 3rem;
 }
 .connexion .connexion__content p {
   font-size: 18px;
@@ -256,12 +278,6 @@ body {
 .connexion .connexion__content form .connexion__buttons .connexion__button-pwforget {
   background-color: #fff;
   width: 15rem;
-}
-
-.errormsg {
-  margin-top: 0;
-  color: red;
-  font-weight: 600;
 }
 
 /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -481,6 +497,7 @@ body {
   border-radius: 7px;
   font-size: 18px;
   font-weight: 500;
+  margin-bottom: 3rem;
 }
 .accueil .accueil__content h2 {
   font-size: 20px;
@@ -513,6 +530,7 @@ body {
   padding: 0.5rem 3rem;
   height: 90%;
   border-radius: 7px;
+  margin-bottom: 3rem;
 }
 .research .research__content h2 {
   font-size: 20px;
@@ -1282,6 +1300,38 @@ body {
   }
 }
 @media screen and (max-width: 850px) {
+  .main-content header .only_smart {
+    display: block;
+    width: 95px;
+    padding: 1% 2%;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: #666666;
+    cursor: pointer;
+    background-color: #E5E5E5;
+    border: none;
+    border-radius: 5px;
+  }
+  .main-content header .only_smart img {
+    height: 24px;
+    width: 24px;
+  }
+  .main-content header .only_smart:hover {
+    background-color: #F6F6F6;
+  }
+  .main-content header .only_smart:hover path {
+    stroke: #1B3168;
+  }
+  .main-content header .only_smart:hover circle {
+    stroke: #1B3168;
+  }
+  .main-content header .only_smart:hover p {
+    color: #1B3168;
+    font-weight: 600;
+  }
+  .main-content header .only_smart svg {
+    width: 64px;
+  }
   .side-bar {
     margin-left: -330px;
   }
