@@ -261,3 +261,18 @@ function add_thematic(string $name): bool
     return $db->lastInsertId();
 }
 
+/**
+ * Permet d'obtenir le nom original d'un fichier en fonction de son ID
+ * @param int $fileId L'ID du fichier
+ * @return string Retourne le nom original du fichier
+ */
+function get_original_name_by_file_id(int $fileId) : string
+{
+    global $db;
+    $query = $db->prepare("SELECT original_name FROM file WHERE id = :file");
+    $query->bindParam(':file', $fileId);
+    $query->execute();
+
+    return $query->fetch(PDO::FETCH_ASSOC)["original_name"];
+}
+

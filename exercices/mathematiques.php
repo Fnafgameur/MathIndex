@@ -29,6 +29,8 @@
                     $correction = $file_sorted['correction'];
                     $keywords_sorted = explode(' ', $exercise_sorted['keywords']);
                     $duration = $exercise_sorted["duration"];
+                    $originalExerciceName = get_original_name_by_file_id($file_sorted['exercise']['id']);
+                    $originalCorrectionName = get_original_name_by_file_id($file_sorted['correction']['id']);
                     if (substr($duration, -2) === ".5") {
                         $duration = str_replace(".5", "h30", $duration);
                     }
@@ -49,8 +51,8 @@
                             } ?>
                         </td>
                         <td class="mathematics__table-data">
-                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download="<?= $originalExerciceName ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download="<?= $originalCorrectionName ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                     </tr>
                 <?php } ?>
@@ -77,6 +79,8 @@
                     $correction = $file_sorted['correction'];
                     $keywords = explode(' ', $exercise['keywords']);
                     $duration = $exercise["duration"];
+                    $originalExerciceName = get_original_name_by_file_id($file_sorted['exercise']['id']);
+                    $originalCorrectionName = get_original_name_by_file_id($file_sorted['correction']['id']);
                     if (substr($duration, -2) === ".5") {
                         $duration = str_replace(".5", "h30", $duration);
                     }
@@ -97,8 +101,8 @@
                             } ?>
                         </td>
                         <td class="mathematics__table-data">
-                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download="<?= $originalExerciceName ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download="<?= $originalCorrectionName ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                     </tr>
                 <?php } ?>

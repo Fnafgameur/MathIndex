@@ -100,14 +100,16 @@
                 $file_sorted = get_file_by_exercises($exercise['exercise_file_id']);
                 $exercice = $file_sorted['exercise'];
                 $correction = $file_sorted['correction'];
+                $originalExerciceName = get_original_name_by_file_id($file_sorted['exercise']['id']);
+                $originalCorrectionName = get_original_name_by_file_id($file_sorted['correction']['id']);
                 ?>
                     <tr>
                         <td><?= $exercise["name"] ?></td>
                         <td><?= get_thematic_by_exercises($exercise["thematic_id"])["name"] ?></td>
                         <td>Niveau <?= $exercise["difficulty"] ?></td>
                         <td>
-                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
-                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
+                            <a class="link link--row" href="./assets/files/exercises/<?=$exercice['name'].'.'.$exercice['extension']?>" download="<?= $originalExerciceName ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Exercice</a>
+                            <a class="link link--row" href="./assets/files/corrections/<?=$correction['name'].'.'.$correction['extension']?>" download="<?= $originalCorrectionName ?>"><img src="./assets/icons/download_file.svg" alt="logo téléchargement">Corrigé</a>
                         </td>
                         <td>
                             <form action="index.php?page=Soumettre&updating=<?= $exercise["id"] ?>&first" method="post">
