@@ -2,7 +2,6 @@
 
 ob_start();
 session_start();
-// test git actions
 
 if (!isset($_GET["page"])) {
     header("Location: index.php?page=Accueil");
