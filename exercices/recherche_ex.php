@@ -110,6 +110,8 @@
                     $keywords = explode(' ', $exercice['keywords']);
                     $correctionFile = $file_sorted['correction'];
                     $duration = $exercice["duration"];
+                    $originalExerciceName = get_original_name_by_file_id($file_sorted['exercise']['id']);
+                    $originalCorrectionName = get_original_name_by_file_id($file_sorted['correction']['id']);
                     if (substr($duration, -2) === ".5") {
                         $duration = str_replace(".5", "h30", $duration);
                     }
@@ -130,11 +132,11 @@
                     <td class="research__table-data file-container">
                         <div class="research__table-file">
                             <img src="./assets/icons/download_file.svg" alt="logo téléchargement">
-                            <a href="./assets/files/exercises/<?=$exerciceFile['name'].'.'.$exerciceFile['extension']?>" download>Exercice</a>
+                            <a href="./assets/files/exercises/<?=$exerciceFile['name'].'.'.$exerciceFile['extension']?>" download="<?= $originalExerciceName ?>">Exercice</a>
                         </div>
                         <div class="research__table-file">
                             <img src="./assets/icons/download_file.svg" alt="logo téléchargement">
-                            <a href="./assets/files/corrections/<?=$correctionFile['name'].'.'.$correctionFile['extension']?>" download>Corrigé</a>
+                            <a href="./assets/files/corrections/<?=$correctionFile['name'].'.'.$correctionFile['extension']?>" download="<?= $originalCorrectionName ?>">Corrigé</a>
                         </div>
                     </td>
                 </tr>
