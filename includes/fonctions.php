@@ -70,7 +70,7 @@
         $niveau = $searchFilter["niveau"];
         $thematique = $searchFilter["thematique"];
 
-        if (!ctype_digit($niveau) || intval($niveau) < 1 || intval($niveau) > 3) {
+        if (!ctype_digit($niveau) || intval($niveau) < 0 || intval($niveau) > 20) {
             $result["msg"] = "Niveau invalide.";
             return $result;
         }

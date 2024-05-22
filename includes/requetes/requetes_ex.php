@@ -70,27 +70,42 @@ function get_exercises(int $currentPage = null, int $limit = null, array $filtre
 
         if ($keywordsReq === "") {
             if ($thematique === "0") {
-                $query = $db->prepare("SELECT * FROM exercise 
-            WHERE classroom_id = :niveau $limitReq");
+                if ($niveau === "0") {
+                    $query = $db->prepare("SELECT * FROM exercise $limitReq");
+                } else {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE difficulty = :niveau $limitReq");
+                }
             } else {
-                $query = $db->prepare("SELECT * FROM exercise 
-            WHERE classroom_id = :niveau 
-            AND thematic_id = :thematique $limitReq");
+                if ($niveau === "0") {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE thematic_id = :thematique $limitReq");
+                } else {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE difficulty = :niveau
+                         AND thematic_id = :thematique $limitReq");
+                }
             }
         } else {
             if ($thematique === "0") {
-                $query = $db->prepare("SELECT * FROM exercise
-            WHERE classroom_id = :niveau
-            AND ($keywordsReq) $limitReq");
+                if ($niveau === "0") {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE ($keywordsReq) $limitReq");
+                } else {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE difficulty = :niveau
+                         AND ($keywordsReq) $limitReq");
+                }
             } else {
-                $query = $db->prepare("SELECT * FROM exercise
-            WHERE classroom_id = :niveau
-            AND thematic_id = :thematique
-            AND ($keywordsReq) $limitReq");
+                if ($niveau === "0") {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE thematic_id = :thematique
+                         AND ($keywordsReq) $limitReq");
+                } else {
+                    $query = $db->prepare("SELECT * FROM exercise WHERE difficulty = :niveau
+                         AND thematic_id = :thematique
+                         AND ($keywordsReq) $limitReq");
+                }
             }
         }
 
-        $query->bindParam(':niveau', $niveau);
+        if ($niveau !== "0") {
+            $query->bindParam(':niveau', $niveau);
+        }
         if ($thematique !== "0") {
             $query->bindParam(':thematique', $thematique);
         }
@@ -101,7 +116,7 @@ function get_exercises(int $currentPage = null, int $limit = null, array $filtre
     $query->execute();
 
     $result["exercise"] = $query->fetchAll(PDO::FETCH_ASSOC);
-    $result["number"] = get_number_of_rows($query->queryString, $limitReq, $niveau === "" ? "" : [':niveau', $niveau], $thematique === "0" ? "" : [':thematique', $thematique]);
+    $result["number"] = get_number_of_rows($query->queryString, $limitReq, $niveau === "0" ? "" : [':niveau', $niveau], $thematique === "0" ? "" : [':thematique', $thematique]);
 
     return $result;
 }
