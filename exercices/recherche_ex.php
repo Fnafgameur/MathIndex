@@ -56,15 +56,7 @@
         <form class="research__form" method="post" action="index.php?page=<?= Page::RECHERCHE->value ?>&pagination=1">
 
             <div>
-                <label for="niveau">Niveau:</label>
-                <select name="niveau">
-                    <option id="niveau" name="niveau" value="1" <?= $filtres["niveau"] === "1" ? "selected" : "" ?>>Seconde</option>
-                    <option id="niveau" name="niveau" value="2" <?= $filtres["niveau"] === "2" ? "selected" : "" ?>>Première</option>
-                    <option id="niveau" name="niveau" value="3" <?= $filtres["niveau"] === "3" ? "selected" : "" ?>>Terminale</option>
-                </select>
-            </div>
-            <div>
-                <label for="thematique">Thématique:</label>
+                <label for="thematique">Thématique :</label>
                 <select name="thematique">
                     <option id="thematique"  name="thematique" value="0" <?= $filtres["thematique"] === "0" ? "selected" : "" ?>>Voir tout</option>
                     <option id="thematique"  name="thematique" value="1" <?= $filtres["thematique"] === "1" ? "selected" : "" ?>>Suites</option>
@@ -78,7 +70,16 @@
                 </select>
             </div>
             <div>
-                <label for="mots-cles">Mots clés:</label>
+                <label for="niveau">Difficulté :</label>
+                <select name="niveau">
+                    <option id="niveau" name="niveau" value="0" <?= $filtres["niveau"] === "0" ? "selected" : "" ?>>Toutes</option>
+                    <?php for ($i = 1; $i <= 20; $i++) {
+                        echo "<option id='niveau' name='niveau' value='$i' ".($filtres["niveau"] === "$i" ? "selected" : "").">$i</option>";
+                     } ?>
+                </select>
+            </div>
+            <div>
+                <label for="mots-cles">Mots clés :</label>
                 <input id="mots_cles" name="mots-cles" value="<?= $filtres["mots-cles"]??"" ?>" type="text">
             </div>
             <div>
