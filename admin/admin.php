@@ -6,7 +6,7 @@
 
     $pageName = $_GET["onglet"]??null;
     $current_page = get_current_page();
-    $per_page = 10;
+    $per_page = 2;
 ?>
 
 <div class="administration">

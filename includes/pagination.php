@@ -6,6 +6,7 @@
 
     $formValueKeys = [];
     $formValues = [];
+    $isPlaced = false;
 
     if ($pages != 0) {
         if ($newPage > $pages) {
@@ -94,11 +95,38 @@
                 <?php foreach ($formValueKeys as $key) { ?>
                     <input type="hidden" name="<?= $key??'' ?>" value="<?= $formValues[$key]??'' ?>">
                 <?php } ?>
-                <button type="submit" class="link link__pagination <?php echo ($current_page) === 1 ? 'link__arrow': null;?>" name="newPagination" value="-1"><img src="./assets/icons/left_arrow.svg" alt="fleche gauche"></button>
-                <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                    <input type="submit" class="link link__pagination <?php echo ($current_page) === $i ? 'link__number' : null;?>" name="newPagination" value="<?php echo $i ?>" onclick="window.location.href='index.php?page=<?php echo $_GET['page']?>&pagination=<?php echo $i;?>'">
+                <button type="submit" class="link link__pagination <?= ($current_page) === 1 ? 'link__arrow': null;?>" name="newPagination" value="-1"><img src="./assets/icons/left_arrow.svg" alt="fleche gauche"></button>
+                <?php if ($pages > 4) {
+                    if ($current_page > $pages-2) { ?>
+                        <input type="submit" class="link link__pagination" name="newPagination" value="...">
+                        <input type="submit" class="link link__pagination link__number" name="newPagination" value="<?= $current_page ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page;?>'">
+                        <?php if ($current_page != $pages) { ?>
+                            <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
+                        <?php } ?>
+                    <?php } else { ?>
+                        <input type="submit" class="link link__pagination link__number" name="newPagination" value="<?= $current_page ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page;?>'">
+                        <input type="submit" class="link link__pagination" name="newPagination" value="<?= $current_page+1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page+1;?>'">
+                        <input type="submit" class="link link__pagination" name="newPagination" value="...">
+                        <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
+                        <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
+                    <?php } ?>
+                    <?php /*for ($i = $current_page; $i <= $pages; $i++) {
+
+
+
+                        if ($i > $current_page+1 && $i < $pages-1) {
+                            continue;
+                        } */?><!--
+                        <input type="submit" class="link link__pagination <?php /*= ($current_page) === $i ? 'link__number' : null;*/?>" name="newPagination" value="<?php /*= $i */?>" onclick="window.location.href='index.php?page=<?php /*= $_GET['page']*/?>&pagination=<?php /*= $i;*/?>'">
+                    --><?php /*} */?>
+                <?php } else { ?>
+                    <?php for ($i = 1; $i <= $pages; $i++) { ?>
+                        <input type="submit" class="link link__pagination <?= ($current_page) === $i ? 'link__number' : null;?>" name="newPagination" value="<?= $i ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $i;?>'">
+                    <?php } ?>
                 <?php } ?>
-                <button type="submit" class="link link__pagination <?php echo ($current_page) >= $pages ? 'link__arrow': null;?>" name="newPagination" value="+1"><img src="./assets/icons/right_arrow.svg" alt="fleche droite"></button>
+
+
+                <button type="submit" class="link link__pagination <?= ($current_page) >= $pages ? 'link__arrow': null;?>" name="newPagination" value="+1"><img src="./assets/icons/right_arrow.svg" alt="fleche droite"></button>
             </form>
         </div>
     <?php } ?>
