@@ -98,16 +98,18 @@
                 <button type="submit" class="link link__pagination <?= ($current_page) === 1 ? 'link__arrow': null;?>" name="newPagination" value="-1"><img src="./assets/icons/left_arrow.svg" alt="fleche gauche"></button>
                 <?php if ($pages > 4) {
                     if ($current_page > $pages-2) { ?>
+                        <input type="submit" class="link link__pagination" name="newPagination" value="<?= 1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= 1;?>'">
+                        <input type="submit" class="link link__pagination" name="newPagination" value="<?= 2 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= 2;?>'">
                         <input type="submit" class="link link__pagination" name="newPagination" value="...">
-                        <input type="submit" class="link link__pagination link__number" name="newPagination" value="<?= $current_page ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page;?>'">
-                        <?php if ($current_page != $pages) { ?>
-                            <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
-                        <?php } ?>
+                        <input type="submit" class="link link__pagination <?= $current_page === intval($pages-1) ? "link__number" : "" ?>" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
+                        <input type="submit" class="link link__pagination <?= $current_page === intval($pages) ? "link__number" : "" ?>" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
                     <?php } else { ?>
                         <input type="submit" class="link link__pagination link__number" name="newPagination" value="<?= $current_page ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page;?>'">
                         <input type="submit" class="link link__pagination" name="newPagination" value="<?= $current_page+1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page+1;?>'">
                         <input type="submit" class="link link__pagination" name="newPagination" value="...">
-                        <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
+                        <?php if ($current_page < $pages-1) { ?>
+                            <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
+                        <?php } ?>
                         <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
                     <?php } ?>
                     <?php /*for ($i = $current_page; $i <= $pages; $i++) {
