@@ -3,16 +3,16 @@
     $uploads_exo = './assets/files/exercises/';
     $uploads_cor = './assets/files/corrections/';
 
-    $classrooms = get_classrooms_names();
+    $classrooms = get_all_names("classroom");
     
-    $thematics = get_thematics_names();
+    $thematics = get_all_names("thematic");
 
     $difficulty = [];
     for ($i = 1; $i <= 20; $i++) {
         $difficulty[$i] = $i;
     }
 
-    $origins = get_origins_names();
+    $origins = get_all_names("origin");
 
     $errors=[
         'name' => "",
@@ -135,19 +135,7 @@
                 }
             }
         }
-        if (empty($errors['name']) and 
-        empty($errors['classroom']) and 
-        empty($errors['thematic']) and 
-        empty($errors['chapter']) and 
-        empty($errors['keywords']) and 
-        empty($errors['difficulty']) and 
-        empty($errors['duration']) and 
-        empty($errors["origin"]) and 
-        empty($errors['origin_name']) and 
-        empty($errors['origin_information']) and 
-        empty($errors["fichier_exercice"]) and 
-        empty($errors["fichier_correction"] and
-        isset($_POST))){
+        if ( empty_array($errors) and isset($_POST)){
 
             $alter = 0;
             foreach ($_FILES as $file) {
@@ -155,36 +143,18 @@
                     $tmp_name = $file["tmp_name"];
                     if (($alter%2) === 0){
                         list($file_name, $file_extention) = explode(".",$file["name"]);
-                        $query = $db->prepare("INSERT INTO file (name, original_name, extension, size)
-                        VALUES (:name, :original_name, :extension, :size);");
-                        $query->bindParam(':name', $file_name);
-                        $query->bindParam(':original_name', $file_name);
-                        $query->bindParam(':extension', $file_extention);
-                        $query->bindParam(':size', $file['size']);
-                        $query->execute();
+                        add_file_to_db($file_name, $file_extention, $file["size"]);
                         $last_id = get_id_by_name($file_name, "file");
                         $new_name = "exercice_id_".$last_id;
-                        $query = $db->prepare("UPDATE file SET name = :new_name WHERE id = :last_id;");
-                        $query->bindParam(':new_name', $new_name);
-                        $query->bindParam(':last_id', $last_id);
-                        $query->execute();
+                        update_file_name($new_name, $last_id);
                         $uploads_dir = $uploads_exo ;
                         $exercice_file_id = $last_id;
                     } else {
-                        $uploads_dir = $uploads_cor;list($file_name, $file_extention) = explode(".",$file["name"]);
-                        $query = $db->prepare("INSERT INTO file (name, original_name, extension, size)
-                        VALUES (:name, :original_name, :extension, :size);");
-                        $query->bindParam(':name', $file_name);
-                        $query->bindParam(':original_name', $file_name);
-                        $query->bindParam(':extension', $file_extention);
-                        $query->bindParam(':size', $file['size']);
-                        $query->execute();
+                        list($file_name, $file_extention) = explode(".",$file["name"]);
+                        add_file_to_db($file_name, $file_extention, $file["size"]);
                         $last_id = get_id_by_name($file_name, "file");
-                        $new_name = "correction_id_".$last_id;
-                        $query = $db->prepare("UPDATE file SET name = :new_name WHERE id = :last_id;");
-                        $query->bindParam(':new_name', $new_name);
-                        $query->bindParam(':last_id', $last_id);
-                        $query->execute();
+                        $new_name = "exercice_id_".$last_id;
+                        update_file_name($new_name, $last_id);
                         $uploads_dir = $uploads_cor ;
                         $correction_file_id = $last_id;
                     }
@@ -197,8 +167,6 @@
                 }
                 $alter += 1;
             }
-
-            
             
             $classroom_id  = get_id_by_name($_POST['classroom'], "classroom");
             $origin_id  = get_id_by_name($_POST['origin'], "origin");
@@ -206,27 +174,10 @@
             $user_id  = $_SESSION['user']['id'];
             $_POST["duration"] = str_replace(",",".",$_POST["duration"]);
 
-            $query = $db->prepare("INSERT INTO exercise (name, classroom_id, thematic_id, chapter, keywords, difficulty, duration, origin_id, origin_name, origin_information, exercise_file_id, correction_file_id, created_by_id) 
-            VALUES (:name, :classroom_id, :thematic_id, :chapter, :keywords, :difficulty, :duration, :origin_id, :origin_name, :origin_information, :exercice_file_id, :correction_file_id, :created_by_id);");
-            $query->bindParam(':name', $_POST['name']);
-            $query->bindParam(':classroom_id', $classroom_id);
-            $query->bindParam(':thematic_id', $thematic_id);
-            $query->bindParam(':chapter', $_POST['chapter']);
-            $query->bindParam(':keywords', $_POST['keywords']);
-            $query->bindParam(':difficulty', $_POST['difficulty']);
-            $query->bindParam(':duration', $_POST['duration']);
-            $query->bindParam(':origin_id', $origin_id);
-            $query->bindParam(':origin_name', $_POST['origin_name']);
-            $query->bindParam(':origin_information', $_POST['origin_information']);
-            $query->bindParam(':exercice_file_id', $exercice_file_id);
-            $query->bindParam(':correction_file_id', $correction_file_id);
-            $query->bindParam(':created_by_id', $user_id);
-            try {
-                $query->execute();
+            $success = add_exercice_to_bd($post, $classroom_id, $thematic_id, $origin_id, $exercice_file_id, $correction_file_id, $user_id);
+            if ($success)
+            {
                 $displays["success"] = "block";
-            }
-            catch (PDOException $e){
-                echo $e->getMessage();
             }
         }
         else if(!empty($errors['name']) or 
@@ -236,16 +187,18 @@
         !empty($errors['keywords']) or 
         !empty($errors['difficulty']) or 
         !empty($errors['duration'])){
-
+            //affiche l'erreur sur la page information
         }
         else if ( !(empty($errors["origin"])) or 
         !(empty($errors['origin_name'])) or 
         !(empty($errors['origin_information']))){
+            //affiche l'erreur sur la page source
             $displays["info"] = "none";
             $displays["source"] = "block";
         }
         else if (!(empty($errors['fichier_exercice'])) or 
         !(empty($errors['fichier_correction']))){
+            //affiche l'erreur sur la page fichier
             $displays["info"] = "none";
             $displays["file"] = "block";
         }

@@ -253,36 +253,10 @@ function get_next_id(string $type): int
  * Permet d'obtenir tous les noms des classes
  * @return array un tableau contennant tout les noms des classes
  */
-function get_classrooms_names(): array
+function get_all_names(string $table): array
 {
     global $db;
-    $query = $db->prepare("SELECT name FROM classroom");
-    $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-}
-
-/**
- * Permet d'obtenir tous les noms des thématiques
- * @return array un tableau contennant tout les noms des thématiques
- */
-function get_thematics_names(): array
-{
-    global $db;
-    $query = $db->prepare("SELECT name FROM thematic");
-    $query->execute();
-    $result = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
-}
-
-/**
- * Permet d'obtenir tous les noms des sources
- * @return array un tableau contennant tout les noms des sources
- */
-function get_origins_names(): array
-{
-    global $db;
-    $query = $db->prepare("SELECT name FROM origin");
+    $query = $db->prepare("SELECT name FROM ".$table.";");
     $query->execute();
     $result = $query->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -303,4 +277,58 @@ function get_id_by_name(string $name, string $table): string
     $array = $query->fetchAll(PDO::FETCH_ASSOC);
     $result = $array[0]["id"];
     return $result;
+}
+
+function add_file_to_db(string $file_name, string $file_extention, string $size) : bool
+{
+    global $db;
+    $query = $db->prepare("INSERT INTO file (name, original_name, extension, size)
+    VALUES (:name, :original_name, :extension, :size);");
+    $query->bindParam(':name', htmlentities($file_name));
+    $query->bindParam(':original_name', htmlentities($file_name));
+    $query->bindParam(':extension', $file_extention);
+    $query->bindParam(':size', $size);
+    $success = $query->execute();
+    return $success;
+}
+
+function update_file_name(string $new_name, int $last_id) : bool
+{
+    global $db;
+    $query = $db->prepare("UPDATE file SET name = :new_name WHERE id = :last_id;");
+    $query->bindParam(':new_name', $new_name);
+    $query->bindParam(':last_id', $last_id);
+    $query->execute();
+    $success = $query->execute();
+    return $success;
+}
+
+function add_exercice_to_bd(array $post, int $classroom_id,int $thematic_id, int $origin_id, int $exercice_file_id, int $correction_file_id, int $user_id) : bool
+{
+    global $db;
+    $query = $db->prepare("INSERT INTO exercise (name, classroom_id, thematic_id, chapter, keywords, difficulty, duration, origin_id, origin_name, origin_information, exercise_file_id, correction_file_id, created_by_id) 
+    VALUES (:name, :classroom_id, :thematic_id, :chapter, :keywords, :difficulty, :duration, :origin_id, :origin_name, :origin_information, :exercice_file_id, :correction_file_id, :created_by_id);");
+    $query->bindParam(':name', $post['name']);
+    $query->bindParam(':classroom_id', $classroom_id);
+    $query->bindParam(':thematic_id', $thematic_id);
+    $query->bindParam(':chapter', $post['chapter']);
+    $query->bindParam(':keywords', $post['keywords']);
+    $query->bindParam(':difficulty', $post['difficulty']);
+    $query->bindParam(':duration', $post['duration']);
+    $query->bindParam(':origin_id', $origin_id);
+    $query->bindParam(':origin_name', $post['origin_name']);
+    $query->bindParam(':origin_information', $post['origin_information']);
+    $query->bindParam(':exercice_file_id', $exercice_file_id);
+    $query->bindParam(':correction_file_id', $correction_file_id);
+    $query->bindParam(':created_by_id', $user_id);
+    try {
+        $query->execute();
+        $success = true;
+        
+    }
+    catch (PDOException $e){
+        echo $e->getMessage();
+        $success = false;
+    }
+    return $success;
 }
