@@ -410,8 +410,33 @@ body{
     form
     {
         display: flex;
+        position: relative;
+
+        #choosePrompt {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 60px;
+            background-color: red;
+            padding: 3px;
+            border-radius: 8px;
+
+            & div {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            #chooseInput {
+                border: none;
+                width: 40px;
+                resize: none;
+            }
+        }
     }
 }
+
 .link
 {
     text-decoration: none;
