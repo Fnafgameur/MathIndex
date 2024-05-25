@@ -23,7 +23,7 @@
         $formValueKeys = ["niveau", "thematique", "mots-cles"];
 
         $formValues = $_SESSION["formValues"] ?? [
-            "niveau" => $_POST["niveau"] ?? "1",
+            "niveau" => $_POST["niveau"] ?? "0",
             "thematique" => $_POST["thematique"] ?? "0",
             "mots-cles" => $_POST["mots-cles"] ?? "",
         ];
@@ -107,7 +107,7 @@
                         <input type="submit" class="link link__pagination link__number" name="newPagination" value="<?= $current_page ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page;?>'">
                         <input type="submit" class="link link__pagination" name="newPagination" value="<?= $current_page+1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $current_page+1;?>'">
                         <input type="submit" class="link link__pagination" name="newPagination" value="...">
-                        <?php if ($current_page < $pages-1) { ?>
+                        <?php if ($current_page < $pages-2) { ?>
                             <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
                         <?php } ?>
                         <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
