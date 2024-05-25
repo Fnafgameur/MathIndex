@@ -111,6 +111,7 @@ function get_exercises(int $currentPage = null, int $limit = null, array $filtre
         }
     } else {
         $query = $db->prepare("SELECT * FROM exercise $limitReq");
+        $niveau = "0";
     }
 
     $query->execute();
