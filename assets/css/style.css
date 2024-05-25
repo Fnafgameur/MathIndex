@@ -346,6 +346,10 @@ body {
   padding: 3px;
   border-radius: 8px;
 }
+.mathematics__pagination form #choosePrompt div {
+  display: flex;
+  gap: 0.5rem;
+}
 .mathematics__pagination form #choosePrompt #chooseInput {
   border: none;
   width: 40px;

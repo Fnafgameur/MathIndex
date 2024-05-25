@@ -423,6 +423,11 @@ body{
             padding: 3px;
             border-radius: 8px;
 
+            & div {
+                display: flex;
+                gap: 0.5rem;
+            }
+
             #chooseInput {
                 border: none;
                 width: 40px;

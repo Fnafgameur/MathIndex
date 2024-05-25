@@ -100,7 +100,14 @@
                     if ($current_page > $pages-2) { ?>
                         <input type="submit" class="link link__pagination" name="newPagination" value="<?= 1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= 1;?>'">
                         <input type="submit" class="link link__pagination" name="newPagination" value="<?= 2 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= 2;?>'">
-                        <input id="chooseButton" type="submit" class="link link__pagination" name="newPagination" value="...">
+                        <input id="chooseButton" type="button" class="link link__pagination" name="newPagination" value="...">
+                        <div id="choosePrompt">
+                            <p>Numéro de la page</p>
+                            <div>
+                                <textarea id="chooseInput" name="chooseInput" rows="1"></textarea>
+                                <input id="chooseConfirm" type="button" name="chooseConfirm" value="OK">
+                            </div>
+                        </div>
                         <input type="submit" class="link link__pagination <?= $current_page === intval($pages-1) ? "link__number" : "" ?>" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
                         <input type="submit" class="link link__pagination <?= $current_page === intval($pages) ? "link__number" : "" ?>" name="newPagination" value="<?= $pages ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages;?>'">
                     <?php } else { ?>
@@ -109,8 +116,10 @@
                         <input id="chooseButton" type="button" class="link link__pagination" name="newPagination" value="...">
                         <div id="choosePrompt">
                             <p>Numéro de la page</p>
-                            <!--do not allow resize-->
-                            <textarea id="chooseInput" name="chooseInput" rows="1"></textarea>
+                            <div>
+                                <textarea id="chooseInput" name="chooseInput" rows="1"></textarea>
+                                <input id="chooseConfirm" type="button" name="chooseConfirm" value="OK">
+                            </div>
                         </div>
                         <?php if ($current_page < $pages-2) { ?>
                             <input type="submit" class="link link__pagination" name="newPagination" value="<?= $pages-1 ?>" onclick="window.location.href='index.php?page=<?= $_GET['page']?>&pagination=<?= $pages-1;?>'">
