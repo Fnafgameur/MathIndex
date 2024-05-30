@@ -230,7 +230,7 @@
                     <div>
                         <label for="name">Nom de l'exercice: *</label><br>
                         <input id="name" name="name" <?= $values["name"]?>><br>
-                        <p class="errormsg" style="display: <?= $displays["name"] .'">'.$errors["name"] ?>"></p>
+                        <p class="errormsg" style= <?= '"display:'.$displays["name"] .'">'.$errors["name"] ?></p>
                         <label for="classroom">Classe: *</label><br>
                         <select name="classroom" id="classroom">
                             <?php
@@ -328,4 +328,5 @@
             </div>
         </form>
     </div>
+    <script src="assets/scripts/submit.js"></script>
 </div>
