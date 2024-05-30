@@ -135,6 +135,22 @@
                 }
             }
         }
+
+        $errorsInfo = [$errors['name'], 
+        $errors['classroom'], 
+        $errors['thematic'], 
+        $errors['chapter'], 
+        $errors['keywords'], 
+        $errors['difficulty'], 
+        $errors['duration']];
+
+        $errorsSource = [$errors["origin"], 
+        $errors['origin_name'], 
+        $errors['origin_information']];
+
+        $errorsFile = [$errors['fichier_exercice'],
+        $errors['fichier_correction']];
+
         if ( empty_array($errors) and isset($_POST)){
 
             $alter = 0;
@@ -180,24 +196,15 @@
                 $displays["success"] = "block";
             }
         }
-        else if(!empty($errors['name']) or 
-        !empty($errors['classroom']) or 
-        !empty($errors['thematic']) or 
-        !empty($errors['chapter']) or 
-        !empty($errors['keywords']) or 
-        !empty($errors['difficulty']) or 
-        !empty($errors['duration'])){
+        else if(!empty_array($errorsInfo)){
             //affiche l'erreur sur la page information
         }
-        else if ( !(empty($errors["origin"])) or 
-        !(empty($errors['origin_name'])) or 
-        !(empty($errors['origin_information']))){
+        else if (!empty_array($errorsSource)){
             //affiche l'erreur sur la page source
             $displays["info"] = "none";
             $displays["source"] = "block";
         }
-        else if (!(empty($errors['fichier_exercice'])) or 
-        !(empty($errors['fichier_correction']))){
+        else if (!empty_array($errorsFile)){
             //affiche l'erreur sur la page fichier
             $displays["info"] = "none";
             $displays["file"] = "block";
