@@ -155,7 +155,7 @@
 
             $alter = 0;
             foreach ($_FILES as $file) {
-                if ($file["error"] === UPLOAD_ERR_OK) {
+                if ($file["error"] == UPLOAD_ERR_OK) {
                     $tmp_name = $file["tmp_name"];
                     if (($alter%2) === 0){
                         list($file_name, $file_extention) = explode(".",$file["name"]);
